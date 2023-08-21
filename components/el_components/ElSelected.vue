@@ -3,9 +3,9 @@
     <div class="selected" @click="toggleDropdown">
       <div class="selected_main">
         <div class="select_img">
-          <img :src="selectedOption.imgUrl" alt="#" />
+          <img :src="selectedOption?.imgUrl" alt="#" />
         </div>
-        <p class="select_text">{{ selectedOption.name }}</p>
+        <p class="select_text">{{ selectedOption?.name }}</p>
         <i class="select_icon" :class="{ rotate: isOpen }"></i>
       </div>
     </div>
@@ -16,7 +16,7 @@
           id="SELECTEDONE"
           v-for="(item, index) in options"
           :key="index"
-          :class="{ activated: selectedOption.name == item.name }"
+          :class="{ activated: selectedOption?.name == item.name }"
           @click="selectOption(item)"
         >
           <div class="imgs">
@@ -35,17 +35,21 @@ export default {
   data() {
     return {
       isOpen: false,
-      selectedOption: this.options[0],
+      selectedOption: this.options[this.pint - 1],
     }
   },
   watch: {
     // 监听点击的id值
     pint(value) {
-      this.selectedOption = this.options[value - 1]
+      this.$nextTick(() => {
+        this.selectedOption = this.options[value - 1]
+      })
     },
   },
   mounted() {
-    this.pint ? (this.selectedOption = this.options[this.pint - 1]) : false
+    this.$nextTick(() => {
+      this.pint ? (this.selectedOption = this.options[this.pint - 1]) : false
+    })
   },
   methods: {
     toggleDropdown() {
