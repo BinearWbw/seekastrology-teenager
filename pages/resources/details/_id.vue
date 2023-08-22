@@ -207,7 +207,7 @@ export default {
       // 创建动态组件实例
       const adComponent = new Vue({
         render: (h) =>
-          h('google-ad', {
+          h('google-observer-auto-ad', {
             props: {
               classNames: 'leftAdText',
               id: randomId,
