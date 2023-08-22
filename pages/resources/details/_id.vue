@@ -184,6 +184,11 @@ export default {
         '7374577739',
         '4748414395',
         '2122251057',
+        '2621794561',
+        '7107834487',
+        '8474539438',
+        '3030641061',
+        '3864909266',
       ],
     }
   },
@@ -192,11 +197,10 @@ export default {
     const h3Element = dataDesc.querySelectorAll('h2')
 
     h3Element.forEach((item, index) => {
-      // 随机选择一个 id
-      const randomId =
-        this.idAdArray[Math.floor(Math.random() * this.idAdArray.length)]
+      // 顺序选择一个 id
+      const randomIdt = index % this.idAdArray.length //保证 index 的值都在 idAdArray.length 内
+      const randomId = this.idAdArray[randomIdt]
 
-      //   console.log('googel', adComponent)
       const adContainer = document.createElement('div')
       adContainer.className = 'leftAdText'
 
@@ -457,7 +461,7 @@ $spacing: 16px;
             :deep(.leftAdText) {
               .leftAdText {
                 height: 130px;
-                margin-bottom: 36px;
+                margin-bottom: 50px;
                 .title {
                   height: 25px;
                   margin: 0;
@@ -795,7 +799,7 @@ $spacing: 16px;
               :deep(.leftAdText) {
                 .leftAdText {
                   height: 100 * $pr;
-                  margin-bottom: 30 * $pr;
+                  margin-bottom: 48 * $pr;
                   .title {
                     height: 17 * $pr;
                   }
