@@ -1,5 +1,6 @@
 <template>
   <div class="details">
+    <google-ad classNames="google_top" :id="'4213491107'" />
     <div class="details_main">
       <div class="details_main_left">
         <div class="details_main_left_top">
@@ -450,6 +451,9 @@ $spacing: 55px;
 }
 .details {
   width: 100%;
+  .google_top {
+    display: none;
+  }
   &_main {
     width: 1400px;
     margin: 0 auto;
@@ -879,6 +883,12 @@ $spacing: 55px;
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .details {
+    .google_top {
+      display: block;
+      width: 345 * $pr;
+      height: 100 * $pr;
+      margin: 0 auto;
+    }
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
@@ -1049,8 +1059,8 @@ $spacing: 55px;
         &_btm {
           margin-top: 48 * $pr;
           &_title {
-            font-size: 22 * $pr;
-            line-height: 30 * $pr;
+            font-size: 26 * $pr;
+            line-height: 36 * $pr;
             text-align: center;
           }
           &_list {

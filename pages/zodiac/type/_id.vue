@@ -721,8 +721,8 @@ export default {
             width: 100%;
             .title {
               width: 100%;
-              font-size: 36 * $pr;
-              line-height: 48 * $pr;
+              font-size: 26 * $pr;
+              line-height: 36 * $pr;
               text-align: center;
               padding-right: 0;
             }

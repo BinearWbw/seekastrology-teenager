@@ -521,7 +521,7 @@ export default {
             }
             .img_cont {
               height: auto;
-              margin: 24 * $pr 0;
+              margin: 16 * $pr 0;
             }
             .right_minute {
               &_min {

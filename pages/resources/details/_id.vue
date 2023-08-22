@@ -1,5 +1,6 @@
 <template>
   <div class="details">
+    <google-ad classNames="google_top" :id="'4405062797'" />
     <div class="details_main">
       <div class="details_main_left">
         <div class="details_main_left_top">
@@ -31,6 +32,7 @@
 
             <div
               class="details_main_left_top_content_text"
+              ref="dataDesc"
               v-html="dataInfo.desc"
             ></div>
           </div>
@@ -171,13 +173,54 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import Vue from 'vue'
 export default {
   data() {
     return {
       playState: false,
+      idAdArray: [
+        '9753329066',
+        '4309430695',
+        '7374577739',
+        '4748414395',
+        '2122251057',
+      ],
     }
   },
-  mounted() {},
+  mounted() {
+    const dataDesc = this.$refs.dataDesc
+    const h3Element = dataDesc.querySelectorAll('h2')
+
+    h3Element.forEach((item, index) => {
+      // 随机选择一个 id
+      const randomId =
+        this.idAdArray[Math.floor(Math.random() * this.idAdArray.length)]
+
+      //   console.log('googel', adComponent)
+      const adContainer = document.createElement('div')
+      adContainer.className = 'leftAdText'
+
+      // 创建动态组件实例
+      const adComponent = new Vue({
+        render: (h) =>
+          h('google-ad', {
+            props: {
+              classNames: 'leftAdText',
+              id: randomId,
+            },
+          }),
+      })
+
+      // 挂载动态组件
+      adComponent.$mount()
+
+      // 将动态组件的根 DOM 元素添加到容器
+      adContainer.appendChild(adComponent.$el)
+
+      // 在 h3 元素之前插入广告容器
+      item.parentNode.insertBefore(adContainer, item)
+    })
+  },
   async asyncData({ error, $apiList, params }) {
     try {
       let totalNum = 0,
@@ -280,6 +323,9 @@ $block: 456px;
 $spacing: 16px;
 .details {
   width: 100%;
+  .google_top {
+    display: none;
+  }
   .google_ad_footer {
     display: none;
     // overflow: hidden;
@@ -407,6 +453,17 @@ $spacing: 16px;
             :deep(figure) {
               display: flex;
               justify-content: center;
+            }
+            :deep(.leftAdText) {
+              .leftAdText {
+                height: 130px;
+                margin-bottom: 36px;
+                .title {
+                  height: 25px;
+                  margin: 0;
+                  color: #fff;
+                }
+              }
             }
           }
         }
@@ -666,10 +723,17 @@ $spacing: 16px;
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .details {
+    .google_top {
+      display: block;
+      width: 345 * $pr;
+      height: 100 * $pr;
+      margin: 0 auto;
+    }
     &_main {
       width: 100%;
       flex-wrap: wrap;
       justify-content: center;
+      margin-top: 48 * $pr;
       &_left {
         width: 343 * $pr;
         margin-left: 0;
@@ -728,6 +792,15 @@ $spacing: 16px;
                 line-height: 24 * $pr;
                 margin-bottom: 20 * $pr;
               }
+              :deep(.leftAdText) {
+                .leftAdText {
+                  height: 100 * $pr;
+                  margin-bottom: 30 * $pr;
+                  .title {
+                    height: 17 * $pr;
+                  }
+                }
+              }
             }
           }
         }
@@ -772,6 +845,8 @@ $spacing: 16px;
       padding: 0 16 * $pr;
       &_title {
         text-align: center;
+        font-size: 26 * $pr;
+        line-height: 36 * $pr;
       }
       &_list {
         grid-gap: 24 * $pr 0;

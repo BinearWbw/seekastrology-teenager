@@ -19,9 +19,6 @@
           :class="{ activated: selectedOption?.name == item.name }"
           @click="selectOption(item)"
         >
-          <div class="imgs">
-            <img :src="item.imgUrl" alt="#" />
-          </div>
           <p class="active">{{ item.name }}</p>
         </li>
       </ul>
@@ -122,36 +119,29 @@ export default {
   .options {
     position: absolute;
     width: 100%;
-    top: 76px;
+    top: 68px;
     left: 0;
-    border-radius: 34px;
-    background-color: #060506;
-    border: 1px solid #fff;
+    padding: 12px 0;
+    border-radius: 17px;
+    background-color: rgba(18, 7, 36, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
     z-index: 10;
     .left_tab_list {
       width: 100%;
-      height: 60px;
+      padding: 6px 0 6px 24px;
       display: flex;
       align-items: center;
       cursor: pointer;
       transition: background-color 0.3s;
-      .imgs {
-        width: 86px;
-        height: 100%;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          filter: grayscale(100%);
-        }
-      }
       .active {
         flex: 1;
         font-family: 'Rubik';
-        font-size: 22px;
-        line-height: 30px;
-        color: #acaaaa;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 16px;
+        line-height: 22px;
+        font-style: normal;
+        font-weight: 400;
       }
       &:hover {
         background-color: rgba(123, 136, 205, 0.1);
@@ -193,16 +183,14 @@ export default {
     }
     .options {
       top: 74 * $pr;
-      border-radius: 34 * $pr;
+      border-radius: 20 * $pr;
       border: 1 * $pr solid #fff;
+      padding: 12 * $pr 0;
       .left_tab_list {
-        height: 60 * $pr;
-        .imgs {
-          width: 86 * $pr;
-        }
+        padding: 6 * $pr 0 6 * $pr 24 * $pr;
         .active {
-          font-size: 22 * $pr;
-          line-height: 30 * $pr;
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
         }
       }
     }

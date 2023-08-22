@@ -263,6 +263,8 @@ export default {
             // padding: 4 * $pr 12 * $pr;
             padding: 4 * $pr 10 * $pr;
             border-radius: 44 * $pr;
+
+            background: var(--9747-ff, #9747ff);
             &_round {
               min-width: 24 * $pr;
               max-width: 24 * $pr;
@@ -272,6 +274,7 @@ export default {
               font-size: 12 * $pr;
               line-height: 14 * $pr;
               padding-left: 6 * $pr;
+              color: #fff;
               &.p_pc {
                 display: none;
               }

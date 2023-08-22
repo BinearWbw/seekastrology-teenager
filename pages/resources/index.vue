@@ -883,7 +883,8 @@ $spacing: 16px;
       width: 100%;
       &_title {
         margin-top: 24 * $pr;
-        font-size: 36 * $pr;
+        font-size: 26 * $pr;
+        line-height: 36 * $pr;
         text-align: center;
         padding-bottom: 8 * $pr;
       }
