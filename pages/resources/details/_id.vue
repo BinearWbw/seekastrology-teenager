@@ -729,15 +729,15 @@ $spacing: 16px;
   .details {
     .google_top {
       display: block;
-      width: 345 * $pr;
-      height: 100 * $pr;
+      width: 343 * $pr;
+      height: 83 * $pr;
       margin: 0 auto;
     }
     &_main {
       width: 100%;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 48 * $pr;
+      margin-top: 32 * $pr;
       &_left {
         width: 343 * $pr;
         margin-left: 0;
