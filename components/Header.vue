@@ -9,6 +9,7 @@
             alt="logoImg"
           />
         </a>
+        <!-- <Desktop></Desktop> -->
         <nav class="nav">
           <a
             class="nav__item"
@@ -218,6 +219,7 @@ export default {
     },
     hideDropdown() {
       this.isDropdownVisible = -1
+      sessionStorage.setItem('firstOpen', 2)
     },
     handleScroll() {
       this.isScrolled = window.scrollY > 10

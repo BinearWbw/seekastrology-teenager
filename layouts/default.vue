@@ -41,6 +41,8 @@ export default {
     }
     this.$store.commit('UPDATE_INTERSPERSE_URL', url)
     window.addEventListener('scroll', this.handleScroll)
+    this.firstOpenSend()
+    this.showNotification()
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
@@ -59,6 +61,36 @@ export default {
       setTimeout(() => {
         this.showScrollToTop = false
       }, 500)
+    },
+
+    showNotification() {
+      const firstOpenVal = sessionStorage.getItem('firstOpen')
+
+      if (Notification.permission !== 'granted') {
+        Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+            // 用户同意了通知
+            console.log('用户同意通知')
+          }
+        })
+      }
+
+      if (Notification.permission === 'granted' && firstOpenVal == '1') {
+        const notification = new Notification('Seekastrology', {
+          body: 'Come to the Tarot game to find what you want to understand',
+          icon: 'https://www.doitme.link/cdn-cgi/image/fit=cover/images/news/your_sign%E2%80%99s_weekly_tarotscope_for_june_20_%E2%80%93_26_2022/173090254457145964.png',
+        })
+
+        notification.onclick = () => {
+          // 用户点击通知时触发的操作
+          window.location.href = 'https://seekastrology.com/tarot/'
+        }
+        sessionStorage.setItem('firstOpen', 2)
+      }
+    },
+    firstOpenSend() {
+      const firstOpenVal = sessionStorage.getItem('firstOpen')
+      if (!firstOpenVal) sessionStorage.setItem('firstOpen', 1)
     },
   },
 }
