@@ -43,6 +43,7 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
     this.showNotification()
+    window.addEventListener('hashchange', this.handleHashChange)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
@@ -91,6 +92,14 @@ export default {
     firstOpenSend() {
       const firstOpenVal = sessionStorage.getItem('firstOpen')
       if (!firstOpenVal) sessionStorage.setItem('firstOpen', 1)
+    },
+    handleHashChange() {
+      if (window.location.hash == '#google_vignette') {
+        window.i_like_it = 1
+        dataLayer.push({
+          event: 'adsChange',
+        })
+      }
     },
   },
 }
