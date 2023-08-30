@@ -171,7 +171,11 @@ module.exports = {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/scss/main.scss', 'aos/dist/aos.css'],
+  css: [
+    '@/assets/scss/main.scss',
+    'aos/dist/aos.css',
+    'ant-design-vue/dist/antd.css',
+  ],
 
   loading: false,
 
@@ -180,6 +184,8 @@ module.exports = {
     '~plugins/axios',
     '~plugins/utils',
     { src: '@/plugins/aos', mode: 'client' },
+    { src: '@/plugins/antd-ui', mode: 'client' },
+    '@/plugins/cookiePersistence',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -191,7 +197,38 @@ module.exports = {
     '@nuxtjs/axios',
     'vue-toastification/nuxt',
     '@nuxtjs/sitemap',
+    'nuxt-precompress',
+    'cookie-universal-nuxt',
   ],
+
+  cookies: {
+    path: '/',
+    // 其他选项...
+  },
+  nuxtPrecompress: {
+    gzip: {
+      enabled: true,
+      filename: '[path].gz[query]',
+      threshold: 10240,
+      minRatio: 0.8,
+      compressionOptions: { level: 9 },
+    },
+    brotli: {
+      enabled: true,
+      filename: '[path].br[query]',
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8,
+    },
+    enabled: true,
+    report: false,
+    test: /\.(js|css|html|txt|xml|svg|ttf)$/,
+    middleware: {
+      enabled: false,
+      enabledStatic: true,
+      encodingsPriority: ['br', 'gzip'],
+    },
+  },
 
   sitemap: sitemap,
 

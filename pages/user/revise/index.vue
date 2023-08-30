@@ -1,0 +1,411 @@
+<template>
+  <div class="revise">
+    <div class="revise_main">
+      <a class="atop" :href="`${getIntersperseUrl}/user/`">
+        <button class="button_top">＜ back</button>
+      </a>
+      <div class="menu">
+        <div class="menu_left">
+          <div
+            class="left_name"
+            :class="{ activate: activeMenu == 0 }"
+            @click="selectMenu(0)"
+          >
+            Edit your profile
+          </div>
+          <div
+            class="left_password"
+            :class="{ activate: activeMenu == 1 }"
+            @click="selectMenu(1)"
+          >
+            Change password
+          </div>
+        </div>
+        <div class="menu_right">
+          <div class="menu_name" v-if="activeMenu == 0">
+            <p>User nickname</p>
+            <div class="name_input">
+              <el-input-name
+                @namested="valueNames"
+                :btn="'Save'"
+              ></el-input-name>
+            </div>
+            <p>Bound email address</p>
+            <div class="email_input">
+              <el-input
+                :holder="getUserInfo.email"
+                @emitted="valueEmail"
+                :btn="'Save'"
+              ></el-input>
+            </div>
+          </div>
+          <div class="menu_password" v-if="activeMenu == 1">
+            <client-only>
+              <a-form-model
+                ref="changeForm"
+                :model="revisePwd"
+                :rules="rulesup"
+                key="0"
+              >
+                <p>Old password</p>
+                <a-form-model-item label="" prop="oldPwd">
+                  <div class="names">
+                    <a-input
+                      placeholder="Enter password"
+                      allow-clear
+                      v-model="revisePwd.oldPwd"
+                    />
+                  </div>
+                </a-form-model-item>
+                <p>Change password</p>
+                <a-form-model-item label="" prop="password1">
+                  <div class="pwd1">
+                    <a-input-password
+                      v-model="revisePwd.password1"
+                      placeholder="Enter password"
+                    />
+                  </div>
+                </a-form-model-item>
+                <a-form-model-item label="" prop="password2">
+                  <div class="pwd2">
+                    <a-input-password
+                      v-model="revisePwd.password2"
+                      placeholder="Enter password again"
+                    />
+                  </div>
+                </a-form-model-item>
+                <a-form-model-item>
+                  <div class="changebtn">
+                    <button class="button" @click="revisePwdSend">
+                      Change
+                    </button>
+                  </div>
+                </a-form-model-item>
+              </a-form-model>
+            </client-only>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import CryptoJS from 'crypto-js'
+import { mapGetters, mapMutations } from 'vuex'
+export default {
+  data() {
+    let validatePass2 = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('Please input the password again'))
+      } else if (value !== this.revisePwd.password1) {
+        callback(new Error("Two inputs don't match!"))
+      } else {
+        callback()
+      }
+    }
+    // 旧密码是否正确
+    // let oldPwds = (rule, value, callback) => {
+    //      if (!value) {
+    //     callback(new Error('Please input the password again'))
+    //   } else if (value == this.getUserInfo.password) {
+    //     callback(new Error("Two inputs don't match!"))
+    //   } else {
+    //     callback()
+    //   }
+    // }
+    return {
+      activeMenu: 0,
+      revisePwd: {
+        oldPwd: '',
+        password1: '',
+        password2: '',
+      },
+      rulesup: {
+        oldPwd: [
+          {
+            required: true,
+            message: 'Please input Activity name',
+            trigger: 'blur',
+          },
+        ],
+        password1: [
+          {
+            required: true,
+            message: 'please enter password',
+            trigger: 'change',
+          },
+        ],
+        password2: [
+          {
+            required: true,
+            message: 'Please input Activity name',
+            trigger: 'blur',
+          },
+          { validator: validatePass2, trigger: 'change' },
+        ],
+      },
+    }
+  },
+  computed: {
+    ...mapGetters(['getIntersperseUrl', 'getUserInfo']),
+  },
+  methods: {
+    ...mapMutations(['showLoginBox']),
+    selectMenu(list) {
+      this.activeMenu = list
+    },
+    valueNames(value) {
+      this.$apiList.user
+        .setUserMsg({
+          origin: process.env.origin,
+          user_name: value,
+        })
+        .then((res) => {
+          if (res.hasOwnProperty('token')) {
+            this.$store.commit('UPDATE_USERINFO', res)
+          } else {
+            alert('未能修改', res.msg)
+          }
+        })
+    },
+    valueEmail(value) {
+      this.$apiList.user
+        .setUserMsg({
+          origin: process.env.origin,
+          new_email: value,
+        })
+        .then((res) => {
+          if (res.hasOwnProperty('token')) {
+            this.$store.commit('UPDATE_USERINFO', res)
+          } else {
+            alert('未能修改', res.msg)
+          }
+        })
+    },
+    revisePwdSend() {
+      this.$refs.changeForm.validate((valid) => {
+        if (valid) {
+          let pwd = CryptoJS.MD5(this.revisePwd.oldPwd).toString(
+            CryptoJS.enc.Hex
+          )
+          let new_pwd = CryptoJS.MD5(this.revisePwd.password2).toString(
+            CryptoJS.enc.Hex
+          )
+          this.$apiList.user
+            .setUserMsg({
+              origin: process.env.origin,
+              pwd,
+              new_pwd,
+            })
+            .then((res) => {
+              if (res.hasOwnProperty('token')) {
+                this.$store.commit('UPDATE_USERINFO', res)
+                this.resetForm()
+                alert('Successfully modified')
+                this.showLoginBox()
+              } else {
+                alert('Unable to modify', res.msg)
+              }
+            })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm() {
+      this.$refs.changeForm.resetFields()
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.revise {
+  width: 1400px;
+  margin: 0 auto;
+  &_main {
+    padding: 48px 196px 174px;
+    .atop {
+      display: inline-block;
+      .button_top {
+        height: 44px;
+        padding: 0 32px;
+        border-radius: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.6);
+        font-family: 'Rubik';
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+      }
+    }
+    .menu {
+      display: flex;
+      padding-top: 17px;
+      &_left {
+        width: 235px;
+        height: 372px;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
+        font-family: Rubik;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+        position: relative;
+        &::before {
+          position: absolute;
+          right: 0;
+          top: 0;
+          content: '';
+          width: 1px;
+          height: 100%;
+          background: linear-gradient(
+            360deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 50.52%,
+            rgba(255, 255, 255, 0) 100%
+          );
+        }
+        .left_name {
+          padding: 16px 0;
+          position: relative;
+          cursor: pointer;
+          &:hover {
+            color: #fff;
+          }
+          &::before {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            content: '';
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(
+              90deg,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.2) 50.52%,
+              rgba(255, 255, 255, 0) 100%
+            );
+          }
+        }
+        .left_password {
+          padding: 16px 0;
+          position: relative;
+          cursor: pointer;
+          &:hover {
+            color: #fff;
+          }
+          &::before {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            content: '';
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(
+              90deg,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.2) 50.52%,
+              rgba(255, 255, 255, 0) 100%
+            );
+          }
+        }
+        .activate {
+          color: #fff !important;
+          &::after {
+            position: absolute;
+            content: '';
+            right: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: #9747ff;
+          }
+        }
+      }
+      &_right {
+        flex: 1;
+        padding-left: 118px;
+        .menu_name {
+          p {
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Rubik';
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 22px;
+          }
+          .name_input {
+            margin: 16px 0 24px;
+          }
+          .email_input {
+            margin: 16px 0 24px;
+          }
+        }
+        .menu_password {
+          :deep(.ant-input) {
+            height: 54px !important;
+            border-radius: 27px !important;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0, 0, 0, 0.08);
+            padding-left: 24px;
+            color: #fff;
+            font-family: 'Rubik';
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 18px;
+          }
+          :deep(.ant-input-clear-icon) {
+            color: rgba(255, 255, 255, 0.08);
+            font-size: 22px;
+          }
+          :deep(.ant-input-password-icon) {
+            color: rgba(255, 255, 255, 0.08);
+            font-size: 22px;
+          }
+          :deep(.has-error .ant-input-affix-wrapper .ant-input) {
+            border-color: #f5222d;
+          }
+          :deep(.ant-form-explain) {
+            padding: 0 0 0 24px;
+            font-size: 12px;
+          }
+          p {
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Rubik';
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 22px;
+          }
+          .names {
+            margin-top: 16px;
+          }
+          .pwd1 {
+            margin-top: 16px;
+          }
+          .changebtn {
+            .button {
+              width: 220px;
+              height: 44px;
+              border-radius: 42px;
+              background: #fff;
+              color: #000;
+              font-family: 'Rubik';
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 22px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>

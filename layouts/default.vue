@@ -19,16 +19,23 @@
     <transition name="fade">
       <Privacy v-if="visiblePrivacy" @close="visiblePrivacy = false"></Privacy>
     </transition>
+    <transition name="fade">
+      <el-login-form v-if="isChildVisible"></el-login-form>
+    </transition>
   </main>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       visiblePrivacy: false,
       showScrollToTop: false,
     }
+  },
+  computed: {
+    ...mapState(['isChildVisible']),
   },
   mounted() {
     let url = 'https://seekastrology.com'

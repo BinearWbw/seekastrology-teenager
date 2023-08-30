@@ -43,6 +43,7 @@
               </div>
             </transition>
           </a>
+          <el-login></el-login>
         </nav>
         <div class="menu common__btn" @click="visibleMenu = true"></div>
         <lazy-dialog-menu
@@ -276,8 +277,7 @@ export default {
         -webkit-flex-shrink: 0;
         flex-shrink: 0;
         &__item {
-          margin-left: 26px;
-          padding: 0 10px;
+          padding: 0 16px;
           height: 100%;
           display: flex;
           align-items: center;
@@ -286,9 +286,9 @@ export default {
           span {
             font-family: 'Cinzel Decorative';
             font-weight: 700;
-            font-size: 16px;
-            line-height: 22px;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            line-height: 18px;
+            color: rgba(255, 255, 255, 0.6);
           }
           &::after {
             content: '';
@@ -382,7 +382,7 @@ export default {
         padding: 0 30px;
         .nav {
           &__item {
-            padding: 0 10px;
+            padding: 0 16px;
           }
         }
       }
