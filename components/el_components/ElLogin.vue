@@ -4,7 +4,9 @@
       Log in
     </button>
     <div class="user_login" v-if="getUserInfo.email" @click="myProfile">
-      <img class="user_img" src="~/assets/img/login/user.svg" alt="" />
+      <div class="user_img">
+        <img :src="userImgIcon" alt="" />
+      </div>
       <span class="names">{{ updateName }}</span>
       <img
         class="arrow"
@@ -18,9 +20,9 @@
             v-for="(item, index) in dropData"
             :key="index"
             :href="`${getIntersperseUrl + item.path}`"
-            @click="logOutTo(item.name)"
             >{{ item.name }}</a
           >
+          <div class="log_out" @click="logOutTo">Log out</div>
         </div>
       </transition>
     </div>
@@ -38,7 +40,6 @@ export default {
         { name: 'Tarot Record', path: '/user/' },
         { name: 'Subscribe Record', path: '/user/revise/' },
         { name: 'Change Password', path: '/user/revise/' },
-        { name: 'Log out', path: '/' },
       ],
     }
   },
@@ -47,10 +48,15 @@ export default {
     updateName() {
       return this.getUserInfo.user_name || 'MY profile'
     },
+    userImgIcon() {
+      const imgUrl = this.getUserInfo.icon
+        ? `${this.$config.cdnUrl + this.getUserInfo.icon}`
+        : require('~/assets/img/login/user.svg')
+
+      return imgUrl
+    },
   },
-  mounted() {
-    console.log('vuex数据', this.getUserInfo.email)
-  },
+  mounted() {},
   methods: {
     ...mapMutations(['showLoginBox']),
     loginTo() {
@@ -62,10 +68,10 @@ export default {
     closeDropdown() {
       this.opens = false
     },
-    logOutTo(item) {
-      if (item == 'Log out') {
-        this.$store.commit('UPDATE_USERINFO', {})
-      }
+    logOutTo() {
+      // 退出登录-清楚用户信息
+      this.$store.commit('UPDATE_USERINFO', {})
+      window.location.href = '/'
     },
   },
 }
@@ -100,7 +106,13 @@ export default {
     .user_img {
       width: 44px;
       height: 44px;
-      object-fit: cover;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
     .names {
       color: rgba(255, 255, 255, 0.6);
@@ -139,15 +151,21 @@ export default {
         font-weight: 400;
         line-height: 22px;
         padding: 6px 24px;
-        &:last-child {
-          color: #ff4646;
-        }
         &:hover {
           background-color: #24104a;
           color: #fff;
-          &:last-child {
-            color: #ff4646;
-          }
+        }
+      }
+      .log_out {
+        font-family: 'Rubik';
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+        padding: 6px 24px;
+        color: #ff4646;
+        &:hover {
+          background-color: #24104a;
         }
       }
     }

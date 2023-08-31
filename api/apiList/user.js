@@ -23,8 +23,20 @@ export default (axios) => ({
   sendEmailAgain(data) {
     return axios.post('api/astro/email/auth', data)
   },
-  /* 激活-再次发送邮件 */
-  accountActiv(params) {
+  /* 激活账号 */
+  accountActive(params) {
     return axios.get('api/astro/auth', { params })
+  },
+  /* 文件上传 */
+  upload(data) {
+    return axios.post('api/astro/upload', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  },
+  /* 用户订阅 */
+  subscribe(data) {
+    return axios.post('api/astro/subscribe', data)
   },
 })

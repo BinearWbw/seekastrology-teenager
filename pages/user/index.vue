@@ -12,7 +12,7 @@
               class="upload_com"
               ref="uploadInput"
             />
-            <img src="~/assets/img/login/user.svg" alt="" />
+            <img :src="userImgIcon" alt="" />
           </div>
           <div class="toggle">
             <img class="imgs" src="~/assets/img/login/Group.svg" alt="" />
@@ -43,7 +43,9 @@
             <div class="details_record" v-if="activeTab == 0">
               <div class="try" v-if="true">
                 <p>You haven't used the tarot test yet</p>
-                <button>Try it now</button>
+                <a :href="`${getIntersperseUrl}/tarot/`">
+                  <button>Try it now</button>
+                </a>
               </div>
               <div class="card" v-if="false">
                 <div
@@ -85,9 +87,9 @@
                       <input
                         class="checkbox"
                         type="checkbox"
-                        :value="item.name"
+                        :value="item.type"
                         v-model="selectItem"
-                        @change="chooseMend(item, index)"
+                        @change="chooseMend(item)"
                       />
                       <div class="imgs">
                         <img class="icon" :src="item.icon" alt="" />
@@ -114,34 +116,40 @@ export default {
       userDetails: [{ tabs: 'Tarot Record' }, { tabs: 'Subscribe' }],
       selectData: [
         {
-          name: 'Tarot Record1',
-          text: 'Read your freedaily horoscopes and learn more about your',
-          icon: require('~/assets/img/horroscope/sign_all.svg'),
-        },
-        {
-          name: 'Tarot Record2',
-          text: 'Read your freedaily horoscopes and learn more about your',
-          icon: require('~/assets/img/horroscope/today_tarot.svg'),
-        },
-        {
-          name: 'Tarot Record3',
-          text: 'Read your freedaily horoscopes and learn more about your',
-          icon: require('~/assets/img/horroscope/cupational_sign.svg'),
-        },
-        {
-          name: 'Tarot Record4',
-          text: 'Read your freedaily horoscopes and learn more about your',
-          icon: require('~/assets/img/horroscope/love_sign.svg'),
-        },
-        {
-          name: 'Tarot Record5',
-          text: 'Read your freedaily horoscopes and learn more about your',
+          type: 'daily_astro',
+          name: "Today's Horoscope",
+          text: 'Start each dav with personalized astrological insights',
           icon: require('~/assets/img/horroscope/today.svg'),
         },
         {
-          name: 'Tarot Record6',
-          text: 'Read your freedaily horoscopes and learn more about your',
+          type: 'daily_love',
+          name: 'Love Horoscope',
+          text: 'Stay one step ahead with daily love energy aimed at your heart',
+          icon: require('~/assets/img/horroscope/love_sign.svg'),
+        },
+        {
+          type: 'daily_career',
+          name: 'Money Horoscope',
+          text: 'Know the direction of your fortune one step ahead every day',
+          icon: require('~/assets/img/horroscope/wealth_sign.svg'),
+        },
+        {
+          type: 'daily_health',
+          name: 'Health Horoscope',
+          text: 'Predicting heaith conditions in advance on a daily basis allows for timely prevention',
+          icon: require('~/assets/img/horroscope/healthy_sign.svg'),
+        },
+        {
+          type: 'special',
+          name: 'Personalized',
+          text: 'Get to know vourself with free insights customized just for you!',
           icon: require('~/assets/img/horroscope/article.svg'),
+        },
+        {
+          type: 'new_function',
+          name: 'New Feature',
+          text: 'Be the frst to know when new Seekastrology features are available!',
+          icon: require('~/assets/img/horroscope/2023.svg'),
         },
       ],
       selectItem: [],
@@ -153,11 +161,23 @@ export default {
           icon: require('~/assets/img/tarot/card2.webp'),
         },
       ],
-      fileType: ['image/jpg', 'image/jpeg', 'image/png'],
+      fileType: ['image/jpg', 'image/jpeg', 'image/png', 'image/JPG'],
+      imgStr: '',
+      olololol: ['daily_health', 'special', 'new_function'],
     }
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl', 'getUserInfo']),
+    ...mapGetters(['getIntersperseUrl', 'getUserInfo', 'getUserSub']),
+    userImgIcon() {
+      const imgUrl = this.getUserInfo.icon
+        ? `${this.$config.cdnUrl + this.getUserInfo.icon}`
+        : require('~/assets/img/login/user.svg')
+
+      return imgUrl
+    },
+  },
+  mounted() {
+    this.selectItem = this.getUserSub //选中的订阅
   },
   methods: {
     correspondingContent(i) {
@@ -171,15 +191,34 @@ export default {
     },
     chooseMend(item, index) {
       // 操作选择的内容
-      console.log('选中', item, index)
-      console.log('当前选中的内容', this.selectItem)
+      const userSub = this.getUserSub
+      const screen2 = userSub?.filter((i) => i == item.type)
+      let numBtn = 2
+      if (screen2) {
+        numBtn = screen2[0] ? 1 : 2 //是否收藏
+      }
+      this.$apiList.user
+        .subscribe({
+          origin: process.env.origin,
+          vote_type: item.type,
+          opt: numBtn,
+        })
+        .then((res) => {
+          if (res.data) {
+          } else {
+            this.$store.commit('UPDATE_USERSUB', res)
+          }
+        })
     },
+    // 点击选择文件
     triggerInput() {
       this.$refs.uploadInput.click()
+      console.log(this.getUserInfo.icon)
     },
     onchangeImgs(event) {
       const file = event.target.files[0]
-      console.log('文件', file, event)
+      console.log('文件', event)
+      if (file?.type == undefined) return
       if (!this.fileType.includes(file.type)) {
         alert('Only jpg, jpeg and png images are allowed to be uploaded!')
         return
@@ -187,21 +226,32 @@ export default {
       const formData = new FormData()
       formData.append('file', file)
       formData.append('path', 'photo')
-
+      console.log(',,,,,', this.$config.cdnUrl)
+      //   限制2m大小
+      if (file.size <= 2000000) {
+        this.$apiList.user.upload(formData).then((res) => {
+          console.log('res头像上传', res)
+          if (res.path) {
+            this.imgStr = res.path
+            this.userImgUp()
+          } else {
+            alert('Unable to modify')
+          }
+        })
+      } else {
+        alert('Image too large')
+      }
+    },
+    //更新用户头像
+    userImgUp() {
       this.$apiList.user
         .setUserMsg({
           origin: process.env.origin,
-          icon: formData,
+          icon: this.imgStr,
         })
         .then((res) => {
-          if (res.hasOwnProperty('token')) {
-            this.$store.commit('UPDATE_USERINFO', res)
-          } else {
-            alert('未能修改', res.msg)
-          }
+          this.$store.commit('UPDATE_USERINFO', res)
         })
-
-      console.log('formData', formData)
     },
   },
 }
@@ -228,6 +278,8 @@ export default {
           width: 172px;
           height: 172px;
           position: relative;
+          overflow: hidden;
+          border-radius: 50%;
           overflow: hidden;
           .upload_com {
             position: absolute;
@@ -266,6 +318,7 @@ export default {
             position: absolute;
             bottom: 15px;
             left: 50%;
+            border-radius: 50%;
             transform: translateX(-50%);
           }
         }
@@ -322,20 +375,23 @@ export default {
             line-height: 30px;
             margin-bottom: 24px;
           }
-          > button {
-            height: 44px;
-            padding: 8px 32px;
-            border-radius: 42px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: rgba(255, 255, 255, 0.6);
-            font-family: 'Rubik';
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 22px;
-            &:hover {
-              background-color: #fff;
-              color: #000;
+          > a {
+            display: inline-block;
+            button {
+              height: 44px;
+              padding: 8px 32px;
+              border-radius: 42px;
+              border: 1px solid rgba(255, 255, 255, 0.3);
+              color: rgba(255, 255, 255, 0.6);
+              font-family: 'Rubik';
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 22px;
+              &:hover {
+                background-color: #fff;
+                color: #000;
+              }
             }
           }
         }

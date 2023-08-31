@@ -19,8 +19,13 @@ export const state = () => ({
     icon: '',
     email: '',
     user_name: '',
+    user_subscribe: [],
   },
   isChildVisible: false, //登录框显示隐藏
+  signSuccessData: {
+    //注册成功后存入的邮箱
+    email: '',
+  },
 })
 export const getters = {
   getIntersperseUrl(state) {
@@ -29,8 +34,11 @@ export const getters = {
   getUserInfo(state) {
     return state.userInfo
   },
-  getUserIcon(state) {
-    return state.userInfo.icon
+  getUserSub(state) {
+    return state.userInfo.user_subscribe
+  },
+  getSignSuccess(state) {
+    return state.signSuccessData.email
   },
 }
 export const mutations = {
@@ -40,14 +48,17 @@ export const mutations = {
   UPDATE_USERINFO(state, payload) {
     state.userInfo = payload
   },
-  UPDATE_USERICON(state, payload) {
-    state.userInfo.icon = payload
+  UPDATE_USERSUB(state, payload) {
+    state.userInfo.user_subscribe = payload
   },
   showLoginBox(state) {
     state.isChildVisible = true
   },
   hideLoginBox(state) {
     state.isChildVisible = false
+  },
+  SIGN_SUCCESS(state, payload) {
+    state.signSuccessData.email = payload
   },
 }
 export const actions = {

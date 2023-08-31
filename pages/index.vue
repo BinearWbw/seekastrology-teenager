@@ -45,6 +45,27 @@
 <script>
 export default {
   name: 'Home',
+  mounted() {
+    this.activeInit()
+  },
+  methods: {
+    /* 检测账号激活 */
+    activeInit() {
+      const currentURL = window.location.href
+      console.log('当前url', currentURL)
+      if (currentURL.includes('key=')) {
+        // 提取 key和type 参数的值
+        const urlParams = new URLSearchParams(window.location.search)
+        const key = urlParams.get('key')
+        const type = urlParams.get('type')
+        this.$apiList.user.accountActive({ key, type }).then((res) => {
+          if (res?.token) {
+            alert('Activation successful, please log in')
+          }
+        })
+      }
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>

@@ -39,7 +39,9 @@
                 </a-form-model-item>
                 <a-form-model-item>
                   <div class="submit">
-                    <a class="forgot" href="#">Forgot password</a>
+                    <span class="forgot" @click="sendForgetPwdEmail"
+                      >Forgot password</span
+                    >
                     <button class="button" @click="inputSubmit">login</button>
                   </div>
                 </a-form-model-item>
@@ -48,8 +50,8 @@
             <div class="noaccount">
               No account? <span class="up" @click="toggleSignUp">Sign Up</span>
             </div>
-            <div class="text_or"><span>or</span></div>
-            <div class="logo_google">
+            <div class="text_or" v-if="false"><span>or</span></div>
+            <div class="logo_google" v-if="false">
               <i>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -76,30 +78,58 @@
                 :rules="rulesup"
                 key="2"
               >
-                <a-form-model-item label="" prop="name">
-                  <a-input
-                    placeholder="Enter your email account"
-                    allow-clear
-                    v-model="formup.name"
-                  />
-                </a-form-model-item>
-                <a-form-model-item label="" prop="password1">
-                  <a-input-password
-                    v-model="formup.password1"
-                    placeholder="Enter password"
-                  />
-                </a-form-model-item>
-                <a-form-model-item label="" prop="passwordtow">
-                  <a-input-password
-                    v-model="formup.passwordtow"
-                    placeholder="Enter password again"
-                  />
-                </a-form-model-item>
-                <a-form-model-item>
-                  <div class="submit signup">
-                    <button class="button" @click="inputSignUp">Sign Up</button>
-                  </div>
-                </a-form-model-item>
+                <div class="next_one" v-if="nextif">
+                  <a-form-model-item label="" prop="name">
+                    <a-input
+                      placeholder="Enter your email account"
+                      allow-clear
+                      v-model="formup.name"
+                    />
+                  </a-form-model-item>
+                  <a-form-model-item label="" prop="password1">
+                    <a-input-password
+                      v-model="formup.password1"
+                      placeholder="Enter password"
+                    />
+                  </a-form-model-item>
+                  <a-form-model-item label="" prop="passwordtow">
+                    <a-input-password
+                      v-model="formup.passwordtow"
+                      placeholder="Enter password again"
+                    />
+                  </a-form-model-item>
+                  <a-form-model-item>
+                    <div class="submit signup">
+                      <button class="button" @click="nextStep">Next</button>
+                    </div>
+                  </a-form-model-item>
+                </div>
+
+                <div class="next_user" v-if="!nextif">
+                  <a-form-model-item prop="nickname">
+                    <a-input
+                      placeholder="Enter your nickname"
+                      allow-clear
+                      v-model="formup.nickname"
+                    />
+                  </a-form-model-item>
+                  <a-form-model-item prop="time">
+                    <a-date-picker
+                      v-model="formup.time"
+                      type="date"
+                      valueFormat="YYYY-MM-DD"
+                      placeholder="Pick a date"
+                      style="width: 100%"
+                    />
+                  </a-form-model-item>
+                  <a-form-model-item>
+                    <div class="submit signup">
+                      <button class="button" @click="inputSignUp">
+                        Sign up
+                      </button>
+                    </div>
+                  </a-form-model-item>
+                </div>
               </a-form-model>
             </client-only>
             <div class="noaccount">
@@ -174,6 +204,8 @@ export default {
         name: '',
         password1: '',
         passwordtow: '',
+        nickname: '',
+        time: '',
       },
       rulesup: {
         name: [
@@ -203,9 +235,24 @@ export default {
           },
           { validator: validatePass2, trigger: 'change' },
         ],
+        nickname: [
+          {
+            required: true,
+            message: 'Please input Activity name',
+            trigger: 'blur',
+          },
+        ],
+        time: [
+          {
+            required: true,
+            message: 'Please select a time',
+            trigger: 'blur',
+          },
+        ],
       },
 
       openif: true,
+      nextif: true,
     }
   },
   methods: {
@@ -224,6 +271,7 @@ export default {
             .then((res) => {
               if (res.hasOwnProperty('token')) {
                 this.$store.commit('UPDATE_USERINFO', res)
+                console.log('登录', res)
                 this.hideLoginBox() //隐藏
               } else if (res.code === 400) {
                 alert(res.msg)
@@ -239,11 +287,16 @@ export default {
           let pwds = CryptoJS.MD5(this.formup.passwordtow).toString(
             CryptoJS.enc.Hex
           )
+          const dateString = this.formup.time
+          const timestamp = new Date(dateString).getTime()
+
           this.$apiList.user
             .getRegister({
               origin: process.env.origin,
               email: this.formup.name,
               pwd: pwds,
+              user_name: this.formup.nickname,
+              birthday: timestamp,
             })
             .then((res) => {
               console.log('res', res)
@@ -251,10 +304,27 @@ export default {
                 alert(res.msg)
               } else {
                 this.hideLoginBox() //隐藏
+                window.location.hash = '/user/activation/' //跳转到账号激活页面
+                this.$store.commit('SIGN_SUCCESS', res.email)
               }
             })
         }
       })
+    },
+    //忘记密码-发送邮件
+    sendForgetPwdEmail() {
+      this.$apiList.user
+        .sendForgetPwdEmail({
+          origin: process.env.origin,
+          email: this.form.name,
+        })
+        .then((res) => {
+          if (res) {
+            alert('Please check your email')
+          } else {
+            alert('Email is incorrect')
+          }
+        })
     },
 
     toggleLogin() {
@@ -267,6 +337,11 @@ export default {
     },
     hideLoginContent() {
       this.hideLoginBox() //隐藏
+    },
+    nextStep() {
+      if (this.formup.name && this.formup.password1) {
+        this.nextif = !this.nextif
+      }
     },
   },
 }
@@ -282,6 +357,7 @@ export default {
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(5px);
   overflow: hidden;
+  z-index: 999;
   &_main {
     position: absolute;
     top: 50%;
@@ -398,6 +474,7 @@ export default {
               font-style: normal;
               font-weight: 400;
               line-height: 22px;
+              cursor: pointer;
               &:hover {
                 color: #fff;
               }
