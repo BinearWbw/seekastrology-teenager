@@ -39,14 +39,22 @@ export default {
   },
   mounted() {
     this.setIframe()
+    window.addEventListener('message', this.handleHashMessage)
+    window.addEventListener('hashchange', this.handleHashChange)
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
     this.showNotification()
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
   methods: {
+    handleHashMessage(e) {
+      if (
+        e.data ===
+          '{"eventType":"adClosed","result":{"status":1},"googMsgType":"fullscreen"}' &&
+        e.origin === 'https://googleads.g.doubleclick.net'
+      ) {
+        window.i_like_it = 0
+      }
+    },
     setIframe() {
       let url = 'https://seekastrology.com'
       if (window.location.host == 'seekastrology.com') {
@@ -60,6 +68,37 @@ export default {
       var iframe = document.getElementById('storage-iframe')
       if (iframe && url) {
         iframe.src = `${url}/storage-iframe.html`
+      }
+    },
+    handleHashChange() {
+      if (window.location.hash == '#google_vignette') {
+        window.i_like_it = 1
+        dataLayer.push({
+          event: 'adsChange',
+        })
+        // look
+        let numot = localStorage.getItem('numot')
+        if (numot) {
+          if (Number(numot) > 1) {
+            dataLayer.push({
+              event: 'numot3',
+            })
+            localStorage.setItem('numot', JSON.stringify(3))
+            this.$utils.setIframeLocalStorage('numot', JSON.stringify(3))
+          } else {
+            dataLayer.push({
+              event: 'numot2',
+            })
+            localStorage.setItem('numot', JSON.stringify(2))
+            this.$utils.setIframeLocalStorage('numot', JSON.stringify(2))
+          }
+        } else {
+          dataLayer.push({
+            event: 'numot1',
+          })
+          localStorage.setItem('numot', JSON.stringify(1))
+          this.$utils.setIframeLocalStorage('numot', JSON.stringify(1))
+        }
       }
     },
     handleScroll() {
@@ -105,6 +144,9 @@ export default {
       const firstOpenVal = sessionStorage.getItem('firstOpen')
       if (!firstOpenVal) sessionStorage.setItem('firstOpen', 1)
     },
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
   },
 }
 </script>
