@@ -38,24 +38,30 @@ export default {
     ...mapState(['isChildVisible']),
   },
   mounted() {
-    let url = 'https://seekastrology.com'
-    if (window.location.host == 'seekastrology.com') {
-      url = 'https://www.seekastrology.com'
-    } else if (window.location.host == 'www.seekastrology.com') {
-      url = 'https://seekastrology.com'
-    } else {
-      url = `http://${window.location.host}`
-    }
-    this.$store.commit('UPDATE_INTERSPERSE_URL', url)
+    this.setIframe()
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
     this.showNotification()
-    window.addEventListener('hashchange', this.handleHashChange)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
+    setIframe() {
+      let url = 'https://seekastrology.com'
+      if (window.location.host == 'seekastrology.com') {
+        url = 'https://www.seekastrology.com'
+      } else if (window.location.host == 'www.seekastrology.com') {
+        url = 'https://seekastrology.com'
+      } else {
+        url = `http://${window.location.host}`
+      }
+      this.$store.commit('UPDATE_INTERSPERSE_URL', url)
+      var iframe = document.getElementById('storage-iframe')
+      if (iframe && url) {
+        iframe.src = `${url}/storage-iframe.html`
+      }
+    },
     handleScroll() {
       const scrollThreshold = 500
       this.showScrollToTop =
@@ -70,7 +76,6 @@ export default {
         this.showScrollToTop = false
       }, 500)
     },
-
     showNotification() {
       const firstOpenVal = sessionStorage.getItem('firstOpen')
 
@@ -99,14 +104,6 @@ export default {
     firstOpenSend() {
       const firstOpenVal = sessionStorage.getItem('firstOpen')
       if (!firstOpenVal) sessionStorage.setItem('firstOpen', 1)
-    },
-    handleHashChange() {
-      if (window.location.hash == '#google_vignette') {
-        window.i_like_it = 1
-        dataLayer.push({
-          event: 'adsChange',
-        })
-      }
     },
   },
 }

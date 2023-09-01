@@ -1,18 +1,6 @@
 <template>
   <div :class="classNames" class="googleAdStyle" ref="googleAdStyle">
     <p class="title">Advertisement</p>
-    <ins
-      v-if="visible"
-      class="adsbygoogle"
-      :style="{
-        display: 'block',
-        width: '100%',
-        height: '100%',
-      }"
-      data-ad-client="ca-pub-6430486603399192"
-      :data-ad-slot="id"
-      data-full-width-responsive="false"
-    ></ins>
   </div>
 </template>
 <script>
@@ -24,49 +12,37 @@ export default {
   },
   data() {
     return {
-      erd: null,
-      googleInit: null,
-      visible: false,
+      observer: null,
     }
   },
   mounted() {
-    let cookiesPrivacySes = sessionStorage.getItem('cookiesPrivacy')
-    if (window.getComputedStyle(this.$refs.googleAdStyle).display !== 'none') {
-      this.visible = true
-      this.googleInit = setTimeout(() => {
-        if (typeof window !== 'undefined')
-          try {
-            const requestNonPersonalizedAds = cookiesPrivacySes ? 1 : 0
-            ;(adsbygoogle =
-              window.adsbygoogle || []).requestNonPersonalizedAds =
-              requestNonPersonalizedAds
-            ;(adsbygoogle = window.adsbygoogle || []).push({})
-          } catch (error) {}
-      }, 500)
-    } else {
-      const elementResizeDetectorMaker = require('element-resize-detector')
-      this.erd = elementResizeDetectorMaker()
-      this.erd.listenTo(this.$refs.googleAdStyle, (ele) => {
-        if (window.getComputedStyle(ele).display !== 'none') {
-          this.visible = true
-          this.googleInit = setTimeout(() => {
-            if (typeof window !== 'undefined')
-              try {
-                const requestNonPersonalizedAds = cookiesPrivacySes ? 1 : 0
-                ;(adsbygoogle =
-                  window.adsbygoogle || []).requestNonPersonalizedAds =
-                  requestNonPersonalizedAds
-                ;(adsbygoogle = window.adsbygoogle || []).push({})
-              } catch (error) {}
-          }, 500)
-          this.erd.uninstall(this.$refs.googleAdStyle)
-        }
-      })
-    }
+    this.observer = new IntersectionObserver(this.handleIntersection)
+    this.observer.observe(this.$refs.googleAdStyle)
+  },
+  methods: {
+    handleIntersection(entries) {
+      if (entries[0].isIntersecting) {
+        const targetElement = this.$refs.googleAdStyle
+        const adScript = document.createElement('script')
+        adScript.innerHTML = `(adsbygoogle = window.adsbygoogle || []).push({});`
+        const insElement = document.createElement('ins')
+        insElement.setAttribute('class', 'adsbygoogle')
+        insElement.setAttribute(
+          'style',
+          'display: block; width: 100%;height: 100%;'
+        )
+        insElement.setAttribute('data-ad-client', 'ca-pub-6430486603399192')
+        insElement.setAttribute('data-ad-slot', `${this.id}`)
+        insElement.setAttribute('data-full-width-responsive', 'false')
+        targetElement.appendChild(insElement)
+        targetElement.appendChild(adScript)
+        this.observer.unobserve(this.$refs.googleAdStyle)
+      }
+    },
   },
   destroyed() {
-    if (this.googleInit) clearTimeout(this.googleInit)
-    if (this.erd) this.erd.uninstall(this.$refs.googleAdStyle)
+    this.observer.disconnect()
+    this.observer = null
   },
 }
 </script>
