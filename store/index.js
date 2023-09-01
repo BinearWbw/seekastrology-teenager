@@ -40,6 +40,9 @@ export const getters = {
   getSignSuccess(state) {
     return state.signSuccessData.email
   },
+  getChildVisible(state) {
+    return state.isChildVisible
+  },
 }
 export const mutations = {
   UPDATE_INTERSPERSE_URL(state, payload) {
@@ -56,6 +59,9 @@ export const mutations = {
   },
   hideLoginBox(state) {
     state.isChildVisible = false
+    //清除滚动限制
+    let bodyStyle = document.body.style
+    bodyStyle.overflow = ''
   },
   SIGN_SUCCESS(state, payload) {
     state.signSuccessData.email = payload

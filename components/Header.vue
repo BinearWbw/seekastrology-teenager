@@ -9,7 +9,6 @@
             alt="logoImg"
           />
         </a>
-        <!-- <Desktop></Desktop> -->
         <nav class="nav">
           <a
             class="nav__item"
@@ -43,9 +42,10 @@
               </div>
             </transition>
           </a>
-          <el-login></el-login>
         </nav>
+        <Desktop></Desktop>
         <div class="menu common__btn" @click="visibleMenu = true"></div>
+        <el-login></el-login>
         <lazy-dialog-menu
           :menu="menu"
           :visible="visibleMenu"
@@ -255,11 +255,11 @@ export default {
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
-      justify-content: space-between;
       .logo {
         height: 100%;
         display: flex;
         align-items: center;
+        margin-right: auto;
         img {
           width: 100%;
           display: block;
@@ -418,7 +418,7 @@ export default {
     }
   }
 }
-@media (max-width: (1024px)) {
+@media (max-width: (1146px)) {
   .header {
     &__main {
       > div {

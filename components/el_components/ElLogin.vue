@@ -52,7 +52,6 @@ export default {
       const imgUrl = this.getUserInfo.icon
         ? `${this.$config.cdnUrl + this.getUserInfo.icon}`
         : require('~/assets/img/login/user.svg')
-
       return imgUrl
     },
   },
@@ -78,14 +77,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:math';
 .login {
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  transition: background-color 0.3s ease-in-out;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.06);
-  }
+  margin-left: 16px;
   .button {
     padding: 8px 32px;
     height: 44px;
@@ -166,6 +162,157 @@ export default {
         color: #ff4646;
         &:hover {
           background-color: #24104a;
+        }
+      }
+    }
+  }
+}
+@media (max-width: (1366px)) {
+  .login {
+    .button {
+      padding: 8px 20px;
+      height: 32px;
+    }
+    .user_login {
+      .user_img {
+        width: 33px;
+        height: 33px;
+      }
+      .drop_down {
+        position: absolute;
+        top: 45px;
+        left: inherit;
+        right: 0;
+        transform: inherit;
+      }
+    }
+  }
+}
+@media (max-width: (1100px)) {
+  .login {
+    .user_login {
+      .names {
+        display: none;
+      }
+      .arrow {
+        display: none;
+      }
+    }
+  }
+}
+@media (max-width: (1024px)) {
+  .login {
+    .user_login {
+      .user_img {
+        width: 30px;
+        height: 30px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .names {
+        display: block;
+      }
+      .arrow {
+        display: block;
+      }
+      .drop_down {
+        position: fixed;
+        top: 0;
+        left: inherit;
+        right: 0;
+        transform: inherit;
+        width: 100%;
+        height: 100%;
+        padding: 46px 0 0;
+        border: none;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(5px);
+        a {
+          color: #fff;
+          padding: 16px 24px;
+          text-align: center;
+          background-color: #000;
+          &:hover {
+            background-color: #160f24;
+          }
+          position: relative;
+          &::after {
+            position: absolute;
+            content: '';
+            left: 0;
+            bottom: 0;
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(
+              90deg,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.2) 50.52%,
+              rgba(255, 255, 255, 0) 100%
+            );
+          }
+        }
+        .log_out {
+          padding: 16px 24px 24px;
+          color: #ff4646;
+          text-align: center;
+          background-color: #000;
+          &:hover {
+            color: #fff;
+            background-color: #832828;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .login {
+    display: flex;
+    align-items: center;
+    margin-left: 16 * $pr;
+    .button {
+      padding: 0;
+      width: 30 * $pr;
+      height: 30 * $pr;
+      border-radius: 50%;
+      font-size: 10 * $pr;
+      font-weight: 700;
+      line-height: 12 * $pr;
+      background: #fff;
+    }
+    .user_login {
+      .user_img {
+        width: 30 * $pr;
+        height: 30 * $pr;
+        border-radius: 50%;
+      }
+      .names {
+        display: none;
+      }
+      .arrow {
+        display: none;
+      }
+      .drop_down {
+        padding: 46 * $pr 0 0;
+        backdrop-filter: blur(5 * $pr);
+        a {
+          color: #fff;
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
+          padding: 16 * $pr 24 * $pr;
+          &::after {
+            position: absolute;
+            height: 1 * $pr;
+          }
+        }
+        .log_out {
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
+          padding: 16 * $pr 24 * $pr 24 * $pr;
         }
       }
     }

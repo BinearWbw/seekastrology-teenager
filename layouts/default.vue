@@ -20,8 +20,7 @@
       <Privacy v-if="visiblePrivacy" @close="visiblePrivacy = false"></Privacy>
     </transition>
     <transition name="fade">
-      <!-- <el-login-form v-if="isChildVisible"></el-login-form> -->
-      <el-login-form v-if="true"></el-login-form>
+      <el-login-form v-if="isChildVisible"></el-login-form>
     </transition>
   </main>
 </template>
