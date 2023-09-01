@@ -41,6 +41,31 @@ export default {
     this.setIframe()
     window.addEventListener('message', this.handleHashMessage)
     window.addEventListener('hashchange', this.handleHashChange)
+    window.addEventListener('blur', () => {
+      const activeElement = document.activeElement
+      const src = activeElement.getAttribute('src')
+      if (
+        src &&
+        src.indexOf('googleads.g.doubleclick.net/pagead/ads?') !== -1
+      ) {
+        dataLayer.push({
+          event: 'sitePageAD',
+        })
+      } else if (
+        src &&
+        src.indexOf('googleads.g.doubleclick.net/pagead/html/') !== -1
+      ) {
+        if (src.indexOf('btvi=') !== -1) {
+          dataLayer.push({
+            event: 'siteAnchoringAD',
+          })
+        } else {
+          dataLayer.push({
+            event: 'siteAlternateAD',
+          })
+        }
+      }
+    })
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
     this.showNotification()
