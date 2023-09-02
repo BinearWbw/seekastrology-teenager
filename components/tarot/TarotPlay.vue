@@ -461,6 +461,7 @@ export default {
       if (this.isSelected) {
         this.bodyHidden('auto')
         sessionStorage.setItem('cardsInfo', JSON.stringify(this.showList))
+        window.changePageUrl = `/tarot/answer/?type=${this.type}`
         window.location = `/tarot/answer/?type=${this.type}`
       }
     },

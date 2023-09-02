@@ -120,11 +120,11 @@ const horoscopeFormatDate = (type = 'd') => {
   }
 }
 const setIframeLocalStorage = (name, data) => {
-  let url = 'https://apkgather.com'
-  if (window.location.host == 'apkgather.com') {
-    url = 'https://www.apkgather.com'
-  } else if (window.location.host == 'www.apkgather.com') {
-    url = 'https://apkgather.com'
+  let url = 'https://seekastrology.com'
+  if (window.location.host == 'seekastrology.com') {
+    url = 'https://www.seekastrology.com'
+  } else if (window.location.host == 'www.seekastrology.com') {
+    url = 'https://seekastrology.com'
   } else {
     url = `http://${window.location.host}`
   }
@@ -141,11 +141,11 @@ const setIframeLocalStorage = (name, data) => {
   }
 }
 const setIframeSessionStorage = (name, data) => {
-  let url = 'https://apkgather.com'
-  if (window.location.host == 'apkgather.com') {
-    url = 'https://www.apkgather.com'
-  } else if (window.location.host == 'www.apkgather.com') {
-    url = 'https://apkgather.com'
+  let url = 'https://seekastrology.com'
+  if (window.location.host == 'seekastrology.com') {
+    url = 'https://www.seekastrology.com'
+  } else if (window.location.host == 'www.seekastrology.com') {
+    url = 'https://seekastrology.com'
   } else {
     url = `http://${window.location.host}`
   }

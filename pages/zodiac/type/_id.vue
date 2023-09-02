@@ -362,7 +362,8 @@ export default {
       })
       this.isLoading = true
       const pathNames = this.pathName.substring(0, this.pathName.indexOf('-'))
-      window.location.href = `${this.getIntersperseUrl}/zodiac/type/${pathNames}-${option.id}/`
+      window.changePageUrl = `/zodiac/type/${pathNames}-${option.id}/`
+      window.location.href = `/zodiac/type/${pathNames}-${option.id}/`
     },
 
     setTitleCrumbs(name = 'aries') {
@@ -401,7 +402,8 @@ export default {
     },
     onBack() {
       this.isLoading = true
-      window.location.href = `${this.getIntersperseUrl}${this.$route.path}`
+      window.changePageUrl = `${this.$route.path}`
+      window.location.href = `${this.$route.path}`
     },
     currentPairingDetailsCrumbs(text) {
       this.pairingDetailsCrumbs = ` / ${

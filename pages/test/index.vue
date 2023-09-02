@@ -184,14 +184,6 @@ export default {
           this.loading = false
         })
     },
-    /**跳转详情页 */
-    jumpDetails(item) {
-      this.$router.push({
-        path: `/test/details/?id=${item.id}`,
-        href: '/test/details',
-        data: item,
-      })
-    },
   },
   computed: {
     ...mapGetters(['getIntersperseUrl']),

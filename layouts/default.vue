@@ -160,6 +160,7 @@ export default {
 
         notification.onclick = () => {
           // 用户点击通知时触发的操作
+          window.changePageUrl = 'https://seekastrology.com/tarot/'
           window.location.href = 'https://seekastrology.com/tarot/'
         }
         sessionStorage.setItem('firstOpen', 2)

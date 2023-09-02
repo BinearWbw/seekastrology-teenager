@@ -113,8 +113,10 @@ export default {
       if (this.genderList.males && this.genderList.females) {
         sessionStorage.setItem('genderList', JSON.stringify(this.genderList))
         if (sessionStorage.getItem('genderList'))
-          window.location.href = `/astrology/`
+          window.changePageUrl = `/astrology/`
+        window.location.href = `/astrology/`
       } else if (!this.genderList.males && !this.genderList.females) {
+        window.changePageUrl = `/astrology/`
         window.location.href = `/astrology/`
       } else {
         alert('please choose two Star sign')

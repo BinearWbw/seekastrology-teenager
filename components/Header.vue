@@ -212,6 +212,7 @@ export default {
           msg: 'Search is required and the length cannot be less than 2',
         })
       } else {
+        window.changePageUrl = `/search/?input=${search}`
         window.location = `/search/?input=${search}`
       }
     },

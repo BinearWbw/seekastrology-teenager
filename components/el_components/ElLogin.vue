@@ -70,6 +70,7 @@ export default {
     logOutTo() {
       // 退出登录-清楚用户信息
       this.$store.commit('UPDATE_USERINFO', {})
+      window.changePageUrl = '/'
       window.location.href = '/'
     },
   },

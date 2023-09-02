@@ -237,9 +237,10 @@ export default {
         top: 0,
         behavior: 'smooth',
       })
-      window.location.href = `${
-        this.getIntersperseUrl
-      }/zodiac/details/${option.name
+      window.changePageUrl = `/zodiac/details/${option.name
+        .replace(/[^a-zA-Z0-9\\s]/g, '-')
+        .toLowerCase()}-${option.id}/`
+      window.location.href = `/zodiac/details/${option.name
         .replace(/[^a-zA-Z0-9\\s]/g, '-')
         .toLowerCase()}-${option.id}/`
       this.isLoading = true

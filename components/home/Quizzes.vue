@@ -122,6 +122,8 @@ export default {
   },
   methods: {
     pathToTestPage() {
+      window.changePageUrl =
+        window.location.pathname === '/' ? '/test/?from=home' : '/test/'
       window.location =
         window.location.pathname === '/' ? '/test/?from=home' : '/test/'
     },

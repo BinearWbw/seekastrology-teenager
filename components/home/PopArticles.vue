@@ -109,6 +109,10 @@ export default {
   },
   methods: {
     pathToPage() {
+      window.changePageUrl =
+        window.location.pathname === '/'
+          ? '/resources/?from=home'
+          : '/resources/'
       window.location =
         window.location.pathname === '/'
           ? '/resources/?from=home'
