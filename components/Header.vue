@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" id="headerNav">
     <div class="header__main" :class="{ header_black: isScrolled }">
       <div>
         <a :href="getIntersperseUrl" class="logo">
