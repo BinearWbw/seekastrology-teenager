@@ -6,6 +6,7 @@
           <a-input
             :placeholder="holder"
             allow-clear
+            :disabled="disable"
             v-model="dataEmail.email"
           />
         </a-form-model-item>
@@ -19,7 +20,7 @@
 
 <script>
 export default {
-  props: ['btn', 'holder'],
+  props: ['btn', 'holder', 'disable'],
   data() {
     return {
       dataEmail: {
@@ -57,6 +58,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:math';
 .input_main {
   width: 100%;
   height: 54px;
@@ -108,5 +110,8 @@ export default {
     min-height: 19px;
     font-size: 12px;
   }
+}
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
 }
 </style>

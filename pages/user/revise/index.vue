@@ -27,7 +27,7 @@
             <div class="name_input">
               <el-input-name
                 @namested="valueNames"
-                :btn="'Save'"
+                :btn="'Send'"
               ></el-input-name>
             </div>
             <p>Bound email address</p>
@@ -35,7 +35,8 @@
               <el-input
                 :holder="getUserInfo.email"
                 @emitted="valueEmail"
-                :btn="'Save'"
+                :btn="'Send'"
+                :disable="false"
               ></el-input>
             </div>
           </div>
@@ -407,5 +408,7 @@ export default {
       }
     }
   }
+}
+@media (max-width: 750px) {
 }
 </style>
