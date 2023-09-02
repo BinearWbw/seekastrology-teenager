@@ -22,6 +22,7 @@
           </div>
         </div>
         <div class="menu_right">
+          <div class="h5_title">Edit your profile</div>
           <div class="menu_name" v-if="activeMenu == 0">
             <p>User nickname</p>
             <div class="name_input">
@@ -40,7 +41,8 @@
               ></el-input>
             </div>
           </div>
-          <div class="menu_password" v-if="activeMenu == 1">
+          <div class="h5_title">Change password</div>
+          <div class="menu_password" v-if="activeMenu == 1 || isInnerWidthBox">
             <client-only>
               <a-form-model
                 ref="changeForm"
@@ -146,15 +148,27 @@ export default {
           { validator: validatePass2, trigger: 'change' },
         ],
       },
+      isInnerWidthBox: false,
     }
   },
   computed: {
     ...mapGetters(['getIntersperseUrl', 'getUserInfo']),
   },
+  mounted() {
+    this.isInnerWidth()
+  },
   methods: {
     ...mapMutations(['showLoginBox']),
     selectMenu(list) {
       this.activeMenu = list
+    },
+    isInnerWidth() {
+      const wid = window.innerWidth
+      if (wid <= 750) {
+        this.isInnerWidthBox = true
+      } else {
+        this.isInnerWidthBox = false
+      }
     },
     valueNames(value) {
       this.$apiList.user
@@ -223,6 +237,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:math';
 .revise {
   width: 1400px;
   margin: 0 auto;
@@ -331,6 +346,9 @@ export default {
       &_right {
         flex: 1;
         padding-left: 118px;
+        .h5_title {
+          display: none;
+        }
         .menu_name {
           p {
             color: rgba(255, 255, 255, 0.6);
@@ -409,6 +427,130 @@ export default {
     }
   }
 }
+@media (max-width: 1450px) {
+  .revise {
+    width: 100%;
+  }
+}
+@media (max-width: 1100px) {
+  .revise {
+    &_main {
+      padding: 48px 40px 174px;
+    }
+  }
+}
 @media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .revise {
+    &_main {
+      padding: 24 * $pr 24 * $pr 48 * $pr;
+      .atop {
+        display: inline-block;
+        .button_top {
+          height: 44px;
+          padding: 0 32px;
+          border-radius: 42px;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: rgba(255, 255, 255, 0.6);
+          font-family: 'Rubik';
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 22px;
+        }
+      }
+      .menu {
+        display: flex;
+        padding-top: 24 * $pr;
+        &_left {
+          display: none;
+        }
+        &_right {
+          flex: 1;
+          padding-left: 0;
+          .h5_title {
+            display: block;
+            color: #fff;
+            text-align: center;
+            font-family: 'Rubik';
+            font-size: 22 * $pr;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 30 * $pr;
+            padding: 12 * $pr 0;
+            margin-bottom: 24 * $pr;
+            &::after {
+              content: '';
+              display: block;
+              width: 100%;
+              height: 1 * $pr;
+              position: relative;
+              left: 0;
+              bottom: -12 * $pr;
+              background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.2) 50.52%,
+                rgba(255, 255, 255, 0) 100%
+              );
+            }
+          }
+          .menu_name {
+            p {
+              font-size: 16 * $pr;
+              line-height: 22 * $pr;
+            }
+            .name_input {
+              margin: 8 * $pr 0 24 * $pr;
+            }
+            .email_input {
+              margin: 8 * $pr 0 48 * $pr;
+            }
+          }
+          .menu_password {
+            :deep(.ant-input) {
+              height: 44 * $pr !important;
+              border-radius: 27 * $pr !important;
+              border: 1 * $pr solid rgba(255, 255, 255, 0.08);
+              padding-left: 16 * $pr;
+              font-size: 16 * $pr;
+              line-height: 18 * $pr;
+            }
+            :deep(.ant-input-clear-icon) {
+              color: rgba(255, 255, 255, 0.08);
+              font-size: 22 * $pr;
+            }
+            :deep(.ant-input-password-icon) {
+              color: rgba(255, 255, 255, 0.08);
+              font-size: 22 * $pr;
+            }
+            :deep(.ant-form-explain) {
+              padding: 0 0 0 16 * $pr;
+              font-size: 12 * $pr;
+            }
+            p {
+              font-size: 16 * $pr;
+              line-height: 22 * $pr;
+            }
+            .names {
+              margin-top: 24 * $pr;
+            }
+            .pwd1 {
+              margin-top: 24 * $pr;
+            }
+            .changebtn {
+              .button {
+                width: 100%;
+                height: 44 * $pr;
+                border-radius: 42 * $pr;
+                font-size: 16 * $pr;
+                line-height: 22 * $pr;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 </style>

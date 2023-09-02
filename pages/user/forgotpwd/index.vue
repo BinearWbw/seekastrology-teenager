@@ -127,6 +127,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:math';
 .forgotpwd {
   width: 1400px;
   margin: 0 auto;
@@ -201,6 +202,73 @@ export default {
           font-style: normal;
           font-weight: 400;
           line-height: 22px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1450px) {
+  .forgotpwd {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .forgotpwd {
+    &_main {
+      padding: 48 * $pr 24 * $pr 60 * $pr;
+      .forms {
+        width: 100%;
+        .h3 {
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
+          margin-bottom: 24 * $pr;
+        }
+
+        :deep(.ant-input) {
+          height: 44 * $pr !important;
+          border-radius: 27 * $pr !important;
+          border: 1 * $pr solid rgba(255, 255, 255, 0.08);
+          padding-left: 16 * $pr;
+          font-size: 16 * $pr;
+          line-height: 18 * $pr;
+        }
+        :deep(.ant-input-clear-icon) {
+          color: rgba(255, 255, 255, 0.08);
+          font-size: 22 * $pr;
+        }
+        :deep(.ant-input-password-icon) {
+          color: rgba(255, 255, 255, 0.08);
+          font-size: 22 * $pr;
+        }
+        :deep(.ant-form-explain) {
+          padding: 0 0 0 16 * $pr;
+          font-size: 12 * $pr;
+        }
+        p {
+          color: rgba(255, 255, 255, 0.6);
+          font-family: 'Rubik';
+          font-size: 16 * $pr;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 22 * $pr;
+        }
+        .names {
+          margin-top: 16 * $pr;
+        }
+        .pwd1 {
+          margin-top: 16 * $pr;
+        }
+        .changebtn {
+          .button {
+            width: 100%;
+            height: 44 * $pr;
+            border-radius: 42 * $pr;
+            font-size: 16 * $pr;
+            line-height: 22 * $pr;
+          }
         }
       }
     }

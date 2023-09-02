@@ -1,5 +1,5 @@
 <template>
-  <div class="login" tabindex="0" @blur="closeDropdown">
+  <div class="login">
     <button class="button" v-if="!getUserInfo.email" @click="loginTo">
       Log in
     </button>
@@ -15,7 +15,7 @@
         alt=""
       />
       <transition name="fade">
-        <div class="drop_down" v-if="opens">
+        <div class="drop_down" tabindex="0" @blur="closeDropdown" v-if="opens">
           <a
             v-for="(item, index) in dropData"
             :key="index"
@@ -55,7 +55,10 @@ export default {
       return imgUrl
     },
   },
-  mounted() {},
+  mounted() {
+    // 添加点击文档其他地方的事件监听器
+    document.addEventListener('click', this.closeDropdown)
+  },
   methods: {
     ...mapMutations(['showLoginBox']),
     loginTo() {
@@ -64,8 +67,13 @@ export default {
     myProfile() {
       this.opens = !this.opens
     },
-    closeDropdown() {
-      this.opens = false
+    closeDropdown(event) {
+      // 判断点击事件的目标是否在下拉菜单内
+      const dropdown = this.$el
+      if (!dropdown.contains(event.target)) {
+        // 如果不在下拉菜单内，则关闭下拉菜单
+        this.opens = false
+      }
     },
     logOutTo() {
       // 退出登录-清楚用户信息
@@ -73,6 +81,10 @@ export default {
       window.changePageUrl = '/'
       window.location.href = '/'
     },
+  },
+  beforeDestroy() {
+    // 在组件销毁之前移除事件监听器
+    document.removeEventListener('click', this.closeDropdown)
   },
 }
 </script>

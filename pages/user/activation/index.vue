@@ -62,6 +62,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:math';
 .activation {
   width: 1400px;
   margin: 0 auto;
@@ -118,6 +119,46 @@ export default {
           cursor: not-allowed; /* 修改鼠标指针样式为“禁用” */
           opacity: 0.6; /* 降低按钮的不透明度，表示禁用状态 */
           pointer-events: none; /* 阻止禁用按钮上的交互事件 */
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1450px) {
+  .activation {
+    width: 100%;
+  }
+}
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .activation {
+    &_main {
+      width: 100%;
+      .popo {
+        padding: 48 * $pr 41 * $pr 150 * $pr;
+        > h3 {
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
+          margin-bottom: 24 * $pr;
+        }
+        .text {
+          font-size: 14 * $pr;
+          line-height: 18 * $pr;
+          margin-bottom: 16 * $pr;
+        }
+        .email {
+          font-size: 12 * $pr;
+          line-height: 16 * $pr;
+        }
+        .btn {
+          padding-top: 24 * $pr;
+          .button {
+            height: 44 * $pr;
+            padding: 0 32 * $pr;
+            font-size: 14 * $pr;
+            line-height: 18 * $pr;
+            border-radius: 42 * $pr;
+          }
         }
       }
     }

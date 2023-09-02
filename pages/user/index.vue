@@ -47,7 +47,7 @@
                   <button>Try it now</button>
                 </a>
               </div>
-              <div class="card" v-if="true">
+              <div class="card" v-if="false">
                 <div
                   class="card_item"
                   v-for="(item, index) in cardData"
@@ -173,28 +173,9 @@ export default {
           time: '2022/05/21',
           icon: require('~/assets/img/tarot/card2.webp'),
         },
-        {
-          title: '“What is your fortune today”',
-          text: 'The daily tarot',
-          time: '2022/05/21',
-          icon: require('~/assets/img/tarot/card2.webp'),
-        },
-        {
-          title: '“What is your fortune today”',
-          text: 'The daily tarot',
-          time: '2022/05/21',
-          icon: require('~/assets/img/tarot/card2.webp'),
-        },
-        {
-          title: '“What is your fortune today”',
-          text: 'The daily tarot',
-          time: '2022/05/21',
-          icon: require('~/assets/img/tarot/card2.webp'),
-        },
       ],
       fileType: ['image/jpg', 'image/jpeg', 'image/png', 'image/JPG'],
       imgStr: '',
-      olololol: ['daily_health', 'special', 'new_function'],
     }
   },
   computed: {
@@ -208,7 +189,9 @@ export default {
     },
   },
   mounted() {
-    this.selectItem = this.getUserSub //选中的订阅
+    if (this.getUserSub) {
+      this.selectItem = this.getUserSub //选中的订阅
+    }
   },
   methods: {
     correspondingContent(i) {
@@ -223,23 +206,38 @@ export default {
     chooseMend(item, index) {
       // 操作选择的内容
       const userSub = this.getUserSub
-      const screen2 = userSub?.filter((i) => i == item.type)
-      let numBtn = 2
-      if (screen2) {
-        numBtn = screen2[0] ? 1 : 2 //是否收藏
+
+      if (userSub) {
+        const screen2 = userSub?.filter((i) => i == item.type)
+        let numBtn = screen2[0] ? 1 : 2
+        this.$apiList.user
+          .subscribe({
+            origin: process.env.origin,
+            vote_type: item.type,
+            opt: numBtn,
+          })
+          .then((res) => {
+            if (res.data) {
+              this.$store.commit('UPDATE_USERSUB', [])
+            } else {
+              this.$store.commit('UPDATE_USERSUB', res)
+            }
+          })
+      } else {
+        this.$apiList.user
+          .subscribe({
+            origin: process.env.origin,
+            vote_type: item.type,
+            opt: 2,
+          })
+          .then((res) => {
+            if (res.data) {
+              this.$store.commit('UPDATE_USERSUB', [])
+            } else {
+              this.$store.commit('UPDATE_USERSUB', res)
+            }
+          })
       }
-      this.$apiList.user
-        .subscribe({
-          origin: process.env.origin,
-          vote_type: item.type,
-          opt: numBtn,
-        })
-        .then((res) => {
-          if (res.data) {
-          } else {
-            this.$store.commit('UPDATE_USERSUB', res)
-          }
-        })
     },
     // 点击选择文件
     triggerInput() {
