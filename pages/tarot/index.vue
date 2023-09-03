@@ -7,6 +7,9 @@
 -->
 <template>
   <div class="tarot-container">
+    <div class="ai_reply">
+      <ai-inquire></ai-inquire>
+    </div>
     <div class="title">Choose 1 Cards From The Deck Below:</div>
     <div class="tarot-section">
       <!-- <div class="add-box-wrapper">

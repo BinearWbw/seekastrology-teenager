@@ -1,12 +1,13 @@
 <template>
   <div class="input_main">
     <client-only>
-      <a-form-model ref="emailForm" :model="dataName">
-        <a-form-model-item label="">
+      <a-form-model ref="aiForm" :model="aiData" :rules="rules">
+        <a-form-model-item label="" prop="text">
           <a-input
-            :placeholder="holderName"
+            placeholder="Ask a question"
             allow-clear
-            v-model="dataName.names"
+            @keyup.enter="inputSubmit"
+            v-model="aiData.text"
           />
         </a-form-model-item>
       </a-form-model>
@@ -18,31 +19,35 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   props: ['btn'],
   data() {
     return {
-      dataName: {
-        names: '',
+      aiData: {
+        text: '',
+      },
+      rules: {
+        text: [
+          {
+            required: true,
+            message: 'Question cannot be empty',
+            trigger: 'change',
+          },
+        ],
       },
     }
   },
   computed: {
     nameHasValue() {
-      return this.dataName.names !== ''
-    },
-    ...mapGetters(['getUserInfo']),
-    holderName() {
-      return this.getUserInfo.user_name || this.getUserInfo.email
+      return this.aiData.text !== ''
     },
   },
   methods: {
     inputSubmit() {
-      this.$refs.emailForm.validate((valid) => {
+      this.$refs.aiForm.validate((valid) => {
         if (valid) {
-          this.$emit('namested', this.dataName.names)
-          this.dataName.names = ''
+          this.$emit('aited', this.aiData.text)
+          this.aiData.text = ''
         } else {
           console.log('error submit!!')
           return false
