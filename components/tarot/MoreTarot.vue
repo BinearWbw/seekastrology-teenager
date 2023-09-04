@@ -28,7 +28,7 @@
       <div class="more-tarot-items" v-show="type != 1">
         <a :href="`${getIntersperseUrl}/tarot/type/${1}/`" class="link">
           <img src="~/assets/img/tarot/love.webp" alt="" />
-          <p class="item-title">LOVE Tarot Reading</p>
+          <p class="item-title">Love Tarot Reading</p>
           <p class="item-sub-title">
             Receive personalized advice for your romantic dilemmas
           </p>
@@ -39,7 +39,7 @@
       <div class="more-tarot-items" v-show="type != 2">
         <a :href="`${getIntersperseUrl}/tarot/type/${2}/`" class="link">
           <img src="~/assets/img/tarot/rich.webp" alt="" />
-          <p class="item-title">Tarot Career Reading</p>
+          <p class="item-title">Career Tarot Reading</p>
           <p class="item-sub-title">
             This free career Tarot reading is here to help you find success
           </p>

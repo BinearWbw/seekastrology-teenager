@@ -62,6 +62,12 @@ const sitemap = [
           priority: 0.7,
           lastmod: new Date(),
         },
+        {
+          url: '/user/',
+          changefreq: 'always',
+          priority: 0.7,
+          lastmod: new Date(),
+        },
       ]
       let addArr = []
       let res2 = await axios.get(

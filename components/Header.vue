@@ -153,9 +153,24 @@ export default {
           childrenShow: true,
           children: [
             {
-              title: 'Tarot Predictions',
-              path: '/tarot/',
-              href: '/tarot/',
+              title: 'Daily Tarot',
+              path: '/tarot/type/4/',
+              href: '/tarot/type/4/',
+            },
+            {
+              title: 'Love Tarot',
+              path: '/tarot/type/1/',
+              href: '/tarot/type/1/',
+            },
+            {
+              title: 'Career Tarot',
+              path: '/tarot/type/2/',
+              href: '/tarot/type/2/',
+            },
+            {
+              title: 'Universal Tarot',
+              path: '/tarot/type/3/',
+              href: '/tarot/type/3/',
             },
             {
               title: 'Tarot Cards',

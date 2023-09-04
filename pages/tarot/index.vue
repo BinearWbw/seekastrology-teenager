@@ -7,6 +7,16 @@
 -->
 <template>
   <div class="tarot-container">
+    <div class="tarot_top_ad">
+      <div class="content">
+        <p class="title">One Card Tarot</p>
+        <p class="text">
+          Pick a card then write down your question in the chatbot below to get
+          a FREE personalized reading.
+        </p>
+      </div>
+      <google-ad classNames="ad-box_row mt-48 h5_google" id="4356182716" />
+    </div>
     <div class="ai_reply">
       <ai-inquire></ai-inquire>
     </div>
@@ -22,7 +32,7 @@
         <google-ad classNames="ad-box" id="9572904273"></google-ad>
       </div> -->
     <!-- </div> -->
-    <google-auto-ad classNames="ad-box_row mt-48" id="4356182716" />
+
     <more-tarot class="mt-48"></more-tarot>
     <google-auto-ad classNames="ad-box_row mt-32" id="7816119415" />
     <all-tarot class="mt-48"></all-tarot>
@@ -56,6 +66,36 @@ export default {
 .tarot-container {
   color: #fff;
   margin-top: 40px;
+  .tarot_top_ad {
+    margin: 0 auto;
+    padding-bottom: 48px;
+    max-width: 1400px;
+    .content {
+      .title {
+        color: #fff;
+        text-align: center;
+        font-family: 'Cinzel Decorative';
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 48px;
+      }
+      .text {
+        color: #fff;
+        font-family: 'Rubik';
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 30px;
+        text-align: center;
+        padding: 0 260px;
+        margin-top: 24px;
+      }
+    }
+    .h5_google {
+      height: 280px;
+    }
+  }
 }
 .title {
   font-family: 'Cinzel Decorative';
@@ -157,6 +197,26 @@ export default {
     }
     > .container {
       padding: 0;
+    }
+    .tarot_top_ad {
+      margin: 0 auto;
+      padding-bottom: 48 * $pr;
+      max-width: 100%;
+      .content {
+        .title {
+          font-size: 26 * $pr;
+          line-height: 36 * $pr;
+        }
+        .text {
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
+          padding: 0 30 * $pr;
+          margin-top: 16 * $pr;
+        }
+      }
+      .h5_google {
+        height: 130 * $pr;
+      }
     }
   }
   .title {

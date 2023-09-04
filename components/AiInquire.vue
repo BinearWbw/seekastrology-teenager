@@ -44,18 +44,27 @@
                     <nuxt-img
                       :src="cardDetails.icon"
                       fit="cover"
-                      width="150"
-                      height="300"
+                      width="200"
+                      height="400"
                       :alt="cardDetails.card_name"
                       loading="lazy"
                     ></nuxt-img>
                   </div>
-                  <p class="names">{{ cardDetails.card_name }}</p>
+                  <!-- <p class="names">{{ cardDetails.card_name }}</p> -->
                 </div>
                 <div class="contens">
                   <p class="title">{{ cardDetails.card_name }} Card :</p>
                   <div class="texts">
                     {{ cardDetails.desc }}
+                  </div>
+                  <div class="read_more">
+                    <a
+                      target="_blank"
+                      :href="`${getIntersperseUrl}/tarot/details/${cardDetails.card_name
+                        .replace(/[^a-zA-Z0-9\\s]/g, '-')
+                        .toLowerCase()}-${cardDetails.card_id}/`"
+                      >Read More</a
+                    >
                   </div>
                 </div>
               </div>
@@ -68,6 +77,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -127,6 +137,9 @@ export default {
       disableds: true,
       cardDetails: {},
     }
+  },
+  computed: {
+    ...mapGetters(['getIntersperseUrl']),
   },
   methods: {
     async toggleActive(index) {
@@ -299,23 +312,25 @@ export default {
             .details {
               width: 100%;
               height: 100%;
-              overflow-y: scroll;
               box-sizing: border-box;
-              &::-webkit-scrollbar {
-                width: 3px; /* Safari,Chrome */
-                height: 100px;
-                display: block;
-              }
-              &::-webkit-scrollbar-thumb {
-                background: rgba(255, 255, 255, 0.12);
-              }
+              //   overflow-y: scroll;
+              //   &::-webkit-scrollbar {
+              //     width: 3px; /* Safari,Chrome */
+              //     height: 100px;
+              //     display: block;
+              //   }
+              //   &::-webkit-scrollbar-thumb {
+              //     background: rgba(255, 255, 255, 0.12);
+              //   }
+              display: grid;
+              place-items: center;
               .the_img {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 .imgs {
-                  width: 150px;
-                  height: 300px;
+                  width: 200px;
+                  height: 400px;
                   margin-bottom: 8px;
                   img {
                     width: 100%;
@@ -351,6 +366,29 @@ export default {
                   font-weight: 400;
                   line-height: 28px;
                   margin-top: 8px;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 4;
+                  -webkit-box-orient: vertical;
+                }
+
+                .read_more {
+                  text-align: center;
+                  padding-top: 24px;
+                  > a {
+                    display: inline-block;
+                    padding: 8px 32px;
+                    border-radius: 42px;
+                    background-color: #fff;
+                    color: #000;
+                    text-align: center;
+                    font-family: Rubik;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 22px;
+                  }
                 }
               }
             }
@@ -400,7 +438,7 @@ export default {
             }
             .card_details {
               .details {
-                max-height: 700px;
+                max-height: auto;
               }
             }
           }
@@ -529,11 +567,6 @@ export default {
             }
             .card_details {
               .details {
-                max-height: 440 * $pr;
-                &::-webkit-scrollbar {
-                  width: 3 * $pr; /* Safari,Chrome */
-                  display: block;
-                }
                 .the_img {
                   .imgs {
                     width: 81 * $pr;
@@ -555,6 +588,15 @@ export default {
                     font-size: 16 * $pr;
                     line-height: 28 * $pr;
                     margin-top: 8 * $pr;
+                  }
+                  .read_more {
+                    padding-top: 24 * $pr;
+                    > a {
+                      padding: 8 * $pr 32 * $pr;
+                      border-radius: 42 * $pr;
+                      font-size: 16 * $pr;
+                      line-height: 22 * $pr;
+                    }
                   }
                 }
               }
