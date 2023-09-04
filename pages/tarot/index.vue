@@ -10,18 +10,18 @@
     <div class="ai_reply">
       <ai-inquire></ai-inquire>
     </div>
-    <div class="title">Choose 1 Cards From The Deck Below:</div>
-    <div class="tarot-section">
-      <!-- <div class="add-box-wrapper">
+    <!-- <div class="title">Choose 1 Cards From The Deck Below:</div> -->
+    <!-- <div class="tarot-section"> -->
+    <!-- <div class="add-box-wrapper">
         <google-ad classNames="ad-box" id="4068446091"></google-ad>
       </div> -->
-      <div class="tarot-box">
-        <tarot-play type="4"></tarot-play>
-      </div>
-      <!-- <div class="add-box-wrapper">
+    <!-- <div class="tarot-box"> -->
+    <!-- <tarot-play type="4"></tarot-play> -->
+    <!-- </div> -->
+    <!-- <div class="add-box-wrapper">
         <google-ad classNames="ad-box" id="9572904273"></google-ad>
       </div> -->
-    </div>
+    <!-- </div> -->
     <google-auto-ad classNames="ad-box_row mt-48" id="4356182716" />
     <more-tarot class="mt-48"></more-tarot>
     <google-auto-ad classNames="ad-box_row mt-32" id="7816119415" />

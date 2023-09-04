@@ -12,7 +12,10 @@
             </div>
             <div class="chat_board">
               <!-- AI问答 -->
-              <el-ai-chat></el-ai-chat>
+              <el-ai-chat
+                :disableds="disableds"
+                :cardName="cardDetails?.card_name"
+              ></el-ai-chat>
             </div>
           </div>
         </div>
@@ -34,46 +37,25 @@
                 <div class="prohibit" v-if="isProhibit"></div>
               </div>
             </div>
-            <div class="card_details" v-if="false">
+            <div class="card_details" v-if="!isCard">
               <div class="details">
                 <div class="the_img">
                   <div class="imgs">
-                    <img src="../assets/img/tarot/card1.webp" alt="" />
+                    <nuxt-img
+                      :src="cardDetails.icon"
+                      fit="cover"
+                      width="150"
+                      height="300"
+                      :alt="cardDetails.card_name"
+                      loading="lazy"
+                    ></nuxt-img>
                   </div>
-                  <p class="names">The fool</p>
+                  <p class="names">{{ cardDetails.card_name }}</p>
                 </div>
                 <div class="contens">
-                  <p class="title">The First Card (The Past):</p>
+                  <p class="title">{{ cardDetails.card_name }} Card :</p>
                   <div class="texts">
-                    The 6 of Cups brings some respite and relief after the
-                    stress of the subtle changes that come with the number 5 in
-                    the Tarot. On this card, we see a bright and sunny day,
-                    children playing in the forefront. One of the children is
-                    offering the other a token in the form of a cup, overflowing
-                    with gifts and flowers. There are 6 cups all around these
-                    figures, and they are all filled with love and gifts. The
-                    cups are larger here than in other cups in the Tarot,
-                    suggesting love is overflowing. There is a strong sense of
-                    nostalgia and the past in this picture. The 6 of Cups brings
-                    some respite and relief after the stress of the subtle
-                    changes that come with the number 5 in the Tarot. On this
-                    card, we see a bright and sunny day, children playing in the
-                    forefront. One of the children is offering the other a token
-                    in the form of a cup, overflowing with gifts and flowers.
-                    There are 6 cups all around these figures, and they are all
-                    filled with love and gifts. The cups are larger here than in
-                    other cups in the Tarot, suggesting love is overflowing.
-                    There is a strong sense of nostalgia and the past in this
-                    picture. The 6 of Cups brings some respite and relief after
-                    the stress of the subtle changes that come with the number 5
-                    in the Tarot. On this card, we see a bright and sunny day,
-                    children playing in the forefront. One of the children is
-                    offering the other a token in the form of a cup, overflowing
-                    with gifts and flowers. There are 6 cups all around these
-                    figures, and they are all filled with love and gifts. The
-                    cups are larger here than in other cups in the Tarot,
-                    suggesting love is overflowing. There is a strong sense of
-                    nostalgia and the past in this picture.
+                    {{ cardDetails.desc }}
                   </div>
                 </div>
               </div>
@@ -142,13 +124,28 @@ export default {
       isFinits: -1,
       isProhibit: false,
       isCard: true,
+      disableds: true,
+      cardDetails: {},
     }
   },
   methods: {
-    toggleActive(index) {
+    async toggleActive(index) {
       console.log('当前', index)
       this.isFinits = index
       this.isProhibit = true
+      await this.$apiList.tarot
+        .drawTarot({
+          origin: process.env.origin,
+          type: 4,
+        })
+        .then((res) => {
+          console.log('data', res)
+          if (Array.isArray(res)) {
+            this.disableds = false
+            this.isCard = false
+            this.cardDetails = res[0]
+          }
+        })
     },
   },
 }
@@ -252,6 +249,7 @@ export default {
                 left: -55px;
                 width: 120%;
                 height: 100%;
+                cursor: not-allowed;
               }
               .card_item {
                 width: 190px;

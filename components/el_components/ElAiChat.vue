@@ -17,16 +17,19 @@
     <div class="input_send">
       <el-ai-input
         :btn="'Send'"
+        :disable="disableds || flowDisabled"
         @aited="meSendContent"
         @keyup.enter="meSendContent"
       ></el-ai-input>
-      <!-- <button class="button"  @click="aiReplyContent()">模拟ai回复</button> -->
+      <div class="doors" v-if="disableds">First draw a tarot card</div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
+  props: ['disableds', 'cardName'],
   data() {
     return {
       chatList: [
@@ -39,7 +42,12 @@ export default {
           uid: 1,
         },
       ],
+      flowDisabled: false,
+      loginOnce: false,
     }
+  },
+  computed: {
+    ...mapGetters(['getUserInfo']),
   },
   methods: {
     //发送信息
@@ -56,6 +64,7 @@ export default {
         )
       })
     },
+    // 模拟Ai 回答
     aiReplyContent() {
       let aiMsg = {
         msg: 'ai 回复内容',
@@ -64,13 +73,55 @@ export default {
       this.chatList.push(aiMsg)
       this.scrollBottom()
     },
+    //输入ai 问题
     meSendContent(val) {
-      console.log('ai输入', val)
       let chatMsg = {
         msg: val,
         uid: 2, //uid
       }
+      if (!this.getUserInfo?.token && this.loginOnce) {
+        alert('Please log in before asking again')
+        return
+      }
       this.sendMsg(chatMsg)
+      this.handelAI(val)
+    },
+
+    // 调用Ai
+    handelAI(val) {
+      this.flowDisabled = true
+      const eventSource = new EventSource(
+        `https://astro.doitme.link/api/openai?type=tarot&card=${this.cardName}&question=${val}`
+      )
+      // 监听事件open
+      eventSource.addEventListener('open', (event) => {
+        this.$set(this.chatList, this.chatList.length, {
+          msg: '',
+          uid: 1,
+        })
+      })
+      // 监听事件流数据
+      eventSource.addEventListener('message', (event) => {
+        let data = event.data
+        if (data) {
+          //   if (!data) {
+          //     data = `<br>`
+          //   }
+          //拼接字符
+          if (data == 'StreamFinished') return
+          this.chatList[this.chatList.length - 1].msg += data
+          this.scrollBottom()
+        }
+      })
+
+      // 监听错误事件
+      eventSource.addEventListener('error', (event) => {
+        console.log('end')
+        eventSource.close()
+        this.flowDisabled = false
+        // 没有登录只能询问一次
+        if (!this.getUserInfo?.token) this.loginOnce = true
+      })
     },
   },
 }
@@ -144,10 +195,29 @@ export default {
   }
   .input_send {
     padding-top: 16px;
+    position: relative;
     .button {
       padding: 8px 32px;
       background-color: aquamarine;
       color: #000;
+    }
+    .doors {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 54px;
+      border-radius: 42px;
+      background-color: rgba(213, 50, 28, 0.1);
+      backdrop-filter: blur(1px);
+      text-align: center;
+      line-height: 54px;
+      color: #fff;
+      font-family: 'Rubik';
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      cursor: not-allowed;
     }
   }
 }
@@ -205,6 +275,13 @@ export default {
     }
     .input_send {
       padding-top: 16 * $pr;
+      .doors {
+        height: 44 * $pr;
+        border-radius: 42 * $pr;
+        backdrop-filter: blur(1 * $pr);
+        line-height: 44 * $pr;
+        font-size: 16 * $pr;
+      }
     }
   }
 }

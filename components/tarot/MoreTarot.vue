@@ -14,7 +14,7 @@
     </div>
     <div class="more-tarot">
       <div class="more-tarot-items" v-show="type != 4">
-        <a :href="`${getIntersperseUrl}/tarot/`" class="link">
+        <a :href="`${getIntersperseUrl}/tarot/type/${4}/`" class="link">
           <img src="~/assets/img/tarot/day.webp" alt="" />
           <p class="item-title">Daily Tarot</p>
           <p class="item-sub-title">
@@ -68,7 +68,7 @@ export default {
   props: {
     type: {
       type: [Number, String],
-      default: '4',
+      default: '0',
     },
   },
   computed: {
@@ -93,7 +93,7 @@ export default {
 .more-tarot {
   text-align: center;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 456px);
+  grid-template-columns: repeat(auto-fill, 338px);
   justify-content: center;
   grid-gap: 16px;
   max-width: 1400px;
@@ -128,7 +128,7 @@ export default {
     img {
       // width: 100%;
       // height: 190px;
-      width: 424px;
+      width: 306px;
       height: 174px;
       object-fit: cover;
     }

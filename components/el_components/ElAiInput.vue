@@ -6,6 +6,7 @@
           <a-input
             placeholder="Ask a question"
             allow-clear
+            :disabled="disable"
             @keyup.enter="inputSubmit"
             v-model="aiData.text"
           />
@@ -20,7 +21,7 @@
 
 <script>
 export default {
-  props: ['btn'],
+  props: ['btn', 'disable'],
   data() {
     return {
       aiData: {
