@@ -23,7 +23,6 @@ export default ({ $axios, store }, inject) => {
   $axios.onResponse((response) => {
     if (response.status === 200) {
       const res = response.data
-      console.log('res:', res)
       if (res.code === 0) {
         return res.data
       } else if (res.code === 400) {

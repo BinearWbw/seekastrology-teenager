@@ -45,7 +45,8 @@
         </nav>
         <Desktop></Desktop>
         <div class="menu common__btn" @click="visibleMenu = true"></div>
-        <el-login></el-login>
+        <!-- 登录暂时隐藏 -->
+        <!-- <el-login></el-login> -->
         <lazy-dialog-menu
           :menu="menu"
           :visible="visibleMenu"

@@ -19,9 +19,11 @@
     <transition name="fade">
       <Privacy v-if="visiblePrivacy" @close="visiblePrivacy = false"></Privacy>
     </transition>
-    <transition name="fade">
+
+    <!-- 登录暂时隐藏 -->
+    <!-- <transition name="fade">
       <el-login-form v-if="isChildVisible"></el-login-form>
-    </transition>
+    </transition> -->
   </main>
 </template>
 
