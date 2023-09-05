@@ -6,7 +6,7 @@ export default ({ app, store }) => {
       setItem: (key, value) =>
         app.$cookies.set(key, value, {
           path: '/',
-          domain: '.seekastrology.com',
+          //   domain: '.seekastrology.com',
           maxAge: 60 * 60 * 24 * 1, // cookie存储时间 可修改
         }),
       removeItem: (key) => app.$cookies.remove(key),

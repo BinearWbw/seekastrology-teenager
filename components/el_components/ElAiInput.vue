@@ -1,6 +1,6 @@
 <template>
   <div class="input_main">
-    <client-only>
+    <no-ssr>
       <a-form-model ref="aiForm" :model="aiData" :rules="rules">
         <template v-if="askInputVisible">
           <a-form-model-item label="" prop="text">
@@ -35,7 +35,10 @@
           </div>
         </div>
       </a-form-model>
-    </client-only>
+    </no-ssr>
+    <button class="button" v-if="nameHasValue" @click="inputSubmit">
+      {{ btn }}
+    </button>
   </div>
 </template>
 

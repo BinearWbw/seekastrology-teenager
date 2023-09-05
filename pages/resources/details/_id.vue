@@ -244,7 +244,7 @@ export default {
             ),
           })
           .then((res) => {
-            return res || null
+            return res.detail || null
           }),
         /**底部推荐 */
         $apiList.articles

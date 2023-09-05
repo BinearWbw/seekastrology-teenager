@@ -1,6 +1,6 @@
 <template>
   <div class="input_main">
-    <client-only>
+    <no-ssr>
       <a-form-model ref="emailForm" :model="dataName">
         <a-form-model-item label="">
           <a-input
@@ -10,7 +10,7 @@
           />
         </a-form-model-item>
       </a-form-model>
-    </client-only>
+    </no-ssr>
     <button class="button" v-if="nameHasValue" @click="inputSubmit">
       {{ btn }}
     </button>
