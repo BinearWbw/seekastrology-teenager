@@ -55,9 +55,7 @@
                 </div>
                 <div class="contens">
                   <p class="title">{{ cardDetails.card_name }} Card :</p>
-                  <div class="texts">
-                    {{ cardDetails.desc }}
-                  </div>
+                  <div class="texts" v-html="cardDetails.desc"></div>
                   <div class="btns">
                     <a
                       class="more btn"
