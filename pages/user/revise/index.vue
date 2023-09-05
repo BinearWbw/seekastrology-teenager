@@ -131,6 +131,11 @@ export default {
             message: 'Please input Activity name',
             trigger: 'blur',
           },
+          {
+            min: 6,
+            message: 'Password entered is less than 6 characters',
+            trigger: 'blur',
+          },
         ],
         password1: [
           {
@@ -138,11 +143,21 @@ export default {
             message: 'please enter password',
             trigger: 'change',
           },
+          {
+            min: 6,
+            message: 'Password entered is less than 6 characters',
+            trigger: 'blur',
+          },
         ],
         password2: [
           {
             required: true,
             message: 'Please input Activity name',
+            trigger: 'blur',
+          },
+          {
+            min: 6,
+            message: 'Password entered is less than 6 characters',
             trigger: 'blur',
           },
           { validator: validatePass2, trigger: 'change' },
@@ -390,10 +405,6 @@ export default {
           :deep(.has-error .ant-input-affix-wrapper .ant-input) {
             border-color: #f5222d;
           }
-          :deep(.ant-form-explain) {
-            padding: 0 0 0 24px;
-            font-size: 12px;
-          }
           p {
             color: rgba(255, 255, 255, 0.6);
             font-family: 'Rubik';
@@ -523,10 +534,6 @@ export default {
             :deep(.ant-input-password-icon) {
               color: rgba(255, 255, 255, 0.08);
               font-size: 22 * $pr;
-            }
-            :deep(.ant-form-explain) {
-              padding: 0 0 0 16 * $pr;
-              font-size: 12 * $pr;
             }
             p {
               font-size: 16 * $pr;

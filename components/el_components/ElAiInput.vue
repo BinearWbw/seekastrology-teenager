@@ -2,30 +2,51 @@
   <div class="input_main">
     <client-only>
       <a-form-model ref="aiForm" :model="aiData" :rules="rules">
-        <a-form-model-item label="" prop="text">
-          <a-input
-            placeholder="Ask a question"
-            allow-clear
-            :disabled="disable"
-            @keyup.enter="inputSubmit"
-            v-model="aiData.text"
-          />
-        </a-form-model-item>
+        <template v-if="askInputVisible">
+          <a-form-model-item label="" prop="text">
+            <a-input
+              placeholder="Ask a question"
+              allow-clear
+              :disabled="disable"
+              @keyup.enter="inputSubmit"
+              v-model="aiData.text"
+            />
+          </a-form-model-item>
+          <button class="button" v-if="nameHasValue" @click="inputSubmit">
+            {{ btn }}
+          </button>
+        </template>
+        <div class="login" v-else>
+          <div class="login_content">
+            <div class="login_content_header">
+              Today's free Tarot AI count has been used up, please log in to
+              your account for more counts!
+            </div>
+            <div class="login_content_label">Email Address*</div>
+            <a-form-model-item label="" prop="email">
+              <a-input
+                placeholder="Enter your email account"
+                allow-clear
+                @keyup.enter="emailSubmit"
+                v-model="aiData.email"
+              />
+            </a-form-model-item>
+            <button class="emailButton" @click="emailSubmit">Send</button>
+          </div>
+        </div>
       </a-form-model>
     </client-only>
-    <button class="button" v-if="nameHasValue" @click="inputSubmit">
-      {{ btn }}
-    </button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['btn', 'disable'],
+  props: ['btn', 'disable', 'askInputVisible'],
   data() {
     return {
       aiData: {
         text: '',
+        email: '',
       },
       rules: {
         text: [
@@ -33,6 +54,18 @@ export default {
             required: true,
             message: 'Question cannot be empty',
             trigger: 'change',
+          },
+        ],
+        name: [
+          {
+            required: true,
+            message: 'Please input Activity name',
+            trigger: 'blur',
+          },
+          {
+            type: 'email',
+            message: 'Please input the correct email address',
+            trigger: ['blur', 'change'],
           },
         ],
       },
@@ -44,6 +77,16 @@ export default {
     },
   },
   methods: {
+    emailSubmit() {
+      this.$refs.aiForm.validate((valid) => {
+        if (valid) {
+          // this.$emit('aited', this.aiData.text)
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
     inputSubmit() {
       this.$refs.aiForm.validate((valid) => {
         if (valid) {
@@ -107,10 +150,59 @@ export default {
     background-color: rgba(0, 0, 0, 0.08);
     border-color: #f5222d;
   }
-  :deep(.ant-form-explain) {
-    padding: 5px 0 0 24px;
-    min-height: 19px;
-    font-size: 12px;
+  .login {
+    height: 230px;
+    border-radius: 27px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    backdrop-filter: blur(8px);
+    &_content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      &_header {
+        padding: 0 10px;
+        color: #ffda8b;
+        font-family: 'Rubik';
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 30px;
+      }
+      &_label {
+        padding: 0 10px;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: 'Rubik';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+      }
+      :deep(.ant-form-item) {
+        margin-bottom: 0;
+      }
+      :deep(.ant-input) {
+        border-radius: 27px !important;
+        border-color: rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.24);
+      }
+      .emailButton {
+        border-radius: 42px;
+        background: #9747ff;
+        padding: 8px 32px;
+        color: #fff;
+        font-family: 'Rubik';
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+      }
+    }
   }
 }
 @media (max-width: 750px) {
@@ -161,10 +253,36 @@ export default {
       background-color: rgba(0, 0, 0, 0.08);
       border-color: #f5222d;
     }
-    :deep(.ant-form-explain) {
-      padding: 5 * $pr 0 0 16 * $pr;
-      min-height: 18 * $pr;
-      font-size: 12 * $pr;
+    .login {
+      height: 236 * $pr;
+      border-radius: 27 * $pr;
+      border: 1 * $pr solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8 * $pr);
+      &_content {
+        padding: 16 * $pr;
+        gap: 8 * $pr;
+        &_header {
+          padding: 0 10 * $pr;
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
+        }
+        &_label {
+          padding: 0 10 * $pr;
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 14 * $pr;
+          line-height: 18 * $pr;
+        }
+
+        :deep(.ant-input) {
+          border-radius: 27 * $pr !important;
+        }
+        .emailButton {
+          border-radius: 42 * $pr;
+          padding: 8 * $pr 32 * $pr;
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
+        }
+      }
     }
   }
 }

@@ -40,18 +40,38 @@
                   :rules="rules"
                   key="1"
                 >
-                  <a-form-model-item label="" prop="name">
+                  <a-form-model-item
+                    label=""
+                    prop="name"
+                    :validateStatus="nameValidateStatus"
+                  >
                     <a-input
                       placeholder="Enter your email account"
                       allow-clear
                       v-model="form.name"
                     />
+                    <div
+                      v-if="nameValidateStatus"
+                      class="errorMsg"
+                      v-html="errorMsg"
+                      @click="hideLoginBox"
+                    ></div>
                   </a-form-model-item>
-                  <a-form-model-item label="" prop="password">
+                  <a-form-model-item
+                    label=""
+                    prop="password"
+                    :validateStatus="passwordValidateStatus"
+                  >
                     <a-input-password
                       v-model="form.password"
                       placeholder="Enter password"
+                      @focus="passwordValidateStatus = ''"
                     />
+                    <div
+                      v-if="passwordValidateStatus"
+                      class="errorMsg"
+                      v-html="errorMsg"
+                    ></div>
                   </a-form-model-item>
                   <a-form-model-item>
                     <div class="submit">
@@ -96,12 +116,23 @@
                     :rules="rulesup"
                     key="2"
                   >
-                    <a-form-model-item label="" prop="name">
+                    <a-form-model-item
+                      label=""
+                      prop="name"
+                      :validateStatus="registerEmailValidateStatus"
+                    >
                       <a-input
                         placeholder="Enter your email account"
                         allow-clear
                         v-model="formup.name"
+                        @focus="registerEmailValidateStatus = ''"
                       />
+                      <div
+                        v-if="registerEmailValidateStatus"
+                        class="errorMsg"
+                        v-html="errorMsg"
+                        @click="toggleLogin"
+                      ></div>
                     </a-form-model-item>
                     <a-form-model-item label="" prop="password1">
                       <a-input-password
@@ -221,6 +252,10 @@ export default {
       }
     }
     return {
+      nameValidateStatus: '', //控制邮箱字段的验证状态
+      passwordValidateStatus: '', // 控制密码字段的验证状态
+      registerEmailValidateStatus: '', //控制注册邮箱字段的验证状态
+      errorMsg: '', // 错误提示
       form: {
         name: '',
         password: '',
@@ -241,8 +276,13 @@ export default {
         password: [
           {
             required: true,
-            message: 'please enter password',
+            message: 'Please enter password',
             trigger: 'change',
+          },
+          {
+            min: 6,
+            message: 'Password entered is less than 6 characters',
+            trigger: 'blur',
           },
         ],
       },
@@ -270,11 +310,21 @@ export default {
             message: 'please enter password',
             trigger: 'change',
           },
+          {
+            min: 6,
+            message: 'Password entered is less than 6 characters',
+            trigger: 'blur',
+          },
         ],
         passwordtow: [
           {
             required: true,
             message: 'Please input Activity name',
+            trigger: 'blur',
+          },
+          {
+            min: 6,
+            message: 'Password entered is less than 6 characters',
             trigger: 'blur',
           },
           { validator: validatePass2, trigger: 'change' },
@@ -335,7 +385,13 @@ export default {
                 console.log('登录', res)
                 this.hideLoginBox() //隐藏
               } else if (res.code === 400) {
-                alert(res.msg)
+                this.passwordValidateStatus = 'error'
+                this.errorMsg = `<span>Password error</span>`
+                // alert(res.msg)
+              } else if (res.code === 1001) {
+                //未激活
+                this.nameValidateStatus = 'error'
+                this.errorMsg = `<span>your mailbox is not activated, <a href="${this.getIntersperseUrl}/user/activation/">activate immediately</a></span>`
               }
             })
         }
@@ -370,7 +426,11 @@ export default {
             .then((res) => {
               console.log('res', res)
               if (res.code === 400) {
-                alert(res.msg)
+                // alert(res.msg)
+                this.nextif = true
+                //
+                this.registerEmailValidateStatus = 'error'
+                this.errorMsg = `<span>your email has been registered, <a>login now</a></span>`
               } else {
                 this.hideLoginBox() //隐藏
                 window.location.hash = '/user/activation/' //跳转到账号激活页面
@@ -413,9 +473,35 @@ export default {
   },
 }
 </script>
-
+<style lang="scss">
+@use 'sass:math';
+.errorMsg {
+  font-family: Rubik;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 4px 21px 16px 24px;
+  span {
+    color: #cf3c3c !important;
+    a {
+      color: #fff !important;
+      text-decoration-line: underline !important;
+    }
+  }
+}
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .errorMsg {
+    margin: 3 * $pr 10 * $pr 16 * $pr 16 * $pr;
+    font-size: 12 * $pr;
+    line-height: 16 8 $pr;
+  }
+}
+</style>
 <style lang="scss" scoped>
 @use 'sass:math';
+
 .login_form {
   width: 100%;
   height: 100vh;
@@ -546,12 +632,6 @@ export default {
             :deep(.has-error .ant-input-affix-wrapper .ant-input) {
               border-color: #f5222d;
             }
-            :deep(.ant-form-explain) {
-              padding: 0 0 0 24px;
-              min-height: 19px;
-              font-size: 12px;
-            }
-
             .submit {
               position: relative;
               padding-top: 36px;
@@ -791,12 +871,6 @@ export default {
               :deep(.has-error .ant-input-affix-wrapper .ant-input) {
                 border-color: #f5222d;
               }
-              :deep(.ant-form-explain) {
-                padding: 0 0 0 16 * $pr;
-                min-height: 18 * $pr;
-                font-size: 12 * $pr;
-              }
-
               .submit {
                 position: relative;
                 padding-top: 36 * $pr;

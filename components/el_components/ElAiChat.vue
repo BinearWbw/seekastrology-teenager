@@ -1,6 +1,10 @@
 <template>
   <div class="chat_main">
-    <div class="chat_frame" ref="chatContent">
+    <div
+      class="chat_frame"
+      ref="chatContent"
+      :class="askInputVisible ? 'height' : 'short'"
+    >
       <div class="chat_wrapper" v-for="(item, index) in chatList" :key="index">
         <div class="chat_friend" v-if="item.uid !== 2">
           <div class="chat_friend_text">
@@ -20,6 +24,7 @@
         :disable="disableds || flowDisabled"
         @aited="meSendContent"
         @keyup.enter="meSendContent"
+        :askInputVisible="askInputVisible"
       ></el-ai-input>
       <div class="doors" v-if="disableds">First draw a tarot card</div>
     </div>
@@ -32,6 +37,7 @@ export default {
   props: ['disableds', 'cardName'],
   data() {
     return {
+      askInputVisible: true,
       chatList: [
         {
           msg: 'Welcome to Lotus Tarot Chatbot! ✨I m Aurora, your reader today. Please choose a card that resonates with you the most.',
@@ -80,7 +86,10 @@ export default {
         uid: 2, //uid
       }
       if (!this.getUserInfo?.token && this.loginOnce) {
-        alert('Please log in before asking again')
+        // alert('Please log in before asking again')
+        //展示输入邮箱模块，隐藏问题输入框
+        // this.sendMsg(chatMsg)
+        this.askInputVisible = false
         return
       }
       this.sendMsg(chatMsg)
@@ -91,7 +100,7 @@ export default {
     handelAI(val) {
       this.flowDisabled = true
       const eventSource = new EventSource(
-        `https://astro.doitme.link/api/openai?type=tarot&card=${this.cardName}&question=${val}`
+        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}`
       )
       // 监听事件open
       eventSource.addEventListener('open', (event) => {
@@ -108,7 +117,9 @@ export default {
           //     data = `<br>`
           //   }
           //拼接字符
-          if (data == 'StreamFinished') return
+          if (data == 'StreamFinished') {
+            this.askInputVisible = false
+          }
           this.chatList[this.chatList.length - 1].msg += data
           this.scrollBottom()
         }
@@ -129,6 +140,12 @@ export default {
 
 <style lang="scss" scoped>
 @use 'sass:math';
+.height {
+  height: 560px;
+}
+.short {
+  height: 375px;
+}
 .chat_main {
   width: 100%;
   height: 100%;
@@ -136,7 +153,6 @@ export default {
   flex-direction: column;
   .chat_frame {
     width: 100%;
-    height: 560px;
     overflow-y: scroll;
     box-sizing: border-box;
     &::-webkit-scrollbar {
@@ -204,26 +220,31 @@ export default {
     .doors {
       position: absolute;
       bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 54px;
-      border-radius: 42px;
-      background-color: rgba(213, 50, 28, 0.1);
-      backdrop-filter: blur(1px);
-      text-align: center;
-      line-height: 54px;
-      color: #fff;
+      left: 50%;
+      // width: 100%;
+      padding: 10px;
+      border-radius: 11px;
+      background-color: rgba(0, 0, 0, 0.3);
+      line-height: 22px;
+      color: rgba(255, 255, 255, 0.6);
       font-family: 'Rubik';
-      font-size: 18px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 400;
       cursor: not-allowed;
+      transform: translateX(-50%) translateY(-80%);
     }
   }
 }
 
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
+  .height {
+    height: 412 * $pr;
+  }
+  .short {
+    height: 200 * $pr;
+  }
   .chat_main {
     width: 100%;
     height: 100%;
@@ -232,9 +253,7 @@ export default {
     flex-direction: column;
     .chat_frame {
       width: 100%;
-      height: auto;
-      flex: 1;
-      max-height: 412 * $pr;
+      // flex: 1;
       overflow-y: scroll;
       box-sizing: border-box;
       &::-webkit-scrollbar {
@@ -276,11 +295,13 @@ export default {
     .input_send {
       padding-top: 16 * $pr;
       .doors {
-        height: 44 * $pr;
-        border-radius: 42 * $pr;
-        backdrop-filter: blur(1 * $pr);
-        line-height: 44 * $pr;
+        padding: 10 * $pr;
+        border-radius: 11 * $pr;
+        background-color: rgba(0, 0, 0, 0.3);
+        line-height: 22 * $pr;
         font-size: 16 * $pr;
+        white-space: nowrap;
+        transform: translateX(-50%) translateY(-70%);
       }
     }
   }

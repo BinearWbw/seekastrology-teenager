@@ -2,13 +2,17 @@
   <div class="activation">
     <div class="activation_main">
       <div class="popo">
-        <h3>Check your inbox</h3>
-        <p class="text">
-          To finish creating your account, click on the link sent to
-        </p>
-        <p class="email">
-          {{ getSignSuccess.email || 'tarot@tarot.con' }}
-        </p>
+        <img class="headerImg" src="@/assets/img/login/emailIcon.png" alt="" />
+        <div class="content">
+          <h3>Check your inbox</h3>
+          <p class="text">
+            To finish creating your account, click on the link sent to
+          </p>
+          <p class="email">
+            {{ getSignSuccess || 'tarot@tarot.con' }}
+          </p>
+        </div>
+
         <div class="btn">
           <button
             class="button"
@@ -34,6 +38,7 @@ export default {
       timeout: null,
     }
   },
+
   computed: {
     ...mapGetters(['getIntersperseUrl', 'getSignSuccess']),
   },
@@ -72,48 +77,59 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 96px 0 200px;
-      > h3 {
-        color: #fff;
-        text-align: center;
-        font-family: 'Cinzel Decorative';
-        font-size: 36px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 48px;
-        margin-bottom: 24px;
+      padding: 48px 0 200px;
+      .headerImg {
+        width: 102px;
+        height: 102px;
       }
-      .text {
-        color: rgba(255, 255, 255, 0.6);
-        font-family: 'Rubik';
-        font-size: 22px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 30px;
-        margin-bottom: 16px;
+      .content {
+        margin: 24px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        > h3 {
+          color: #fff;
+          text-align: center;
+          font-family: 'Rubik';
+          font-size: 22px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 30px;
+        }
+        .text {
+          color: rgba(255, 255, 255, 0.6);
+          text-align: center;
+          font-family: 'Rubik';
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 22px;
+        }
+        .email {
+          color: #fff;
+          text-align: center;
+          font-family: 'Rubik';
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 22px; /* 137.5% */
+          text-decoration-line: underline;
+        }
       }
-      .email {
-        color: #9747ff;
-        text-align: center;
-        font-family: 'Rubik';
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 18px;
-      }
+
       .btn {
-        padding-top: 24px;
         .button {
           height: 44px;
-          padding: 0 32px;
+          padding: 8px 32px;
           background-color: #fff;
           color: #000;
           font-family: 'Rubik';
-          font-size: 14px;
+          font-size: 16px;
           font-style: normal;
           font-weight: 400;
-          line-height: 18px;
-          border-radius: 16px;
+          line-height: 22px;
+          border-radius: 42px;
         }
         .disabled {
           cursor: not-allowed; /* 修改鼠标指针样式为“禁用” */

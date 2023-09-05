@@ -15,6 +15,7 @@
               <el-ai-chat
                 :disableds="disableds"
                 :cardName="cardDetails?.card_name"
+                ref="chat"
               ></el-ai-chat>
             </div>
           </div>
@@ -57,14 +58,22 @@
                   <div class="texts">
                     {{ cardDetails.desc }}
                   </div>
-                  <div class="read_more">
+                  <div class="btns">
                     <a
+                      class="more btn"
                       target="_blank"
                       :href="`${getIntersperseUrl}/tarot/details/${cardDetails.card_name
                         .replace(/[^a-zA-Z0-9\\s]/g, '-')
                         .toLowerCase()}-${cardDetails.card_id}/`"
-                      >Read More</a
+                      >See Card Meanings</a
                     >
+                    <button
+                      class="pick btn"
+                      @click="handelPick"
+                      v-if="!chatFlowDisabled"
+                    >
+                      Pick Another Card
+                    </button>
                   </div>
                 </div>
               </div>
@@ -140,8 +149,18 @@ export default {
   },
   computed: {
     ...mapGetters(['getIntersperseUrl']),
+    chatFlowDisabled() {
+      // 根据子组件的值来判断条件
+      return this.$refs.chat.flowDisabled
+    },
   },
   methods: {
+    //
+    handelPick() {
+      this.isCard = true
+      this.isFinits = -1
+      this.isProhibit = false
+    },
     async toggleActive(index) {
       console.log('当前', index)
       this.isFinits = index
@@ -372,22 +391,30 @@ export default {
                   -webkit-line-clamp: 4;
                   -webkit-box-orient: vertical;
                 }
-
-                .read_more {
-                  text-align: center;
-                  padding-top: 24px;
-                  > a {
-                    display: inline-block;
-                    padding: 8px 32px;
+                .btns {
+                  width: 100%;
+                  display: flex;
+                  justify-content: center;
+                  margin-top: 16px;
+                  gap: 16px;
+                  .btn {
+                    padding: 10px 32px;
                     border-radius: 42px;
-                    background-color: #fff;
-                    color: #000;
                     text-align: center;
                     font-family: Rubik;
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 22px;
+                  }
+                  .more {
+                    display: block;
+                    border: 1px solid rgba(255, 255, 255, 0.48);
+                    color: rgba(255, 255, 255, 0.6);
+                  }
+                  .pick {
+                    background-color: #fff;
+                    color: #000;
                   }
                 }
               }
@@ -589,13 +616,17 @@ export default {
                     line-height: 28 * $pr;
                     margin-top: 8 * $pr;
                   }
-                  .read_more {
-                    padding-top: 24 * $pr;
-                    > a {
-                      padding: 8 * $pr 32 * $pr;
+                  .btns {
+                    flex-direction: column;
+                    .btn {
+                      width: 100%;
+                      padding: 8 * $pr 0;
                       border-radius: 42 * $pr;
                       font-size: 16 * $pr;
                       line-height: 22 * $pr;
+                    }
+                    .more {
+                      border: 1 * $pr solid rgba(255, 255, 255, 0.48);
                     }
                   }
                 }

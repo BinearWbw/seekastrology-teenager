@@ -105,11 +105,6 @@ export default {
     background-color: rgba(0, 0, 0, 0.08);
     border-color: #f5222d;
   }
-  :deep(.ant-form-explain) {
-    padding: 5px 0 0 24px;
-    min-height: 19px;
-    font-size: 12px;
-  }
 }
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
