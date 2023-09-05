@@ -151,29 +151,44 @@ export default {
     &_main {
       width: 100%;
       .popo {
-        padding: 48 * $pr 41 * $pr 150 * $pr;
-        > h3 {
-          font-size: 22 * $pr;
-          line-height: 30 * $pr;
-          margin-bottom: 24 * $pr;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 48 * $pr 41 * $pr 200 * $pr;
+        .headerImg {
+          width: 69 * $pr;
+          height: 69 * $pr;
         }
-        .text {
-          font-size: 14 * $pr;
-          line-height: 18 * $pr;
-          margin-bottom: 16 * $pr;
-        }
-        .email {
-          font-size: 12 * $pr;
-          line-height: 16 * $pr;
-        }
-        .btn {
-          padding-top: 24 * $pr;
-          .button {
-            height: 44 * $pr;
-            padding: 0 32 * $pr;
+        .content {
+          margin: 24 * $pr 0;
+
+          gap: 8 * $pr;
+          > h3 {
+            font-size: 22 * $pr;
+            line-height: 30 * $pr;
+          }
+          .text {
             font-size: 14 * $pr;
             line-height: 18 * $pr;
+          }
+          .email {
+            font-size: 14 * $pr;
+            line-height: 18 * $pr;
+          }
+        }
+
+        .btn {
+          .button {
+            height: 44 * $pr;
+            padding: 8 * $pr 32 * $pr;
+            font-size: 16 * $pr;
+            line-height: 22 * $pr;
             border-radius: 42 * $pr;
+          }
+          .disabled {
+            cursor: not-allowed; /* 修改鼠标指针样式为“禁用” */
+            opacity: 0.6; /* 降低按钮的不透明度，表示禁用状态 */
+            pointer-events: none; /* 阻止禁用按钮上的交互事件 */
           }
         }
       }
