@@ -36,9 +36,6 @@
         </div>
       </a-form-model>
     </no-ssr>
-    <button class="button" v-if="nameHasValue" @click="inputSubmit">
-      {{ btn }}
-    </button>
   </div>
 </template>
 
