@@ -162,7 +162,7 @@ export default {
     );
     backdrop-filter: blur(8px);
     &_content {
-      padding: 16px;
+      padding: 8px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -257,10 +257,11 @@ export default {
     .login {
       //   height: 236 * $pr;
       border-radius: 27 * $pr;
-      border: 1 * $pr solid rgba(255, 255, 255, 0.4);
+      //   border: 1 * $pr solid rgba(255, 255, 255, 0.4);
+      border: none;
       backdrop-filter: blur(8 * $pr);
       &_content {
-        padding: 10 * $pr;
+        padding: 8 * $pr;
         gap: 8 * $pr;
         &_header {
           padding: 0 10 * $pr;
@@ -280,8 +281,8 @@ export default {
         .emailButton {
           border-radius: 42 * $pr;
           padding: 8 * $pr 32 * $pr;
-          font-size: 16 * $pr;
-          line-height: 22 * $pr;
+          font-size: 14 * $pr;
+          line-height: 18 * $pr;
         }
       }
     }
