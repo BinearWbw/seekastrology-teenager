@@ -41,26 +41,30 @@
         <el-tabs :tabs="userDetails" @click="correspondingContent">
           <template v-slot="{ activeTab }">
             <div class="details_record" v-if="activeTab == 0">
-              <div class="try" v-if="true">
+              <div class="try" v-if="!cardData.length">
                 <p>You haven't used the tarot test yet</p>
                 <a :href="`/tarot/`">
                   <button>Try it now</button>
                 </a>
               </div>
-              <div class="card" v-if="false">
+              <div class="card" v-else>
                 <div
                   class="card_item"
                   v-for="(item, index) in cardData"
                   :key="index"
                 >
                   <div class="imags">
-                    <img :src="item.icon" alt="" />
-                    <i class="number">{{ index }}</i>
+                    <nuxt-img
+                      :src="item.icon"
+                      fit="cover"
+                      :alt="item.card_name"
+                    ></nuxt-img>
+                    <i class="number">{{ item.meaning_type }}</i>
                   </div>
                   <div class="content">
-                    <p class="title">{{ item.title }}</p>
-                    <p class="text">{{ item.text }}</p>
-                    <span class="time">{{ item.time }}</span>
+                    <p class="title">{{ item.card_name }}</p>
+                    <p class="text">{{ item.desc }}</p>
+                    <span class="time">{{ item.desc_type }}</span>
                   </div>
                 </div>
               </div>
@@ -160,24 +164,13 @@ export default {
         },
       ],
       selectItem: [],
-      cardData: [
-        {
-          title: '“What is your fortune today”',
-          text: 'The daily tarot',
-          time: '2022/05/21',
-          icon: require('~/assets/img/tarot/card2.webp'),
-        },
-        {
-          title: '“What is your fortune today”',
-          text: 'The daily tarot',
-          time: '2022/05/21',
-          icon: require('~/assets/img/tarot/card2.webp'),
-        },
-      ],
+      cardData: [],
       fileType: ['image/jpg', 'image/jpeg', 'image/png', 'image/JPG'],
       imgStr: '',
     }
   },
+  //   或者抽牌的记录
+
   computed: {
     ...mapGetters(['getUserInfo', 'getUserSub']),
     userImgIcon() {
@@ -189,13 +182,27 @@ export default {
     },
   },
   mounted() {
-    if (this.getUserSub) {
-      this.selectItem = this.getUserSub //选中的订阅
-    }
+    this.cardHisData()
   },
   methods: {
+    cardHisData() {
+      this.$apiList.tarot
+        .getTarotCardHistory({
+          origin: process.env.origin,
+        })
+        .then((res) => {
+          if (res.code == 401) {
+            alert('Please log in')
+          } else {
+            this.cardData = res || []
+          }
+        })
+    },
     correspondingContent(i) {
-      console.log('tabs', i)
+      //   console.log('tabs', i)
+      if (this.getUserSub) {
+        this.selectItem = this.getUserSub //选中的订阅
+      }
     },
     onSearch(value) {
       console.log(value)
@@ -243,6 +250,7 @@ export default {
     triggerInput() {
       this.$refs.uploadInput.click()
       console.log(this.getUserInfo.icon)
+      console.log('选择的', this.getUserInfo.user_subscribe)
     },
     onchangeImgs(event) {
       const file = event.target.files[0]

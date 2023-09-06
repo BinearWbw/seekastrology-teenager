@@ -21,9 +21,9 @@
     </transition>
 
     <!-- 登录暂时隐藏 -->
-    <!-- <transition name="fade">
-      <el-login-form v-if="isChildVisible"></el-login-form>
-    </transition> -->
+    <transition name="fade">
+      <!-- <el-login-form v-if="isChildVisible"></el-login-form> -->
+    </transition>
   </main>
 </template>
 
@@ -35,9 +35,6 @@ export default {
       visiblePrivacy: false,
       showScrollToTop: false,
     }
-  },
-  computed: {
-    ...mapState(['isChildVisible']),
   },
   mounted() {
     this.getHotPageView()
@@ -71,6 +68,18 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
     this.showNotification()
+
+    this.$nextTick(() => {
+      //在页面加载时读取localStorage里的状态信息
+      const savedState = JSON.parse(localStorage.getItem('userInfo'))
+      if (savedState) {
+        this.$store.commit('restoreStateFromLocalStorage', savedState)
+      }
+      // 页面刷新再存一遍用户信息
+      window.addEventListener('beforeunload', () => {
+        localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
+      })
+    })
   },
   methods: {
     handleHashMessage(e) {

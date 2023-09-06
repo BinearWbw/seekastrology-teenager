@@ -46,7 +46,9 @@
         <Desktop></Desktop>
         <div class="menu common__btn" @click="visibleMenu = true"></div>
         <!-- 登录暂时隐藏 -->
-        <!-- <el-login></el-login> -->
+        <transition name="fade">
+          <el-login></el-login>
+        </transition>
         <lazy-dialog-menu
           :menu="menu"
           :visible="visibleMenu"

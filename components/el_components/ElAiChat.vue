@@ -119,8 +119,9 @@ export default {
           //拼接字符
           if (data == 'StreamFinished') {
             this.askInputVisible = false
+          } else {
+            this.chatList[this.chatList.length - 1].msg += data
           }
-          this.chatList[this.chatList.length - 1].msg += data
           this.scrollBottom()
         }
       })

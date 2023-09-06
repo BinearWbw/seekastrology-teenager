@@ -59,6 +59,9 @@ export const mutations = {
   SIGN_SUCCESS(state, payload) {
     state.signSuccessData.email = payload
   },
+  restoreStateFromLocalStorage(state, restoredState) {
+    Object.assign(state, restoredState)
+  },
 }
 export const actions = {
   toast({ state }, res) {

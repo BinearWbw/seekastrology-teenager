@@ -162,7 +162,7 @@ export default {
       this.isFinits = index
       this.isProhibit = true
       await this.$apiList.tarot
-        .drawTarot({
+        .drawTarotAi({
           origin: process.env.origin,
           type: 4,
         })

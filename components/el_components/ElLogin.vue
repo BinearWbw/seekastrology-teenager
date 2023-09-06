@@ -1,8 +1,10 @@
 <template>
   <div class="login">
-    <button class="button" v-if="!getUserInfo.email" @click="loginTo">
-      Log in
-    </button>
+    <transition name="fade">
+      <button class="button" v-if="!getUserInfo.email" @click="loginTo">
+        Log in
+      </button>
+    </transition>
     <div class="user_login" v-if="getUserInfo.email" @click="myProfile">
       <div class="user_img">
         <img :src="userImgIcon" alt="" />
@@ -26,6 +28,9 @@
         </div>
       </transition>
     </div>
+    <transition name="fade">
+      <el-login-form v-if="formOf" @choce="showunde"></el-login-form>
+    </transition>
   </div>
 </template>
 
@@ -41,6 +46,7 @@ export default {
         { name: 'Subscribe Record', path: '/user/revise/' },
         { name: 'Change Password', path: '/user/revise/' },
       ],
+      formOf: false,
     }
   },
   computed: {
@@ -62,7 +68,12 @@ export default {
   methods: {
     ...mapMutations(['showLoginBox']),
     loginTo() {
-      this.showLoginBox()
+      //   this.showLoginBox()
+      this.formOf = true
+    },
+    showunde(val) {
+      console.log('弹窗', val)
+      this.formOf = false
     },
     myProfile() {
       this.opens = !this.opens
@@ -128,9 +139,15 @@ export default {
       font-family: 'Cinzel Decorative';
       font-size: 14px;
       font-style: normal;
+      max-width: 60px;
       font-weight: 700;
       line-height: 18px;
       padding: 0 8px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
     }
     .arrow {
       width: 10px;

@@ -19,12 +19,27 @@ export default (axios) => ({
     return axios.post('api/tarot/cards', data)
   },
   /**
+   * AI 抽牌
+   * */
+
+  drawTarotAi(data) {
+    return axios.post('api/tarot/cards/ai', data)
+  },
+  /**
    * 塔罗牌详情
    * @param {*} id
    * @returns
    */
   getDetail(params) {
     return axios.get('api/tarot/detail', { params })
+  },
+
+  /**
+   * 塔罗抽牌的历史记录
+   *
+   */
+  getTarotCardHistory(params) {
+    return axios.get('api/tarot/cards/record', { params })
   },
   // postSubscribe(data) {
   //   return axios.post('api/subscribe', data)

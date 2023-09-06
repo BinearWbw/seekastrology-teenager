@@ -51,7 +51,7 @@
                       v-model="form.name"
                     />
                     <div
-                      v-if="nameValidateStatus"
+                      v-show="nameValidateStatus"
                       class="errorMsg"
                       v-html="errorMsg"
                       @click="hideLoginBox"
@@ -68,7 +68,7 @@
                       @focus="passwordValidateStatus = ''"
                     />
                     <div
-                      v-if="passwordValidateStatus"
+                      v-show="passwordValidateStatus"
                       class="errorMsg"
                       v-html="errorMsg"
                     ></div>
@@ -87,8 +87,8 @@
                 No account?
                 <span class="up" @click="toggleSignUp">Sign Up</span>
               </div>
-              <div class="text_or" v-if="false"><span>or</span></div>
-              <div class="logo_google" v-if="false">
+              <div class="text_or" v-show="false"><span>or</span></div>
+              <div class="logo_google" v-show="false">
                 <i>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -106,9 +106,9 @@
               </div>
             </div>
             <!-- 注册 -->
-            <div class="form_sign" v-if="!openif">
+            <div class="form_sign" v-show="!openif">
               <h2 class="login_h2">Sign up</h2>
-              <div class="next_one" v-if="nextif">
+              <div class="next_one" v-show="nextif">
                 <no-ssr>
                   <a-form-model
                     ref="ruleFormUp"
@@ -128,7 +128,7 @@
                         @focus="registerEmailValidateStatus = ''"
                       />
                       <div
-                        v-if="registerEmailValidateStatus"
+                        v-show="registerEmailValidateStatus"
                         class="errorMsg"
                         v-html="errorMsg"
                         @click="toggleLogin"
@@ -155,7 +155,7 @@
                 </no-ssr>
               </div>
               <!-- 注册下一步 -->
-              <div class="next_user" v-if="!nextif">
+              <div class="next_user" v-show="!nextif">
                 <div class="btn">
                   <button class="button_top" @click="backUp">＜ back</button>
                 </div>
@@ -357,14 +357,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getChildVisible']),
+    // ...mapGetters(['getChildVisible']),
   },
   mounted() {
-    if (this.getChildVisible) {
-      //添加滚动限制
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = 'hidden'
-    }
+    // if (this.getChildVisible) {
+    //   //添加滚动限制
+    //   let bodyStyle = document.body.style
+    //   bodyStyle.overflow = 'hidden'
+    // }
   },
   methods: {
     ...mapMutations(['hideLoginBox']),
@@ -382,8 +382,12 @@ export default {
             .then((res) => {
               if (res.hasOwnProperty('token')) {
                 this.$store.commit('UPDATE_USERINFO', res)
-                console.log('登录', res)
-                this.hideLoginBox() //隐藏
+                localStorage.setItem(
+                  'userInfo',
+                  JSON.stringify(this.$store.state)
+                )
+                // this.hideLoginBox() //隐藏
+                this.$emit('choce', false)
               } else if (res.code === 400) {
                 this.passwordValidateStatus = 'error'
                 this.errorMsg = `<span>Password error</span>`
@@ -432,7 +436,8 @@ export default {
                 this.registerEmailValidateStatus = 'error'
                 this.errorMsg = `<span>your email has been registered, <a>login now</a></span>`
               } else {
-                this.hideLoginBox() //隐藏
+                // this.hideLoginBox() //隐藏
+                this.$emit('choce', false)
                 window.location.hash = '/user/activation/' //跳转到账号激活页面
                 this.$store.commit('SIGN_SUCCESS', res.email)
               }
@@ -465,7 +470,8 @@ export default {
       this.$refs.ruleForm.resetFields()
     },
     hideLoginContent() {
-      this.hideLoginBox() //隐藏
+      //   this.hideLoginBox() //隐藏
+      this.$emit('choce', false)
     },
     backUp() {
       this.nextif = true

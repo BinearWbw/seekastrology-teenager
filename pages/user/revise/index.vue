@@ -107,16 +107,6 @@ export default {
         callback()
       }
     }
-    // 旧密码是否正确
-    // let oldPwds = (rule, value, callback) => {
-    //      if (!value) {
-    //     callback(new Error('Please input the password again'))
-    //   } else if (value == this.getUserInfo.password) {
-    //     callback(new Error("Two inputs don't match!"))
-    //   } else {
-    //     callback()
-    //   }
-    // }
     return {
       activeMenu: 0,
       revisePwd: {
