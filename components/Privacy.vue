@@ -4,18 +4,14 @@
       <p class="text">
         We use unpersonalized cookies to keep our site working and collect
         statistics for marketing purposes.See the Privacy and Cookie Policy
-        <a :href="`${getIntersperseUrl}/privacy.html`" target="_blank"
-          >Learn more</a
-        >
+        <a href="/privacy.html" target="_blank">Learn more</a>
       </p>
       <button class="common-btn btn">Accept</button>
       <div class="privacy__main">
         <p class="text">
           We use unpersonalized cookies to keep our site working and collect
           statistics for marketing purposes.See the Privacy and Cookie Policy
-          <a :href="`${getIntersperseUrl}/privacy.html`" target="_blank"
-            >Learn more</a
-          >
+          <a href="/privacy.html" target="_blank">Learn more</a>
         </p>
         <button class="common-btn btn" @click="accept">Accept</button>
       </div>
@@ -23,12 +19,8 @@
   </transition>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'Privacy',
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
-  },
   methods: {
     accept() {
       let data = {

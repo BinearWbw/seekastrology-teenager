@@ -60,7 +60,7 @@
                     <a
                       class="more btn"
                       target="_blank"
-                      :href="`${getIntersperseUrl}/tarot/details/${cardDetails.card_name
+                      :href="`/tarot/details/${cardDetails.card_name
                         .replace(/[^a-zA-Z0-9\\s]/g, '-')
                         .toLowerCase()}-${cardDetails.card_id}/`"
                       >See Card Meanings</a
@@ -84,7 +84,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -146,7 +145,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl']),
     chatFlowDisabled() {
       // 根据子组件的值来判断条件
       return this.$refs.chat.flowDisabled

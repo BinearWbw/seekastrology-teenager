@@ -11,7 +11,7 @@
               :key="item.id"
             >
               <a
-                :href="`${getIntersperseUrl}/test/details/${item.name
+                :href="`/test/details/${item.name
                   .trim()
                   .replace(/[^\w\d]/g, '-')
                   .toLowerCase()}-${item.id}/${getCurrentRoute}`"
@@ -35,7 +35,7 @@
         <div class="quizzes_two">
           <div class="quizzes_two_list">
             <a
-              :href="`${getIntersperseUrl}/test/details/${item.name
+              :href="`/test/details/${item.name
                 .trim()
                 .replace(/[^\w\d]/g, '-')
                 .toLowerCase()}-${item.id}/${getCurrentRoute}`"
@@ -70,7 +70,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
-import { mapGetters } from 'vuex'
+
 export default {
   name: 'quizzes',
   props: ['homeQuizzes'],
@@ -115,7 +115,6 @@ export default {
     SwiperSlide,
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl']),
     getCurrentRoute() {
       return this.$route.path === '/' ? '?from=home' : ''
     },

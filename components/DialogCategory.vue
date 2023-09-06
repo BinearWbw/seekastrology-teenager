@@ -8,7 +8,7 @@
           <div class="list">
             <a
               class="item"
-              :href="`${getIntersperseUrl}/category/#from=${$route.name}`"
+              :href="`/category/#from=${$route.name}`"
               :class="{ active: !info }"
               key="0"
             >
@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'DialogCategory',
   props: ['visible', 'category', 'info'],
@@ -65,7 +64,6 @@ export default {
       })
       return total
     },
-    ...mapGetters(['getIntersperseUrl']),
   },
   methods: {
     closeVisibleMain() {

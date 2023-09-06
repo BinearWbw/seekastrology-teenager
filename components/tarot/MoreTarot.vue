@@ -14,7 +14,7 @@
     </div>
     <div class="more-tarot">
       <div class="more-tarot-items" v-show="type != 4">
-        <a :href="`${getIntersperseUrl}/tarot/type/${4}/`" class="link">
+        <a :href="`/tarot/type/${4}/`" class="link">
           <img src="~/assets/img/tarot/day.webp" alt="" />
           <p class="item-title">Daily Tarot</p>
           <p class="item-sub-title">
@@ -26,7 +26,7 @@
       </div>
 
       <div class="more-tarot-items" v-show="type != 1">
-        <a :href="`${getIntersperseUrl}/tarot/type/${1}/`" class="link">
+        <a :href="`/tarot/type/${1}/`" class="link">
           <img src="~/assets/img/tarot/love.webp" alt="" />
           <p class="item-title">Love Tarot Reading</p>
           <p class="item-sub-title">
@@ -37,7 +37,7 @@
       </div>
 
       <div class="more-tarot-items" v-show="type != 2">
-        <a :href="`${getIntersperseUrl}/tarot/type/${2}/`" class="link">
+        <a :href="`/tarot/type/${2}/`" class="link">
           <img src="~/assets/img/tarot/rich.webp" alt="" />
           <p class="item-title">Career Tarot Reading</p>
           <p class="item-sub-title">
@@ -48,7 +48,7 @@
       </div>
 
       <div class="more-tarot-items" v-show="type != 3">
-        <a :href="`${getIntersperseUrl}/tarot/type/${3}/`" class="link">
+        <a :href="`/tarot/type/${3}/`" class="link">
           <img src="~/assets/img/tarot/general.webp" alt="" />
           <p class="item-title">Universal Tarot Reading</p>
           <p class="item-sub-title">
@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'MoreTarot',
   props: {
@@ -70,12 +69,6 @@ export default {
       type: [Number, String],
       default: '0',
     },
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
-  },
-  data() {
-    return {}
   },
 }
 </script>

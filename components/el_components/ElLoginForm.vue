@@ -192,13 +192,13 @@
                         <div class="terms">
                           Click here to view our
                           <a
-                            :href="`${getIntersperseUrl}/support/?name=privacy`"
+                            :href="`/support/?name=privacy`"
                             @click="hideLoginContent"
                             >Privacy Agreement</a
                           >
                           and
                           <a
-                            :href="`${getIntersperseUrl}/support/?name=disclaimer`"
+                            :href="`/support/?name=disclaimer`"
                             @click="hideLoginContent"
                             >Terms of Use</a
                           >
@@ -357,7 +357,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl', 'getChildVisible']),
+    ...mapGetters(['getChildVisible']),
   },
   mounted() {
     if (this.getChildVisible) {
@@ -391,7 +391,7 @@ export default {
               } else if (res.code === 1001) {
                 //未激活
                 this.nameValidateStatus = 'error'
-                this.errorMsg = `<span>your mailbox is not activated, <a href="${this.getIntersperseUrl}/user/activation/">activate immediately</a></span>`
+                this.errorMsg = `<span>your mailbox is not activated, <a href="/user/activation/">activate immediately</a></span>`
               }
             })
         }

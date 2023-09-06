@@ -6,7 +6,7 @@
       <div class="main_primary">
         <div class="main_primary_content">
           <a
-            :href="`${getIntersperseUrl}/zodiac/details/${horoscopeData[0]?.name
+            :href="`/zodiac/details/${horoscopeData[0]?.name
               .replace(/[^a-zA-Z0-9\\s]/g, '-')
               .toLowerCase()}-${horoscopeData[0]?.id}/`"
             id="KNOWSUNSIGNS"
@@ -25,7 +25,7 @@
         </div>
         <div class="main_primary_content">
           <a
-            :href="`${getIntersperseUrl}/zodiac/details/${horoscopeData[1]?.name
+            :href="`/zodiac/details/${horoscopeData[1]?.name
               .replace(/[^a-zA-Z0-9\\s]/g, '-')
               .toLowerCase()}-${horoscopeData[1]?.id}/`"
             id="KNOWSUNSIGNS"
@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'daily_horoscope',
   data() {
@@ -72,9 +71,6 @@ export default {
         }),
     ])
     this.horoscopeData = horoscopeData
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
   methods: {
     pathToPage() {

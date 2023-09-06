@@ -8,7 +8,7 @@
         <div class="menu">
           <a
             class="href"
-            :href="`${getIntersperseUrl + item.href}`"
+            :href="`${item.href}`"
             :class="{
               active:
                 item.path == $route.path ||
@@ -26,13 +26,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'DialogMenu',
   props: ['menu', 'visible'],
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
-  },
   data() {
     return {
       searchInput: '',

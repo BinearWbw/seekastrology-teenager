@@ -19,7 +19,7 @@
           <a
             v-for="(item, index) in dropData"
             :key="index"
-            :href="`${getIntersperseUrl + item.path}`"
+            :href="`${item.path}`"
             >{{ item.name }}</a
           >
           <div class="log_out" @click="logOutTo">Log out</div>
@@ -44,7 +44,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl', 'getUserInfo']),
+    ...mapGetters(['getUserInfo']),
     updateName() {
       return this.getUserInfo.user_name || 'MY profile'
     },

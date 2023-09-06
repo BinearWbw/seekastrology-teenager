@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'Pairing',
   data() {
@@ -107,11 +106,6 @@ export default {
       },
     }
   },
-
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
-  },
-
   methods: {
     handleDropdownChangeLeft(option) {
       this.genderList.males = option.name.toLowerCase()

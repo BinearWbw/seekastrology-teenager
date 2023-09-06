@@ -13,7 +13,7 @@
           <div class="zodiac_signs">
             <div class="each" v-for="(item, index) in zodiacList" :key="index">
               <a
-                :href="`${getIntersperseUrl}/zodiac/details/${item.name
+                :href="`/zodiac/details/${item.name
                   .replace(/[^a-zA-Z0-9\\s]/g, '-')
                   .toLowerCase()}-${item.id}/`"
               >
@@ -55,17 +55,11 @@
 
 <script>
 import GoogleAd from '../../components/GoogleAd.vue'
-import { mapGetters } from 'vuex'
+
 import MoreTarot from '../../components/tarot/MoreTarot.vue'
 export default {
   components: { GoogleAd, MoreTarot },
   name: 'Zodiac',
-  data() {
-    return {}
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
-  },
   async asyncData({ error, $apiList }) {
     try {
       let zodiacList = await $apiList.home

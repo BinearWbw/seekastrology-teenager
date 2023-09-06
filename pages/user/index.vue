@@ -30,7 +30,7 @@
             <p class="emails">{{ getUserInfo.email }}</p>
           </div>
           <div class="edit">
-            <a :href="`${getIntersperseUrl}/user/revise/`">
+            <a :href="`/user/revise/`">
               <img src="~/assets/img/login/edit.svg" alt="" />
             </a>
           </div>
@@ -43,7 +43,7 @@
             <div class="details_record" v-if="activeTab == 0">
               <div class="try" v-if="true">
                 <p>You haven't used the tarot test yet</p>
-                <a :href="`${getIntersperseUrl}/tarot/`">
+                <a :href="`/tarot/`">
                   <button>Try it now</button>
                 </a>
               </div>
@@ -179,7 +179,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl', 'getUserInfo', 'getUserSub']),
+    ...mapGetters(['getUserInfo', 'getUserSub']),
     userImgIcon() {
       const imgUrl = this.getUserInfo.icon
         ? `${this.$config.cdnUrl + this.getUserInfo.icon}`

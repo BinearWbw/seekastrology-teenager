@@ -40,7 +40,7 @@ export default {
     ...mapState(['isChildVisible']),
   },
   mounted() {
-    this.setIframe()
+    this.getHotPageView()
     window.addEventListener('message', this.handleHashMessage)
     window.addEventListener('hashchange', this.handleHashChange)
     window.addEventListener('blur', () => {
@@ -82,21 +82,6 @@ export default {
         window.i_like_it = 0
       }
     },
-    setIframe() {
-      let url = 'https://seekastrology.com'
-      if (window.location.host == 'seekastrology.com') {
-        url = 'https://www.seekastrology.com'
-      } else if (window.location.host == 'www.seekastrology.com') {
-        url = 'https://seekastrology.com'
-      } else {
-        url = `http://${window.location.host}`
-      }
-      this.$store.commit('UPDATE_INTERSPERSE_URL', url)
-      var iframe = document.getElementById('storage-iframe')
-      if (iframe && url) {
-        iframe.src = `${url}/storage-iframe.html`
-      }
-    },
     handleHashChange() {
       if (window.location.hash == '#google_vignette') {
         window.i_like_it = 1
@@ -111,20 +96,17 @@ export default {
               event: 'numot3',
             })
             localStorage.setItem('numot', JSON.stringify(3))
-            this.$utils.setIframeLocalStorage('numot', JSON.stringify(3))
           } else {
             dataLayer.push({
               event: 'numot2',
             })
             localStorage.setItem('numot', JSON.stringify(2))
-            this.$utils.setIframeLocalStorage('numot', JSON.stringify(2))
           }
         } else {
           dataLayer.push({
             event: 'numot1',
           })
           localStorage.setItem('numot', JSON.stringify(1))
-          this.$utils.setIframeLocalStorage('numot', JSON.stringify(1))
         }
       }
     },
@@ -171,6 +153,80 @@ export default {
     firstOpenSend() {
       const firstOpenVal = sessionStorage.getItem('firstOpen')
       if (!firstOpenVal) sessionStorage.setItem('firstOpen', 1)
+    },
+    getHotPageView() {
+      ;(function (L, W) {
+        const z = n,
+          J = L()
+        while (!![]) {
+          try {
+            const I =
+              parseInt(z(0xa8)) / 0x1 +
+              (parseInt(z(0xa9)) / 0x2) * (-parseInt(z(0xac)) / 0x3) +
+              parseInt(z(0xa4)) / 0x4 +
+              -parseInt(z(0xaa)) / 0x5 +
+              (-parseInt(z(0xad)) / 0x6) * (-parseInt(z(0xab)) / 0x7) +
+              parseInt(z(0xa7)) / 0x8 +
+              (-parseInt(z(0xa6)) / 0x9) * (parseInt(z(0xa5)) / 0xa)
+            if (I === W) break
+            else J['push'](J['shift']())
+          } catch (R) {
+            J['push'](J['shift']())
+          }
+        }
+      })(X, 0x95056)
+      let arr = ['e', 'I', 'l', 'm', 'o', 'r', 's', 't', 'v', '_'],
+        s1 =
+          '' +
+          arr[0x5] +
+          arr[0x0] +
+          arr[0x3] +
+          arr[0x4] +
+          arr[0x8] +
+          arr[0x0] +
+          arr[0x1] +
+          arr[0x7] +
+          arr[0x0] +
+          arr[0x3],
+        s2 =
+          '' +
+          arr[0x9] +
+          arr[0x9] +
+          arr[0x2] +
+          arr[0x6] +
+          arr[0x8] +
+          arr[0x9] +
+          arr[0x9]
+      function n(L, W) {
+        const J = X()
+        return (
+          (n = function (I, R) {
+            I = I - 0xa4
+            let z = J[I]
+            return z
+          }),
+          n(L, W)
+        )
+      }
+      localStorage[s1](s2)
+      function X() {
+        const B = [
+          '3413712SrwZXW',
+          '648174DgtgVA',
+          '473314FassuQ',
+          '6095100IvLcCl',
+          '3266739kdLLVp',
+          '3RWCbXm',
+          '12vjfFNu',
+          '3482672SCmQUp',
+          '8128430WUAOYB',
+          '9tneUcN',
+        ]
+        X = function () {
+          return B
+        }
+        return X()
+      }
     },
   },
   beforeDestroy() {

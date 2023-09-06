@@ -86,7 +86,7 @@
         <!-- 右侧列表 -->
         <!-- <div class="details_main_right_list">
           <a
-            :href="`${getIntersperseUrl}/resources/details/${item.name
+            :href="`/resources/details/${item.name
               .trim()
               .replace(/[^\w\d]/g, '-')
               .toLowerCase()}-${item.id}/`"
@@ -104,7 +104,7 @@
       <div class="details_footer_title">Trending Articles</div>
       <div class="details_footer_list">
         <a
-          :href="`${getIntersperseUrl}/resources/details/${item.name
+          :href="`/resources/details/${item.name
             .trim()
             .replace(/[^\w\d]/g, '-')
             .toLowerCase()}-${item.id}/`"
@@ -172,7 +172,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 import Vue from 'vue'
 export default {
   data() {
@@ -315,9 +314,6 @@ export default {
           // this.getNews()
         })
     },
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
 }
 </script>

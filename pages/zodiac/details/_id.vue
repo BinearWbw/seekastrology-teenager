@@ -126,7 +126,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'zodiac_details',
   data() {
@@ -227,9 +226,6 @@ export default {
     } catch (e) {
       error({ statusCode: e.code, message: e.message })
     }
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
   methods: {
     handleDropdownChange(option) {

@@ -26,7 +26,7 @@
                   :class="{ paused: item.paused }"
                 >
                   <a
-                    :href="`${getIntersperseUrl + item.path}${getCurrentRoute}`"
+                    :href="`${item.path}${getCurrentRoute}`"
                     class="slideshow_item"
                   >
                     <img
@@ -63,7 +63,7 @@
               <p>Welcome to Tarot Chatbot! ✨</p>
             </div>
             <div class="min_right">
-              <a :href="`${getIntersperseUrl}/tarot/`">Try Now</a>
+              <a :href="`/tarot/`">Try Now</a>
             </div>
           </div>
         </div>
@@ -73,7 +73,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -112,7 +111,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl']),
     getCurrentRoute() {
       return this.$route.path === '/' ? '?from=home' : ''
     },

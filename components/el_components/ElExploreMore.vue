@@ -4,11 +4,7 @@
       <p class="title">Explore More</p>
       <div class="explore_main_tag" data-aos="zoom-out">
         <div class="tag_list" v-for="(item, index) in moreData" :key="index">
-          <a
-            :href="`${getIntersperseUrl + item.path}`"
-            class="tag_list_aos"
-            id="EXPLORE"
-          >
+          <a :href="`${item.path}`" class="tag_list_aos" id="EXPLORE">
             <div class="tag_list_aos_round">
               <img :src="item.imgUrl" alt="#" />
             </div>
@@ -22,7 +18,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'explore_more',
   data() {
@@ -85,9 +80,6 @@ export default {
         },
       ],
     }
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
   methods: {
     addTag(str) {

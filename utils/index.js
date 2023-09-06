@@ -119,49 +119,6 @@ const horoscopeFormatDate = (type = 'd') => {
       return year
   }
 }
-const setIframeLocalStorage = (name, data) => {
-  let url = 'https://seekastrology.com'
-  if (window.location.host == 'seekastrology.com') {
-    url = 'https://www.seekastrology.com'
-  } else if (window.location.host == 'www.seekastrology.com') {
-    url = 'https://seekastrology.com'
-  } else {
-    url = `http://${window.location.host}`
-  }
-  var iframe = document.getElementById('storage-iframe')
-  if (iframe) {
-    iframe.contentWindow.postMessage(
-      {
-        type: 'send-localStorage-message',
-        name: name,
-        data: data,
-      },
-      url
-    )
-  }
-}
-const setIframeSessionStorage = (name, data) => {
-  let url = 'https://seekastrology.com'
-  if (window.location.host == 'seekastrology.com') {
-    url = 'https://www.seekastrology.com'
-  } else if (window.location.host == 'www.seekastrology.com') {
-    url = 'https://seekastrology.com'
-  } else {
-    url = `http://${window.location.host}`
-  }
-  var iframe = document.getElementById('storage-iframe')
-  if (iframe) {
-    iframe.contentWindow.postMessage(
-      {
-        type: 'send-sessionStorage-message',
-        name: name,
-        data: data,
-      },
-      url
-    )
-  }
-}
-
 // 滚动到底部
 const scrollAnimation = (obj, target, fn1) => {
   // console.log(fn1);
@@ -191,7 +148,5 @@ export default {
   formatYYYYMMDDHHMM,
   debounce,
   horoscopeFormatDate,
-  setIframeLocalStorage,
-  setIframeSessionStorage,
   scrollAnimation,
 }

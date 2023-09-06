@@ -303,8 +303,8 @@ body::-webkit-scrollbar {
 *::-webkit-scrollbar {
   display: block;
 }
-.ant-form-explain{
-  color:  #CF3C3C;
+.ant-form-explain {
+  color: #cf3c3c;
   font-family: Rubik;
   font-size: 14px;
   font-style: normal;
@@ -418,7 +418,7 @@ body::-webkit-scrollbar {
 }
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
-  .ant-form-explain{
+  .ant-form-explain {
     margin: 3 * $pr 16 * $pr 16 * $pr;
     font-size: 12 * $pr;
     line-height: 16 * $pr;

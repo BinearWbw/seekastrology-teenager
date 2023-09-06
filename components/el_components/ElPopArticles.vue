@@ -4,7 +4,7 @@
       <p class="title">POPULAR ARTICLES</p>
       <div class="content">
         <a
-          :href="`${getIntersperseUrl}/resources/details/${item.name
+          :href="`/resources/details/${item.name
             .trim()
             .replace(/[^\w\d]/g, '-')
             .toLowerCase()}-${item.id}`"
@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -52,10 +51,6 @@ export default {
         }),
     ])
     this.getHomeNewsData = getHomeNewsData
-  },
-  mounted() {},
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
 }
 </script>

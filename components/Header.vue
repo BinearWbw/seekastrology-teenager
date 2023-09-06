@@ -2,7 +2,7 @@
   <header class="header" id="headerNav">
     <div class="header__main" :class="{ header_black: isScrolled }">
       <div>
-        <a :href="getIntersperseUrl" class="logo">
+        <a href="/" class="logo">
           <img
             class="img"
             src="~/assets/img/header/logoImg.svg"
@@ -12,7 +12,7 @@
         <nav class="nav">
           <a
             class="nav__item"
-            :href="`${getIntersperseUrl + item.href}`"
+            :href="`${item.href}`"
             :class="{
               active:
                 item.path == $route.path ||
@@ -34,7 +34,7 @@
                   class="nav_children"
                   :title="item_i.title"
                   v-for="(item_i, index_i) in item.children"
-                  :href="`${getIntersperseUrl + item_i.href}`"
+                  :href="`${item_i.href}`"
                   :key="index_i"
                 >
                   {{ item_i.title }}
@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   data() {
@@ -197,9 +196,6 @@ export default {
         },
       ],
     }
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
   mounted() {
     if (window.scrollY) this.isScrolled = window.scrollY > 10

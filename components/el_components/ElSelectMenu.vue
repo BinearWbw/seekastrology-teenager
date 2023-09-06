@@ -3,9 +3,9 @@
     <div class="select_menu">
       <div class="menu_sole">
         <a
-          :href="`${getIntersperseUrl}/zodiac/details/${
-            corresponding()[0].name
-          }-${corresponding()[0].id}/`"
+          :href="`/zodiac/details/${corresponding()[0].name}-${
+            corresponding()[0].id
+          }/`"
         >
           <div
             class="menu_sole_item"
@@ -26,7 +26,7 @@
         :key="index"
         v-show="!item.sexId || item.sexId == whetherMaleFemale()"
       >
-        <a :href="`${getIntersperseUrl + item.path + '-' + ids}/`">
+        <a :href="`${item.path + '-' + ids}/`">
           <div
             class="menu_list_item"
             :class="{
@@ -48,7 +48,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   props: ['names', 'ids'],
   data() {
@@ -168,9 +167,6 @@ export default {
       ],
       isLoading: false,
     }
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
   methods: {
     toUpperBig(str) {

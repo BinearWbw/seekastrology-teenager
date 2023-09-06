@@ -35,7 +35,7 @@
               v-for="item in newsData?.list"
               :key="item.id"
               class="resources_main_btm_main_item"
-              :href="`${getIntersperseUrl}/resources/details/${item.name
+              :href="`/resources/details/${item.name
                 .trim()
                 .replace(/[^\w\d]/g, '-')
                 .toLowerCase()}-${item.id}/`"
@@ -121,7 +121,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -287,7 +286,6 @@ export default {
     normalList() {
       return this.list.filter((_, index) => index !== 0)
     },
-    ...mapGetters(['getIntersperseUrl']),
   },
 }
 </script>

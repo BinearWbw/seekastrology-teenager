@@ -19,7 +19,7 @@
                 setTitleCrumbs().title
               }}
             </p>
-            <a :href="`${getIntersperseUrl}${$route.path}`" class="crumbs">
+            <a :href="`${$route.path}`" class="crumbs">
               {{
                 setTitleCrumbs(zodiacIData.name).crumbs + pairingDetailsCrumbs
               }}
@@ -240,7 +240,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -350,10 +349,6 @@ export default {
       error({ statusCode: e.code, message: e.message })
     }
   },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
-  },
-  mounted() {},
   methods: {
     handleDropdownChange(option) {
       window.scrollTo({

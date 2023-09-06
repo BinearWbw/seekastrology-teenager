@@ -15,14 +15,14 @@
         suits:
       </div>
       <div class="card-righter">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`"
+        <a :href="`/tarot/cards/${getCurrentRoute}`"
           ><button class="button">View All</button>
         </a>
       </div>
     </div>
     <ul class="card-list">
       <li class="card-items">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`">
+        <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card0.webp"
             alt=""
@@ -32,7 +32,7 @@
         </a>
       </li>
       <li class="card-items">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`">
+        <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card1.webp"
             alt=""
@@ -42,7 +42,7 @@
         </a>
       </li>
       <li class="card-items">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`">
+        <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card2.webp"
             alt=""
@@ -52,7 +52,7 @@
         </a>
       </li>
       <li class="card-items">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`">
+        <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card3.webp"
             alt=""
@@ -62,7 +62,7 @@
         </a>
       </li>
       <li class="card-items">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`">
+        <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card4.webp"
             alt=""
@@ -74,7 +74,7 @@
     </ul>
     <ul class="card-list-mobile">
       <li class="list-mobile">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`">
+        <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card0.webp"
             alt=""
@@ -83,7 +83,7 @@
         </a>
       </li>
       <li class="list-mobile">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`">
+        <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card1.webp"
             alt=""
@@ -92,7 +92,7 @@
         </a>
       </li>
       <li class="list-mobile">
-        <a :href="`${getIntersperseUrl}/tarot/cards/${getCurrentRoute}`">
+        <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card2.webp"
             alt=""
@@ -105,14 +105,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'AllTarot',
   data() {
     return {}
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl']),
     getCurrentRoute() {
       return this.$route.path === '/' ? '?from=home' : ''
     },

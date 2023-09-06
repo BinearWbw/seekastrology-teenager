@@ -40,7 +40,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getIntersperseUrl', 'getSignSuccess']),
+    ...mapGetters(['getSignSuccess']),
   },
   methods: {
     sendAgains: debounce(function () {

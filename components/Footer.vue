@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer__main">
-      <a :href="getIntersperseUrl">
+      <a href="/">
         <img
           class="logo_mobile_img"
           src="~/assets/img/header/logoImg.svg"
@@ -15,7 +15,7 @@
         <div class="top_link">
           <div class="top_list" v-for="item in footer_link" :key="item.id">
             <a
-              :href="`${getIntersperseUrl + cont.path}`"
+              :href="`${cont.path}`"
               v-for="(cont, index) in item.content"
               :key="index"
               @click="gotoPageList($event, cont)"
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="top_last">
-          <a :href="getIntersperseUrl">
+          <a href="/">
             <img
               class="logo_img"
               src="~/assets/img/header/logoImg.svg"
@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'Footer',
   data() {
@@ -168,9 +167,6 @@ export default {
         },
       ],
     }
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
   methods: {
     goTop() {

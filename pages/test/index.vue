@@ -9,7 +9,7 @@
               v-for="(item, index) in list"
               :key="item.id"
               class="test_main_center_left_list_item"
-              :href="`${getIntersperseUrl}/test/details/${item.name
+              :href="`/test/details/${item.name
                 .trim()
                 .replace(/[^\w\d]/g, '-')
                 .toLowerCase()}-${item.id}/`"
@@ -80,7 +80,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -184,9 +183,6 @@ export default {
           this.loading = false
         })
     },
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
 }
 </script>

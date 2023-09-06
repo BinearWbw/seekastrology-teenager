@@ -173,7 +173,7 @@
           <div class="details_main_left_btm_title">MOST POPULAR QUIZZES</div>
           <div class="details_main_left_btm_list">
             <a
-              :href="`${getIntersperseUrl}/test/details/${item.name
+              :href="`/test/details/${item.name
                 .trim()
                 .replace(/[^\w\d]/g, '-')
                 .toLowerCase()}-${item.id}/`"
@@ -214,7 +214,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -416,9 +415,6 @@ export default {
         behavior: 'smooth',
       })
     },
-  },
-  computed: {
-    ...mapGetters(['getIntersperseUrl']),
   },
 }
 </script>

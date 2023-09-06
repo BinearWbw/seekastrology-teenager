@@ -5,7 +5,7 @@
       <div class="pop_news">
         <div class="news_left">
           <a
-            :href="`${getIntersperseUrl}/resources/details/${getHomeNewsData[0]?.name
+            :href="`/resources/details/${getHomeNewsData[0]?.name
               .trim()
               .replace(/[^\w\d]/g, '-')
               .toLowerCase()}-${getHomeNewsData[0]?.id}/${getCurrentRoute}`"
@@ -39,7 +39,7 @@
           <li v-for="(item, index) in normalList" :key="index">
             <a
               class="resources_main_top_left"
-              :href="`${getIntersperseUrl}/resources/details/${item.name
+              :href="`/resources/details/${item.name
                 .trim()
                 .replace(/[^\w\d]/g, '-')
                 .toLowerCase()}-${item.id}/${getCurrentRoute}`"
@@ -73,7 +73,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'PopArticles',
   props: ['homeNews'],
@@ -98,7 +97,6 @@ export default {
     normalList() {
       return this.getHomeNewsData?.filter((_, index) => index !== 0)
     },
-    ...mapGetters(['getIntersperseUrl']),
     getCurrentRoute() {
       return this.$route.path === '/' ? '?from=home' : ''
     },

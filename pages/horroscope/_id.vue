@@ -84,7 +84,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'Horroscope',
   data() {
@@ -253,10 +252,7 @@ export default {
         },
       ]
     },
-    ...mapGetters(['getIntersperseUrl']),
   },
-  created() {},
-  mounted() {},
   methods: {
     async getHoroscopeData(id = 1, kind = 'd') {
       await this.$apiList.home

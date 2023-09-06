@@ -1,7 +1,7 @@
 <template>
   <div class="revise">
     <div class="revise_main">
-      <a class="atop" :href="`${getIntersperseUrl}/user/`">
+      <a class="atop" :href="`/user/`">
         <button class="button_top">＜ back</button>
       </a>
       <div class="menu">
@@ -167,7 +167,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl', 'getUserInfo']),
+    ...mapGetters(['getUserInfo']),
   },
   mounted() {
     this.isInnerWidth()

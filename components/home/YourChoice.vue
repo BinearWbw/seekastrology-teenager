@@ -15,7 +15,7 @@
       <li v-for="item_i in variousListData" :key="item_i.id">
         <a
           class="fade choice__main__a"
-          :href="`${getIntersperseUrl}/horroscope/${item_i.name
+          :href="`/horroscope/${item_i.name
             .replace(/[^a-zA-Z0-9\\s]/g, '-')
             .toLowerCase()}-${item_i.id}/${getCurrentRoute}`"
           data-aos="zoom-out-up"
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'YourChoice',
   props: ['item'],
@@ -60,7 +59,6 @@ export default {
     this.variousListData = variousListData
   },
   computed: {
-    ...mapGetters(['getIntersperseUrl']),
     getCurrentRoute() {
       return this.$route.path === '/' ? '?from=home' : ''
     },
