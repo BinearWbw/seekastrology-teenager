@@ -19,11 +19,11 @@
         <div class="login" v-else>
           <div class="login_content">
             <div class="login_content_header">
-              Today's free tarot AI counting has run out, please come back
-              tomorrow!
+              Today's free Tarot AI count has been used up, please log in to
+              your account for more counts!
             </div>
-            <!-- <div class="login_content_label">Email Address*</div> -->
-            <!-- <a-form-model-item label="" prop="email">
+            <div class="login_content_label">Email Address*</div>
+            <a-form-model-item label="" prop="email">
               <a-input
                 placeholder="Enter your email account"
                 allow-clear
@@ -31,7 +31,7 @@
                 v-model="aiData.email"
               />
             </a-form-model-item>
-            <button class="emailButton" @click="emailSubmit">Send</button> -->
+            <button class="emailButton" @click="emailSubmit">Send</button>
           </div>
         </div>
       </a-form-model>
@@ -151,8 +151,7 @@ export default {
     border-color: #f5222d;
   }
   .login {
-    // height: 230px;
-    height: auto;
+    height: 230px;
     border-radius: 27px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background: linear-gradient(
@@ -162,7 +161,7 @@ export default {
     );
     backdrop-filter: blur(8px);
     &_content {
-      padding: 8px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -255,13 +254,13 @@ export default {
       border-color: #f5222d;
     }
     .login {
-      //   height: 236 * $pr;
+      height: 236 * $pr;
       border-radius: 27 * $pr;
-      //   border: 1 * $pr solid rgba(255, 255, 255, 0.4);
+      border: 1 * $pr solid rgba(255, 255, 255, 0.4);
       border: none;
       backdrop-filter: blur(8 * $pr);
       &_content {
-        padding: 8 * $pr;
+        padding: 16 * $pr;
         gap: 8 * $pr;
         &_header {
           padding: 0 10 * $pr;

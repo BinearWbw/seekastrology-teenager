@@ -154,7 +154,7 @@ export default {
   flex-direction: column;
   .chat_frame {
     width: 100%;
-    height: 560px;
+    // height: 560px;
     overflow-y: scroll;
     box-sizing: border-box;
     &::-webkit-scrollbar {
@@ -255,9 +255,9 @@ export default {
     flex-direction: column;
     .chat_frame {
       width: 100%;
-      height: auto;
-      flex: 1;
-      max-height: 412 * $pr;
+      //   height: auto;
+      //   flex: 1;
+      //   max-height: 412 * $pr;
       overflow-y: scroll;
       box-sizing: border-box;
       &::-webkit-scrollbar {
