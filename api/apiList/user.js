@@ -39,4 +39,9 @@ export default (axios) => ({
   subscribe(data) {
     return axios.post('api/astro/subscribe', data)
   },
+
+  /* openai */
+  getApiOpenai(params) {
+    return axios.get('api/openai', { params })
+  },
 })

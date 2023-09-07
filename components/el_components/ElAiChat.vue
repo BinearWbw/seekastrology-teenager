@@ -33,6 +33,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { EventSourcePolyfill } from 'event-source-polyfill'
 export default {
   props: ['disableds', 'cardName'],
   data() {
@@ -99,9 +100,34 @@ export default {
     // 调用Ai
     handelAI(val) {
       this.flowDisabled = true
-      const eventSource = new EventSource(
-        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}`
+      const eventSource = new EventSourcePolyfill(
+        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}`,
+        {
+          headers: {
+            Authorization: this.getUserInfo?.token,
+          },
+        }
       )
+
+      //   this.$apiList.user
+      //     .getApiOpenai({
+      //       origin: process.env.origin,
+      //       type: 'tarot',
+      //       card: this.cardName,
+      //       question: val,
+      //     })
+      //     .then((res) => {
+      //       console.log('res', res)
+      //       // if (res.data) {
+      //       //   //拼接字符
+      //       //   if (res.data == 'StreamFinished') {
+      //       //   } else {
+      //       //     this.chatList[this.chatList.length - 1].msg += res.data
+      //       //   }
+      //       //   this.scrollBottom()
+      //       // }
+      //     })
+
       // 监听事件open
       eventSource.addEventListener('open', (event) => {
         this.$set(this.chatList, this.chatList.length, {

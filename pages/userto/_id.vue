@@ -68,15 +68,15 @@
                 >
                   <div class="imags">
                     <nuxt-img
-                      :src="item.cards[0]?.icon"
+                      :src="item.cards[0]?.icon || '/'"
                       fit="cover"
                       :alt="item.cards[0]?.icon"
                     ></nuxt-img>
                     <i class="number">{{ item.cards?.length }}</i>
                   </div>
                   <div class="content">
-                    <p class="title">{{ item.cards[0]?.card_name }}</p>
-                    <p class="text">{{ item.cards[0]?.desc }}</p>
+                    <p class="title">{{ item.question }}</p>
+                    <p class="text">{{ item.cards[0]?.card_name }}</p>
                     <span class="time">{{
                       $utils.formatYYYYMMDD(item.created_at)
                     }}</span>

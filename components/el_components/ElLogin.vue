@@ -41,9 +41,9 @@ export default {
     return {
       opens: false,
       dropData: [
-        { name: 'Your Profile', path: '/userto/1/' },
-        { name: 'Tarot Record', path: '/userto/2/' },
-        { name: 'Subscribe Record', path: '/userrevise/1/' },
+        { name: 'Your Profile', path: '/userrevise/1/' },
+        { name: 'Tarot Record', path: '/userto/1/' },
+        { name: 'Subscribe Record', path: '/userto/2/' },
         { name: 'Change Password', path: '/userrevise/2/' },
       ],
       formOf: false,
