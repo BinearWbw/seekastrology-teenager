@@ -183,9 +183,11 @@ module.exports = {
   plugins: [
     '~plugins/axios',
     '~plugins/utils',
+    '~/plugins/event-bus.js', // 添加事件总线插件
     '~plugins/cookiePersistence',
     { src: '~plugins/aos', ssr: false },
-    { src: '~plugins/antd-ui', ssr: false },
+    { src: '~plugins/antd-ui', ssr: false, mode: 'client' },
+    // { src: '~plugins/cookiePersistence', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

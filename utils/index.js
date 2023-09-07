@@ -13,6 +13,22 @@ const formatMMDD = (param) => {
   // 返回格式化后的字符串
   return month + '/' + day
 }
+const formatYYYYMMDD = (param) => {
+  if (param == '' || param == undefined || param == null) {
+    return ''
+  }
+  //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  var date = new Date(param * 1000)
+  // 获取月份和日期
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1 // 月份从 0 开始，所以需要加 1
+  var day = date.getDate()
+  // 格式化月份和日期为两位数（如果小于 10）
+  month = month < 10 ? '0' + month : month
+  day = day < 10 ? '0' + day : day
+  // 返回格式化后的字符串
+  return year + '/' + month + '/' + day
+}
 const formatYYYYMMDDHHMM = (param, format) => {
   if (param == '' || param == undefined || param == null) {
     return ''
@@ -145,6 +161,7 @@ const scrollAnimation = (obj, target, fn1) => {
 export default {
   formatMMSS,
   formatMMDD,
+  formatYYYYMMDD,
   formatYYYYMMDDHHMM,
   debounce,
   horoscopeFormatDate,

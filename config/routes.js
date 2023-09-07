@@ -110,6 +110,14 @@ const addRoutes = async () => {
   res19.map((item) => {
     routes.push(`/zodiac/type/girlamor-${item}/`)
   })
+  let res20 = [1, 2]
+  res20.map((item) => {
+    routes.push(`/userto/${item}/`)
+  })
+  let res21 = [1, 2]
+  res21.map((item) => {
+    routes.push(`/userrevise/${item}/`)
+  })
 
   return routes
 }

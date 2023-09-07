@@ -395,7 +395,7 @@ export default {
               } else if (res.code === 1001) {
                 //未激活
                 this.nameValidateStatus = 'error'
-                this.errorMsg = `<span>your mailbox is not activated, <a href="/user/activation/">activate immediately</a></span>`
+                this.errorMsg = `<span>your mailbox is not activated, <a href="/user/">activate immediately</a></span>`
               }
             })
         }
@@ -438,7 +438,7 @@ export default {
               } else {
                 // this.hideLoginBox() //隐藏
                 this.$emit('choce', false)
-                window.location.hash = '/user/activation/' //跳转到账号激活页面
+                window.location.hash = '/user/' //跳转到账号激活页面
                 this.$store.commit('SIGN_SUCCESS', res.email)
               }
             })

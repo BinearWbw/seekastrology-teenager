@@ -179,6 +179,14 @@ const sitemap = [
       res19.map((item) => {
         addArr.push(`/zodiac/type/girlamor-${item}/`)
       })
+      let res20 = [1, 2]
+      res20.map((item) => {
+        addArr.push(`/userto/${item}/`)
+      })
+      let res21 = [1, 2]
+      res21.map((item) => {
+        addArr.push(`/userrevise/${item}/`)
+      })
 
       routes = routes.concat(addArr)
       return routes

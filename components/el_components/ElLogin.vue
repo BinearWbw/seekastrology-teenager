@@ -41,10 +41,10 @@ export default {
     return {
       opens: false,
       dropData: [
-        { name: 'Your Profile', path: '/user/' },
-        { name: 'Tarot Record', path: '/user/' },
-        { name: 'Subscribe Record', path: '/user/revise/' },
-        { name: 'Change Password', path: '/user/revise/' },
+        { name: 'Your Profile', path: '/userto/1/' },
+        { name: 'Tarot Record', path: '/userto/2/' },
+        { name: 'Subscribe Record', path: '/userrevise/1/' },
+        { name: 'Change Password', path: '/userrevise/2/' },
       ],
       formOf: false,
     }

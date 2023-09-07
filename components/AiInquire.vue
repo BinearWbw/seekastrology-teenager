@@ -80,6 +80,9 @@
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <el-login-form v-if="formOf" @choce="showLogin"></el-login-form>
+    </transition>
   </div>
 </template>
 
@@ -142,6 +145,7 @@ export default {
       isCard: true,
       disableds: true,
       cardDetails: {},
+      formOf: false,
     }
   },
   computed: {
@@ -149,6 +153,12 @@ export default {
       // 根据子组件的值来判断条件
       return this.$refs.chat.flowDisabled
     },
+  },
+  mounted() {
+    this.$eventBus.$on('loginShow', (receivedData) => {
+      // 处理接收到的数据
+      this.formOf = receivedData
+    })
   },
   methods: {
     //
@@ -174,6 +184,10 @@ export default {
             this.cardDetails = res[0]
           }
         })
+    },
+    // 关闭登录弹窗
+    showLogin(val) {
+      this.formOf = val
     },
   },
 }
@@ -386,6 +400,9 @@ export default {
                   display: -webkit-box;
                   -webkit-line-clamp: 4;
                   -webkit-box-orient: vertical;
+                  :deep(h3) {
+                    color: #d2d3d7;
+                  }
                 }
                 .btns {
                   width: 100%;

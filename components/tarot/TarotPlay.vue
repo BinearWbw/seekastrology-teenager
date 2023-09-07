@@ -216,7 +216,7 @@
               alt="btn"
             />
             <img
-              v-if="isSelected"
+              v-else
               class="btn-img"
               src="~/assets/img/tarot/mobile-btn.png"
               alt="btn"

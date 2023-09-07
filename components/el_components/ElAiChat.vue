@@ -86,11 +86,11 @@ export default {
         uid: 2, //uid
       }
       if (!this.getUserInfo?.token && this.loginOnce) {
-        // alert('Please log in before asking again')
         //展示输入邮箱模块，隐藏问题输入框
-        // this.sendMsg(chatMsg)
         this.askInputVisible = false
         return
+      } else {
+        this.askInputVisible = true
       }
       this.sendMsg(chatMsg)
       this.handelAI(val)
@@ -113,12 +113,8 @@ export default {
       eventSource.addEventListener('message', (event) => {
         let data = event.data
         if (data) {
-          //   if (!data) {
-          //     data = `<br>`
-          //   }
           //拼接字符
           if (data == 'StreamFinished') {
-            this.askInputVisible = false
           } else {
             this.chatList[this.chatList.length - 1].msg += data
           }
@@ -145,7 +141,7 @@ export default {
   height: 560px;
 }
 .short {
-  height: 375px;
+  height: 507px;
 }
 .chat_main {
   width: 100%;
@@ -245,7 +241,7 @@ export default {
     height: 412 * $pr;
   }
   .short {
-    height: 200 * $pr;
+    height: 330 * $pr;
   }
   .chat_main {
     width: 100%;

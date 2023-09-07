@@ -16,21 +16,23 @@
             {{ btn }}
           </button>
         </template>
-        <div class="login" v-else>
+      </a-form-model>
+      <a-form-model ref="todayForm" :model="emailData" :rules="emailRules">
+        <div class="login" v-if="!askInputVisible">
           <div class="login_content">
             <div class="login_content_header">
               Today's free Tarot AI count has been used up, please log in to
               your account for more counts!
             </div>
-            <div class="login_content_label">Email Address*</div>
-            <a-form-model-item label="" prop="email">
+            <!-- <div class="login_content_label">Email Address*</div> -->
+            <!-- <a-form-model-item label="" prop="emails">
               <a-input
                 placeholder="Enter your email account"
                 allow-clear
                 @keyup.enter="emailSubmit"
-                v-model="aiData.email"
+                v-model="emailData.email"
               />
-            </a-form-model-item>
+            </a-form-model-item> -->
             <button class="emailButton" @click="emailSubmit">Send</button>
           </div>
         </div>
@@ -40,13 +42,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   props: ['btn', 'disable', 'askInputVisible'],
   data() {
     return {
       aiData: {
         text: '',
-        email: '',
       },
       rules: {
         text: [
@@ -56,10 +58,15 @@ export default {
             trigger: 'change',
           },
         ],
-        name: [
+      },
+      emailData: {
+        email: '',
+      },
+      emailRules: {
+        emails: [
           {
             required: true,
-            message: 'Please input Activity name',
+            message: 'Please enter email',
             trigger: 'blur',
           },
           {
@@ -69,23 +76,29 @@ export default {
           },
         ],
       },
+      localAskInputVisible: this.askInputVisible,
     }
   },
   computed: {
+    ...mapGetters(['getUserInfo']),
     nameHasValue() {
       return this.aiData.text !== ''
     },
   },
   methods: {
     emailSubmit() {
-      this.$refs.aiForm.validate((valid) => {
-        if (valid) {
-          // this.$emit('aited', this.aiData.text)
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+      console.log('点击打开登录框')
+      this.$eventBus.$emit('loginShow', true)
+      //邮箱功能暂时不要
+      //   this.$refs.todayForm.validate((valid) => {
+      //     if (valid) {
+      //       console.log(valid)
+      //       // this.$emit('aited', this.aiData.text)
+      //     } else {
+      //       console.log('error submit!!')
+      //       return false
+      //     }
+      //   })
     },
     inputSubmit() {
       this.$refs.aiForm.validate((valid) => {
@@ -144,14 +157,14 @@ export default {
     color: rgba(255, 255, 255, 0.08);
     font-size: 22px;
     position: relative;
-    right: 100px;
+    right: 110px;
   }
   :deep(.has-error .ant-input-affix-wrapper .ant-input) {
     background-color: rgba(0, 0, 0, 0.08);
     border-color: #f5222d;
   }
   .login {
-    height: 230px;
+    // min-height: auto;
     border-radius: 27px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background: linear-gradient(
@@ -190,6 +203,12 @@ export default {
         border-radius: 27px !important;
         border-color: rgba(255, 255, 255, 0.08);
         background: rgba(0, 0, 0, 0.24);
+      }
+      :deep(.ant-input-clear-icon) {
+        color: rgba(255, 255, 255, 0.08);
+        font-size: 22px;
+        position: relative;
+        right: initial;
       }
       .emailButton {
         border-radius: 42px;
@@ -253,8 +272,10 @@ export default {
       background-color: rgba(0, 0, 0, 0.08);
       border-color: #f5222d;
     }
+    :deep(.ant-form-explain) {
+      padding: 0 0 0 16 * $pr;
+    }
     .login {
-      height: 236 * $pr;
       border-radius: 27 * $pr;
       border: 1 * $pr solid rgba(255, 255, 255, 0.4);
       border: none;
@@ -276,6 +297,12 @@ export default {
 
         :deep(.ant-input) {
           border-radius: 27 * $pr !important;
+        }
+        :deep(.ant-input-clear-icon) {
+          font-size: 22 * $pr;
+        }
+        :deep(.ant-input-affix-wrapper .ant-input:not(:last-child)) {
+          padding-right: 35 * $pr;
         }
         .emailButton {
           border-radius: 42 * $pr;

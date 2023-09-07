@@ -1,7 +1,7 @@
 <template>
   <div class="revise">
     <div class="revise_main">
-      <a class="atop" :href="`/user/`">
+      <a class="atop" :href="`/userto/1/`">
         <button class="button_top">＜ back</button>
       </a>
       <div class="menu">
@@ -108,7 +108,6 @@ export default {
       }
     }
     return {
-      activeMenu: 0,
       revisePwd: {
         oldPwd: '',
         password1: '',
@@ -154,6 +153,17 @@ export default {
         ],
       },
       isInnerWidthBox: false,
+    }
+  },
+  async asyncData({ error, $apiList, params }) {
+    try {
+      let ids = Number(params.id)
+      let activeMenu = ids - 1
+      return {
+        activeMenu,
+      }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.message })
     }
   },
   computed: {
