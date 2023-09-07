@@ -9,7 +9,7 @@
             To finish creating your account, click on the link sent to
           </p>
           <p class="email">
-            {{ getSignSuccess || 'tarot@tarot.con' }}
+            {{ emailsData || '' }}
           </p>
         </div>
 
@@ -36,11 +36,18 @@ export default {
     return {
       isDisabled: false,
       timeout: null,
+      emailsData: '',
     }
   },
 
   computed: {
     ...mapGetters(['getSignSuccess']),
+  },
+  mounted() {
+    this.$eventBus.$on('emails', (receivedData) => {
+      console.log('传递来的邮件', receivedData)
+      this.emailsData = receivedData
+    })
   },
   methods: {
     sendAgains: debounce(function () {

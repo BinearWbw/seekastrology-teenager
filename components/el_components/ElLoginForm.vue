@@ -75,7 +75,10 @@
                   </a-form-model-item>
                   <a-form-model-item>
                     <div class="submit">
-                      <span class="forgot" @click="sendForgetPwdEmail"
+                      <span
+                        v-if="false"
+                        class="forgot"
+                        @click="sendForgetPwdEmail"
                         >Forgot password</span
                       >
                       <button class="button" @click="inputSubmit">login</button>
@@ -264,7 +267,7 @@ export default {
         name: [
           {
             required: true,
-            message: 'Please input Activity name',
+            message: 'Please enter email',
             trigger: 'blur',
           },
           {
@@ -411,6 +414,7 @@ export default {
     },
     // 注册
     inputSignUp() {
+      this.$eventBus.$emit('emails', 'dadws')
       this.$refs.nextFormUp.validate((valid) => {
         if (valid) {
           let pwds = CryptoJS.MD5(this.formup.passwordtow).toString(
@@ -438,8 +442,10 @@ export default {
               } else {
                 // this.hideLoginBox() //隐藏
                 this.$emit('choce', false)
-                window.location.hash = '/user/' //跳转到账号激活页面
+                window.changePageUrl = `/user/`
+                window.location.href = '/user/' //跳转到账号激活页面
                 this.$store.commit('SIGN_SUCCESS', res.email)
+                this.$eventBus.$emit('emails', res.email)
               }
             })
         }

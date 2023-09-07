@@ -139,7 +139,7 @@ export default {
       font-family: 'Cinzel Decorative';
       font-size: 14px;
       font-style: normal;
-      max-width: 60px;
+      min-width: 100px;
       font-weight: 700;
       line-height: 18px;
       padding: 0 8px;
@@ -147,7 +147,6 @@ export default {
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
-      text-overflow: ellipsis;
     }
     .arrow {
       width: 10px;
