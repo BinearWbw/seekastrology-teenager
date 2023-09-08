@@ -88,6 +88,7 @@ export default {
     logOutTo() {
       // 退出登录-清楚用户信息
       this.$store.commit('UPDATE_USERINFO', {})
+      localStorage.setItem('userInfo', JSON.stringify({}))
       window.changePageUrl = '/'
       window.location.href = '/'
     },

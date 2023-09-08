@@ -61,7 +61,7 @@ export default {
           if (res?.token) {
             this.$store.commit('UPDATE_USERINFO', res)
             localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
-            alert('Login successful')
+            // alert('Login successful')
             window.location.reload() //刷新页面
           }
         })
