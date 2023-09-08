@@ -74,10 +74,7 @@
                   </a-form-model-item>
                   <a-form-model-item>
                     <div class="submit">
-                      <span
-                        v-if="false"
-                        class="forgot"
-                        @click="sendForgetPwdEmail"
+                      <span class="forgot" @click="sendForgetPwdEmail"
                         >Forgot password</span
                       >
                       <button class="button" @click="inputSubmit">login</button>
@@ -429,7 +426,7 @@ export default {
           let pwds = CryptoJS.MD5(this.formup.passwordtow).toString(
             CryptoJS.enc.Hex
           )
-          const dateString = this.formup.time
+          const dateString = this.nextFormUp.time
           const timestamp = new Date(dateString).getTime()
 
           this.$apiList.user
@@ -437,7 +434,7 @@ export default {
               origin: process.env.origin,
               email: this.formup.name,
               pwd: pwds,
-              user_name: this.formup.nickname,
+              user_name: this.nextFormUp.nickname,
               birthday: timestamp,
             })
             .then((res) => {
@@ -449,7 +446,6 @@ export default {
                 this.registerEmailValidateStatus = 'error'
                 this.errorMsg = `<span>your email has been registered, <a>login now</a></span>`
               } else {
-                // this.hideLoginBox() //隐藏
                 this.$store.commit('SIGN_SUCCESS', res.email)
                 this.$eventBus.$emit('emails', res.email)
                 this.$emit('choce', false)

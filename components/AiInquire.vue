@@ -15,6 +15,7 @@
               <el-ai-chat
                 :disableds="disableds"
                 :cardName="cardDetails?.card_name"
+                :descType="cardDetails?.desc_type"
                 ref="chat"
               ></el-ai-chat>
             </div>
@@ -41,7 +42,10 @@
             <div class="card_details" v-if="!isCard">
               <div class="details">
                 <div class="the_img">
-                  <div class="imgs">
+                  <div
+                    class="imgs"
+                    :class="{ imgs_rotate: cardDetails.desc_type == 2 }"
+                  >
                     <nuxt-img
                       :src="cardDetails.icon"
                       fit="cover"
@@ -374,6 +378,9 @@ export default {
                     height: 100%;
                     object-fit: cover;
                   }
+                }
+                .imgs_rotate {
+                  transform: rotate(180deg);
                 }
                 .names {
                   color: rgba(255, 255, 255, 0.6);

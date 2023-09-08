@@ -70,6 +70,7 @@
                     <nuxt-img
                       :src="item.cards[0]?.icon || '/'"
                       fit="cover"
+                      :class="{ imgs_rotate: item.cards[0]?.desc_type == 2 }"
                       :alt="item.cards[0]?.icon"
                     ></nuxt-img>
                     <i class="number">{{ item.cards?.length }}</i>
@@ -488,7 +489,6 @@ export default {
           }
         }
       }
-      &_record,
       .tab_details_record {
         .try {
           display: grid;
@@ -573,7 +573,11 @@ export default {
                 background-color: rgba(0, 0, 0, 0.6);
               }
             }
+            .imgs_rotate {
+              transform: rotate(180deg);
+            }
             .content {
+              width: 100%;
               font-family: 'Rubik';
               font-size: 16px;
               font-style: normal;
@@ -606,7 +610,6 @@ export default {
           }
         }
       }
-      &_subscribe,
       .tab_details_subscribe {
         padding: 24px 0 96px;
         .joinus {
@@ -860,7 +863,6 @@ export default {
             }
           }
         }
-        &_record,
         .tab_details_record {
           .try {
             padding: 24 * $pr 0 120 * $pr;
@@ -926,7 +928,6 @@ export default {
             }
           }
         }
-        &_subscribe,
         .tab_details_subscribe {
           padding: 16 * $pr 0 48 * $pr;
           .joinus {

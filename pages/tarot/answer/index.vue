@@ -18,7 +18,7 @@
               <nuxt-img
                 class="card-img"
                 :class="{ 'card-img-rotate': item.desc_type == 2 }"
-                :src="item.icon"
+                :src="item.icon || '/'"
                 fit="cover"
                 :alt="item.name"
                 loading="lazy"

@@ -35,7 +35,7 @@
 import { mapGetters } from 'vuex'
 // import { EventSourcePolyfill } from 'event-source-polyfill'
 export default {
-  props: ['disableds', 'cardName'],
+  props: ['disableds', 'cardName', 'descType'],
   data() {
     return {
       askInputVisible: true,
@@ -101,7 +101,7 @@ export default {
     handelAI(val) {
       this.flowDisabled = true
       const eventSource = new EventSource(
-        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}`
+        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}&desc_type=${this.descType}`
         // {
         //   headers: {
         //     Authorization: this.getUserInfo?.token,
@@ -115,6 +115,7 @@ export default {
           type: 'tarot',
           card: this.cardName,
           question: val,
+          desc_type: this.descType,
         })
         .then((res) => {
           //   console.log('本地ai 接口', res)

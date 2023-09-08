@@ -10,7 +10,7 @@
             :rules="rulesForgot"
             key="0"
           >
-            <p>Old password</p>
+            <!-- <p>Old password</p>
             <a-form-model-item label="" prop="oldPwd">
               <div class="names">
                 <a-input
@@ -19,7 +19,7 @@
                   v-model="forgotPwd.oldPwd"
                 />
               </div>
-            </a-form-model-item>
+            </a-form-model-item> -->
             <p>New Password</p>
             <a-form-model-item label="" prop="password1">
               <div class="pwd1">
@@ -46,6 +46,9 @@
         </no-ssr>
       </div>
     </div>
+    <transition name="fade">
+      <el-login-form v-if="formOf" @choce="forgotSend"></el-login-form>
+    </transition>
   </div>
 </template>
 
@@ -64,23 +67,23 @@ export default {
     }
     return {
       forgotPwd: {
-        oldPwd: '',
+        // oldPwd: '',
         password1: '',
         password2: '',
       },
       rulesForgot: {
-        oldPwd: [
-          {
-            required: true,
-            message: 'Your current password',
-            trigger: 'blur',
-          },
-          {
-            min: 6,
-            message: 'Password entered is less than 6 characters',
-            trigger: 'blur',
-          },
-        ],
+        // oldPwd: [
+        //   {
+        //     required: true,
+        //     message: 'Your current password',
+        //     trigger: 'blur',
+        //   },
+        //   {
+        //     min: 6,
+        //     message: 'Password entered is less than 6 characters',
+        //     trigger: 'blur',
+        //   },
+        // ],
         password1: [
           {
             required: true,
@@ -107,6 +110,7 @@ export default {
           },
         ],
       },
+      formOf: false,
     }
   },
   methods: {
@@ -123,7 +127,8 @@ export default {
             })
             .then((res) => {
               if (res && res?.code !== 400) {
-                alert('Reset successful')
+                alert('Reset successful please sign in')
+                this.formOf = true
               } else {
                 alert('fail to edit')
               }
@@ -136,6 +141,9 @@ export default {
     },
     resetForm() {
       this.$refs.changeForm.resetFields()
+    },
+    forgotSend() {
+      this.formOf = false
     },
   },
 }
