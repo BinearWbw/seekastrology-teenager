@@ -52,7 +52,6 @@ export default {
     /* 检测账号激活 */
     activeInit() {
       const currentURL = window.location.href
-      console.log('当前url', currentURL)
       if (currentURL.includes('key=')) {
         // 提取 key和type 参数的值
         const urlParams = new URLSearchParams(window.location.search)

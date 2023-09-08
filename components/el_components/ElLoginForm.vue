@@ -182,6 +182,7 @@
                         valueFormat="YYYY-MM-DD"
                         placeholder="dd/mm/yyyy"
                         style="width: 100%"
+                        :getCalendarContainer="(trigger) => trigger.parentNode"
                       />
                     </a-form-model-item>
                     <a-form-model-item>
@@ -392,7 +393,7 @@ export default {
                 window.location.reload() //刷新当前页面
               } else if (res.code === 400) {
                 this.passwordValidateStatus = 'error'
-                this.errorMsg = `<span>Password error</span>`
+                this.errorMsg = `<span>Incorrect username or password</span>`
                 // alert(res.msg)
               } else if (res.code === 1001) {
                 //未激活

@@ -646,6 +646,7 @@ export default {
                     font-size: 16 * $pr;
                     line-height: 28 * $pr;
                     margin-top: 8 * $pr;
+                    height: 112 * $pr;
                   }
                   .btns {
                     flex-direction: column;

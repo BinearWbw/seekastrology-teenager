@@ -26,7 +26,9 @@
               <div class="card-text">{{ item.card_name }}</div>
             </div>
             <div class="desc">
-              <div class="desc-title">{{ subTitleText[type][index] }}</div>
+              <div class="desc-title">
+                {{ subTitleText[type][index] || item.card_name }}
+              </div>
               <div class="desc-text">{{ item.desc }}</div>
             </div>
           </li>

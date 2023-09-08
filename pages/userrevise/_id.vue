@@ -23,7 +23,7 @@
         </div>
         <div class="menu_right">
           <div class="h5_title">Edit your profile</div>
-          <div class="menu_name" v-if="activeMenu == 0">
+          <div class="menu_name" v-if="activeMenu == 0 || isInnerWidthBox">
             <p>User nickname</p>
             <div class="name_input">
               <el-input-name
@@ -175,6 +175,7 @@ export default {
   methods: {
     ...mapMutations(['showLoginBox']),
     selectMenu(list) {
+      console.log('当前', list)
       this.activeMenu = list
     },
     isInnerWidth() {
