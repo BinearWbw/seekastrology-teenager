@@ -117,7 +117,7 @@ export default {
           question: val,
         })
         .then((res) => {
-          //   console.log('res', res)
+          //   console.log('本地ai 接口', res)
           // if (res.data) {
           //   //拼接字符
           //   if (res.data == 'StreamFinished') {
@@ -138,6 +138,7 @@ export default {
       // 监听事件流数据
       eventSource.addEventListener('message', (event) => {
         let data = event.data
+        // console.log('在线ai 接口', data)
         if (data) {
           //拼接字符
           if (data == 'StreamFinished') {
@@ -167,7 +168,7 @@ export default {
   height: 560px;
 }
 .short {
-  height: 507px;
+  height: 497px;
 }
 .chat_main {
   width: 100%;

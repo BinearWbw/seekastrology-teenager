@@ -33,7 +33,7 @@
                 v-model="emailData.email"
               />
             </a-form-model-item> -->
-            <button class="emailButton" @click="emailSubmit">Send</button>
+            <button class="emailButton" @click="emailSubmit">Login</button>
           </div>
         </div>
       </a-form-model>

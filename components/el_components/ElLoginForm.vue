@@ -45,33 +45,32 @@
                     prop="name"
                     :validateStatus="nameValidateStatus"
                   >
+                    <template #help v-if="nameValidateStatus">
+                      <div
+                        v-html="errorMsg"
+                        class="errorMsg"
+                        @click="sendingMailbox(form.name)"
+                      ></div>
+                    </template>
                     <a-input
                       placeholder="Enter your email account"
                       allow-clear
                       v-model="form.name"
                     />
-                    <div
-                      v-show="nameValidateStatus"
-                      class="errorMsg"
-                      v-html="errorMsg"
-                      @click="hideLoginBox"
-                    ></div>
                   </a-form-model-item>
                   <a-form-model-item
                     label=""
                     prop="password"
                     :validateStatus="passwordValidateStatus"
                   >
+                    <template #help v-if="passwordValidateStatus">
+                      <div v-html="errorMsg" class="errorMsg"></div>
+                    </template>
                     <a-input-password
                       v-model="form.password"
                       placeholder="Enter password"
                       @focus="passwordValidateStatus = ''"
                     />
-                    <div
-                      v-show="passwordValidateStatus"
-                      class="errorMsg"
-                      v-html="errorMsg"
-                    ></div>
                   </a-form-model-item>
                   <a-form-model-item>
                     <div class="submit">
@@ -124,18 +123,19 @@
                       prop="name"
                       :validateStatus="registerEmailValidateStatus"
                     >
+                      <template #help v-if="registerEmailValidateStatus">
+                        <div
+                          v-html="errorMsg"
+                          class="errorMsg"
+                          @click="toggleLogin"
+                        ></div>
+                      </template>
                       <a-input
                         placeholder="Enter your email account"
                         allow-clear
                         v-model="formup.name"
                         @focus="registerEmailValidateStatus = ''"
                       />
-                      <div
-                        v-show="registerEmailValidateStatus"
-                        class="errorMsg"
-                        v-html="errorMsg"
-                        @click="toggleLogin"
-                      ></div>
                     </a-form-model-item>
                     <a-form-model-item label="" prop="password1">
                       <a-input-password
@@ -298,7 +298,7 @@ export default {
         name: [
           {
             required: true,
-            message: 'Please input Activity name',
+            message: 'Please fill in your email',
             trigger: 'blur',
           },
           {
@@ -322,7 +322,7 @@ export default {
         passwordtow: [
           {
             required: true,
-            message: 'Please input Activity name',
+            message: 'Please enter password again',
             trigger: 'blur',
           },
           {
@@ -342,14 +342,14 @@ export default {
         nickname: [
           {
             required: true,
-            message: 'Please input Activity name',
+            message: 'Please fill in your nickname',
             trigger: 'blur',
           },
         ],
         time: [
           {
             required: true,
-            message: 'Please select a time',
+            message: 'Your birthday',
             trigger: 'blur',
           },
         ],
@@ -360,7 +360,7 @@ export default {
     }
   },
   computed: {
-    // ...mapGetters(['getChildVisible']),
+    // ...mapState(['userInfo']),
   },
   mounted() {
     // if (this.getChildVisible) {
@@ -391,6 +391,8 @@ export default {
                 )
                 // this.hideLoginBox() //隐藏
                 this.$emit('choce', false)
+                window.changePageUrl = window.location.href
+                window.location.reload() //刷新当前页面
               } else if (res.code === 400) {
                 this.passwordValidateStatus = 'error'
                 this.errorMsg = `<span>Password error</span>`
@@ -403,6 +405,13 @@ export default {
             })
         }
       })
+    },
+    // 去激活邮箱页面
+    sendingMailbox(a) {
+      this.$eventBus.$emit('emails', a)
+      this.$store.commit('SIGN_SUCCESS', a)
+      window.changePageUrl = `/user/`
+      window.location.href = '/user/'
     },
     // 下一步
     nextStep() {
@@ -441,11 +450,11 @@ export default {
                 this.errorMsg = `<span>your email has been registered, <a>login now</a></span>`
               } else {
                 // this.hideLoginBox() //隐藏
+                this.$store.commit('SIGN_SUCCESS', res.email)
+                this.$eventBus.$emit('emails', res.email)
                 this.$emit('choce', false)
                 window.changePageUrl = `/user/`
                 window.location.href = '/user/' //跳转到账号激活页面
-                this.$store.commit('SIGN_SUCCESS', res.email)
-                this.$eventBus.$emit('emails', res.email)
               }
             })
         }
@@ -485,32 +494,6 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-@use 'sass:math';
-.errorMsg {
-  font-family: Rubik;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
-  margin: 4px 21px 16px 24px;
-  span {
-    color: #cf3c3c !important;
-    a {
-      color: #fff !important;
-      text-decoration-line: underline !important;
-    }
-  }
-}
-@media (max-width: 750px) {
-  $pr: math.div(1vw, 3.75);
-  .errorMsg {
-    margin: 3 * $pr 10 * $pr 16 * $pr 16 * $pr;
-    font-size: 12 * $pr;
-    line-height: 16 8 $pr;
-  }
-}
-</style>
 <style lang="scss" scoped>
 @use 'sass:math';
 
@@ -767,6 +750,21 @@ export default {
                 padding-bottom: 8px;
               }
             }
+            .errorMsg {
+              font-family: Rubik;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 18px;
+              padding-bottom: 3px;
+              span {
+                color: #cf3c3c !important;
+                a {
+                  color: #fff !important;
+                  text-decoration-line: underline !important;
+                }
+              }
+            }
           }
         }
       }
@@ -948,6 +946,10 @@ export default {
                   line-height: 22 * $pr;
                   padding-bottom: 8 * $pr;
                 }
+              }
+              .errorMsg {
+                font-size: 12 * $pr;
+                line-height: 16 8 $pr;
               }
             }
           }

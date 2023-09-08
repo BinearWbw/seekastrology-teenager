@@ -117,39 +117,39 @@ export default {
         oldPwd: [
           {
             required: true,
-            message: 'Please input Activity name',
+            message: 'Your current password',
             trigger: 'blur',
           },
           {
             min: 6,
             message: 'Password entered is less than 6 characters',
-            trigger: 'blur',
+            trigger: ['blur', 'change'],
           },
         ],
         password1: [
           {
             required: true,
-            message: 'please enter password',
+            message: 'Enter your new password',
             trigger: 'change',
           },
           {
             min: 6,
             message: 'Password entered is less than 6 characters',
-            trigger: 'blur',
+            trigger: ['blur', 'change'],
           },
         ],
         password2: [
           {
             required: true,
-            message: 'Please input Activity name',
+            message: 'Please enter new password again',
             trigger: 'blur',
           },
           {
             min: 6,
             message: 'Password entered is less than 6 characters',
-            trigger: 'blur',
+            trigger: ['blur', 'change'],
           },
-          { validator: validatePass2, trigger: 'change' },
+          { validator: validatePass2, trigger: ['blur', 'change'] },
         ],
       },
       isInnerWidthBox: false,
@@ -235,7 +235,7 @@ export default {
                 alert('Successfully modified')
                 this.showLoginBox()
               } else {
-                alert('Unable to modify', res.msg)
+                alert('wrong password', res.msg)
               }
             })
         } else {

@@ -67,8 +67,10 @@
                     >
                     <button
                       class="pick btn"
+                      :class="{ btnds: isBtn }"
                       @click="handelPick"
                       v-if="!chatFlowDisabled"
+                      :disabled="isBtn"
                     >
                       Pick Another Card
                     </button>
@@ -87,6 +89,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -146,6 +149,7 @@ export default {
       disableds: true,
       cardDetails: {},
       formOf: false,
+      isBtn: false,
     }
   },
   computed: {
@@ -153,6 +157,7 @@ export default {
       // 根据子组件的值来判断条件
       return this.$refs.chat.flowDisabled
     },
+    ...mapGetters(['getUserInfo']),
   },
   mounted() {
     this.$eventBus.$on('loginShow', (receivedData) => {
@@ -181,6 +186,9 @@ export default {
           if (Array.isArray(res)) {
             this.disableds = false
             this.isCard = false
+            if (!this.getUserInfo?.token) {
+              this.isBtn = true
+            }
             this.cardDetails = res[0]
           }
         })
@@ -419,6 +427,9 @@ export default {
                     font-style: normal;
                     font-weight: 400;
                     line-height: 22px;
+                  }
+                  .btnds {
+                    cursor: not-allowed;
                   }
                   .more {
                     display: block;

@@ -34,7 +34,7 @@ export const getters = {
     return state.userInfo.user_subscribe
   },
   getSignSuccess(state) {
-    return state.signSuccessData.email
+    return state.signSuccessData
   },
   getChildVisible(state) {
     return state.isChildVisible

@@ -9,7 +9,7 @@
             To finish creating your account, click on the link sent to
           </p>
           <p class="email">
-            {{ emailsData || '' }}
+            {{ this.getSignSuccess.email || '' }}
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default {
     return {
       isDisabled: false,
       timeout: null,
-      emailsData: '',
+      emailsData: '???',
     }
   },
 
@@ -45,7 +45,6 @@ export default {
   },
   mounted() {
     this.$eventBus.$on('emails', (receivedData) => {
-      console.log('传递来的邮件', receivedData)
       this.emailsData = receivedData
     })
   },

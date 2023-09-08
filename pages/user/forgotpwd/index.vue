@@ -72,7 +72,7 @@ export default {
         oldPwd: [
           {
             required: true,
-            message: 'Please input Activity name',
+            message: 'Your current password',
             trigger: 'blur',
           },
           {
@@ -84,26 +84,26 @@ export default {
         password1: [
           {
             required: true,
-            message: 'please enter password',
+            message: 'Enter your new password',
             trigger: 'change',
           },
           {
             min: 6,
             message: 'Password entered is less than 6 characters',
-            trigger: 'blur',
+            trigger: ['blur', 'change'],
           },
         ],
         password2: [
           {
             required: true,
-            message: 'Please input Activity name',
-            trigger: 'blur',
+            message: 'Please enter new password again',
+            trigger: ['blur', 'change'],
           },
-          { validator: validatePass2, trigger: 'change' },
+          { validator: validatePass2, trigger: ['blur', 'change'] },
           {
             min: 6,
             message: 'Password entered is less than 6 characters',
-            trigger: 'blur',
+            trigger: ['blur', 'change'],
           },
         ],
       },
