@@ -45,7 +45,7 @@
                 v-for="(tab, index) in userDetails"
                 :key="index"
                 :class="['tab-item', { active: idsType === index }]"
-                @click="selectTab(tab, index)"
+                @click="selectTab(index)"
               >
                 {{ tab.tabs }}
               </div>
@@ -323,7 +323,7 @@ export default {
           this.$store.commit('UPDATE_USERINFO', res)
         })
     },
-    selectTab(tab, index) {
+    selectTab(index) {
       this.idsType = index
     },
   },

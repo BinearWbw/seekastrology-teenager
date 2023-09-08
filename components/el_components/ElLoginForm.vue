@@ -389,8 +389,8 @@ export default {
                 )
                 // this.hideLoginBox() //隐藏
                 this.$emit('choce', false)
-                window.changePageUrl = window.location.href
-                window.location.reload() //刷新当前页面
+                window.changePageUrl = '/userto/2/'
+                window.location.href = '/userto/2/'
               } else if (res.code === 400) {
                 this.passwordValidateStatus = 'error'
                 this.errorMsg = `<span>Incorrect username or password</span>`

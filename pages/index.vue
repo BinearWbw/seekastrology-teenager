@@ -59,7 +59,10 @@ export default {
         const type = urlParams.get('type')
         this.$apiList.user.accountActive({ key, type }).then((res) => {
           if (res?.token) {
-            alert('Activation successful, please log in')
+            this.$store.commit('UPDATE_USERINFO', res)
+            localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
+            alert('Login successful')
+            window.location.reload() //刷新页面
           }
         })
       }

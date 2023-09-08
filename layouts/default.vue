@@ -67,7 +67,7 @@ export default {
     })
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
-    this.showNotification()
+    // this.showNotification()
 
     this.$nextTick(() => {
       //在页面加载时读取localStorage里的状态信息

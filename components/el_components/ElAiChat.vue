@@ -157,6 +157,14 @@ export default {
         this.flowDisabled = false
         // 没有登录只能询问一次
         if (!this.getUserInfo?.token) this.loginOnce = true
+
+        if (!this.getUserInfo?.token && this.loginOnce) {
+          //展示输入邮箱模块，隐藏问题输入框
+          this.askInputVisible = false
+          return
+        } else {
+          this.askInputVisible = true
+        }
       })
     },
   },
