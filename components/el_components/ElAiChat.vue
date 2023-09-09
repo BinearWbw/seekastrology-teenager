@@ -4,6 +4,7 @@
       class="chat_frame"
       ref="chatContent"
       :class="askInputVisible ? 'height' : 'short'"
+      @scroll="scrollChange"
     >
       <div class="chat_wrapper" v-for="(item, index) in chatList" :key="index">
         <div class="chat_friend" v-if="item.uid !== 2">
@@ -21,12 +22,12 @@
     <div class="input_send">
       <el-ai-input
         :btn="'Send'"
-        :disable="disableds || flowDisabled"
+        :disable="disableds || flowDisabled || takeInput"
         @aited="meSendContent"
         @keyup.enter="meSendContent"
         :askInputVisible="askInputVisible"
       ></el-ai-input>
-      <div class="doors" v-if="disableds">First draw a tarot card</div>
+      <div class="doors" v-if="takeItOneAt">First draw a tarot card</div>
     </div>
   </div>
 </template>
@@ -51,16 +52,41 @@ export default {
       ],
       flowDisabled: false,
       loginOnce: false,
+      takeItOneAt: true,
+      takeInput: false,
+      lastScrollTop: 0,
+      stopScroll: true,
     }
   },
   computed: {
     ...mapGetters(['getUserInfo']),
+  },
+  mounted() {
+    this.$eventBus.$on('disabos', (receivedData) => {
+      this.takeItOneAt = receivedData
+      this.takeInput = receivedData
+    })
   },
   methods: {
     //发送信息
     sendMsg(msgList) {
       this.chatList.push(msgList)
       this.scrollBottom()
+    },
+    // 检测向下向上滚动
+    scrollChange(e) {
+      const to = e.target.scrollTop
+      const ty = to - this.lastScrollTop
+      this.lastScrollTop = to
+
+      if (ty > 0) {
+        // console.log('向下滚动')
+        this.stopScroll = true
+      } else {
+        // console.log('向上滚动')
+        this.stopScroll = false
+      }
+      //   this.scrollBottom()
     },
     scrollBottom() {
       this.$nextTick(() => {
@@ -78,7 +104,12 @@ export default {
         uid: 1, //判断是输入还是回复内容
       }
       this.chatList.push(aiMsg)
-      this.scrollBottom()
+      if (!this.stopScroll) {
+        console.log('停止滚动')
+        return
+      } else {
+        this.scrollBottom()
+      }
     },
     //输入ai 问题
     meSendContent(val) {
@@ -95,6 +126,7 @@ export default {
       }
       this.sendMsg(chatMsg)
       this.handelAI(val)
+      this.stopScroll = true //可以滚动了
     },
 
     // 调用Ai
@@ -117,17 +149,7 @@ export default {
           question: val,
           desc_type: this.descType,
         })
-        .then((res) => {
-          //   console.log('本地ai 接口', res)
-          // if (res.data) {
-          //   //拼接字符
-          //   if (res.data == 'StreamFinished') {
-          //   } else {
-          //     this.chatList[this.chatList.length - 1].msg += res.data
-          //   }
-          //   this.scrollBottom()
-          // }
-        })
+        .then((res) => {})
 
       // 监听事件open
       eventSource.addEventListener('open', (event) => {
@@ -146,7 +168,11 @@ export default {
           } else {
             this.chatList[this.chatList.length - 1].msg += data
           }
-          this.scrollBottom()
+          if (!this.stopScroll) {
+            return
+          } else {
+            this.scrollBottom()
+          }
         }
       })
 
@@ -164,6 +190,8 @@ export default {
           return
         } else {
           this.askInputVisible = true
+          this.takeInput = true
+          this.takeItOneAt = true
         }
       })
     },

@@ -177,6 +177,7 @@ export default {
       this.isProhibit = false
     },
     async toggleActive(index) {
+      this.$eventBus.$emit('disabos', false)
       console.log('当前', index)
       this.isFinits = index
       this.isProhibit = true

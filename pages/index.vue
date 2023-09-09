@@ -62,7 +62,7 @@ export default {
             this.$store.commit('UPDATE_USERINFO', res)
             localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
             // alert('Login successful')
-            window.location.reload() //刷新页面
+            window.location.href = '/'
           }
         })
       }
