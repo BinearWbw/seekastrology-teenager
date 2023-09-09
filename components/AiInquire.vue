@@ -514,7 +514,7 @@ export default {
     &_main {
       padding-bottom: 48 * $pr;
       .ai_question {
-        gap: 24 * $pr;
+        gap: 0;
         &_inquire {
           flex: initial;
           order: 2;
@@ -524,7 +524,7 @@ export default {
           border-radius: 24 * $pr;
           border: 1 * $pr solid rgba(255, 255, 255, 0.4);
           padding: 3 * $pr;
-
+          margin-top: 24 * $pr;
           .content {
             width: 100%;
             height: 100%;

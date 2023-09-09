@@ -108,5 +108,31 @@ export default {
 }
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
+  .input_main {
+    height: 44 * $pr;
+    .button {
+      position: absolute;
+      top: 50%;
+      right: 8 * $pr;
+      padding: 8 * $pr 32 * $pr;
+      border-radius: 42 * $pr;
+      font-size: 16 * $pr;
+      line-height: 22 * $pr;
+    }
+    :deep(.ant-input) {
+      height: 44 * $pr !important;
+      border-radius: 44 * $pr !important;
+      padding-left: 16 * $pr;
+      font-size: 16 * $pr;
+      line-height: 22 * $pr;
+    }
+    :deep(.ant-input-affix-wrapper .ant-input:not(:last-child)) {
+      padding-right: 140 * $pr;
+    }
+    :deep(.ant-input-clear-icon) {
+      font-size: 22 * $pr;
+      right: 100 * $pr;
+    }
+  }
 }
 </style>

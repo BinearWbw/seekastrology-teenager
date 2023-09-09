@@ -885,7 +885,7 @@ export default {
           }
           .card {
             padding: 16 * $pr 8 * $pr 48 * $pr;
-            gap: 5 * $pr;
+            gap: 0;
             flex-wrap: wrap;
             &_item {
               width: auto;
@@ -895,6 +895,13 @@ export default {
               background-color: rgba(255, 255, 255, 0.08);
               &:hover {
                 transform: translateY(0);
+              }
+              margin-bottom: 5 * $pr;
+              &:nth-child(odd) {
+                margin-right: 2.5 * $pr;
+              }
+              &:nth-child(even) {
+                margin-left: 2.5 * $pr;
               }
               .imags {
                 width: 45 * $pr;
@@ -960,9 +967,16 @@ export default {
             }
             .list {
               padding-top: 5 * $pr;
-              gap: 5 * $pr;
+              gap: 0;
               label {
                 flex: 0 0 calc(50% - 2.5 * $pr); //平分父宽度为两份，减去间隙
+                margin-bottom: 5 * $pr;
+                &:nth-child(odd) {
+                  margin-right: 2.5 * $pr;
+                }
+                &:nth-child(even) {
+                  margin-left: 2.5 * $pr;
+                }
               }
               .list_item {
                 width: auto;
