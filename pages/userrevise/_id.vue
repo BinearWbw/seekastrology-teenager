@@ -175,7 +175,6 @@ export default {
   methods: {
     ...mapMutations(['showLoginBox']),
     selectMenu(list) {
-      console.log('当前', list)
       this.activeMenu = list
     },
     isInnerWidth() {
@@ -196,7 +195,7 @@ export default {
           if (res.hasOwnProperty('token')) {
             this.$store.commit('UPDATE_USERINFO', res)
           } else {
-            alert('未能修改', res.msg)
+            alert(res.msg)
           }
         })
     },
@@ -210,7 +209,7 @@ export default {
           if (res.hasOwnProperty('token')) {
             this.$store.commit('UPDATE_USERINFO', res)
           } else {
-            alert('未能修改', res.msg)
+            alert(res.msg)
           }
         })
     },

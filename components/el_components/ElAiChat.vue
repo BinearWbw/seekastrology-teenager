@@ -105,7 +105,6 @@ export default {
       }
       this.chatList.push(aiMsg)
       if (!this.stopScroll) {
-        console.log('停止滚动')
         return
       } else {
         this.scrollBottom()
@@ -161,7 +160,6 @@ export default {
       // 监听事件流数据
       eventSource.addEventListener('message', (event) => {
         let data = event.data
-        // console.log('在线ai 接口', data)
         if (data) {
           //拼接字符
           if (data == 'StreamFinished') {
@@ -178,7 +176,6 @@ export default {
 
       // 监听错误事件
       eventSource.addEventListener('error', (event) => {
-        console.log('end')
         eventSource.close()
         this.flowDisabled = false
         // 没有登录只能询问一次

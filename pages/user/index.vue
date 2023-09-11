@@ -58,7 +58,7 @@ export default {
           email: this.getSignSuccess.email || '',
         })
         .then((res) => {
-          console.log('发送邮箱激活', res)
+          // 发送邮箱激活
         })
 
       this.timeout = setTimeout(() => {

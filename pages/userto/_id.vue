@@ -238,10 +238,10 @@ export default {
       window.location = `/tarot/answer/`
     },
     onSearch(value) {
-      console.log(value)
+      //   console.log(value)
     },
     valueEmail(value) {
-      console.log('email', value)
+      //   console.log('email', value)
     },
     chooseMend(item, index) {
       // 操作选择的内容
@@ -282,12 +282,9 @@ export default {
     // 点击选择文件
     triggerInput() {
       this.$refs.uploadInput.click()
-      console.log(this.getUserInfo.icon)
-      console.log('选择的', this.getUserInfo.user_subscribe)
     },
     onchangeImgs(event) {
       const file = event.target.files[0]
-      console.log('文件', event)
       if (file?.type == undefined) return
       if (!this.fileType.includes(file.type)) {
         alert('Only jpg, jpeg and png images are allowed to be uploaded!')
@@ -296,11 +293,9 @@ export default {
       const formData = new FormData()
       formData.append('file', file)
       formData.append('path', 'photo')
-      console.log(',,,,,', this.$config.cdnUrl)
       //   限制2m大小
       if (file.size <= 2048000) {
         this.$apiList.user.upload(formData).then((res) => {
-          console.log('res头像上传', res)
           if (res.path) {
             this.imgStr = res.path
             this.userImgUp()

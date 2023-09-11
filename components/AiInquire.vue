@@ -178,7 +178,6 @@ export default {
     },
     async toggleActive(index) {
       this.$eventBus.$emit('disabos', false)
-      console.log('当前', index)
       this.isFinits = index
       this.isProhibit = true
       await this.$apiList.tarot
@@ -187,7 +186,6 @@ export default {
           type: 4,
         })
         .then((res) => {
-          console.log('data', res)
           if (Array.isArray(res)) {
             this.disableds = false
             this.isCard = false

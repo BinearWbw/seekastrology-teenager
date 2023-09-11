@@ -87,7 +87,6 @@ export default {
   },
   methods: {
     emailSubmit() {
-      console.log('点击打开登录框')
       this.$eventBus.$emit('loginShow', true)
       //邮箱功能暂时不要
       //   this.$refs.todayForm.validate((valid) => {

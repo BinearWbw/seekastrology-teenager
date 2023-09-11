@@ -35,7 +35,6 @@ export default ({ $axios, store }, inject) => {
     }
   })
   $axios.onError((error) => {
-    console.log(error.message)
     return Promise.resolve(false)
   })
   var apiObject = {}

@@ -142,7 +142,6 @@ export default {
           Notification.requestPermission().then((permission) => {
             if (permission === 'granted') {
               // 用户同意了通知
-              console.log('用户同意通知')
             }
           })
         }

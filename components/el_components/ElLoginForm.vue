@@ -439,7 +439,6 @@ export default {
               birthday: timestamp,
             })
             .then((res) => {
-              console.log('res', res)
               if (res.code === 400) {
                 // alert(res.msg)
                 this.nextif = true

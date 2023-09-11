@@ -71,7 +71,6 @@ export default {
       this.formOf = true
     },
     showunde(val) {
-      console.log('弹窗', val)
       this.formOf = false
     },
     myProfile() {
