@@ -651,6 +651,8 @@ export default {
                   }
                   .btns {
                     flex-direction: column;
+                    margin-top: 8 * $pr;
+                    gap: 0;
                     .btn {
                       width: 100%;
                       padding: 8 * $pr 0;
@@ -659,6 +661,7 @@ export default {
                       line-height: 22 * $pr;
                     }
                     .more {
+                      margin-bottom: 8 * $pr;
                       border: 1 * $pr solid rgba(255, 255, 255, 0.48);
                     }
                   }
