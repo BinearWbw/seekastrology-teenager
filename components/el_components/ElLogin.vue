@@ -69,9 +69,13 @@ export default {
     loginTo() {
       //   this.showLoginBox()
       this.formOf = true
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
     },
     showunde(val) {
       this.formOf = false
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
     },
     myProfile() {
       this.opens = !this.opens

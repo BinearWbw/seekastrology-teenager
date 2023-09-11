@@ -129,6 +129,8 @@ export default {
               if (res && res?.code !== 400) {
                 alert('Reset successful please sign in')
                 this.formOf = true
+                let bodyStyle = document.body.style
+                bodyStyle.overflow = 'hidden'
               } else {
                 alert('fail to edit')
               }
@@ -144,6 +146,8 @@ export default {
     },
     forgotSend() {
       this.formOf = false
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
     },
   },
 }

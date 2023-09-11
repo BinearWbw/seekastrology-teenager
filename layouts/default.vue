@@ -19,16 +19,10 @@
     <transition name="fade">
       <Privacy v-if="visiblePrivacy" @close="visiblePrivacy = false"></Privacy>
     </transition>
-
-    <!-- 登录暂时隐藏 -->
-    <transition name="fade">
-      <!-- <el-login-form v-if="isChildVisible"></el-login-form> -->
-    </transition>
   </main>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   data() {
     return {

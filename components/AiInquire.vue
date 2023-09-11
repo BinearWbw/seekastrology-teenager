@@ -167,6 +167,8 @@ export default {
     this.$eventBus.$on('loginShow', (receivedData) => {
       // 处理接收到的数据
       this.formOf = receivedData
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
     })
   },
   methods: {
@@ -199,6 +201,8 @@ export default {
     // 关闭登录弹窗
     showLogin(val) {
       this.formOf = val
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
     },
   },
 }
