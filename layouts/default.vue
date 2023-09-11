@@ -67,7 +67,7 @@ export default {
     })
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
-    // this.showNotification()
+    this.showNotification()
 
     this.$nextTick(() => {
       //在页面加载时读取localStorage里的状态信息
@@ -134,29 +134,34 @@ export default {
       }, 500)
     },
     showNotification() {
-      const firstOpenVal = sessionStorage.getItem('firstOpen')
+      // 检测浏览器是否支持通知
+      if ('Notification' in window && window.Notification !== null) {
+        const firstOpenVal = sessionStorage.getItem('firstOpen')
 
-      if (Notification.permission !== 'granted') {
-        Notification.requestPermission().then((permission) => {
-          if (permission === 'granted') {
-            // 用户同意了通知
-            console.log('用户同意通知')
-          }
-        })
-      }
-
-      if (Notification.permission === 'granted' && firstOpenVal == '1') {
-        const notification = new Notification('Seekastrology', {
-          body: 'Come to the Tarot game to find what you want to understand',
-          icon: 'https://www.doitme.link/cdn-cgi/image/fit=cover/images/news/your_sign%E2%80%99s_weekly_tarotscope_for_june_20_%E2%80%93_26_2022/173090254457145964.png',
-        })
-
-        notification.onclick = () => {
-          // 用户点击通知时触发的操作
-          window.changePageUrl = 'https://seekastrology.com/tarot/'
-          window.location.href = 'https://seekastrology.com/tarot/'
+        if (Notification.permission !== 'granted') {
+          Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+              // 用户同意了通知
+              console.log('用户同意通知')
+            }
+          })
         }
-        sessionStorage.setItem('firstOpen', 2)
+
+        if (Notification.permission === 'granted' && firstOpenVal == '1') {
+          const notification = new Notification('Seekastrology', {
+            body: 'Come to the Tarot game to find what you want to understand',
+            icon: 'https://www.doitme.link/cdn-cgi/image/fit=cover/images/news/your_sign%E2%80%99s_weekly_tarotscope_for_june_20_%E2%80%93_26_2022/173090254457145964.png',
+          })
+
+          notification.onclick = () => {
+            // 用户点击通知时触发的操作
+            window.changePageUrl = 'https://seekastrology.com/tarot/'
+            window.location.href = 'https://seekastrology.com/tarot/'
+          }
+          sessionStorage.setItem('firstOpen', 2)
+        }
+      } else {
+        return
       }
     },
     firstOpenSend() {
