@@ -195,7 +195,15 @@ export default {
           if (res.hasOwnProperty('token')) {
             this.$store.commit('UPDATE_USERINFO', res)
           } else {
-            alert(res.msg)
+            // 提示通知
+            this.$notification.open({
+              message: 'Error',
+              description: res.msg,
+              duration: 2,
+              style: {
+                color: '#f00',
+              },
+            })
           }
         })
     },
@@ -209,7 +217,15 @@ export default {
           if (res.hasOwnProperty('token')) {
             this.$store.commit('UPDATE_USERINFO', res)
           } else {
-            alert(res.msg)
+            // 提示通知
+            this.$notification.open({
+              message: 'Error',
+              description: res.msg,
+              duration: 2,
+              style: {
+                color: '#f00',
+              },
+            })
           }
         })
     },
@@ -232,14 +248,38 @@ export default {
               if (res.hasOwnProperty('token')) {
                 this.$store.commit('UPDATE_USERINFO', res)
                 this.resetForm()
-                alert('Successfully modified')
+                // 提示通知
+                this.$notification.open({
+                  message: 'Finish',
+                  description: 'Successfully modified.',
+                  duration: 2,
+                  style: {
+                    color: '#0f0',
+                  },
+                })
                 this.showLoginBox()
               } else {
-                alert('wrong password', res.msg)
+                // 提示通知
+                this.$notification.open({
+                  message: 'Wrong password',
+                  description: res.msg,
+                  duration: 2,
+                  style: {
+                    color: '#f00',
+                  },
+                })
               }
             })
         } else {
-          console.log('error submit!!')
+          // 提示通知
+          this.$notification.open({
+            message: 'Wrong password',
+            description: 'Please check password.',
+            duration: 2,
+            style: {
+              color: '#f00',
+            },
+          })
           return false
         }
       })

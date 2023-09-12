@@ -397,7 +397,16 @@ export default {
         !this.nextFlag ||
         this.currentQuestionIndex + 1 == this.dataInfo.questions.length
       ) {
-        alert('Please make a selection for 1.!')
+        // alert('Please make a selection for 1.!')
+        // 提示通知
+        this.$notification.open({
+          message: 'Stop',
+          description: 'Please make a selection for 1.!',
+          duration: 2,
+          style: {
+            color: '#f00',
+          },
+        })
         return
       }
       //更改radio禁用状态

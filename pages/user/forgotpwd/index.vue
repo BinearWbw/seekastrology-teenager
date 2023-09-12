@@ -127,16 +127,40 @@ export default {
             })
             .then((res) => {
               if (res && res?.code !== 400) {
-                alert('Reset successful please sign in')
+                // 提示通知
+                this.$notification.open({
+                  message: 'Fulfill',
+                  description: 'Reset successful please sign in.',
+                  duration: 2,
+                  style: {
+                    color: '#0f0',
+                  },
+                })
                 this.formOf = true
                 let bodyStyle = document.body.style
                 bodyStyle.overflow = 'hidden'
               } else {
-                alert('fail to edit')
+                // 提示通知
+                this.$notification.open({
+                  message: 'Error',
+                  description: 'fail to edit.',
+                  duration: 2,
+                  style: {
+                    color: '#f00',
+                  },
+                })
               }
             })
         } else {
-          console.log('error submit!!')
+          // 提示通知
+          this.$notification.open({
+            message: 'Error',
+            description: 'Error submit!!',
+            duration: 2,
+            style: {
+              color: '#f00',
+            },
+          })
           return false
         }
       })

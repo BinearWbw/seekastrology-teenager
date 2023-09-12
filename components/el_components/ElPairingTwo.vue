@@ -119,7 +119,15 @@ export default {
         window.changePageUrl = `/astrology/`
         window.location.href = `/astrology/`
       } else {
-        alert('please choose two Star sign')
+        // 提示通知
+        this.$notification.open({
+          message: 'Stop',
+          description: 'Please choose two Star sign.',
+          duration: 2,
+          style: {
+            color: '#f00',
+          },
+        })
       }
     },
   },

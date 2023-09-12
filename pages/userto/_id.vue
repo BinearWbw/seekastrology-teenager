@@ -225,7 +225,15 @@ export default {
         })
         .then((res) => {
           if (res.code == 401) {
-            alert('Please log in')
+            // 提示通知
+            this.$notification.open({
+              message: 'Error source',
+              description: 'Please log in',
+              duration: 2,
+              style: {
+                color: '#f00',
+              },
+            })
           } else {
             this.cardData = res || []
           }
@@ -287,7 +295,16 @@ export default {
       const file = event.target.files[0]
       if (file?.type == undefined) return
       if (!this.fileType.includes(file.type)) {
-        alert('Only jpg, jpeg and png images are allowed to be uploaded!')
+        // 提示通知
+        this.$notification.open({
+          message: 'Error',
+          description:
+            'Only jpg, jpeg and png images are allowed to be uploaded!',
+          duration: 2,
+          style: {
+            color: '#f00',
+          },
+        })
         return
       }
       const formData = new FormData()
@@ -300,11 +317,26 @@ export default {
             this.imgStr = res.path
             this.userImgUp()
           } else {
-            alert('Unable to modify')
+            this.$notification.open({
+              message: 'Error',
+              description: 'Unable to modify',
+              duration: 2,
+              style: {
+                color: '#f00',
+              },
+            })
           }
         })
       } else {
-        alert('Image too large')
+        // 提示通知
+        this.$notification.open({
+          message: 'Error',
+          description: 'Image too large',
+          duration: 2,
+          style: {
+            color: '#f00',
+          },
+        })
       }
     },
     //更新用户头像

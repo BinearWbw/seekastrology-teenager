@@ -458,18 +458,48 @@ export default {
     },
     //忘记密码-发送邮件
     sendForgetPwdEmail() {
-      this.$apiList.user
-        .sendForgetPwdEmail({
-          origin: process.env.origin,
-          email: this.form.name,
+      const emailPattern = /^[\w\.-]+@[\w\.-]+\.\w+$/
+      const foEmail = emailPattern.test(this.form.name)
+      if (!this.form.name || !foEmail) {
+        // 提示通知
+        this.$notification.open({
+          message: 'Email',
+          description: 'Please confirm your email.',
+          duration: 3,
+          style: {
+            color: '#9a5cc9',
+          },
         })
-        .then((res) => {
-          if (res) {
-            alert('Please check your email')
-          } else {
-            alert('Email is incorrect')
-          }
-        })
+      } else {
+        this.$apiList.user
+          .sendForgetPwdEmail({
+            origin: process.env.origin,
+            email: this.form.name,
+          })
+          .then((res) => {
+            if (res) {
+              // 提示通知
+              this.$notification.open({
+                message: 'Go to mailbox',
+                description: 'Please check your email.',
+                duration: 3,
+                style: {
+                  color: '#9a5cc9',
+                },
+              })
+            } else {
+              // 提示通知
+              this.$notification.open({
+                message: 'Error',
+                description: 'Email is incorrect.',
+                duration: 2,
+                style: {
+                  color: '#f00',
+                },
+              })
+            }
+          })
+      }
     },
 
     toggleLogin() {

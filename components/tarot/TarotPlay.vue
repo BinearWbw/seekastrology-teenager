@@ -305,7 +305,15 @@ export default {
   methods: {
     handleInput() {
       if (!this.question.trim()) {
-        alert('Please enter your question')
+        // 提示通知
+        this.$notification.open({
+          message: 'Stop',
+          description: 'Please enter your question.',
+          duration: 2,
+          style: {
+            color: '#f00',
+          },
+        })
         return
       }
       this.questionTop = true
@@ -317,7 +325,15 @@ export default {
     },
     handleMobileInpit() {
       if (!this.question.trim()) {
-        alert('Please enter your question')
+        // 提示通知
+        this.$notification.open({
+          message: 'Stop',
+          description: 'Please enter your question.',
+          duration: 2,
+          style: {
+            color: '#f00',
+          },
+        })
         return
       }
       this.inPlay = true

@@ -313,6 +313,34 @@ body::-webkit-scrollbar {
   //   margin: 4px 21px 16px 24px;
   padding: 8px 0 0 24px;
 }
+.ant-notification {
+  margin: 48px 24px 0 0;
+  span {
+    .ant-notification-notice,
+    .ant-notification-notice-closable {
+      font-family: Rubik;
+      border-radius: 24px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      backdrop-filter: blur(50px);
+      .ant-notification-notice-message {
+        color: #fff;
+        font-size: 20px;
+      }
+      .ant-notification-notice-description {
+        // color: #9a5cc9;
+        font-size: 16px;
+      }
+      .ant-notification-close-icon {
+        font-size: 16px;
+        color: #fff;
+      }
+    }
+  }
+}
 .common__btn {
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -423,6 +451,27 @@ body::-webkit-scrollbar {
     padding: 6 * $pr 0 6 * $pr 16 * $pr;
     font-size: 12 * $pr;
     line-height: 16 * $pr;
+  }
+  .ant-notification {
+    width: 90%;
+    margin: 0;
+    padding: 16 * $pr;
+    span {
+      .ant-notification-notice,
+      .ant-notification-notice-closable {
+        border-radius: 14 * $pr;
+        backdrop-filter: blur(50 * $pr);
+        .ant-notification-notice-message {
+          font-size: 16 * $pr;
+        }
+        .ant-notification-notice-description {
+          font-size: 14 * $pr;
+        }
+        .ant-notification-close-icon {
+          font-size: 14 * $pr;
+        }
+      }
+    }
   }
   body::-webkit-scrollbar {
     margin-right: 5 * $pr;

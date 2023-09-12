@@ -61,7 +61,15 @@ export default {
           if (res?.token) {
             this.$store.commit('UPDATE_USERINFO', res)
             localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
-            // alert('Login successful')
+            // 提示通知
+            this.$notification.open({
+              message: 'Finish',
+              description: 'Login successful.',
+              duration: 2,
+              style: {
+                color: '#0f0',
+              },
+            })
             window.location.href = '/'
           }
         })
