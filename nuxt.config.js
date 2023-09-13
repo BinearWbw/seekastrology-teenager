@@ -202,6 +202,12 @@ module.exports = {
     'cookie-universal-nuxt',
   ],
 
+  extend(config, ctx) {
+    if (ctx.idDev) {
+      config.entry.push('eventsource-polyfill')
+    }
+  },
+
   cookies: {
     path: '/',
     // 其他选项...

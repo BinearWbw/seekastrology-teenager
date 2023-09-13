@@ -4050,7 +4050,7 @@ events@^3.0.0:
 
 eventsource-polyfill@^0.9.6:
   version "0.9.6"
-  resolved "https://mirrors.huaweicloud.com/repository/npm/eventsource-polyfill/-/eventsource-polyfill-0.9.6.tgz"
+  resolved "https://registry.yarnpkg.com/eventsource-polyfill/-/eventsource-polyfill-0.9.6.tgz#10e0d187f111b167f28fdab918843ce7d818f13c"
   integrity sha512-LyMFp2oPDGhum2lMvkjqKZEwWd2/AoXyt8aoyftTBMWwPHNgU+2tdxhTHPluDxoz+z4gNj0uHAPR9nqevATMbg==
 
 evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:

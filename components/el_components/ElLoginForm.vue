@@ -467,7 +467,7 @@ export default {
           description: 'Please confirm your email.',
           duration: 3,
           style: {
-            color: '#9a5cc9',
+            color: '#9747ff',
           },
         })
       } else {
@@ -484,7 +484,7 @@ export default {
                 description: 'Please check your email.',
                 duration: 3,
                 style: {
-                  color: '#9a5cc9',
+                  color: '#9747ff',
                 },
               })
             } else {

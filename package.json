@@ -37,6 +37,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/sitemap": "^2.4.0",
     "eslint-config-prettier": "^8.5.0",
+    "eventsource-polyfill": "^0.9.6",
     "prettier": "^2.7.1",
     "sass": "^1.22.10",
     "sass-loader": "^7.2.0"

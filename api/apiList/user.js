@@ -42,6 +42,12 @@ export default (axios) => ({
 
   /* openai */
   getApiOpenai(params) {
-    return axios.get('api/openai', { params })
+    return axios.get('api/openai', {
+      params,
+      headers: {
+        'Content-Type': 'text/event-stream',
+      },
+      responseType: 'text',
+    })
   },
 })

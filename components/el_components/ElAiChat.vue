@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="input_send">
+    <div class="input_send" v-if="!localAskInputVisible">
       <el-ai-input
         :btn="'Send'"
         :disable="disableds || flowDisabled || takeInput"
@@ -29,12 +29,19 @@
       ></el-ai-input>
       <div class="doors" v-if="takeItOneAt">First draw a tarot card</div>
     </div>
+    <div class="login" v-if="localAskInputVisible">
+      <div class="login_content">
+        <div class="login_content_header">
+          Today's times have been used up, please come again tomorrow
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-// import { EventSourcePolyfill } from 'event-source-polyfill'
+import { EventSourcePolyfill } from 'event-source-polyfill'
 export default {
   props: ['disableds', 'cardName', 'descType'],
   data() {
@@ -56,6 +63,7 @@ export default {
       takeInput: false,
       lastScrollTop: 0,
       stopScroll: true,
+      localAskInputVisible: false,
     }
   },
   computed: {
@@ -131,13 +139,13 @@ export default {
     // 调用Ai
     handelAI(val) {
       this.flowDisabled = true
-      const eventSource = new EventSource(
-        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}&desc_type=${this.descType}`
-        // {
-        //   headers: {
-        //     Authorization: this.getUserInfo?.token,
-        //   },
-        // }
+      const eventSource = new EventSourcePolyfill(
+        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}&desc_type=${this.descType}`,
+        {
+          headers: {
+            Authorization: this.getUserInfo?.token,
+          },
+        }
       )
 
       this.$apiList.user
@@ -148,7 +156,22 @@ export default {
           question: val,
           desc_type: this.descType,
         })
-        .then((res) => {})
+        .then((res) => {
+          if (res?.code == 1003) {
+            this.localAskInputVisible = true
+            this.flowDisabled = true
+            // 提示通知
+            this.$notification.open({
+              message: 'Please log in',
+              description:
+                "Today's opportunity has been used up, please come back tomorrow",
+              duration: 2,
+              style: {
+                color: '#9747ff',
+              },
+            })
+          }
+        })
 
       // 监听事件open
       eventSource.addEventListener('open', (event) => {
@@ -294,6 +317,31 @@ export default {
       transform: translateX(-50%) translateY(-80%);
     }
   }
+  .login {
+    border-radius: 27px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    backdrop-filter: blur(8px);
+    &_content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      &_header {
+        padding: 0 10px;
+        color: #ffda8b;
+        font-family: 'Rubik';
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 30px;
+      }
+    }
+  }
 }
 
 @media (max-width: 750px) {
@@ -363,6 +411,21 @@ export default {
         font-size: 16 * $pr;
         white-space: nowrap;
         transform: translateX(-50%) translateY(-70%);
+      }
+    }
+    .login {
+      border-radius: 27 * $pr;
+      border: 1 * $pr solid rgba(255, 255, 255, 0.4);
+      border: none;
+      backdrop-filter: blur(8 * $pr);
+      &_content {
+        padding: 16 * $pr;
+        gap: 8 * $pr;
+        &_header {
+          padding: 0 10 * $pr;
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
+        }
       }
     }
   }

@@ -76,7 +76,6 @@ export default {
           },
         ],
       },
-      localAskInputVisible: this.askInputVisible,
     }
   },
   computed: {
