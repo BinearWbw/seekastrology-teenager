@@ -178,7 +178,6 @@ export default {
             this.frequency = false
             return (this.chatList[this.chatList.length - 1].msg = '')
           } else if (data == '1002') {
-            this.askInputVisible = false
             ifVisible = false
             console.log('data 1002', data, this.askInputVisible)
             return (this.chatList[this.chatList.length - 1].msg = '')
@@ -197,18 +196,21 @@ export default {
       eventSource.addEventListener('error', (event) => {
         eventSource.close()
         this.flowDisabled = ifOpen || false
+        this.getNumberRequests() //检测ai剩余次数
         // 没有登录只能询问一次
-        if (!this.getUserInfo?.token && this.setNumberRequest == 3)
+        if (!this.getUserInfo?.token && this.setNumberRequest == 4)
           this.loginOnce = true
 
         if (!this.getUserInfo?.token && this.loginOnce) {
           //展示输入邮箱模块，隐藏问题输入框
           this.askInputVisible = false
+          console.log('最后的login1111', this.askInputVisible)
           return
         } else {
           this.askInputVisible = true
           this.takeInput = true
           this.takeItOneAt = true
+          console.log('最后的login2222', this.askInputVisible)
         }
       })
     },
@@ -233,11 +235,16 @@ export default {
       this.$apiList.user
         .getAiDegree({ origin: process.env.origin })
         .then((res) => {
-          console.log('剩余次数', res)
+          console.log('累计次数', res)
           this.setNumberRequest = res
           if (res == 10) {
             this.localAskInputVisible = true
             this.frequency = false
+            this.flowDisabled = true
+          } else if (res == 4 && !this.getUserInfo?.token) {
+            this.askInputVisible = false
+            this.takeItOneAt = false
+            this.flowDisabled = true
           }
         })
     },
