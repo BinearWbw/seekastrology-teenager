@@ -8,7 +8,6 @@
               placeholder="Ask a question"
               allow-clear
               :disabled="disable"
-              @keyup.enter="inputSubmit"
               v-model="aiData.text"
             />
           </a-form-model-item>
@@ -101,6 +100,18 @@ export default {
     inputSubmit() {
       this.$refs.aiForm.validate((valid) => {
         if (valid) {
+          if (this.aiData.text.trim() === '') {
+            // 提示通知
+            this.$notification.open({
+              message: 'Stop',
+              description: 'The content can not be blank',
+              duration: 3,
+              style: {
+                color: '#f00',
+              },
+            })
+            return
+          }
           this.$emit('aited', this.aiData.text)
           this.aiData.text = ''
         } else {

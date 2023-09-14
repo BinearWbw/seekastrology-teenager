@@ -77,7 +77,13 @@
                       <span class="forgot" @click="sendForgetPwdEmail"
                         >Forgot password</span
                       >
-                      <button class="button" @click="inputSubmit">login</button>
+                      <button
+                        class="button"
+                        id="CLICKTOLOGIN"
+                        @click="inputSubmit"
+                      >
+                        login
+                      </button>
                     </div>
                   </a-form-model-item>
                 </a-form-model>
@@ -187,7 +193,11 @@
                     </a-form-model-item>
                     <a-form-model-item>
                       <div class="submit signup">
-                        <button class="button" @click="inputSignUp">
+                        <button
+                          class="button"
+                          id="CLICKSIGNUP"
+                          @click="inputSignUp"
+                        >
                           Sign up
                         </button>
                         <div class="terms">

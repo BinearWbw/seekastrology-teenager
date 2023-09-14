@@ -29,6 +29,7 @@
               <div class="card_list">
                 <div
                   class="card_item"
+                  id="TOGGLEACTIVE"
                   v-for="(item, index) in card_list"
                   :class="{ card_active: isFinits == index }"
                   :key="index"
@@ -63,6 +64,7 @@
                   <div class="btns">
                     <a
                       class="more btn"
+                      id="SEECARDBTN"
                       target="_blank"
                       :href="`/tarot/details/${cardDetails.card_name
                         .replace(/[^a-zA-Z0-9\\s]/g, '-')
@@ -71,6 +73,7 @@
                     >
                     <button
                       class="pick btn"
+                      id="HANDELPICKBTN"
                       :class="{ btnds: isBtn }"
                       @click="handelPick"
                       v-if="!chatFlowDisabled"
@@ -159,6 +162,7 @@ export default {
   computed: {
     chatFlowDisabled() {
       // 根据子组件的值来判断条件
+      console.log('this.$refs.chat.flowDisabled', this.$refs.chat.flowDisabled)
       return this.$refs.chat.flowDisabled
     },
     ...mapGetters(['getUserInfo']),

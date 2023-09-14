@@ -8,7 +8,7 @@
     >
       <div class="chat_wrapper" v-for="(item, index) in chatList" :key="index">
         <div class="chat_friend" v-if="item.uid !== 2">
-          <div class="chat_friend_text">
+          <div class="chat_friend_text" v-show="item.msg !== ''">
             {{ item.msg }}
           </div>
         </div>
@@ -22,6 +22,7 @@
     <div class="input_send" v-if="!localAskInputVisible">
       <el-ai-input
         :btn="'Send'"
+        id="SENDAIMATTER"
         :disable="disableds || flowDisabled || takeInput"
         @aited="meSendContent"
         @keyup.enter="meSendContent"
@@ -148,30 +149,7 @@ export default {
         }
       )
 
-      this.$apiList.user
-        .getApiOpenai({
-          origin: process.env.origin,
-          type: 'tarot',
-          card: this.cardName,
-          question: val,
-          desc_type: this.descType,
-        })
-        .then((res) => {
-          if (res?.code == 1003) {
-            this.localAskInputVisible = true
-            this.flowDisabled = true
-            // 提示通知
-            this.$notification.open({
-              message: 'Please log in',
-              description:
-                "Today's opportunity has been used up, please come back tomorrow",
-              duration: 2,
-              style: {
-                color: '#9747ff',
-              },
-            })
-          }
-        })
+      let ifOpen = false //控制重新选牌按钮
 
       // 监听事件open
       eventSource.addEventListener('open', (event) => {
@@ -186,6 +164,20 @@ export default {
         if (data) {
           //拼接字符
           if (data == 'StreamFinished') {
+          } else if (data == '1003') {
+            this.localAskInputVisible = true
+            ifOpen = true
+            // 提示通知
+            this.$notification.open({
+              message: 'Please log in',
+              description:
+                "Today's opportunity has been used up, please come back tomorrow",
+              duration: 2,
+              style: {
+                color: '#9747ff',
+              },
+            })
+            return (this.chatList[this.chatList.length - 1].msg = '')
           } else {
             this.chatList[this.chatList.length - 1].msg += data
           }
@@ -200,7 +192,8 @@ export default {
       // 监听错误事件
       eventSource.addEventListener('error', (event) => {
         eventSource.close()
-        this.flowDisabled = false
+        this.flowDisabled = ifOpen || false
+        console.log(event)
         // 没有登录只能询问一次
         if (!this.getUserInfo?.token) this.loginOnce = true
 
@@ -318,6 +311,7 @@ export default {
     }
   }
   .login {
+    margin-top: 10px;
     border-radius: 27px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background: linear-gradient(
@@ -327,7 +321,7 @@ export default {
     );
     backdrop-filter: blur(8px);
     &_content {
-      padding: 16px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -414,6 +408,7 @@ export default {
       }
     }
     .login {
+      margin: 0;
       border-radius: 27 * $pr;
       border: 1 * $pr solid rgba(255, 255, 255, 0.4);
       border: none;
