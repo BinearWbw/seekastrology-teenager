@@ -31,21 +31,42 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('beforeunload', function () {
-      if (window.i_like_it === 1) {
-        dataLayer.push({
-          event: 'justdoit',
-        })
-      } else {
-        dataLayer.push({
-          event: 'pageChange',
-        })
+    window.onlyOne = false
+    window.addEventListener('beforeunload', () => {
+      let index = window.dataLayer.findIndex(
+        ({ event }) => event === 'gtm.linkClick'
+      )
+      if (index !== -1 && !window.onlyOne) {
+        let unloadNum = localStorage.getItem('unloadNum')
+        if (window.i_like_it === 1) {
+          dataLayer.push({
+            event: 'justdoit',
+          })
+          if (unloadNum && Number(unloadNum) > 0) {
+            dataLayer.push({
+              event: 'justdoitUnloadNum',
+            })
+            localStorage.setItem('unloadNum', JSON.stringify(0))
+          }
+        } else {
+          dataLayer.push({
+            event: 'pageChange',
+          })
+          if (unloadNum) {
+            let num = Number(unloadNum) + 1
+            localStorage.setItem('unloadNum', JSON.stringify(num))
+          } else {
+            localStorage.setItem('unloadNum', JSON.stringify(1))
+          }
+        }
+        window.onlyOne = true
       }
     })
     this.getHotPageView()
     window.addEventListener('message', this.handleHashMessage)
     window.addEventListener('hashchange', this.handleHashChange)
     window.addEventListener('blur', () => {
+      let unloadNum = localStorage.getItem('unloadNum')
       const activeElement = document.activeElement
       const src = activeElement.getAttribute('src')
       if (
@@ -55,6 +76,12 @@ export default {
         dataLayer.push({
           event: 'sitePageAD',
         })
+        if (unloadNum && Number(unloadNum) > 1) {
+          dataLayer.push({
+            event: 'sitePageADUnloadNum',
+          })
+          localStorage.setItem('unloadNum', JSON.stringify(0))
+        }
       } else if (
         src &&
         src.indexOf('googleads.g.doubleclick.net/pagead/html/') !== -1
@@ -63,6 +90,12 @@ export default {
           dataLayer.push({
             event: 'siteAnchoringAD',
           })
+          if (unloadNum && Number(unloadNum) > 1) {
+            dataLayer.push({
+              event: 'siteAnchoringADUnloadNum',
+            })
+            localStorage.setItem('unloadNum', JSON.stringify(0))
+          }
         } else {
           dataLayer.push({
             event: 'siteAlternateAD',
@@ -73,7 +106,6 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
     this.showNotification()
-
     this.$nextTick(() => {
       //在页面加载时读取localStorage里的状态信息
       const savedState = JSON.parse(localStorage.getItem('userInfo'))
