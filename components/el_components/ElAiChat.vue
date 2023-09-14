@@ -3,7 +3,7 @@
     <div
       class="chat_frame"
       ref="chatContent"
-      :class="askInputVisible ? 'height' : 'short'"
+      :class="askInputVisible && frequency ? 'height' : 'short'"
       @scroll="scrollChange"
     >
       <div class="chat_wrapper" v-for="(item, index) in chatList" :key="index">
@@ -33,8 +33,10 @@
     <div class="login" v-if="localAskInputVisible">
       <div class="login_content">
         <div class="login_content_header">
-          Today's times have been used up, please come again tomorrow
+          Today's opportunity has been exhausted. Please come back tomorrow.
+          want to add it to your desktop?
         </div>
+        <button class="login_content_button" @click="download">Download</button>
       </div>
     </div>
   </div>
@@ -65,16 +67,21 @@ export default {
       lastScrollTop: 0,
       stopScroll: true,
       localAskInputVisible: false,
+      prompt: null,
+      frequency: true,
+      setNumberRequest: 0,
     }
   },
   computed: {
     ...mapGetters(['getUserInfo']),
   },
   mounted() {
+    window.addEventListener('beforeinstallprompt', this.beforeinstallprompt)
     this.$eventBus.$on('disabos', (receivedData) => {
       this.takeItOneAt = receivedData
       this.takeInput = receivedData
     })
+    this.getNumberRequests()
   },
   methods: {
     //发送信息
@@ -144,12 +151,13 @@ export default {
         `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}&desc_type=${this.descType}`,
         {
           headers: {
-            Authorization: this.getUserInfo?.token,
+            Authorization: this.getUserInfo?.token || '',
           },
         }
       )
 
       let ifOpen = false //控制重新选牌按钮
+      let ifVisible = true // 控制重新登录状态
 
       // 监听事件open
       eventSource.addEventListener('open', (event) => {
@@ -167,16 +175,12 @@ export default {
           } else if (data == '1003') {
             this.localAskInputVisible = true
             ifOpen = true
-            // 提示通知
-            this.$notification.open({
-              message: 'Please log in',
-              description:
-                "Today's opportunity has been used up, please come back tomorrow",
-              duration: 2,
-              style: {
-                color: '#9747ff',
-              },
-            })
+            this.frequency = false
+            return (this.chatList[this.chatList.length - 1].msg = '')
+          } else if (data == '1002') {
+            this.askInputVisible = false
+            ifVisible = false
+            console.log('data 1002', data, this.askInputVisible)
             return (this.chatList[this.chatList.length - 1].msg = '')
           } else {
             this.chatList[this.chatList.length - 1].msg += data
@@ -193,9 +197,9 @@ export default {
       eventSource.addEventListener('error', (event) => {
         eventSource.close()
         this.flowDisabled = ifOpen || false
-        console.log(event)
         // 没有登录只能询问一次
-        if (!this.getUserInfo?.token) this.loginOnce = true
+        if (!this.getUserInfo?.token && this.setNumberRequest == 3)
+          this.loginOnce = true
 
         if (!this.getUserInfo?.token && this.loginOnce) {
           //展示输入邮箱模块，隐藏问题输入框
@@ -208,6 +212,35 @@ export default {
         }
       })
     },
+    beforeinstallprompt(e) {
+      this.prompt = e
+      e.preventDefault()
+      return false
+    },
+    download() {
+      if (this.prompt) {
+        this.prompt.prompt()
+        this.prompt.userChoice
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    },
+    getNumberRequests() {
+      this.$apiList.user
+        .getAiDegree({ origin: process.env.origin })
+        .then((res) => {
+          console.log('剩余次数', res)
+          this.setNumberRequest = res
+          if (res == 10) {
+            this.localAskInputVisible = true
+            this.frequency = false
+          }
+        })
+    },
   },
 }
 </script>
@@ -218,7 +251,7 @@ export default {
   height: 560px;
 }
 .short {
-  height: 497px;
+  height: 471px;
 }
 .chat_main {
   width: 100%;
@@ -287,11 +320,6 @@ export default {
   .input_send {
     padding-top: 16px;
     position: relative;
-    .button {
-      padding: 8px 32px;
-      background-color: aquamarine;
-      color: #000;
-    }
     .doors {
       position: absolute;
       bottom: 0;
@@ -311,7 +339,7 @@ export default {
     }
   }
   .login {
-    margin-top: 10px;
+    margin-top: 16px;
     border-radius: 27px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background: linear-gradient(
@@ -334,6 +362,17 @@ export default {
         font-weight: 400;
         line-height: 30px;
       }
+      &_button {
+        padding: 8px 32px;
+        border-radius: 42px;
+        background: var(--9747-ff, #9747ff);
+        color: #fff;
+        font-family: Rubik;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+      }
     }
   }
 }
@@ -344,7 +383,7 @@ export default {
     height: 412 * $pr;
   }
   .short {
-    height: 330 * $pr;
+    height: 310 * $pr;
   }
   .chat_main {
     width: 100%;
@@ -408,7 +447,7 @@ export default {
       }
     }
     .login {
-      margin: 0;
+      margin: 10 * $pr;
       border-radius: 27 * $pr;
       border: 1 * $pr solid rgba(255, 255, 255, 0.4);
       border: none;
@@ -418,6 +457,12 @@ export default {
         gap: 8 * $pr;
         &_header {
           padding: 0 10 * $pr;
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
+        }
+        &_button {
+          padding: 8 * $pr 32 * $pr;
+          border-radius: 42 * $pr;
           font-size: 16 * $pr;
           line-height: 22 * $pr;
         }

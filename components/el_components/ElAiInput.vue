@@ -83,6 +83,9 @@ export default {
       return this.aiData.text !== ''
     },
   },
+  mounted() {
+    console.log('sss', this.askInputVisible)
+  },
   methods: {
     emailSubmit() {
       this.$eventBus.$emit('loginShow', true)
@@ -174,6 +177,7 @@ export default {
   }
   .login {
     // min-height: auto;
+    margin-top: 14px;
     border-radius: 27px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background: linear-gradient(

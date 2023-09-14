@@ -50,4 +50,9 @@ export default (axios) => ({
       responseType: 'text',
     })
   },
+
+  /* 获取ai提问次数 */
+  getAiDegree(params) {
+    return axios.get('api/openai/count', { params })
+  },
 })

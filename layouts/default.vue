@@ -31,6 +31,17 @@ export default {
     }
   },
   mounted() {
+    window.addEventListener('beforeunload', function () {
+      if (window.i_like_it === 1) {
+        dataLayer.push({
+          event: 'justdoit',
+        })
+      } else {
+        dataLayer.push({
+          event: 'pageChange',
+        })
+      }
+    })
     this.getHotPageView()
     window.addEventListener('message', this.handleHashMessage)
     window.addEventListener('hashchange', this.handleHashChange)

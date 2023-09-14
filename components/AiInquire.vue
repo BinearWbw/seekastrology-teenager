@@ -162,7 +162,6 @@ export default {
   computed: {
     chatFlowDisabled() {
       // 根据子组件的值来判断条件
-      console.log('this.$refs.chat.flowDisabled', this.$refs.chat.flowDisabled)
       return this.$refs.chat.flowDisabled
     },
     ...mapGetters(['getUserInfo']),
@@ -195,9 +194,9 @@ export default {
           if (Array.isArray(res)) {
             this.disableds = false
             this.isCard = false
-            if (!this.getUserInfo?.token) {
-              this.isBtn = true
-            }
+            // if (!this.getUserInfo?.token) {
+            //   this.isBtn = true
+            // }
             this.cardDetails = res[0]
           }
         })
