@@ -81,7 +81,7 @@ export default {
           id: 1,
           paused: false,
           name: 'Daily',
-          path: '/tarot/',
+          path: '/tarot/type/4/',
           imgUrl: require('~/assets/img/tarot/tarot_daily.webp'),
         },
         {

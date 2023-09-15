@@ -85,15 +85,15 @@ export default {
 }
 .more-tarot {
   text-align: center;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 338px);
+  display: flex;
   justify-content: center;
   grid-gap: 16px;
   max-width: 1400px;
   margin: 34px auto 48px;
+  flex-wrap: wrap;
   .more-tarot-items {
-    // width: 456px;
-    // height: 376px;
+    width: 338px;
+    justify-self: center;
     padding: 16px 16px 40px;
     box-sizing: border-box;
     background: linear-gradient(
@@ -175,6 +175,7 @@ export default {
     text-align: center;
   }
   .more-tarot {
+    display: grid;
     grid-template-columns: repeat(auto-fill, 100%);
     margin: 16 * $pr auto 0;
     padding: 0;

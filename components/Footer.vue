@@ -86,8 +86,12 @@ export default {
               link: 'Tarot',
             },
             {
-              link: 'Daily Tarot',
+              link: 'Tarot Ai',
               path: '/tarot/',
+            },
+            {
+              link: 'Daily Tarot',
+              path: '/tarot/type/4/',
             },
             {
               link: 'Career Tarot',
