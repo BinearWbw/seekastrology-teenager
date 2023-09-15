@@ -84,6 +84,24 @@ export default {
     this.getNumberRequests()
   },
   methods: {
+    // 检测ai剩余次数
+    async getNumberRequests() {
+      this.$apiList.user
+        .getAiDegree({ origin: process.env.origin })
+        .then((res) => {
+          console.log(res)
+          this.setNumberRequest = res
+          if (res == 10) {
+            this.localAskInputVisible = true
+            this.frequency = false
+            this.flowDisabled = true
+          } else if (res == 3 && !this.getUserInfo?.token) {
+            this.askInputVisible = false
+            this.takeItOneAt = false
+            this.flowDisabled = true
+          }
+        })
+    },
     //发送信息
     sendMsg(msgList) {
       this.chatList.push(msgList)
@@ -132,13 +150,6 @@ export default {
         msg: val,
         uid: 2, //uid
       }
-      if (!this.getUserInfo?.token && this.loginOnce) {
-        //展示输入邮箱模块，隐藏问题输入框
-        this.askInputVisible = false
-        return
-      } else {
-        this.askInputVisible = true
-      }
       this.sendMsg(chatMsg)
       this.handelAI(val)
       this.stopScroll = true //可以滚动了
@@ -179,7 +190,7 @@ export default {
             return (this.chatList[this.chatList.length - 1].msg = '')
           } else if (data == '1002') {
             ifVisible = false
-            console.log('data 1002', data, this.askInputVisible)
+            ifOpen = true
             return (this.chatList[this.chatList.length - 1].msg = '')
           } else {
             this.chatList[this.chatList.length - 1].msg += data
@@ -195,23 +206,13 @@ export default {
       // 监听错误事件
       eventSource.addEventListener('error', (event) => {
         eventSource.close()
-        this.flowDisabled = ifOpen || false
         this.getNumberRequests() //检测ai剩余次数
-        // 没有登录只能询问一次
-        if (!this.getUserInfo?.token && this.setNumberRequest == 4)
-          this.loginOnce = true
-
-        if (!this.getUserInfo?.token && this.loginOnce) {
-          //展示输入邮箱模块，隐藏问题输入框
-          this.askInputVisible = false
-          console.log('最后的login1111', this.askInputVisible)
-          return
-        } else {
-          this.askInputVisible = true
-          this.takeInput = true
-          this.takeItOneAt = true
-          console.log('最后的login2222', this.askInputVisible)
-        }
+        if (!this.getUserInfo?.token && this.setNumberRequest == 2) return // 限制显示重新选牌按钮的闪烁
+        if (this.setNumberRequest == 9) return // 限制显示重新选牌按钮的闪烁
+        this.flowDisabled = ifOpen || false
+        this.askInputVisible = true
+        this.takeInput = true
+        this.takeItOneAt = true
       })
     },
     beforeinstallprompt(e) {
@@ -230,23 +231,6 @@ export default {
             console.log(err)
           })
       }
-    },
-    getNumberRequests() {
-      this.$apiList.user
-        .getAiDegree({ origin: process.env.origin })
-        .then((res) => {
-          console.log('累计次数', res)
-          this.setNumberRequest = res
-          if (res == 10) {
-            this.localAskInputVisible = true
-            this.frequency = false
-            this.flowDisabled = true
-          } else if (res == 4 && !this.getUserInfo?.token) {
-            this.askInputVisible = false
-            this.takeItOneAt = false
-            this.flowDisabled = true
-          }
-        })
     },
   },
 }

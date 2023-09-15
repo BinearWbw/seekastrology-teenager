@@ -83,9 +83,6 @@ export default {
       return this.aiData.text !== ''
     },
   },
-  mounted() {
-    console.log('sss', this.askInputVisible)
-  },
   methods: {
     emailSubmit() {
       this.$eventBus.$emit('loginShow', true)

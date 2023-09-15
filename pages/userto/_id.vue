@@ -211,7 +211,7 @@ export default {
   watch: {
     getUserSub(newVal, oldVal) {
       this.$nextTick(() => {
-        console.log('newVal', newVal, oldVal)
+        if (!newVal) return
         this.selectItem = this.getUserSub //选中的订阅
       })
     },
@@ -257,8 +257,6 @@ export default {
     chooseMend(item, index) {
       // 操作选择的内容
       const userSub = this.getUserSub
-
-      console.log('点击选中', userSub, this.getUserSub)
 
       if (userSub) {
         const screen2 = userSub?.filter((i) => i == item.type)
