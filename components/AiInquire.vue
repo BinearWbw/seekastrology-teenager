@@ -409,6 +409,7 @@ export default {
                   line-height: 48px; /* 133.333% */
                 }
                 .texts {
+                  height: 112px;
                   color: #d2d3d7;
                   font-family: 'Rubik';
                   font-size: 16px;

@@ -28,6 +28,9 @@
       <section class="module quizzes">
         <home-quizzes></home-quizzes>
       </section>
+      <transition name="fade">
+        <el-pairing></el-pairing>
+      </transition>
       <section class="module new_pop">
         <home-pop-articles></home-pop-articles>
         <google-auto-ad
@@ -391,6 +394,9 @@ export default {
             display: none;
           }
         }
+      }
+      :deep(.pairing_max_main .pairing_module) {
+        padding: 0;
       }
     }
     .all_tarot {

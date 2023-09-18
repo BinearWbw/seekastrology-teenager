@@ -55,6 +55,7 @@
                     <a-input
                       placeholder="Enter your email account"
                       allow-clear
+                      autocomplete="off"
                       v-model="form.name"
                     />
                   </a-form-model-item>
@@ -68,6 +69,7 @@
                     </template>
                     <a-input-password
                       v-model="form.password"
+                      autocomplete="off"
                       placeholder="Enter password"
                       @focus="passwordValidateStatus = ''"
                     />
@@ -136,18 +138,21 @@
                       <a-input
                         placeholder="Enter your email account"
                         allow-clear
+                        autocomplete="off"
                         v-model="formup.name"
                         @focus="registerEmailValidateStatus = ''"
                       />
                     </a-form-model-item>
                     <a-form-model-item label="" prop="password1">
                       <a-input-password
+                        autocomplete="off"
                         v-model="formup.password1"
                         placeholder="Enter password"
                       />
                     </a-form-model-item>
                     <a-form-model-item label="" prop="passwordtow">
                       <a-input-password
+                        autocomplete="off"
                         v-model="formup.passwordtow"
                         placeholder="Enter password again"
                       />
@@ -245,6 +250,9 @@
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 
@@ -267,6 +275,7 @@ export default {
       passwordValidateStatus: '', // 控制密码字段的验证状态
       registerEmailValidateStatus: '', //控制注册邮箱字段的验证状态
       errorMsg: '', // 错误提示
+      isLoading: false, // loading
       form: {
         name: '',
         password: '',
@@ -383,6 +392,7 @@ export default {
     inputSubmit() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
+          this.isLoading = true
           let pwds = CryptoJS.MD5(this.form.password).toString(CryptoJS.enc.Hex)
           this.$apiList.user
             .getLogin({
@@ -410,6 +420,7 @@ export default {
                 this.nameValidateStatus = 'error'
                 this.errorMsg = `<span>your mailbox is not activated, <a href="/user/">activate immediately</a></span>`
               }
+              this.isLoading = false
             })
         }
       })
@@ -434,6 +445,7 @@ export default {
       this.$eventBus.$emit('emails', 'dadws')
       this.$refs.nextFormUp.validate((valid) => {
         if (valid) {
+          this.isLoading = true
           let pwds = CryptoJS.MD5(this.formup.passwordtow).toString(
             CryptoJS.enc.Hex
           )
@@ -462,6 +474,7 @@ export default {
                 window.changePageUrl = `/user/`
                 window.location.href = '/user/' //跳转到账号激活页面
               }
+              this.isLoading = false
             })
         }
       })
