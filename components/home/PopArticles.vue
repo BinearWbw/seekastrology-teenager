@@ -48,8 +48,7 @@
                 <nuxt-img
                   :src="item.icon || '/'"
                   fit="cover"
-                  width="358"
-                  height="262"
+                  width="458"
                   loading="lazy"
                   format="webp"
                   :alt="item.name"

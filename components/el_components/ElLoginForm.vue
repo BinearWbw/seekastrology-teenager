@@ -419,6 +419,15 @@ export default {
                 //未激活
                 this.nameValidateStatus = 'error'
                 this.errorMsg = `<span>your mailbox is not activated, <a href="/user/">activate immediately</a></span>`
+              } else if (res.code == 10001) {
+                this.nameValidateStatus = 'error'
+                this.errorMsg = `<span>Email is not verified</span>`
+              } else if (res.code == 10002) {
+                this.nameValidateStatus = 'error'
+                this.errorMsg = `<span>Email not found, Please re-register</span>`
+              } else if (res.code == 10003) {
+                this.passwordValidateStatus = 'error'
+                this.errorMsg = `<span>Password error</span>`
               }
               this.isLoading = false
             })
@@ -465,6 +474,10 @@ export default {
                 // alert(res.msg)
                 this.nextif = true
                 //
+                this.registerEmailValidateStatus = 'error'
+                this.errorMsg = `<span>your email has been registered, <a>login now</a></span>`
+              } else if (res.code == 1004) {
+                this.backUp()
                 this.registerEmailValidateStatus = 'error'
                 this.errorMsg = `<span>your email has been registered, <a>login now</a></span>`
               } else {
