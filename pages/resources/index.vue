@@ -1047,7 +1047,7 @@ $spacing: 16px;
         margin: 48 * $pr auto;
       }
       .google_ad_top {
-        display: none;
+        height: 130 * $pr;
       }
       .google_ad_btm {
         width: 343 * $pr;

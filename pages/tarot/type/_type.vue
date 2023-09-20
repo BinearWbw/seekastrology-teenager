@@ -1,17 +1,14 @@
 <template>
   <div>
+    <div class="new_google">
+      <google-ad classNames="google_top_ad" :id="'7734920798'"></google-ad>
+    </div>
     <div class="tarot-container">
       <div class="title">{{ titleText[type] || '' }}</div>
       <div class="tarot-section">
-        <!-- <div class="add-box-wrapper">
-          <google-ad classNames="ad-box" id="3876874401"></google-ad>
-        </div> -->
         <div class="tarot-box">
           <tarot-play :type="type" ref="play"></tarot-play>
         </div>
-        <!-- <div class="add-box-wrapper">
-          <google-ad classNames="ad-box" id="1694414255"></google-ad>
-        </div> -->
       </div>
       <div class="introduce-box">
         <div class="intro">
@@ -23,47 +20,6 @@
             v-html="textObj[type] && textObj[type].desc"
           ></div>
         </div>
-        <!-- <div class="divination">
-              <div class="divination-title">Prepare for Divination</div>
-              <div class="divination-wrapper">
-                <div class="divination-item">
-                  <div class="divination-text">Relaxation:</div>
-                  <div class="divination-content">
-                    Tiake adeeptbreath,relaxyour body and mind, help cear your mind
-                    ofditracions and emptyousel, and quit our mind completeky fyou are
-                    in anoisy emvironment,tryto thangetoa quieter environment or
-                    change to a comfortable position.
-                  </div>
-                </div>
-                <div class="divination-item">
-                  <div class="divination-text">Relaxation:</div>
-                  <div class="divination-content">
-                    Tiake adeeptbreath,relaxyour body and mind, help cear your mind
-                    ofditracions and emptyousel, and quit our mind completeky fyou are
-                    in anoisy emvironment,tryto thangetoa quieter environment or
-                    change to a comfortable position.
-                  </div>
-                </div>
-                <div class="divination-item">
-                  <div class="divination-text">Relaxation:</div>
-                  <div class="divination-content">
-                    Tiake adeeptbreath,relaxyour body and mind, help cear your mind
-                    ofditracions and emptyousel, and quit our mind completeky fyou are
-                    in anoisy emvironment,tryto thangetoa quieter environment or
-                    change to a comfortable position.
-                  </div>
-                </div>
-                <div class="divination-item">
-                  <div class="divination-text">Relaxation:</div>
-                  <div class="divination-content">
-                    Tiake adeeptbreath,relaxyour body and mind, help cear your mind
-                    ofditracions and emptyousel, and quit our mind completeky fyou are
-                    in anoisy emvironment,tryto thangetoa quieter environment or
-                    change to a comfortable position.
-                  </div>
-                </div>
-              </div>
-            </div> -->
       </div>
       <google-auto-ad class="ad-box_row mt_80" id="6755169246" />
       <more-tarot class="el_more" :type="type"></more-tarot>
@@ -129,6 +85,13 @@ export default {
 
 <style lang="scss" scoped>
 @use 'sass:math';
+.new_google {
+  .google_top_ad {
+    width: 1200px;
+    height: 315px;
+    margin: 24px auto;
+  }
+}
 .tarot-container {
   color: #fff;
   padding: 40px 0 0;
@@ -237,6 +200,12 @@ export default {
   }
 }
 @media (max-width: 1200px) {
+  .new_google {
+    padding: 0 30px;
+    .google_top_ad {
+      width: 100%;
+    }
+  }
   .tarot-container {
     .ad-box_row {
       padding: 0 30px;
@@ -250,8 +219,16 @@ export default {
 
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
+  .new_google {
+    padding: 0 16 * $pr;
+    .google_top_ad {
+      width: 100%;
+      height: 110 * $pr;
+      margin: 0 auto 24 * $pr;
+    }
+  }
   .tarot-container {
-    padding: 48 * $pr 16 * $pr 0;
+    padding: 0 16 * $pr 0;
     .title {
       font-size: 26 * $pr;
       line-height: 36 * $pr;

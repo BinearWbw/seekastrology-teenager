@@ -1,6 +1,7 @@
 <template>
   <div class="test">
     <div class="test_main">
+      <google-ad classNames="google_top_ad" :id="'8758274141'"></google-ad>
       <div class="test_main_line"></div>
       <div class="test_main_center">
         <div class="test_main_center_left">
@@ -204,6 +205,11 @@ $spacing: 16px;
   &_main {
     width: 1400px;
     margin: 0 auto;
+    .google_top_ad {
+      width: 1200px;
+      height: 315px;
+      margin: 24px auto;
+    }
     &_top {
       width: 100%;
       display: flex;
@@ -402,6 +408,9 @@ $spacing: 16px;
   .test {
     &_main {
       width: 95%;
+      //   .google_top_ad {
+      //     width: 100%;
+      //   }
       &_center {
         &_right {
           .google_ad {
@@ -415,6 +424,9 @@ $spacing: 16px;
 @media (max-width: (4 * $block + 3 * $spacing + 400px)) {
   .test {
     &_main {
+      .google_top_ad {
+        width: 100%;
+      }
       &_center {
         &_left {
           &_list {
@@ -479,6 +491,11 @@ $spacing: 16px;
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
+      .google_top_ad {
+        width: 100%;
+        height: 110 * $pr;
+        margin: 0 auto 24 * $pr;
+      }
       &_top {
         align-items: center;
         &_tabs {
