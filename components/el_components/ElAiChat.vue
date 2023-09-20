@@ -52,11 +52,11 @@ export default {
       askInputVisible: true,
       chatList: [
         {
-          msg: 'Welcome to Lotus Tarot Chatbot! ✨I m Aurora, your reader today. Please choose a card that resonates with you the most.',
+          msg: 'Welcome to the seeastrology tarot chatbot! ✨ Please choose a card that resonates with you the most.',
           uid: 1,
         },
         {
-          msg: "Then either ask a specific question for personalized guidance or click 'See Card Meaning' to self-explore symbolism and messages.",
+          msg: 'Then please focus your attention and ask a specific question that burns within you. Our mystical powers will reveal the answer you seek. You can ask up to 3 questions, log in to get more.',
           uid: 1,
         },
       ],
@@ -261,8 +261,6 @@ export default {
     }
     .chat_wrapper {
       position: relative;
-      word-break: break-all;
-
       .chat_friend {
         width: 100%;
         float: left;

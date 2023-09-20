@@ -28,9 +28,6 @@
       <section class="module quizzes">
         <home-quizzes></home-quizzes>
       </section>
-      <transition name="fade">
-        <el-pairing></el-pairing>
-      </transition>
       <section class="module new_pop">
         <home-pop-articles></home-pop-articles>
         <google-auto-ad
@@ -38,6 +35,9 @@
           :id="'2699524105'"
         ></google-auto-ad>
       </section>
+      <transition name="fade">
+        <el-pairing></el-pairing>
+      </transition>
     </div>
     <section class="all_tarot">
       <tarot-all-tarot></tarot-all-tarot>

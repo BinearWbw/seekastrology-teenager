@@ -1,7 +1,7 @@
 <template>
   <div class="resources">
     <div class="resources_main">
-      <google-auto-ad classNames="google_ad_top" :id="'9680645670'" />
+      <google-ad classNames="google_ad_top" :id="'9680645670'" />
       <div class="resources_main_title">HOT Content</div>
       <section class="pop_article">
         <home-pop-articles></home-pop-articles>
@@ -553,6 +553,7 @@ $spacing: 16px;
     }
     .google_ad_top {
       width: 1200px;
+      height: 315px;
       margin: 40px auto;
     }
     .google_ad {
@@ -1047,6 +1048,7 @@ $spacing: 16px;
         margin: 48 * $pr auto;
       }
       .google_ad_top {
+        width: 343 * $pr;
         height: 130 * $pr;
       }
       .google_ad_btm {

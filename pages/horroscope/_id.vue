@@ -1,5 +1,6 @@
 <template>
   <div class="horroscope">
+    <google-ad classNames="horroscope_googlead" :id="''"></google-ad>
     <div class="horroscope_main">
       <div class="horoscope_details">
         <google-ad classNames="google_ad" :id="'4376417914'"></google-ad>
@@ -41,6 +42,9 @@
           </div>
           <google-ad classNames="google_ad" :id="'8124091233'"></google-ad>
         </div>
+      </div>
+      <div class="mexplore">
+        <el-explore-more />
       </div>
       <div class="horoscope_more">
         <h3>Read More Horoscope</h3>
@@ -312,6 +316,9 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .horroscope {
+  &_googlead {
+    display: none;
+  }
   &_main {
     margin: 0 auto 48px;
     width: 1400px;
@@ -391,6 +398,9 @@ export default {
           margin: 48px auto 0;
         }
       }
+    }
+    .mexplore {
+      padding-top: 48px;
     }
     .horoscope_more {
       padding: 48px 0 0;
@@ -558,13 +568,19 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .horroscope {
+    &_googlead {
+      display: block;
+      width: 343 * $pr;
+      height: 110 * $pr;
+      margin: 0 auto 24 * $pr;
+    }
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
       margin: 0 auto 48 * $pr;
       .horoscope_details {
         display: flex;
-        padding: 48 * $pr 0 24 * $pr;
+        padding: 10 * $pr 0 24 * $pr;
         position: relative;
         &::after {
           height: 1 * $pr;
@@ -618,11 +634,15 @@ export default {
             }
           }
           .google_ad {
+            display: none;
             width: 100%;
             height: 299 * $pr;
             margin: 23 * $pr auto 0;
           }
         }
+      }
+      .mexplore {
+        padding-top: 24 * $pr;
       }
       .horoscope_more {
         padding: 24 * $pr 0 0;

@@ -3,7 +3,12 @@
     <div class="explore_main">
       <p class="title">Explore More</p>
       <div class="explore_main_tag" data-aos="zoom-out">
-        <div class="tag_list" v-for="(item, index) in moreData" :key="index">
+        <div
+          class="tag_list"
+          v-for="(item, index) in moreData"
+          :key="index"
+          v-show="isHorroscopePage(index)"
+        >
           <a :href="`${item.path}`" class="tag_list_aos" id="EXPLORE">
             <div class="tag_list_aos_round">
               <img :src="item.imgUrl" alt="#" />
@@ -24,32 +29,32 @@ export default {
     return {
       moreData: [
         {
-          name: "Today's Horoscope",
+          name: "Today's",
           path: '/horroscope/aries-1/',
           imgUrl: require('~/assets/img/horroscope/today.svg'),
         },
         {
-          name: 'Love Horoscope',
+          name: 'Love',
           path: '/horroscope/aries-1-1/',
           imgUrl: require('~/assets/img/horroscope/love_sign.svg'),
         },
         {
-          name: 'Health Horoscope',
+          name: 'Health',
           path: '/horroscope/aries-2-1/',
           imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
         },
         {
-          name: 'Career Horoscope',
+          name: 'Career',
           path: '/horroscope/aries-3-1/',
           imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
         },
         {
-          name: 'Money Horoscope',
+          name: 'Money',
           path: '/horroscope/aries-4-1/',
           imgUrl: require('~/assets/img/horroscope/wealth_sign.svg'),
         },
         {
-          name: '2023 Horoscope',
+          name: '2023',
           path: '/horroscope/aries-5-1/',
           imgUrl: require('~/assets/img/horroscope/2023.svg'),
         },
@@ -59,17 +64,27 @@ export default {
           imgUrl: require('~/assets/img/horroscope/sign_all.svg'),
         },
         {
-          name: 'The daily tarot',
+          name: 'AI tarot',
           path: '/tarot/',
           imgUrl: require('~/assets/img/horroscope/today_tarot.svg'),
         },
         {
-          name: 'Love Matcher',
+          name: 'The daily tarot',
+          path: '/tarot/type/4/',
+          imgUrl: require('~/assets/img/horroscope/today_tarot.svg'),
+        },
+        {
+          name: 'Universal tarot',
+          path: '/tarot/type/3/',
+          imgUrl: require('~/assets/img/horroscope/today_tarot.svg'),
+        },
+        {
+          name: 'Compatibility',
           path: '/astrology/',
           imgUrl: require('~/assets/img/horroscope/love_pairing.svg'),
         },
         {
-          name: 'Free Quizzes',
+          name: 'Quiz',
           path: '/test/',
           imgUrl: require('~/assets/img/horroscope/free_test.svg'),
         },
@@ -81,10 +96,17 @@ export default {
       ],
     }
   },
+
   methods: {
     addTag(str) {
       const strof = str.replace(/\s/, '\n')
       return strof
+    },
+    isHorroscopePage(index) {
+      return !(
+        this.$route.path.includes('horroscope') &&
+        (index === 0 || index === 5)
+      )
     },
   },
 }
@@ -114,9 +136,23 @@ export default {
         border-radius: 44px;
         margin-right: 16px;
         margin-top: 16px;
-        &:nth-child(6),
+        &:nth-child(11) {
+          .tag_list_aos {
+            background: #ed6ddf;
+          }
+        }
+        &:nth-child(12) {
+          .tag_list_aos {
+            background: #6aa6ff;
+          }
+        }
         &:last-child {
-          margin-right: 0;
+          .tag_list_aos {
+            background: #f09968;
+          }
+        }
+        .isvisible {
+          display: none;
         }
         &_aos {
           display: flex;
@@ -124,9 +160,10 @@ export default {
           align-items: center;
           padding: 5px 16px;
           border-radius: 44px;
-          background: rgba(255, 255, 255, 0.08);
+          background: var(--9747-ff, #9747ff);
+          transition: transform 0.3s ease-in-out;
           &:hover {
-            background: var(--9747-ff, #9747ff);
+            transform: scale(1.1);
             p {
               color: #fff;
             }
@@ -144,7 +181,7 @@ export default {
             }
           }
           p {
-            color: rgba(255, 255, 255, 0.6);
+            color: #fff;
             font-family: 'Rubik';
             font-size: 16px;
             font-style: normal;
@@ -164,39 +201,6 @@ export default {
 @media (max-width: 1435px) {
   .explore {
     width: 100%;
-    &_main {
-      &_tag {
-        .tag_list {
-          &:nth-child(5),
-          &:last-child {
-            margin-right: 0;
-          }
-          &:nth-child(6) {
-            margin-right: 16px;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1200px) {
-  .explore {
-    width: 100%;
-    &_main {
-      &_tag {
-        .tag_list {
-          &:nth-child(4),
-          &:nth-child(9),
-          &:last-child {
-            margin-right: 0;
-          }
-          &:nth-child(5) {
-            margin-right: 16px;
-          }
-        }
-      }
-    }
   }
 }
 
@@ -206,16 +210,6 @@ export default {
     &_main {
       &_tag {
         padding: 0 30px;
-        .tag_list {
-          &:last-child {
-            margin-right: 0;
-          }
-          &:nth-child(4),
-          &:nth-child(9),
-          &:nth-child(5) {
-            margin-right: 16px;
-          }
-        }
       }
     }
   }
@@ -232,27 +226,15 @@ export default {
         padding-bottom: 16 * $pr;
       }
       &_tag {
-        // display: grid;
         justify-content: start;
-        // overflow-x: scroll;
-        // grid-template-columns: repeat(6, 1fr);
-        // height: 81 * $pr;
-        // gap: 10 * $pr 5 * $pr;
         padding: 0;
         .tag_list {
           padding: 5 * $pr 2.5 * $pr;
           border-radius: 44 * $pr;
           margin-right: 0;
           margin-top: 0;
-          &:nth-child(4),
-          &:nth-child(6),
-          &:nth-child(9),
-          &:nth-child(5) {
-            margin-right: 0;
-          }
           &_aos {
             width: auto;
-            // padding: 4 * $pr 12 * $pr;
             padding: 4 * $pr 10 * $pr;
             border-radius: 44 * $pr;
 
