@@ -120,9 +120,9 @@
                         nextFlag
                       "
                     >
-                      <a class="get_result" :href="currentRoute">
-                        Get Your Result
-                      </a>
+                      <!-- <a class="get_result" :href="currentRoute"> -->
+                      Get Your Result
+                      <!-- </a> -->
                     </div>
                     <div
                       v-else
@@ -219,6 +219,7 @@
   </div>
 </template>
 <script>
+import { adBreakInit, showAdBreak } from '@/utils/ad'
 export default {
   data() {
     return {
@@ -232,7 +233,7 @@ export default {
       disabledFlag: false, //禁用单选框状态
       showQuestions: false, //展示问答（pc端直接展示问题和回答列表、h5先展示详情，点击开始答题后展示问题和回答列表）
       screenWidth: 0, //屏幕宽度
-      currentRoute: '#', //当前路由
+      //currentRoute: '#', //当前路由
       isLoading: false,
     }
   },
@@ -281,9 +282,10 @@ export default {
   },
   mounted() {
     this.handleResize()
+    adBreakInit()
     window.addEventListener('resize', this.handleResize)
-    this.currentRoute = window.location.href
-    this.initializeAnswer() //初始化是否有答案
+    //this.currentRoute = window.location.href
+    //this.initializeAnswer() //初始化是否有答案
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize)
@@ -370,32 +372,33 @@ export default {
     },
     /**获取最终分数或者正确答案和描述 */
     getQuizResult() {
-      const datalis = {
-        id: this.dataInfo.id,
-        answers: this.answers,
-      }
-      localStorage.setItem('quiz_results', JSON.stringify(datalis)) //存入值跳转页面时拿取
-      //   this.$apiList.test
-      //     .getQuizResult({
-      //       origin: process.env.origin,
-      //       id: this.dataInfo.id,
-      //       answers: this.answers,
-      //     })
-      //     .then((res) => {
-      //       console.log('请求答案', res)
-
-      //       this.result = res
-      //       //   //隐藏详情，展示问题和回答列表
-      //       //   this.showQuestions = true
-      //       //   //显示标题和描述
-      //       //   this.$refs.nameAndDesc.style.display = 'block'
-      //       //   //展示结果
-      //       //   this.showResult = true
-      //       //   window.scrollTo({
-      //       //     top: 0,
-      //       //     behavior: 'smooth',
-      //       //   })
-      //     })
+      //   const datalis = {
+      //     id: this.dataInfo.id,
+      //     answers: this.answers,
+      //   }
+      //localStorage.setItem('quiz_results', JSON.stringify(datalis)) //存入值跳转页面时拿取
+      showAdBreak(this.adComplete)
+      this.isLoading = true
+      this.$apiList.test
+        .getQuizResult({
+          origin: process.env.origin,
+          id: this.dataInfo.id,
+          answers: this.answers,
+        })
+        .then((res) => {
+          this.isLoading = false
+          this.result = res
+          //隐藏详情，展示问题和回答列表
+          this.showQuestions = true
+          //显示标题和描述
+          this.$refs.nameAndDesc.style.display = 'block'
+          //展示结果
+          this.showResult = true
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        })
     },
     /**选择答案 */
     chooseAnswer(item, index) {
@@ -462,6 +465,9 @@ export default {
         top: 0,
         behavior: 'smooth',
       })
+    },
+    adComplete(data) {
+      console.log(data)
     },
   },
 }
@@ -678,15 +684,15 @@ $spacing: 55px;
                 font-size: 16px;
                 line-height: 22px;
                 margin-left: 9px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 cursor: pointer;
-                .get_result {
-                  width: 100%;
-                  height: 100%;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  color: #ffffff;
-                }
+                // .get_result {
+                //   width: 100%;
+                //   height: 100%;
+                //   color: #ffffff;
+                // }
               }
             }
           }

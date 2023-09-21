@@ -138,6 +138,9 @@
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 
@@ -190,6 +193,7 @@ export default {
       fileType: ['image/jpg', 'image/jpeg', 'image/png', 'image/JPG'],
       imgStr: '',
       activeTab: 0,
+      isLoading: false,
     }
   },
   async asyncData({ error, $apiList, params }) {
@@ -350,12 +354,14 @@ export default {
     },
     //更新用户头像
     userImgUp() {
+      this.isLoading = true
       this.$apiList.user
         .setUserMsg({
           origin: process.env.origin,
           icon: this.imgStr,
         })
         .then((res) => {
+          this.isLoading = false
           this.$store.commit('UPDATE_USERINFO', res)
         })
     },
@@ -364,12 +370,14 @@ export default {
     },
     // 保存当前选择的订阅
     subscribeCurrent() {
+      this.isLoading = true
       this.$apiList.user
         .subscribeVtow({
           origin: process.env.origin,
           vote_type: this.selectItem,
         })
         .then((res) => {
+          this.isLoading = false
           if (res.data) {
             this.$store.commit('UPDATE_USERSUB', [])
           } else {
