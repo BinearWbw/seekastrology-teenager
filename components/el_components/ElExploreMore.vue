@@ -13,8 +13,8 @@
             <div class="tag_list_aos_round">
               <img :src="item.imgUrl" alt="#" />
             </div>
-            <p class="p_pc">{{ item.name }}</p>
-            <p class="p_h5">{{ addTag(item.name) }}</p>
+            <p>{{ item.name }}</p>
+            <!-- <p class="p_h5">{{ addTag(item.name) }}</p> -->
           </a>
         </div>
       </div>
@@ -29,7 +29,7 @@ export default {
     return {
       moreData: [
         {
-          name: "Today's",
+          name: 'Daily horoscope',
           path: '/horroscope/aries-1/',
           imgUrl: require('~/assets/img/horroscope/today.svg'),
         },
@@ -54,7 +54,7 @@ export default {
           imgUrl: require('~/assets/img/horroscope/wealth_sign.svg'),
         },
         {
-          name: '2023',
+          name: '2023 horoscope',
           path: '/horroscope/aries-5-1/',
           imgUrl: require('~/assets/img/horroscope/2023.svg'),
         },
@@ -64,12 +64,12 @@ export default {
           imgUrl: require('~/assets/img/horroscope/sign_all.svg'),
         },
         {
-          name: 'AI tarot',
+          name: 'Ai tarot',
           path: '/tarot/',
           imgUrl: require('~/assets/img/horroscope/today_tarot.svg'),
         },
         {
-          name: 'The daily tarot',
+          name: 'Daily tarot',
           path: '/tarot/type/4/',
           imgUrl: require('~/assets/img/horroscope/today_tarot.svg'),
         },
@@ -84,7 +84,7 @@ export default {
           imgUrl: require('~/assets/img/horroscope/love_pairing.svg'),
         },
         {
-          name: 'Quiz',
+          name: 'Quizs',
           path: '/test/',
           imgUrl: require('~/assets/img/horroscope/free_test.svg'),
         },

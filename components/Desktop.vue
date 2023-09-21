@@ -2,6 +2,7 @@
   <div class="install">
     <button
       class="desktop common__btn"
+      id="PWACLICKTO"
       v-if="prompt"
       @click="download"
     ></button>

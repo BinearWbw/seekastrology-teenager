@@ -36,7 +36,9 @@
           Today's opportunity has been exhausted. Please come back tomorrow.
           want to add it to your desktop?
         </div>
-        <button class="login_content_button" @click="download">Download</button>
+        <button class="login_content_button" id="PWACLICKTO" @click="download">
+          Download
+        </button>
       </div>
     </div>
   </div>
