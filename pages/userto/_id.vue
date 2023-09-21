@@ -107,6 +107,12 @@
                     >(Subscription activation and deactivation will take effect
                     at 00:00 tomorrow.)</span
                   >
+                  <span
+                    class="subscribe"
+                    id="SUBSCRIBECURRENT"
+                    @click="subscribeCurrent"
+                    >Save current subscription</span
+                  >
                 </div>
                 <div class="list">
                   <label v-for="(item, index) in selectData" :key="index">
@@ -258,37 +264,37 @@ export default {
       // 操作选择的内容
       const userSub = this.getUserSub
 
-      if (userSub) {
-        const screen2 = userSub?.filter((i) => i == item.type)
-        let numBtn = screen2[0] ? 1 : 2
-        this.$apiList.user
-          .subscribe({
-            origin: process.env.origin,
-            vote_type: item.type,
-            opt: numBtn,
-          })
-          .then((res) => {
-            if (res.data) {
-              this.$store.commit('UPDATE_USERSUB', [])
-            } else {
-              this.$store.commit('UPDATE_USERSUB', res)
-            }
-          })
-      } else {
-        this.$apiList.user
-          .subscribe({
-            origin: process.env.origin,
-            vote_type: item.type,
-            opt: 2,
-          })
-          .then((res) => {
-            if (res.data) {
-              this.$store.commit('UPDATE_USERSUB', [])
-            } else {
-              this.$store.commit('UPDATE_USERSUB', res)
-            }
-          })
-      }
+      //   if (userSub) {
+      //     const screen2 = userSub?.filter((i) => i == item.type)
+      //     let numBtn = screen2[0] ? 1 : 2
+      //     this.$apiList.user
+      //       .subscribe({
+      //         origin: process.env.origin,
+      //         vote_type: item.type,
+      //         opt: numBtn,
+      //       })
+      //       .then((res) => {
+      //         if (res.data) {
+      //           this.$store.commit('UPDATE_USERSUB', [])
+      //         } else {
+      //           this.$store.commit('UPDATE_USERSUB', res)
+      //         }
+      //       })
+      //   } else {
+      //     this.$apiList.user
+      //       .subscribe({
+      //         origin: process.env.origin,
+      //         vote_type: item.type,
+      //         opt: 2,
+      //       })
+      //       .then((res) => {
+      //         if (res.data) {
+      //           this.$store.commit('UPDATE_USERSUB', [])
+      //         } else {
+      //           this.$store.commit('UPDATE_USERSUB', res)
+      //         }
+      //       })
+      //   }
     },
     // 点击选择文件
     triggerInput() {
@@ -355,6 +361,30 @@ export default {
     },
     selectTab(index) {
       this.idsType = index
+    },
+    // 保存当前选择的订阅
+    subscribeCurrent() {
+      this.$apiList.user
+        .subscribeVtow({
+          origin: process.env.origin,
+          vote_type: this.selectItem,
+        })
+        .then((res) => {
+          if (res.data) {
+            this.$store.commit('UPDATE_USERSUB', [])
+          } else {
+            this.$store.commit('UPDATE_USERSUB', res)
+            // 提示通知
+            this.$notification.open({
+              message: 'Subscription',
+              description: 'Saved successfully.',
+              duration: 3,
+              style: {
+                color: '#9747ff',
+              },
+            })
+          }
+        })
     },
   },
 }
@@ -680,6 +710,16 @@ export default {
               font-size: 14px;
               line-height: 18px;
             }
+            .subscribe {
+              display: inline-block;
+              padding: 7px 22px;
+              background-color: #fff;
+              border-radius: 42px;
+              color: #000;
+              font-size: 14px;
+              line-height: 18px;
+              cursor: pointer;
+            }
           }
           .list {
             padding-top: 16px;
@@ -993,6 +1033,15 @@ export default {
                 font-size: 14 * $pr;
                 line-height: 18 * $pr;
                 padding-top: 5 * $pr;
+              }
+              .subscribe {
+                display: block;
+                padding: 7 * $pr 22 * $pr;
+                border-radius: 42 * $pr;
+                font-size: 14 * $pr;
+                line-height: 18 * $pr;
+                text-align: center;
+                margin-top: 8 * $pr;
               }
             }
             .list {

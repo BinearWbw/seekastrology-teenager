@@ -35,9 +35,14 @@ export default (axios) => ({
       },
     })
   },
-  /* 用户订阅 */
+  /* 用户订阅 传字符串*/
   subscribe(data) {
     return axios.post('api/astro/subscribe', data)
+  },
+
+  /* 用户订阅 2 传数组 */
+  subscribeVtow(data) {
+    return axios.post('api/astro/subscribe/v2', data)
   },
 
   /* openai */

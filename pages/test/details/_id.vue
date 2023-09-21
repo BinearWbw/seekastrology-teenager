@@ -120,7 +120,9 @@
                         nextFlag
                       "
                     >
-                      Get Your Result
+                      <a class="get_result" :href="currentRoute">
+                        Get Your Result
+                      </a>
                     </div>
                     <div
                       v-else
@@ -211,6 +213,9 @@
         <tarot-more-tarot></tarot-more-tarot>
       </transition>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 <script>
@@ -227,6 +232,8 @@ export default {
       disabledFlag: false, //禁用单选框状态
       showQuestions: false, //展示问答（pc端直接展示问题和回答列表、h5先展示详情，点击开始答题后展示问题和回答列表）
       screenWidth: 0, //屏幕宽度
+      currentRoute: '#', //当前路由
+      isLoading: false,
     }
   },
   async asyncData({ error, route, $apiList, params, $utils }) {
@@ -275,11 +282,36 @@ export default {
   mounted() {
     this.handleResize()
     window.addEventListener('resize', this.handleResize)
+    this.currentRoute = window.location.href
+    this.initializeAnswer() //初始化是否有答案
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    // 初始化答案
+    initializeAnswer() {
+      const dailyTsxt = JSON.parse(localStorage.getItem('quiz_results')) //获取跳转前的结果
+      if (dailyTsxt) {
+        this.isLoading = true
+        this.$apiList.test
+          .getQuizResult({
+            origin: process.env.origin,
+            id: dailyTsxt.id,
+            answers: dailyTsxt.answers,
+          })
+          .then((res) => {
+            // 请求答案
+            this.isLoading = false
+            localStorage.setItem('quiz_results', null)
+            this.result = res
+          })
+        //显示标题和描述
+        this.$refs.nameAndDesc.style.display = 'block'
+        //展示结果
+        this.showResult = true
+      }
+    },
     /** 屏幕尺寸变化*/
     handleResize() {
       this.screenWidth = window.innerWidth
@@ -338,25 +370,32 @@ export default {
     },
     /**获取最终分数或者正确答案和描述 */
     getQuizResult() {
-      this.$apiList.test
-        .getQuizResult({
-          origin: process.env.origin,
-          id: this.dataInfo.id,
-          answers: this.answers,
-        })
-        .then((res) => {
-          this.result = res
-          //隐藏详情，展示问题和回答列表
-          // this.showQuestions = true
-          //显示标题和描述
-          this.$refs.nameAndDesc.style.display = 'block'
-          //展示结果
-          this.showResult = true
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
-        })
+      const datalis = {
+        id: this.dataInfo.id,
+        answers: this.answers,
+      }
+      localStorage.setItem('quiz_results', JSON.stringify(datalis)) //存入值跳转页面时拿取
+      //   this.$apiList.test
+      //     .getQuizResult({
+      //       origin: process.env.origin,
+      //       id: this.dataInfo.id,
+      //       answers: this.answers,
+      //     })
+      //     .then((res) => {
+      //       console.log('请求答案', res)
+
+      //       this.result = res
+      //       //   //隐藏详情，展示问题和回答列表
+      //       //   this.showQuestions = true
+      //       //   //显示标题和描述
+      //       //   this.$refs.nameAndDesc.style.display = 'block'
+      //       //   //展示结果
+      //       //   this.showResult = true
+      //       //   window.scrollTo({
+      //       //     top: 0,
+      //       //     behavior: 'smooth',
+      //       //   })
+      //     })
     },
     /**选择答案 */
     chooseAnswer(item, index) {
@@ -629,9 +668,6 @@ $spacing: 55px;
                 cursor: pointer;
               }
               &_resultbtn {
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 width: 179px;
                 height: 44px;
                 background: #9747ff;
@@ -641,9 +677,16 @@ $spacing: 55px;
                 font-weight: 400;
                 font-size: 16px;
                 line-height: 22px;
-                color: #ffffff;
                 margin-left: 9px;
                 cursor: pointer;
+                .get_result {
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  color: #ffffff;
+                }
               }
             }
           }
