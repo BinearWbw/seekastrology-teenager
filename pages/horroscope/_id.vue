@@ -1,6 +1,6 @@
 <template>
   <div class="horroscope">
-    <google-ad classNames="horroscope_googlead" :id="''"></google-ad>
+    <google-ad classNames="horroscope_googlead" :id="'7036206358'"></google-ad>
     <div class="horroscope_main">
       <div class="horoscope_details">
         <google-ad classNames="google_ad" :id="'4376417914'"></google-ad>
@@ -394,7 +394,7 @@ export default {
         }
         .google_ad {
           width: 924px;
-          height: 130px;
+          min-height: 130px;
           margin: 48px auto 0;
         }
       }

@@ -107,12 +107,15 @@
                     >(Subscription activation and deactivation will take effect
                     at 00:00 tomorrow.)</span
                   >
-                  <span
+                  <button
                     class="subscribe"
+                    :class="{ hold_btn: isSubscribe }"
+                    :disabled="isSubscribe"
                     id="SUBSCRIBECURRENT"
                     @click="subscribeCurrent"
-                    >Save current subscription</span
                   >
+                    Save current subscription
+                  </button>
                 </div>
                 <div class="list">
                   <label v-for="(item, index) in selectData" :key="index">
@@ -123,6 +126,7 @@
                         :value="item.type"
                         v-model="selectItem"
                         ref="selectBox"
+                        @change="chooseMend"
                       />
                       <div class="imgs">
                         <img class="icon" :src="item.icon" alt="" />
@@ -194,6 +198,7 @@ export default {
       imgStr: '',
       activeTab: 0,
       isLoading: false,
+      isSubscribe: true,
     }
   },
   async asyncData({ error, $apiList, params }) {
@@ -266,7 +271,13 @@ export default {
     },
     chooseMend(item, index) {
       // 操作选择的内容
-      const userSub = this.getUserSub
+      const userSub = this.getUserSub // 上次保存的选项
+      const userSubE = this.selectItem // 当前的选项
+      const sortedArray1 = userSub.slice().sort() // 排序数组, 值相同, 位置不相同的情况下对比
+      const sortedArray2 = userSubE.slice().sort()
+      const compare =
+        JSON.stringify(sortedArray1) === JSON.stringify(sortedArray2) //对比上次==当前选择的值
+      this.isSubscribe = compare // 保存按钮的状态
 
       //   if (userSub) {
       //     const screen2 = userSub?.filter((i) => i == item.type)
@@ -382,6 +393,7 @@ export default {
             this.$store.commit('UPDATE_USERSUB', [])
           } else {
             this.$store.commit('UPDATE_USERSUB', res)
+            this.isSubscribe = false // 隐藏保存按钮
             // 提示通知
             this.$notification.open({
               message: 'Subscription',
@@ -727,6 +739,13 @@ export default {
               font-size: 14px;
               line-height: 18px;
               cursor: pointer;
+              transition: background-color 0.3s ease-out;
+            }
+            .hold_btn {
+              color: rgba(255, 255, 255, 0.6);
+              background-color: rgb(173, 173, 173, 0.3);
+              transition: background-color 0.3s ease-out;
+              cursor: not-allowed;
             }
           }
           .list {

@@ -224,6 +224,7 @@ export default {
         .google_ad_pc {
           max-width: 1200px;
           margin: 0 auto;
+          min-height: 305px;
           margin-bottom: 24px;
         }
       }

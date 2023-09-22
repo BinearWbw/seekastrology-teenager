@@ -206,9 +206,7 @@ $spacing: 16px;
     width: 1400px;
     margin: 0 auto;
     .google_top_ad {
-      width: 1200px;
-      height: 315px;
-      margin: 24px auto;
+      display: none;
     }
     &_top {
       width: 100%;
@@ -408,9 +406,6 @@ $spacing: 16px;
   .test {
     &_main {
       width: 95%;
-      //   .google_top_ad {
-      //     width: 100%;
-      //   }
       &_center {
         &_right {
           .google_ad {
@@ -424,9 +419,6 @@ $spacing: 16px;
 @media (max-width: (4 * $block + 3 * $spacing + 400px)) {
   .test {
     &_main {
-      .google_top_ad {
-        width: 100%;
-      }
       &_center {
         &_left {
           &_list {
@@ -492,6 +484,7 @@ $spacing: 16px;
       width: 100%;
       padding: 0 16 * $pr;
       .google_top_ad {
+        display: block;
         width: 100%;
         height: 110 * $pr;
         margin: 0 auto 24 * $pr;
