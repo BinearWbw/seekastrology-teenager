@@ -122,7 +122,7 @@
                         type="checkbox"
                         :value="item.type"
                         v-model="selectItem"
-                        @change="chooseMend(item)"
+                        ref="selectBox"
                       />
                       <div class="imgs">
                         <img class="icon" :src="item.icon" alt="" />

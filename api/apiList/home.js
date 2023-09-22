@@ -23,4 +23,8 @@ export default (axios) => ({
   getZodiacAll(params) {
     return axios.get('api/astro/all', { params })
   },
+  /* 欧盟 */
+  getGameLocation() {
+    return axios.get('api/user/loc')
+  },
 })

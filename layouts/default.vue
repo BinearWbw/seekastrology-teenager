@@ -117,8 +117,30 @@ export default {
         localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
       })
     })
+    this.getLocation()
   },
   methods: {
+    getLocation() {
+      let cookiesPrivacyLoc = localStorage.getItem('cookiesPrivacy')
+      let cookiesPrivacySes = sessionStorage.getItem('cookiesPrivacy')
+      if (!cookiesPrivacyLoc && !cookiesPrivacySes) {
+        this.$apiList.home
+          .getGameLocation()
+          .then((res) => {
+            if (!res.loc) {
+              localStorage.setItem(
+                'cookiesPrivacy',
+                JSON.stringify({ accept: 0 })
+              )
+            } else {
+              this.visiblePrivacy = true
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+    },
     handleHashMessage(e) {
       if (
         e.data ===
