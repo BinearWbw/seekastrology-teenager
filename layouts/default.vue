@@ -31,78 +31,7 @@ export default {
     }
   },
   mounted() {
-    window.onlyOne = false
-    window.addEventListener('beforeunload', () => {
-      let index = window.dataLayer.findIndex(
-        ({ event }) => event === 'gtm.linkClick'
-      )
-      if (index !== -1 && !window.onlyOne) {
-        let unloadNum = localStorage.getItem('unloadNum')
-        if (window.i_like_it === 1) {
-          dataLayer.push({
-            event: 'justdoit',
-          })
-          if (unloadNum && Number(unloadNum) > 0) {
-            dataLayer.push({
-              event: 'justdoitUnloadNum',
-            })
-            localStorage.setItem('unloadNum', JSON.stringify(0))
-          }
-        } else {
-          dataLayer.push({
-            event: 'pageChange',
-          })
-          if (unloadNum) {
-            let num = Number(unloadNum) + 1
-            localStorage.setItem('unloadNum', JSON.stringify(num))
-          } else {
-            localStorage.setItem('unloadNum', JSON.stringify(1))
-          }
-        }
-        window.onlyOne = true
-      }
-    })
     this.getHotPageView()
-    window.addEventListener('message', this.handleHashMessage)
-    window.addEventListener('hashchange', this.handleHashChange)
-    window.addEventListener('blur', () => {
-      let unloadNum = localStorage.getItem('unloadNum')
-      const activeElement = document.activeElement
-      const src = activeElement.getAttribute('src')
-      if (
-        src &&
-        src.indexOf('googleads.g.doubleclick.net/pagead/ads?') !== -1
-      ) {
-        dataLayer.push({
-          event: 'sitePageAD',
-        })
-        if (unloadNum && Number(unloadNum) > 1) {
-          dataLayer.push({
-            event: 'sitePageADUnloadNum',
-          })
-          localStorage.setItem('unloadNum', JSON.stringify(0))
-        }
-      } else if (
-        src &&
-        src.indexOf('googleads.g.doubleclick.net/pagead/html/') !== -1
-      ) {
-        if (src.indexOf('btvi=') !== -1) {
-          dataLayer.push({
-            event: 'siteAnchoringAD',
-          })
-          if (unloadNum && Number(unloadNum) > 1) {
-            dataLayer.push({
-              event: 'siteAnchoringADUnloadNum',
-            })
-            localStorage.setItem('unloadNum', JSON.stringify(0))
-          }
-        } else {
-          dataLayer.push({
-            event: 'siteAlternateAD',
-          })
-        }
-      }
-    })
     window.addEventListener('scroll', this.handleScroll)
     this.firstOpenSend()
     this.showNotification()
@@ -139,43 +68,6 @@ export default {
           .catch((error) => {
             console.log(error)
           })
-      }
-    },
-    handleHashMessage(e) {
-      if (
-        e.data ===
-          '{"eventType":"adClosed","result":{"status":1},"googMsgType":"fullscreen"}' &&
-        e.origin === 'https://googleads.g.doubleclick.net'
-      ) {
-        window.i_like_it = 0
-      }
-    },
-    handleHashChange() {
-      if (window.location.hash == '#google_vignette') {
-        window.i_like_it = 1
-        dataLayer.push({
-          event: 'adsChange',
-        })
-        // look
-        let numot = localStorage.getItem('numot')
-        if (numot) {
-          if (Number(numot) > 1) {
-            dataLayer.push({
-              event: 'numot3',
-            })
-            localStorage.setItem('numot', JSON.stringify(3))
-          } else {
-            dataLayer.push({
-              event: 'numot2',
-            })
-            localStorage.setItem('numot', JSON.stringify(2))
-          }
-        } else {
-          dataLayer.push({
-            event: 'numot1',
-          })
-          localStorage.setItem('numot', JSON.stringify(1))
-        }
       }
     },
     handleScroll() {
@@ -314,7 +206,6 @@ export default {
 .main {
   min-height: 100vh;
   overflow: hidden;
-  //   background: url('/img/bg.png');
   position: relative;
   .home_bg {
     display: inline-block;
@@ -364,7 +255,6 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .main {
-    // background: url('/img/bg.png');
     .home_bg {
       width: 100%;
       height: 900 * $pr;

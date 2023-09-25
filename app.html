@@ -66,5 +66,148 @@
       ></iframe
     ></noscript>
     {{ APP }}
+    <script>
+      window.onlyOne = false
+      window.addEventListener('beforeunload', () => {
+        let index = window.dataLayer.findIndex(
+          ({ event }) => event === 'gtm.linkClick'
+        )
+        if (index !== -1 && !window.onlyOne) {
+          let elementUrl = window.dataLayer[index]['gtm.elementUrl']
+          let pageChangeNum = localStorage.getItem('pageChangeNum')
+          let pageChangeHomeNum = localStorage.getItem('pageChangeHomeNum')
+          let unloadNum = localStorage.getItem('unloadNum')
+          if (window.i_like_it === 1) {
+            dataLayer.push({
+              event: 'justdoit',
+            })
+            if (unloadNum && Number(unloadNum) > 0) {
+              dataLayer.push({
+                event: 'justdoitUnloadNum',
+              })
+              localStorage.setItem('unloadNum', JSON.stringify(0))
+            }
+          } else {
+            dataLayer.push({
+              event: 'pageChange',
+            })
+            if (unloadNum) {
+              let num = Number(unloadNum) + 1
+              localStorage.setItem('unloadNum', JSON.stringify(num))
+            } else {
+              localStorage.setItem('unloadNum', JSON.stringify(1))
+            }
+          }
+          if (pageChangeHomeNum) {
+            if (pageChangeHomeNum < 2) {
+              let num = Number(pageChangeHomeNum) + 1
+              localStorage.setItem('pageChangeHomeNum', JSON.stringify(num))
+            } else {
+              localStorage.setItem('pageChangeHomeNum', JSON.stringify(0))
+              dataLayer.push({
+                event: 'product-pages-home-3',
+              })
+            }
+          } else {
+            localStorage.setItem('pageChangeHomeNum', JSON.stringify(1))
+          }
+          if (
+            ![
+              'https://www.seekastrology.com/',
+              'https://seekastrology.com/',
+            ].includes(elementUrl)
+          ) {
+            if (pageChangeNum) {
+              if (pageChangeNum < 2) {
+                let num = Number(pageChangeNum) + 1
+                localStorage.setItem('pageChangeNum', JSON.stringify(num))
+              } else {
+                localStorage.setItem('pageChangeNum', JSON.stringify(0))
+                dataLayer.push({
+                  event: 'product-pages-3',
+                })
+              }
+            } else {
+              localStorage.setItem('pageChangeNum', JSON.stringify(1))
+            }
+          }
+          window.onlyOne = true
+        }
+      })
+      window.addEventListener('hashchange', () => {
+        if (window.location.hash == '#google_vignette') {
+          window.i_like_it = 1
+          dataLayer.push({
+            event: 'adsChange',
+          })
+          let numot = localStorage.getItem('numot')
+          if (numot) {
+            if (Number(numot) > 1) {
+              dataLayer.push({
+                event: 'numot3',
+              })
+              localStorage.setItem('numot', JSON.stringify(3))
+            } else {
+              dataLayer.push({
+                event: 'numot2',
+              })
+              localStorage.setItem('numot', JSON.stringify(2))
+            }
+          } else {
+            dataLayer.push({
+              event: 'numot1',
+            })
+            localStorage.setItem('numot', JSON.stringify(1))
+          }
+        }
+      })
+      window.addEventListener('message', (e) => {
+        if (
+          e.data ===
+            '{"eventType":"adClosed","result":{"status":1},"googMsgType":"fullscreen"}' &&
+          e.origin === 'https://googleads.g.doubleclick.net'
+        ) {
+          window.i_like_it = 0
+        }
+      })
+      window.addEventListener('blur', () => {
+        let unloadNum = localStorage.getItem('unloadNum')
+        const activeElement = document.activeElement
+        const src = activeElement.getAttribute('src')
+        if (
+          src &&
+          src.indexOf('googleads.g.doubleclick.net/pagead/ads?') !== -1
+        ) {
+          dataLayer.push({
+            event: 'sitePageAD',
+          })
+          if (unloadNum && Number(unloadNum) > 1) {
+            dataLayer.push({
+              event: 'sitePageADUnloadNum',
+            })
+            localStorage.setItem('unloadNum', JSON.stringify(0))
+          }
+        } else if (
+          src &&
+          src.indexOf('googleads.g.doubleclick.net/pagead/html/') !== -1
+        ) {
+          if (src.indexOf('btvi=') !== -1) {
+            dataLayer.push({
+              event: 'siteAnchoringAD',
+            })
+            if (unloadNum && Number(unloadNum) > 1) {
+              dataLayer.push({
+                event: 'siteAnchoringADUnloadNum',
+              })
+              localStorage.setItem('unloadNum', JSON.stringify(0))
+            }
+          } else {
+            dataLayer.push({
+              event: 'siteAlternateAD',
+            })
+          }
+        }
+      })
+    </script>
   </body>
 </html>
