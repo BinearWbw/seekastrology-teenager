@@ -389,11 +389,11 @@ export default {
         })
         .then((res) => {
           this.isLoading = false
+          this.isSubscribe = true // 隐藏保存按钮
           if (res.data) {
             this.$store.commit('UPDATE_USERSUB', [])
           } else {
             this.$store.commit('UPDATE_USERSUB', res)
-            this.isSubscribe = false // 隐藏保存按钮
             // 提示通知
             this.$notification.open({
               message: 'Subscription',
