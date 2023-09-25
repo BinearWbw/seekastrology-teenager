@@ -93,17 +93,20 @@ module.exports = {
       {
         hid: 'keywords',
         name: 'keywords',
-        content: '',
+        content:
+          'One Card Tarot Reading with AI empowered Chatbot offer free and personalized reading based on your question. Pick a card and then write down your question in ...',
       },
       {
         hid: 'og:title',
         property: 'og:title',
-        content: '',
+        content:
+          'Get your free seekastrology.com daily horoscope: Aries Taurus Gemini Cancer Leo Virgo Scorpio Sagittarius Capricorn ...',
       },
       {
         hid: 'og:description',
         property: 'og:description',
-        content: '',
+        content:
+          'Discover a true divination experience at seeastrology .com! Get answers that reveal your love, marriage and career through tarot divination.',
       },
       {
         hid: 'og:url',
