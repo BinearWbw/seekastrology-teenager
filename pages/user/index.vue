@@ -2,7 +2,11 @@
   <div class="activation">
     <div class="activation_main">
       <div class="popo">
-        <img class="headerImg" src="@/assets/img/login/emailIcon.png" alt="" />
+        <img
+          class="headerImg"
+          src="@/assets/img/login/emailIcon.png"
+          alt="email"
+        />
         <div class="content">
           <h3>Check your inbox</h3>
           <p class="text">

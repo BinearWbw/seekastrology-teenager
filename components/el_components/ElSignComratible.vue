@@ -16,11 +16,17 @@
             <div class="unfold" v-if="isOpen && !defaultHeight">
               <div class="unfold_imgs">
                 <div class="imgs">
-                  <img :src="currentSign()[0].imgUrl || '/'" alt="#" />
+                  <img
+                    :src="currentSign()[0].imgUrl || '/'"
+                    :alt="currentSign()[0].imgUrl"
+                  />
                 </div>
                 <i class="icons"></i>
                 <div class="imgs">
-                  <img :src="matchingSign()[0].imgUrl" alt="#" />
+                  <img
+                    :src="matchingSign()[0].imgUrl"
+                    :alt="matchingSign()[0].imgUrl"
+                  />
                 </div>
               </div>
               <div class="unfold_text" v-html="sub[1]"></div>

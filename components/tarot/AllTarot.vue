@@ -25,7 +25,7 @@
         <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card0.webp"
-            alt=""
+            alt="card"
             class="card-item-img"
           />
           <div class="card-text">The Fool</div>
@@ -35,7 +35,7 @@
         <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card1.webp"
-            alt=""
+            alt="card"
             class="card-item-img"
           />
           <div class="card-text">The Magician</div>
@@ -45,7 +45,7 @@
         <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card2.webp"
-            alt=""
+            alt="card"
             class="card-item-img"
           />
           <div class="card-text">The High Priestess</div>
@@ -55,7 +55,7 @@
         <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card3.webp"
-            alt=""
+            alt="card"
             class="card-item-img"
           />
           <div class="card-text">The Empress</div>
@@ -65,7 +65,7 @@
         <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card4.webp"
-            alt=""
+            alt="card"
             class="card-item-img"
           />
           <div class="card-text">The Emperor</div>
@@ -77,7 +77,7 @@
         <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card0.webp"
-            alt=""
+            alt="card"
             class="list-mobile-img"
           />
         </a>
@@ -86,7 +86,7 @@
         <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card1.webp"
-            alt=""
+            alt="card"
             class="list-mobile-img"
           />
         </a>
@@ -95,7 +95,7 @@
         <a :href="`/tarot/cards/${getCurrentRoute}`">
           <img
             src="~/assets/img/tarot/card2.webp"
-            alt=""
+            alt="card"
             class="list-mobile-img"
           />
         </a>

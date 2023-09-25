@@ -31,7 +31,7 @@
                   >
                     <img
                       :src="item.imgUrl"
-                      alt=""
+                      :alt="item.imgUrl"
                       :style="{ animationDelay: index * 1200 + 'ms' }"
                       :class="{ paused: item.paused }"
                     />

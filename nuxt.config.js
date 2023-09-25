@@ -88,25 +88,22 @@ module.exports = {
         hid: 'description',
         name: 'description',
         content:
-          'Seekastrology is a platform that gathers countless young gamers with the best free online games. All of our games are designed to provide young people with a better way to relax and have fun, with healthy gameplay and a wide range of styles waiting for your selection. When you are looking for fun through games, Seekastrology will be your faithful choice, offering you a more comprehensive range of games, the most diverse selection and as many new surprises as possible!',
+          'Find free horoscopes, tarot AI, astrology quizzes, latest astrology news, horoscope personality traits on seekastrology.com, your one-stop platform for all things astrological...',
       },
       {
         hid: 'keywords',
         name: 'keywords',
-        content:
-          'Role-playing games, entertainment games, puzzle games, strategy games, cute games, pet games, parkour games, synthesis games, dress up games, princess games, adventure games, casual games, healing games, horror games, music games, cooking games',
+        content: '',
       },
       {
         hid: 'og:title',
         property: 'og:title',
-        content:
-          'Seekastrology－dedicated to the dreams and wonders of the young crowd, play with your own colors in the game!',
+        content: '',
       },
       {
         hid: 'og:description',
         property: 'og:description',
-        content:
-          'Seekastrology is a platform that gathers countless young gamers with the best free online games. All of our games are designed to provide young people with a better way to relax and have fun, with healthy gameplay and a wide range of styles waiting for your selection. When you are looking for fun through games, Seekastrology will be your faithful choice, offering you a more comprehensive range of games, the most diverse selection and as many new surprises as possible!',
+        content: '',
       },
       {
         hid: 'og:url',

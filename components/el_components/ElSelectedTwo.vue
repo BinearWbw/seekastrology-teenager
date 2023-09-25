@@ -7,18 +7,22 @@
           <div class="title_img" v-if="!selectedOption">
             <img
               src="~/assets/img/resources/boy.svg"
-              alt="#"
+              alt="boy"
               v-if="title == 'First Sign'"
             />
             <img
               src="~/assets/img/resources/girl.svg"
-              alt="#"
+              alt="girl"
               v-if="title == 'Second Sign'"
             />
           </div>
           <i class="icons" v-if="!selectedOption"></i>
           <transition name="fade">
-            <img :src="selectedOption.imgUrl" alt="#" v-if="selectedOption" />
+            <img
+              :src="selectedOption.imgUrl"
+              :alt="titleName"
+              v-if="selectedOption"
+            />
           </transition>
         </div>
       </div>

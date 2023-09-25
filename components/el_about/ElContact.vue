@@ -6,7 +6,7 @@
     <div class="content">
       <div class="content_emails">
         <div class="imgs">
-          <img src="~/assets/img/home/email.png" alt="#" />
+          <img src="~/assets/img/home/email.png" alt="email" />
         </div>
         <div class="input_text">
           <p class="input_text_title">Please contact us:</p>

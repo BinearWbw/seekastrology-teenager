@@ -71,7 +71,7 @@
               ></iframe>
               <!-- <img
                 src="../../../assets/img/resources/play_icon.png"
-                alt=""
+                alt="play icon"
                 class="details_main_left_top_content_img_play"
                 @click="playState = true"
                 v-if="!playState"
@@ -95,7 +95,7 @@
             :key="index"
           >
             <span>{{ item.name }}</span>
-            <img src="../../../assets/img/resources/d_02.png" alt="" />
+            <img src="../../../assets/img/resources/d_02.png" alt="resources" />
           </a>
         </div> -->
       </div>
@@ -145,7 +145,7 @@
               ></nuxt-img>
               <img
                 src="../../../assets/img/resources/play_icon.png"
-                alt=""
+                alt="play icon"
                 class="details_footer_list_item_img_play"
               />
               <!-- <div class="details_footer_list_item_img_time">

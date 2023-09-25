@@ -13,10 +13,14 @@
           <img
             src="~/assets/img/tarot/Vector2.png"
             style="margin-right: -8px"
-            alt=""
+            alt="vector"
             class="tip-img"
           />
-          <img src="~/assets/img/tarot/Vector1.png" alt="" class="tip-img" />
+          <img
+            src="~/assets/img/tarot/Vector1.png"
+            alt="vector"
+            class="tip-img"
+          />
         </div>
         <div class="tip-img-list" v-if="showList.length">
           <nuxt-img
@@ -40,7 +44,11 @@
         :class="{ 'question-top': questionTop }"
         v-if="type != 4"
       >
-        <img class="icon-img" src="~/assets/img/tarot/edit_icon.png" alt="" />
+        <img
+          class="icon-img"
+          src="~/assets/img/tarot/edit_icon.png"
+          alt="edit_icon"
+        />
         <input
           @keyup.enter="handleInput"
           @input="handleValid"

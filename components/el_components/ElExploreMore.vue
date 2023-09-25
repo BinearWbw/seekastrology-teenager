@@ -11,7 +11,7 @@
         >
           <a :href="`${item.path}`" class="tag_list_aos" id="EXPLORE">
             <div class="tag_list_aos_round">
-              <img :src="item.imgUrl" alt="#" />
+              <img :src="item.imgUrl" alt="item.name" />
             </div>
             <p>{{ item.name }}</p>
             <!-- <p class="p_h5">{{ addTag(item.name) }}</p> -->

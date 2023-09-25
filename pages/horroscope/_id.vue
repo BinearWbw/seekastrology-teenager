@@ -59,7 +59,7 @@
           >
             <div class="more_title">
               <div class="img_top">
-                <img :src="item.imgUrl" alt="#" />
+                <img :src="item.imgUrl" :alt="item.title" />
               </div>
               <p>{{ item.title }}</p>
             </div>

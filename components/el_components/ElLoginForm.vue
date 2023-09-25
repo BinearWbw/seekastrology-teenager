@@ -22,13 +22,13 @@
           <div class="login_right">
             <!-- 关闭按钮 -->
             <i class="icon_off" @click="hideLoginContent">
-              <img src="../../assets/img/login/openup.svg" alt="" />
+              <img src="../../assets/img/login/openup.svg" alt="openup" />
             </i>
             <!-- h5背景 -->
             <img
               class="img_h5"
               src="~/assets//img/login/login_sun_h5.png"
-              alt=""
+              alt="logo_bg"
             />
             <!-- 登录 -->
             <div class="form_login" v-if="openif">

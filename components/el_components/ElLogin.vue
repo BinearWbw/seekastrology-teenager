@@ -14,7 +14,7 @@
         class="arrow"
         :class="{ arrowto: opens }"
         src="~/assets/img/login/down_arrow.svg"
-        alt=""
+        alt="down arrow"
       />
       <transition name="fade">
         <div class="drop_down" tabindex="0" @blur="closeDropdown" v-if="opens">

@@ -3,7 +3,7 @@
     <div class="selected" @click="toggleDropdown">
       <div class="selected_main">
         <div class="select_img">
-          <img :src="selectedOption?.imgUrl" alt="#" />
+          <img :src="selectedOption?.imgUrl" :alt="selectedOption?.name" />
         </div>
         <p class="select_text">{{ selectedOption?.name }}</p>
         <i class="select_icon" :class="{ rotate: isOpen }"></i>

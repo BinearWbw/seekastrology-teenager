@@ -78,7 +78,7 @@
                   ></nuxt-img>
                   <img
                     src="../../assets/img/resources/play_icon.png"
-                    alt=""
+                    alt="play icon"
                     class="resources_main_btm_main_item_img_play"
                   />
                   <div class="resources_main_btm_main_item_img_time">
@@ -98,7 +98,7 @@
         <div class="resources_main_btm_loading" v-if="loading">
           <img
             src="../../assets/img/resources/loading.png"
-            alt=""
+            alt="loading"
             class="loading"
           />
         </div>

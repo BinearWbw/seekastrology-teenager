@@ -47,7 +47,7 @@
           <div class="test_main_center_left_loading" v-if="loading">
             <img
               src="../../assets/img/resources/loading2.png"
-              alt=""
+              alt="loading"
               class="loading"
             />
           </div>

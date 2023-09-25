@@ -12,10 +12,10 @@
               class="upload_com"
               ref="uploadInput"
             />
-            <img :src="userImgIcon" alt="" />
+            <img :src="userImgIcon" alt="user" />
           </div>
           <div class="toggle">
-            <img class="imgs" src="~/assets/img/login/Group.svg" alt="" />
+            <img class="imgs" src="~/assets/img/login/Group.svg" alt="group" />
           </div>
         </div>
         <div class="account_edit">
@@ -31,7 +31,7 @@
           </div>
           <div class="edit">
             <a :href="`/userrevise/1/`">
-              <img src="~/assets/img/login/edit.svg" alt="" />
+              <img src="~/assets/img/login/edit.svg" alt="edit" />
             </a>
           </div>
         </div>
@@ -129,7 +129,7 @@
                         @change="chooseMend"
                       />
                       <div class="imgs">
-                        <img class="icon" :src="item.icon" alt="" />
+                        <img class="icon" :src="item.icon" :alt="item.name" />
                       </div>
                       <p class="title">{{ item.name }}</p>
                       <p class="texts">{{ item.text }}</p>
