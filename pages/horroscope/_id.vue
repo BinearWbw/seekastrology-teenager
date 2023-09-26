@@ -333,6 +333,12 @@ export default {
     },
     setOpenExpand() {
       this.openExpand = !this.openExpand
+      if (!this.openExpand) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
+      }
     },
   },
   destroyed() {
@@ -665,7 +671,11 @@ export default {
                 .texts {
                   font-size: 16 * $pr;
                   line-height: 28 * $pr;
-                  max-height: 224 * $pr;
+                  height: 224 * $pr;
+                }
+                .texts_more {
+                  -webkit-line-clamp: unset !important;
+                  height: auto !important;
                 }
                 .more_btn {
                   font-size: 16 * $pr;

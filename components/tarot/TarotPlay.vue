@@ -139,7 +139,9 @@
           ></nuxt-img>
         </div>
         <div class="handle-btn" id="HANDLEANSWER" @click="handleAnswer">
-          <img class="btn-img" src="~/assets/img/tarot/btn.png" alt="btn" />
+          <a :href="`/tarot/answer/?type=${this.type}`" class="a_type">
+            <img class="btn-img" src="~/assets/img/tarot/btn.png" alt="btn" />
+          </a>
         </div>
       </div>
     </div>
@@ -226,18 +228,20 @@
               </div>
             </div>
             <div class="handle-btn" id="HANDLEANSWER" @click="handleAnswer">
-              <img
-                v-if="!isSelected"
-                class="btn-img"
-                src="~/assets/img/tarot/mobile-btn-disable.png"
-                alt="btn"
-              />
-              <img
-                v-else
-                class="btn-img"
-                src="~/assets/img/tarot/mobile-btn.png"
-                alt="btn"
-              />
+              <a :href="`/tarot/answer/?type=${this.type}`" class="a_type">
+                <img
+                  v-if="!isSelected"
+                  class="btn-img"
+                  src="~/assets/img/tarot/mobile-btn-disable.png"
+                  alt="btn"
+                />
+                <img
+                  v-else
+                  class="btn-img"
+                  src="~/assets/img/tarot/mobile-btn.png"
+                  alt="btn"
+                />
+              </a>
             </div>
           </div>
           <!-- <google-ad :id="'9971744541'" classNames="in-play-ad"></google-ad> -->
@@ -249,7 +253,6 @@
 
 <script>
 import { throttle } from 'lodash'
-import { adBreakInit, showAdBreak } from '@/utils/ad'
 export default {
   name: 'TarotPlay',
   props: {
@@ -320,9 +323,7 @@ export default {
       clickCount: 0,
     }
   },
-  mounted() {
-    adBreakInit() // 插页广告
-  },
+  mounted() {},
   methods: {
     handleInput() {
       if (!this.question.trim()) {
@@ -497,14 +498,10 @@ export default {
     handleAnswer() {
       if (this.isSelected) {
         this.bodyHidden('auto')
-        showAdBreak(this.adComplete)
         sessionStorage.setItem('cardsInfo', JSON.stringify(this.showList))
-        window.changePageUrl = `/tarot/answer/?type=${this.type}`
-        window.location = `/tarot/answer/?type=${this.type}`
+        // window.changePageUrl = `/tarot/answer/?type=${this.type}`
+        // window.location = `/tarot/answer/?type=${this.type}`
       }
-    },
-    adComplete(data) {
-      console.log(data)
     },
   },
 }
@@ -565,6 +562,11 @@ export default {
   }
   .question-top {
     top: 48px;
+  }
+  .handle-btn {
+    .a_type {
+      display: inline-block;
+    }
   }
   .tarot-wrapper {
     width: 100%;
@@ -953,6 +955,9 @@ export default {
         .btn-img {
           margin-top: 0;
           width: 196 * $pr;
+        }
+        .a_type {
+          height: 100%;
         }
       }
     }
