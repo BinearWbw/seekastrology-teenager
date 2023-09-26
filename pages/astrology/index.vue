@@ -630,7 +630,8 @@ export default {
               }
               :deep(.leftAdText) {
                 .leftAdText {
-                  height: 299 * $pr;
+                  height: auto;
+                  max-height: 299 * $pr;
                   margin-top: 24 * $pr;
                   .title {
                     height: 17 * $pr;

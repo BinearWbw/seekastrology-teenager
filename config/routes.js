@@ -83,9 +83,6 @@ const addRoutes = async () => {
     routes.push(`/zodiac/type/comratible-${item}/`)
   })
   let res13 = [1, 2, 3, 4, 5]
-  res13.map((item) => {
-    routes.push(`/horroscope/aries-${item}-1/`)
-  })
   let res14 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   res14.map((item) => {
     routes.push(`/zodiac/type/boycareer-${item}/`)
@@ -117,6 +114,61 @@ const addRoutes = async () => {
   let res21 = [1, 2]
   res21.map((item) => {
     routes.push(`/userrevise/${item}/`)
+  })
+  let res22 = [
+    {
+      name: 'aries',
+      id: 1,
+    },
+    {
+      name: 'taurus',
+      id: 2,
+    },
+    {
+      name: 'gemini',
+      id: 3,
+    },
+    {
+      name: 'cancer',
+      id: 4,
+    },
+    {
+      name: 'leo',
+      id: 5,
+    },
+    {
+      name: 'virgo',
+      id: 6,
+    },
+    {
+      name: 'libra',
+      id: 7,
+    },
+    {
+      name: 'scorpio',
+      id: 8,
+    },
+    {
+      name: 'sagittarius',
+      id: 9,
+    },
+    {
+      name: 'capricorn',
+      id: 10,
+    },
+    {
+      name: 'aquarius',
+      id: 11,
+    },
+    {
+      name: 'pisces',
+      id: 12,
+    },
+  ]
+  res22.map((item) => {
+    res13.map((item_i) => {
+      routes.push(`/horroscope/${item.name}-${item_i}-${item.id}/`)
+    })
   })
 
   return routes

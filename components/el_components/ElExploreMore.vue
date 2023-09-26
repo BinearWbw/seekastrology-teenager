@@ -94,6 +94,88 @@ export default {
           imgUrl: require('~/assets/img/horroscope/article.svg'),
         },
       ],
+      tabListData: [
+        {
+          name: 'aries',
+          id: 1,
+        },
+        {
+          name: 'taurus',
+          id: 2,
+        },
+        {
+          name: 'gemini',
+          id: 3,
+        },
+        {
+          name: 'cancer',
+          id: 4,
+        },
+        {
+          name: 'leo',
+          id: 5,
+        },
+        {
+          name: 'virgo',
+          id: 6,
+        },
+        {
+          name: 'libra',
+          id: 7,
+        },
+        {
+          name: 'scorpio',
+          id: 8,
+        },
+        {
+          name: 'sagittarius',
+          id: 9,
+        },
+        {
+          name: 'capricorn',
+          id: 10,
+        },
+        {
+          name: 'aquarius',
+          id: 11,
+        },
+        {
+          name: 'pisces',
+          id: 12,
+        },
+      ],
+    }
+  },
+  mounted() {
+    const pathHome = this.$route.path.includes('horroscope') //是否在运势页
+    if (pathHome) {
+      const inputString = this.$route.params.id
+      const parts = inputString.split('-')
+      const extractedValue = parts[0] // 获取第一个元素
+      const ids = this.tabListData.find((lis) => extractedValue == lis.name) // 拿到对应星座id
+      const moreDataTwo = [
+        {
+          name: 'Love',
+          path: `/horroscope/${extractedValue}-1-${ids.id}/`,
+          imgUrl: require('~/assets/img/horroscope/love_sign.svg'),
+        },
+        {
+          name: 'Health',
+          path: `/horroscope/${extractedValue}-2-${ids.id}/`,
+          imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
+        },
+        {
+          name: 'Career',
+          path: `/horroscope/${extractedValue}-3-${ids.id}/`,
+          imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
+        },
+        {
+          name: 'Money',
+          path: `/horroscope/${extractedValue}-4-${ids.id}/`,
+          imgUrl: require('~/assets/img/horroscope/wealth_sign.svg'),
+        },
+      ]
+      this.moreData.splice(1, 4, ...moreDataTwo)
     }
   },
 

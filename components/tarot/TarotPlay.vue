@@ -175,63 +175,65 @@
         </div>
       </div>
       <div class="in-play" v-if="inPlay" ref="playArea">
-        <div class="play_bg">
-          <i class="home_bg"></i>
-        </div>
-        <button class="back-btn" @click="handleBack"></button>
-        <div class="tip-text" v-html="textObj[type]"></div>
-        <ul class="play-list">
-          <span class="list_mask" ref="list_mask"></span>
-          <li
-            class="play-list-item"
-            v-for="index of mobileCount"
-            :key="'mobile-' + index"
-            :ref="'mobile' + index"
-            @click.once="handleClike"
-          >
-            <img
-              :data-index="index"
-              class="card-img-mobile"
-              src="~/assets/img/tarot/card.png"
-              alt="Card"
-            />
-          </li>
-        </ul>
-        <div class="mobile-tip">
-          <div class="question-text" v-if="question">"{{ question }}"</div>
-          <div class="tip-img-list">
-            <div
-              class="wrapper"
-              v-for="(item, index) of mobileNumbers"
-              :key="index"
+        <div class="play_scroll">
+          <div class="play_bg">
+            <i class="home_bg"></i>
+          </div>
+          <button class="back-btn" @click="handleBack"></button>
+          <div class="tip-text" v-html="textObj[type]"></div>
+          <ul class="play-list">
+            <span class="list_mask" ref="list_mask"></span>
+            <li
+              class="play-list-item"
+              v-for="index of mobileCount"
+              :key="'mobile-' + index"
+              :ref="'mobile' + index"
+              @click.once="handleClike"
             >
-              <nuxt-img
-                v-if="showList[index]"
-                class="tip-img-item"
-                :class="{ 'img-rotate': showList[index].desc_type == 2 }"
-                :src="showList[index].icon"
-                width="60"
-                height="100"
-                loading="lazy"
-              ></nuxt-img>
+              <img
+                :data-index="index"
+                class="card-img-mobile"
+                src="~/assets/img/tarot/card.png"
+                alt="Card"
+              />
+            </li>
+          </ul>
+          <div class="mobile-tip">
+            <div class="question-text" v-if="question">"{{ question }}"</div>
+            <div class="tip-img-list">
+              <div
+                class="wrapper"
+                v-for="(item, index) of mobileNumbers"
+                :key="index"
+              >
+                <nuxt-img
+                  v-if="showList[index]"
+                  class="tip-img-item"
+                  :class="{ 'img-rotate': showList[index].desc_type == 2 }"
+                  :src="showList[index].icon"
+                  width="60"
+                  height="100"
+                  loading="lazy"
+                ></nuxt-img>
+              </div>
+            </div>
+            <div class="handle-btn" id="HANDLEANSWER" @click="handleAnswer">
+              <img
+                v-if="!isSelected"
+                class="btn-img"
+                src="~/assets/img/tarot/mobile-btn-disable.png"
+                alt="btn"
+              />
+              <img
+                v-else
+                class="btn-img"
+                src="~/assets/img/tarot/mobile-btn.png"
+                alt="btn"
+              />
             </div>
           </div>
-          <div class="handle-btn" id="HANDLEANSWER" @click="handleAnswer">
-            <img
-              v-if="!isSelected"
-              class="btn-img"
-              src="~/assets/img/tarot/mobile-btn-disable.png"
-              alt="btn"
-            />
-            <img
-              v-else
-              class="btn-img"
-              src="~/assets/img/tarot/mobile-btn.png"
-              alt="btn"
-            />
-          </div>
+          <google-ad :id="'9971744541'" classNames="in-play-ad"></google-ad>
         </div>
-        <google-ad :id="'9971744541'" classNames="in-play-ad"></google-ad>
       </div>
     </div>
   </div>
@@ -380,7 +382,7 @@ export default {
       //     this.$refs.list_mask.style.display = 'block'
       //   }
       //   if (this.isSelected || ele !== 'IMG') return
-      event.target.parentNode.style.display = 'none'
+      event.target.style.display = 'none'
       if (this.cardsInfo.length === 0) {
         await this.drawCard()
       }
@@ -733,20 +735,28 @@ export default {
     }
     .in-play {
       position: fixed;
-      //   width: 100vw;
-      height: calc(100% - 122 * $pr);
+      // width: 100vw;
+      //   height: calc(100% - 122 * $pr);
+      height: 100vh;
       top: 0;
       left: 0;
       z-index: 7;
-
       background-size: 100% 100%;
       background-repeat: no-repeat;
+
+      .play_scroll {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        // background-color: rgba(151, 71, 255, 0.1);
+      }
+
       .play_bg {
         position: absolute;
         z-index: -1;
+        background: #221434;
         width: 100%;
         height: 100%;
-        background: #221434;
         .home_bg {
           display: inline-block;
           width: 100%;
@@ -770,7 +780,7 @@ export default {
     }
 
     .in-play-ad {
-      position: fixed;
+      //   position: fixed;
       bottom: 0;
       width: 100%;
       height: 123 * $pr;
@@ -828,11 +838,12 @@ export default {
     }
     .play-list {
       width: 375 * $pr;
-      height: 100%;
+      height: 200 * $pr;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      overflow: hidden;
       .list_mask {
         position: absolute;
         width: 100%;
@@ -848,6 +859,7 @@ export default {
         top: 20 * $pr;
         transform-origin: 40% 40%;
         transition: transform 0.7s ease-out;
+        overflow: hidden;
         .card-img-mobile {
           width: 70 * $pr;
           height: 117 * $pr;
@@ -865,9 +877,10 @@ export default {
       text-align: center;
     }
     .mobile-tip {
-      position: absolute;
+      //   position: absolute;
       bottom: 30 * $pr;
       width: 375 * $pr;
+      margin: 24 * $pr 0 48 * $pr;
       .question-text {
         font-family: 'Rufina';
         font-style: normal;
