@@ -41,7 +41,7 @@
             <transition name="fade">
               <div
                 class="introduce"
-                v-if="compatibilityData"
+                ref="astrologyData"
                 v-html="compatibilityData"
               ></div>
             </transition>
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import ElSelect from '../../components/el_components/ElSelected.vue'
 export default {
   components: { ElSelect },
@@ -140,6 +141,7 @@ export default {
       femalesId: 0,
       compatibilityData: '',
       isLoading: false,
+      idAdArray: ['4256255492', '8383202764', '3000133706'],
     }
   },
   mounted() {
@@ -186,6 +188,7 @@ export default {
             this.isLoading = false
             this.compatibilityData = res
             sessionStorage.removeItem('genderList')
+            this.getGoogleAd()
           })
       } else {
         // 提示通知
@@ -211,6 +214,45 @@ export default {
         this.females = females
         this.getStartPairing()
       }
+    },
+    getGoogleAd() {
+      this.$nextTick(() => {
+        const astrologyData = this.$refs.astrologyData
+        const h4Element = astrologyData.querySelectorAll('h4')
+        let counter = 0 // 用于保证每个广告id按顺序使用
+        h4Element.forEach((item, index) => {
+          const threeeDa = (index + 1) % 3 === 0
+
+          if (threeeDa) {
+            // 顺序选择一个 id
+            const randomId = this.idAdArray[counter % this.idAdArray.length]
+            counter++
+
+            const adContainer = document.createElement('div')
+            adContainer.className = 'leftAdText'
+
+            // 创建动态组件实例
+            const adComponent = new Vue({
+              render: (h) =>
+                h('google-observer-auto-ad', {
+                  props: {
+                    classNames: 'leftAdText',
+                    id: randomId,
+                  },
+                }),
+            })
+
+            // 挂载动态组件
+            adComponent.$mount()
+
+            // 将动态组件的根 DOM 元素添加到容器
+            adContainer.appendChild(adComponent.$el)
+
+            // 在 h4 元素之前插入广告容器
+            item.parentNode.insertBefore(adContainer, item)
+          }
+        })
+      })
     },
   },
 }
@@ -391,6 +433,17 @@ export default {
             :deep(a) {
               color: rgba(255, 255, 255, 0.6);
               pointer-events: none;
+            }
+            :deep(.leftAdText) {
+              .leftAdText {
+                height: 130px;
+                margin-top: 48px;
+                .title {
+                  height: 25px;
+                  margin: 0;
+                  color: #fff;
+                }
+              }
             }
           }
         }
@@ -574,6 +627,15 @@ export default {
                 line-height: 30 * $pr;
                 margin: 24 * $pr 0 8 * $pr;
                 color: #fff;
+              }
+              :deep(.leftAdText) {
+                .leftAdText {
+                  height: 299 * $pr;
+                  margin-top: 24 * $pr;
+                  .title {
+                    height: 17 * $pr;
+                  }
+                }
               }
             }
           }

@@ -307,13 +307,13 @@ export default {
     align-items: center;
     margin-left: 16 * $pr;
     .button {
-      padding: 0;
-      width: 30 * $pr;
-      height: 30 * $pr;
-      border-radius: 50%;
-      font-size: 10 * $pr;
-      font-weight: 700;
-      line-height: 12 * $pr;
+      height: auto;
+      font-family: Rubik;
+      padding: 8 * $pr 12 * $pr;
+      border-radius: 42 * $pr;
+      font-size: 14 * $pr;
+      font-weight: 400;
+      line-height: 18 * $pr;
       background: #fff;
     }
     .user_login {

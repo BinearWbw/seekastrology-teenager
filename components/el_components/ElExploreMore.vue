@@ -2,14 +2,14 @@
   <div class="explore">
     <div class="explore_main">
       <p class="title">Explore More</p>
-      <div class="explore_main_tag" data-aos="zoom-out">
+      <div class="explore_main_tag" data-aos="zoom-out" id="EXPLORE">
         <div
           class="tag_list"
           v-for="(item, index) in moreData"
           :key="index"
           v-show="isHorroscopePage(index)"
         >
-          <a :href="`${item.path}`" class="tag_list_aos" id="EXPLORE">
+          <a :href="`${item.path}`" class="tag_list_aos">
             <div class="tag_list_aos_round">
               <img :src="item.imgUrl" alt="item.name" />
             </div>

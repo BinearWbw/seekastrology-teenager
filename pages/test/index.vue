@@ -19,7 +19,11 @@
                 <nuxt-img
                   :src="item.icon || '/'"
                   fit="cover"
+                  width="338"
+                  height="338"
                   :alt="item.name"
+                  loading="lazy"
+                  format="auto"
                 ></nuxt-img>
               </div>
               <div class="test_main_center_left_list_item_text">

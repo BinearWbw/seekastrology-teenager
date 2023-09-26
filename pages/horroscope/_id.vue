@@ -33,8 +33,16 @@
                     <div class="format_date">
                       {{ $utils.horoscopeFormatDate(currentTime) }}
                     </div>
-                    -
-                    <div class="texts" v-html="moreData[comentIds].texts"></div>
+
+                    <div
+                      class="texts"
+                      :class="{ texts_more: openExpand }"
+                      ref="textMore"
+                      v-html="moreData[comentIds].texts"
+                    ></div>
+                    <div class="more_btn" v-if="aoMore" @click="setOpenExpand">
+                      {{ openExpand ? 'Show Less' : 'Show More' }}
+                    </div>
                   </div>
                 </template>
               </el-tabs>
@@ -177,6 +185,9 @@ export default {
       comentIdSession: 0,
       isLoading: false,
       isSetTimes: null,
+      aoMore: false,
+      openExpand: false,
+      timeout: null,
     }
   },
   async asyncData({ error, $apiList, params }) {
@@ -257,8 +268,12 @@ export default {
       ]
     },
   },
+  mounted() {
+    this.getCurrentTexts()
+  },
   methods: {
     async getHoroscopeData(id = 1, kind = 'd') {
+      this.isLoading = true
       await this.$apiList.home
         .getZodiacHoroscope({
           origin: process.env.origin,
@@ -266,7 +281,9 @@ export default {
           kind,
         })
         .then((res) => {
+          this.isLoading = false
           this.youlistData = res.horoscope
+          this.getCurrentTexts()
         })
     },
     handleDropdownChange(option) {
@@ -302,13 +319,25 @@ export default {
       // 点击tabs
       this.currentTime = i.type
       this.getHoroscopeData(this.ids, i.type)
+      this.openExpand = false
     },
     toUpperBig(str) {
       return str?.charAt(0).toUpperCase() + str?.slice(1)
     },
+    getCurrentTexts() {
+      this.timeout = setTimeout(() => {
+        const moreConten = this.$refs.textMore
+        const aoMore = moreConten.scrollHeight > moreConten.offsetHeight
+        this.aoMore = aoMore
+      }, 500)
+    },
+    setOpenExpand() {
+      this.openExpand = !this.openExpand
+    },
   },
   destroyed() {
     if (this.isSetTimes) clearTimeout(this.isSetTimes)
+    if (this.timeout) clearTimeout(this.timeout)
   },
 }
 </script>
@@ -378,16 +407,32 @@ export default {
                 color: #9747ff;
               }
               .texts {
-                display: inline;
                 font-family: 'Rubik';
                 font-style: normal;
                 font-weight: 400;
                 font-size: 16px;
                 line-height: 28px;
                 color: rgba(255, 255, 255, 0.6);
+                text-overflow: ellipsis;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 8;
+                -webkit-box-orient: vertical;
                 ::v-deep(:first-child) {
                   display: inline;
                 }
+              }
+              .texts_more {
+                -webkit-line-clamp: unset !important;
+              }
+              .more_btn {
+                font-family: 'Rubik';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 28px;
+                color: #9747ff;
+                cursor: pointer;
               }
             }
           }
@@ -618,6 +663,11 @@ export default {
                   line-height: 28 * $pr;
                 }
                 .texts {
+                  font-size: 16 * $pr;
+                  line-height: 28 * $pr;
+                  max-height: 224 * $pr;
+                }
+                .more_btn {
                   font-size: 16 * $pr;
                   line-height: 28 * $pr;
                 }
