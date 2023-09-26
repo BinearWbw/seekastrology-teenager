@@ -34,6 +34,10 @@
                       :src="dataInfo.icon || '/'"
                       fit="cover"
                       :alt="dataInfo.name"
+                      width="700"
+                      height="338"
+                      loading="lazy"
+                      format="auto"
                     ></nuxt-img>
                   </div>
                   <div class="details_main_left_top_content_main_h5_name">
@@ -67,6 +71,10 @@
                   fit="cover"
                   :alt="dataInfo.questions[currentQuestionIndex].question"
                   class="details_main_left_top_content_main_questionImage"
+                  width="700"
+                  height="338"
+                  loading="lazy"
+                  format="auto"
                 ></nuxt-img>
                 <!-- 答案选项 -->
                 <div class="details_main_left_top_content_main_answer">
@@ -188,6 +196,10 @@
                   :src="item.icon || '/'"
                   fit="cover"
                   :alt="item.name"
+                  width="220"
+                  height="220"
+                  loading="lazy"
+                  format="auto"
                 ></nuxt-img>
               </div>
               <div class="details_main_left_btm_list_item_text">

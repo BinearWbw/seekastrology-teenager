@@ -20,10 +20,11 @@
                   <nuxt-img
                     :src="item.icon || '/'"
                     fit="cover"
-                    width="400"
-                    height="400"
-                    loading="lazy"
+                    width="590"
+                    height="590"
                     :alt="item.name"
+                    loading="lazy"
+                    format="auto"
                   ></nuxt-img>
                 </div>
                 <p>{{ item.name }}</p>
@@ -50,6 +51,7 @@
                     width="220"
                     height="220"
                     loading="lazy"
+                    format="auto"
                     :alt="item.name"
                   ></nuxt-img>
                 </div>

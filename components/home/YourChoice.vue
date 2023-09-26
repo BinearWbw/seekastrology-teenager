@@ -27,6 +27,8 @@
               width="218"
               height="154"
               :alt="item_i.name"
+              loading="lazy"
+              format="auto"
             ></nuxt-img>
           </div>
           <p class="title">{{ upPercase(item_i.name) }}</p>

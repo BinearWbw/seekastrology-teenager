@@ -25,8 +25,12 @@
               <nuxt-img
                 :src="dataInfo.icon || '/'"
                 fit="cover"
+                width="632"
+                height="324"
                 :alt="dataInfo.name"
                 class="details_main_left_top_content_img_pic"
+                loading="lazy"
+                format="auto"
               ></nuxt-img>
             </div>
 
@@ -119,7 +123,11 @@
                 :src="item.icon || '/'"
                 fit="cover"
                 :alt="item.name"
+                width="632"
+                height="225"
                 class="details_footer_list_item_img_pic"
+                loading="lazy"
+                format="auto"
               ></nuxt-img>
               <div class="details_footer_list_item_img_tarot">TAROT</div>
             </div>
@@ -140,8 +148,12 @@
               <nuxt-img
                 :src="item.icon || '/'"
                 fit="cover"
+                width="632"
+                height="225"
                 :alt="item.name"
                 class="details_footer_list_item_img_video"
+                loading="lazy"
+                format="auto"
               ></nuxt-img>
               <img
                 src="../../../assets/img/resources/play_icon.png"
@@ -193,36 +205,39 @@ export default {
   },
   mounted() {
     const dataDesc = this.$refs.dataDesc
-    const h3Element = dataDesc.querySelectorAll('h2')
 
-    h3Element.forEach((item, index) => {
-      // 顺序选择一个 id
-      const randomIdt = index % this.idAdArray.length //保证 index 的值都在 idAdArray.length 内
-      const randomId = this.idAdArray[randomIdt]
+    console.log('dataDesc', dataDesc)
+    if (dataDesc) {
+      const h3Element = dataDesc.querySelectorAll('h2')
+      h3Element.forEach((item, index) => {
+        // 顺序选择一个 id
+        const randomIdt = index % this.idAdArray.length //保证 index 的值都在 idAdArray.length 内
+        const randomId = this.idAdArray[randomIdt]
 
-      const adContainer = document.createElement('div')
-      adContainer.className = 'leftAdText'
+        const adContainer = document.createElement('div')
+        adContainer.className = 'leftAdText'
 
-      // 创建动态组件实例
-      const adComponent = new Vue({
-        render: (h) =>
-          h('google-observer-auto-ad', {
-            props: {
-              classNames: 'leftAdText',
-              id: randomId,
-            },
-          }),
+        // 创建动态组件实例
+        const adComponent = new Vue({
+          render: (h) =>
+            h('google-observer-auto-ad', {
+              props: {
+                classNames: 'leftAdText',
+                id: randomId,
+              },
+            }),
+        })
+
+        // 挂载动态组件
+        adComponent.$mount()
+
+        // 将动态组件的根 DOM 元素添加到容器
+        adContainer.appendChild(adComponent.$el)
+
+        // 在 h3 元素之前插入广告容器
+        item.parentNode.insertBefore(adContainer, item)
       })
-
-      // 挂载动态组件
-      adComponent.$mount()
-
-      // 将动态组件的根 DOM 元素添加到容器
-      adContainer.appendChild(adComponent.$el)
-
-      // 在 h3 元素之前插入广告容器
-      item.parentNode.insertBefore(adContainer, item)
-    })
+    }
   },
   async asyncData({ error, $apiList, params }) {
     try {
@@ -418,6 +433,7 @@ $spacing: 16px;
             &_video,
             &_pic {
               width: 100%;
+              height: auto;
               object-fit: cover;
             }
             &_play {

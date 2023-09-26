@@ -46,8 +46,12 @@
                   <nuxt-img
                     :src="item.icon || '/'"
                     fit="cover"
+                    width="338"
+                    height="225"
                     :alt="item.name"
                     class="resources_main_btm_main_item_img_pic"
+                    loading="lazy"
+                    format="auto"
                   ></nuxt-img>
                   <!-- <div class="resources_main_btm_main_item_img_tarot">
                   {{ item.main_label }}
@@ -73,8 +77,12 @@
                   <nuxt-img
                     :src="item.icon || '/'"
                     fit="cover"
+                    width="338"
+                    height="225"
                     :alt="item.name"
                     class="resources_main_btm_main_item_img_video"
+                    loading="lazy"
+                    format="auto"
                   ></nuxt-img>
                   <img
                     src="../../assets/img/resources/play_icon.png"

@@ -20,8 +20,11 @@
                 :class="{ 'card-img-rotate': item.desc_type == 2 }"
                 :src="item.icon || '/'"
                 fit="cover"
+                width="340"
+                height="680"
                 :alt="item.name"
                 loading="lazy"
+                format="auto"
               ></nuxt-img>
               <div class="card-text">{{ item.card_name }}</div>
             </div>

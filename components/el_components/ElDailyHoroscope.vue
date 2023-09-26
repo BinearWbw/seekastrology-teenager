@@ -15,8 +15,11 @@
               <nuxt-img
                 :src="horoscopeData[0]?.banner || '/'"
                 fit="cover"
+                width="686"
                 height="210"
                 :alt="horoscopeData[0]?.name"
+                loading="lazy"
+                format="auto"
               ></nuxt-img>
             </div>
             <p class="title">{{ horoscopeData[0]?.name }}</p>
@@ -34,8 +37,11 @@
               <nuxt-img
                 :src="horoscopeData[1]?.banner || '/'"
                 fit="cover"
+                width="686"
                 height="210"
                 :alt="horoscopeData[1]?.name"
+                loading="lazy"
+                format="auto"
               ></nuxt-img>
             </div>
             <p class="title">{{ horoscopeData[1]?.name }}</p>

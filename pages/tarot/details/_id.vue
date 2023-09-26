@@ -28,6 +28,10 @@
                 :src="cardsInfo.icon || '/'"
                 fit="cover"
                 :alt="cardsInfo.name"
+                width="300"
+                height="600"
+                loading="lazy"
+                format="auto"
               ></nuxt-img>
               <div class="card-text">{{ cardsInfo.name }}</div>
             </div>

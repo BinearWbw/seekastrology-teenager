@@ -29,8 +29,11 @@
             class="tip-img-item"
             :class="{ 'img-rotate': item.desc_type == 2 }"
             width="45"
+            height="120"
             :src="item.icon"
             :alt="item.name"
+            loading="lazy"
+            format="auto"
           ></nuxt-img>
         </div>
         <div class="tip-text">
@@ -129,6 +132,10 @@
             :key="index"
             :src="item.icon || '/'"
             :alt="item.name"
+            width="223"
+            height="447"
+            loading="lazy"
+            format="auto"
           ></nuxt-img>
         </div>
         <div class="handle-btn" id="HANDLEANSWER" @click="handleAnswer">
@@ -211,9 +218,10 @@
                   class="tip-img-item"
                   :class="{ 'img-rotate': showList[index].desc_type == 2 }"
                   :src="showList[index].icon"
-                  width="60"
-                  height="100"
+                  width="100"
+                  height="172"
                   loading="lazy"
+                  format="auto"
                 ></nuxt-img>
               </div>
             </div>
@@ -232,7 +240,7 @@
               />
             </div>
           </div>
-          <google-ad :id="'9971744541'" classNames="in-play-ad"></google-ad>
+          <!-- <google-ad :id="'9971744541'" classNames="in-play-ad"></google-ad> -->
         </div>
       </div>
     </div>
@@ -241,6 +249,7 @@
 
 <script>
 import { throttle } from 'lodash'
+import { adBreakInit, showAdBreak } from '@/utils/ad'
 export default {
   name: 'TarotPlay',
   props: {
@@ -311,7 +320,9 @@ export default {
       clickCount: 0,
     }
   },
-  mounted() {},
+  mounted() {
+    adBreakInit() // 插页广告
+  },
   methods: {
     handleInput() {
       if (!this.question.trim()) {
@@ -486,10 +497,14 @@ export default {
     handleAnswer() {
       if (this.isSelected) {
         this.bodyHidden('auto')
+        showAdBreak(this.adComplete)
         sessionStorage.setItem('cardsInfo', JSON.stringify(this.showList))
         window.changePageUrl = `/tarot/answer/?type=${this.type}`
         window.location = `/tarot/answer/?type=${this.type}`
       }
+    },
+    adComplete(data) {
+      console.log(data)
     },
   },
 }

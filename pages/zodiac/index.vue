@@ -24,7 +24,10 @@
                   :src="item.icon"
                   fit="cover"
                   width="180"
+                  height="126"
                   :alt="item.name"
+                  loading="lazy"
+                  format="auto"
                 ></nuxt-img>
               </a>
             </div>

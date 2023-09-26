@@ -16,7 +16,11 @@
               <nuxt-img
                 :src="item.icon || '/'"
                 fit="cover"
+                width="214"
+                height="124"
                 :alt="item.name"
+                loading="lazy"
+                format="auto"
               ></nuxt-img>
             </div>
             <div class="content_item_text">

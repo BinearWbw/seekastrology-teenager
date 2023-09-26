@@ -23,9 +23,12 @@
                 class="major-item-img"
                 :src="item.icon || '/'"
                 :alt="item.name"
-                loading="lazy"
+                width="194"
+                height="388"
                 :data-id="item.id"
                 :options="{ modifiers: { lazy: true } }"
+                loading="lazy"
+                format="auto"
               ></nuxt-img>
               <div class="item-text" :data-id="item.id">
                 {{ item.name }}
@@ -85,9 +88,12 @@
             class="minor-item-img"
             :src="item.icon || '/'"
             fit="cover"
+            width="194"
+            height="388"
             :alt="item.name"
             loading="lazy"
             :options="{ modifiers: { lazy: true } }"
+            format="auto"
           ></nuxt-img>
           <div class="item-text">{{ item.name }}</div>
         </a>

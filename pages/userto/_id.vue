@@ -72,6 +72,10 @@
                       fit="cover"
                       :class="{ imgs_rotate: item.cards[0]?.desc_type == 2 }"
                       :alt="item.cards[0]?.icon"
+                      width="114"
+                      height="228"
+                      loading="lazy"
+                      format="auto"
                     ></nuxt-img>
                     <i class="number">{{ item.cards?.length }}</i>
                   </div>

@@ -17,9 +17,11 @@
               <nuxt-img
                 :src="zodiacIData.banner || '/'"
                 fit="cover"
+                width="900"
                 height="325"
                 loading="lazy"
                 :alt="zodiacIData.name"
+                format="auto"
               ></nuxt-img>
             </div>
             <div class="right_minute">

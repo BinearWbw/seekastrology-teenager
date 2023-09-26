@@ -54,6 +54,7 @@
                       height="400"
                       :alt="cardDetails.card_name"
                       loading="lazy"
+                      format="auto"
                     ></nuxt-img>
                   </div>
                   <!-- <p class="names">{{ cardDetails.card_name }}</p> -->
