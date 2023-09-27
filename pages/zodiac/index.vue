@@ -428,7 +428,7 @@ export default {
           }
           .pairing {
             margin-top: 48 * $pr;
-            margin-bottom: 30 * $pr;
+            margin-bottom: 48 * $pr;
           }
         }
       }

@@ -702,10 +702,10 @@ export default {
         }
       }
       .mexplore {
-        padding-top: 24 * $pr;
+        padding-top: 48 * $pr;
       }
       .horoscope_more {
-        padding: 24 * $pr 0 0;
+        padding: 48 * $pr 0 0;
         h3 {
           font-size: 26 * $pr;
           line-height: 36 * $pr;
