@@ -409,6 +409,7 @@ export default {
                 )
                 // this.hideLoginBox() //隐藏
                 this.$emit('choce', false)
+                sessionStorage.setItem('recom', 'one')
                 window.changePageUrl = '/userto/2/'
                 window.location.href = '/userto/2/'
               } else if (res.code === 400) {

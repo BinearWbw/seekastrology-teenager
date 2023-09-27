@@ -149,6 +149,9 @@
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
+    <transition name="fade">
+      <el-recommend v-if="isRecomment" @recomment="setRecomment"></el-recommend>
+    </transition>
   </div>
 </template>
 
@@ -203,6 +206,7 @@ export default {
       activeTab: 0,
       isLoading: false,
       isSubscribe: true,
+      isRecomment: false,
     }
   },
   async asyncData({ error, $apiList, params }) {
@@ -238,6 +242,17 @@ export default {
   mounted() {
     // 获取当前用户的抽牌记录
     this.cardHisData()
+    this.$nextTick(() => {
+      const recom = sessionStorage.getItem('recom')
+      if (recom) {
+        this.isRecomment = true //显示推荐
+      }
+      if (this.isRecomment) {
+        // 不可以滚动
+        let bodyStyle = document.body.style
+        bodyStyle.overflow = 'hidden'
+      }
+    })
   },
   methods: {
     cardHisData() {
@@ -409,6 +424,13 @@ export default {
             })
           }
         })
+    },
+
+    setRecomment(val) {
+      this.isRecomment = val
+      //   可以滚动
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
     },
   },
 }
