@@ -8,7 +8,7 @@
               <img src="~/assets/img/login/openup.svg" alt="openup" />
             </i>
             <p class="title">Recommended</p>
-            <div class="content">
+            <div class="content" id="RECOMMENDATION">
               <a
                 :href="item.path"
                 v-for="(item, index) in captionData"
@@ -84,10 +84,10 @@ export default {
           path: '/astrology/',
         },
         {
-          name: 'Pet Compatibility',
-          texts: 'Get Your Compatibility',
-          imgs: require('../../assets/img/login/goat.png'),
-          path: '/',
+          name: 'OCTOBER 2023 Horoscopes',
+          texts: 'Get Your Reading',
+          imgs: require('../../assets/img/login/libra.avif'),
+          path: '/resources/details/attention--life-changing-eclipses--october-2023-horoscopes-for-all-12-signs--1313/',
         },
         {
           name: 'Free Quiz',
@@ -128,7 +128,6 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: rgb(0, 255, 255, 0.1);
     overflow-y: auto;
     &_scroll {
       position: absolute;
