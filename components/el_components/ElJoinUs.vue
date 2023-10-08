@@ -71,7 +71,6 @@ export default {}
 }
 @media (max-width: 1470px) {
   .join_main {
-    padding: 0 50px;
     .content {
       width: 100%;
     }
@@ -80,7 +79,6 @@ export default {}
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .join_main {
-    padding: 0;
     .content {
       border-radius: 24 * $pr;
       border: 1 * $pr solid rgba(255, 255, 255, 0.4);

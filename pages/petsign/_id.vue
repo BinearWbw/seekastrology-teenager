@@ -445,6 +445,9 @@ export default {
         }
       }
     }
+    .joins {
+      padding: 48px 50px 0;
+    }
   }
 }
 

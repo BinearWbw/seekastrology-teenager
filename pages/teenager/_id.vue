@@ -50,12 +50,14 @@
               </el-tabs>
             </div>
           </div>
-          <!-- <google-ad classNames="google_ad" :id="'8124091233'"></google-ad> -->
         </div>
       </div>
       <div class="mexplore">
         <el-explore-more />
       </div>
+      <transition name="fade">
+        <el-join-us class="joins"></el-join-us>
+      </transition>
       <div class="horoscope_more">
         <h3>Read More Horoscope</h3>
         <div class="more_main">
@@ -445,6 +447,9 @@ export default {
     .mexplore {
       padding-top: 48px;
     }
+    .joins {
+      padding-top: 96px;
+    }
     .horoscope_more {
       padding: 96px 0 0;
       h3 {
@@ -694,6 +699,9 @@ export default {
         }
       }
       .mexplore {
+        padding-top: 48 * $pr;
+      }
+      .joins {
         padding-top: 48 * $pr;
       }
       .horoscope_more {

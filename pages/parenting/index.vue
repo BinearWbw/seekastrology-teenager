@@ -1,0 +1,339 @@
+<template>
+  <div class="parenting">
+    <div class="parenting_main">
+      <google-ad classNames="google_ad_top" :id="'9680645670'" />
+      <div class="baby">
+        <div class="choice">
+          <div class="choice__title">
+            <h3>Choose Your Zodiac Sign</h3>
+          </div>
+          <ul class="choice__main">
+            <li v-for="item_i in parentingData" :key="item_i.id">
+              <a
+                class="fade choice__main__a"
+                :href="`/horroscope/${item_i.name
+                  .replace(/[^a-zA-Z0-9\\s]/g, '-')
+                  .toLowerCase()}-${item_i.id}/`"
+                data-aos="zoom-out-up"
+              >
+                <div class="img__list">
+                  <!-- <nuxt-img
+                    :src="item_i.icon || '/'"
+                    fit="cover"
+                    width="218"
+                    height="154"
+                    :alt="item_i.name"
+                    loading="lazy"
+                    format="auto"
+                  ></nuxt-img> -->
+                  <img :src="item_i.icon || '/'" :alt="item_i.name" />
+                </div>
+                <p class="title">{{ item_i.name }}</p>
+                <p class="time">{{ item_i.dates }}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      parentingData: [
+        {
+          name: 'Aries',
+          id: 1,
+          icon: require('../../assets/img/parenting/aries.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Taurus',
+          id: 2,
+          icon: require('../../assets/img/parenting/taurus.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Gemini',
+          id: 3,
+          icon: require('../../assets/img/parenting/gemini.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Cancer',
+          id: 4,
+          icon: require('../../assets/img/parenting/cancar.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Leo',
+          id: 5,
+          icon: require('../../assets/img/parenting/leo.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Virgo',
+          id: 6,
+          icon: require('../../assets/img/parenting/virgo.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Libra',
+          id: 7,
+          icon: require('../../assets/img/parenting/libra.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Scorpic',
+          id: 8,
+          icon: require('../../assets/img/parenting/scorpic.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Sagittarius',
+          id: 9,
+          icon: require('../../assets/img/parenting/sagittarius.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Capricorn',
+          id: 10,
+          icon: require('../../assets/img/parenting/capricorn.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Aquarius',
+          id: 11,
+          icon: require('../../assets/img/parenting/aquarius.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+        {
+          name: 'Pisces',
+          id: 12,
+          icon: require('../../assets/img/parenting/pisces.png'),
+          dates: 'Mar 21 - Apr 20',
+        },
+      ],
+    }
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+@use 'sass:math';
+.parenting {
+  &_main {
+    .google_ad_top {
+      width: 1200px;
+      height: 315px;
+      margin: 48px auto 0;
+    }
+    .baby {
+      width: 1400px;
+      margin: 0 auto;
+      &_ting {
+        width: 100%;
+      }
+      .choice {
+        width: 1400px;
+        margin: 48px auto 0;
+        &__title {
+          padding-bottom: 16px;
+          h3 {
+            color: #fff;
+            text-align: center;
+            font-family: 'Cinzel Decorative';
+            font-size: 36px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 48px;
+          }
+          p {
+            font-family: 'Rubik';
+            font-size: 22px;
+            line-height: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+          }
+          &.to_page_padding {
+            padding-bottom: 8px !important;
+          }
+        }
+        &__main {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 16px;
+          li {
+            box-sizing: border-box;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+            .choice__main__a {
+              box-sizing: border-box;
+              height: 100%;
+              display: block;
+              padding-bottom: 40px;
+              .img__list {
+                width: 114px;
+                height: 114px;
+                border-radius: 6px;
+                overflow: hidden;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  transition: transform 0.3s;
+                }
+              }
+              .title {
+                font-family: 'Rubik';
+                font-size: 22px;
+                line-height: 30px;
+                color: #fff;
+                text-align: center;
+              }
+              .time {
+                font-family: 'Rubik';
+                font-size: 14px;
+                line-height: 18px;
+                color: rgba(255, 255, 255, 0.6);
+                text-align: center;
+              }
+            }
+            &:hover {
+              border-color: rgba(255, 255, 255, 0.6);
+              .img__list {
+                img {
+                  transform: scale(1.2);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1435px) {
+  .parenting {
+    &_main {
+      .google_ad_top {
+        max-width: 1200px;
+        width: 100%;
+        height: 315px;
+        margin: 48px auto 0;
+      }
+      .baby {
+        width: 100%;
+        margin: 0 auto;
+        .choice {
+          width: 100%;
+          padding: 0 30px;
+          &__main {
+            grid-template-columns: repeat(4, auto);
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 947px) {
+  .parenting {
+    &_main {
+      .baby {
+        .choice {
+          &__main {
+            grid-template-columns: repeat(3, auto);
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .parenting {
+    &_main {
+      padding: 0 16 * $pr;
+      .google_ad_top {
+        max-width: auto;
+        height: 130 * $pr;
+        margin: 0 auto;
+      }
+      .baby {
+        .choice {
+          margin: 48 * $pr auto 0;
+          &__title {
+            padding-bottom: 16 * $pr;
+            h3 {
+              font-size: 26 * $pr;
+              line-height: 36 * $pr;
+            }
+            .h5_size {
+              font-size: 26 * $pr;
+              line-height: 36 * $pr;
+            }
+            p {
+              font-size: 14 * $pr;
+              line-height: 18 * $pr;
+            }
+            &.to_page_padding {
+              padding-bottom: 8 * $pr !important;
+            }
+          }
+          &__main {
+            grid-template-columns: repeat(3, 1fr);
+            row-gap: 0;
+            column-gap: 11 * $pr;
+            li {
+              width: 100%;
+              height: 147 * $pr;
+              margin-bottom: 24 * $pr;
+              border: 0;
+              .choice__main__a {
+                height: 100%;
+                padding-bottom: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                .img__list {
+                  width: 100%;
+                  height: 100 * $pr;
+                  margin-bottom: auto;
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain cover;
+                  }
+                }
+                .title {
+                  font-size: 16 * $pr;
+                  line-height: 22 * $pr;
+                }
+                .time {
+                  font-size: 12 * $pr;
+                  line-height: 16 * $pr;
+                }
+              }
+              &:hover {
+                .img__list {
+                  img {
+                    transform: scale(1.1);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
