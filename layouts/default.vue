@@ -51,8 +51,7 @@ export default {
   methods: {
     getLocation() {
       let cookiesPrivacyLoc = localStorage.getItem('cookiesPrivacy')
-      let cookiesPrivacySes = sessionStorage.getItem('cookiesPrivacy')
-      if (!cookiesPrivacyLoc && !cookiesPrivacySes) {
+      if (!cookiesPrivacyLoc) {
         this.$apiList.home
           .getGameLocation()
           .then((res) => {
