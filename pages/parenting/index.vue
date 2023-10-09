@@ -16,17 +16,27 @@
                   .toLowerCase()}-${item_i.id}/`"
                 data-aos="zoom-out-up"
               >
-                <div class="img__list">
-                  <!-- <nuxt-img
-                    :src="item_i.icon || '/'"
-                    fit="cover"
-                    width="218"
-                    height="154"
-                    :alt="item_i.name"
-                    loading="lazy"
-                    format="auto"
-                  ></nuxt-img> -->
-                  <img :src="item_i.icon || '/'" :alt="item_i.name" />
+                <div class="imgs">
+                  <div class="img__list">
+                    <!-- <nuxt-img
+                      :src="item_i.icon || '/'"
+                      fit="cover"
+                      width="218"
+                      height="154"
+                      :alt="item_i.name"
+                      loading="lazy"
+                      format="auto"
+                    ></nuxt-img> -->
+                    <div class="dose_img">
+                      <img :src="item_i.icon || '/'" :alt="item_i.name" />
+                      <i class="layer"></i>
+                    </div>
+                    <img
+                      class="icon_img"
+                      :src="item_i.icon_mini"
+                      :alt="item_i.name"
+                    />
+                  </div>
                 </div>
                 <p class="title">{{ item_i.name }}</p>
                 <p class="time">{{ item_i.dates }}</p>
@@ -34,7 +44,10 @@
             </li>
           </ul>
         </div>
+        <el-explore-more class="explore" />
+        <el-join-us class="joins"></el-join-us>
       </div>
+      <tarot-all-tarot class="all_tarot"></tarot-all-tarot>
     </div>
   </div>
 </template>
@@ -48,72 +61,84 @@ export default {
           name: 'Aries',
           id: 1,
           icon: require('../../assets/img/parenting/aries.png'),
+          icon_mini: require('../../assets/img/parenting/aries_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Taurus',
           id: 2,
           icon: require('../../assets/img/parenting/taurus.png'),
+          icon_mini: require('../../assets/img/parenting/taurus_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Gemini',
           id: 3,
           icon: require('../../assets/img/parenting/gemini.png'),
+          icon_mini: require('../../assets/img/parenting/gemini_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Cancer',
           id: 4,
           icon: require('../../assets/img/parenting/cancar.png'),
+          icon_mini: require('../../assets/img/parenting/cancer_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Leo',
           id: 5,
           icon: require('../../assets/img/parenting/leo.png'),
+          icon_mini: require('../../assets/img/parenting/leo_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Virgo',
           id: 6,
           icon: require('../../assets/img/parenting/virgo.png'),
+          icon_mini: require('../../assets/img/parenting/virgin_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Libra',
           id: 7,
           icon: require('../../assets/img/parenting/libra.png'),
+          icon_mini: require('../../assets/img/parenting/libra_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Scorpic',
           id: 8,
           icon: require('../../assets/img/parenting/scorpic.png'),
+          icon_mini: require('../../assets/img/parenting/scorpio_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Sagittarius',
           id: 9,
           icon: require('../../assets/img/parenting/sagittarius.png'),
+          icon_mini: require('../../assets/img/parenting/sagittarius_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Capricorn',
           id: 10,
           icon: require('../../assets/img/parenting/capricorn.png'),
+          icon_mini: require('../../assets/img/parenting/capricorn_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Aquarius',
           id: 11,
           icon: require('../../assets/img/parenting/aquarius.png'),
+          icon_mini: require('../../assets/img/parenting/aquarius_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
         {
           name: 'Pisces',
           id: 12,
           icon: require('../../assets/img/parenting/pisces.png'),
+          icon_mini: require('../../assets/img/parenting/pisces_icon.png'),
           dates: 'Mar 21 - Apr 20',
         },
       ],
@@ -134,9 +159,7 @@ export default {
     .baby {
       width: 1400px;
       margin: 0 auto;
-      &_ting {
-        width: 100%;
-      }
+      padding: 0 0 48px;
       .choice {
         width: 1400px;
         margin: 48px auto 0;
@@ -169,24 +192,57 @@ export default {
           gap: 16px;
           li {
             box-sizing: border-box;
-            border: 1px solid transparent;
             border-radius: 6px;
             transition: border-color 0.3s;
+            transition: transform 0.3s, background-color 0.3s ease-out;
             .choice__main__a {
               box-sizing: border-box;
               height: 100%;
               display: block;
-              padding-bottom: 40px;
-              .img__list {
-                width: 114px;
-                height: 114px;
-                border-radius: 6px;
-                overflow: hidden;
-                img {
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
+              padding-bottom: 32px;
+              .imgs {
+                display: flex;
+                justify-content: center;
+                padding: 20px 0;
+                .img__list {
+                  width: 114px;
+                  height: 114px;
+                  border-radius: 6px;
+                  overflow: hidden;
                   transition: transform 0.3s;
+                  position: relative;
+                  .dose_img {
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    > img {
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                    }
+                    .layer {
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 100%;
+                      border-radius: 50%;
+                      background: rgba(0, 0, 0, 0.5);
+                      opacity: 0;
+                      transition: opacity 0.3s ease-out;
+                    }
+                  }
+                  .icon_img {
+                    width: 80px;
+                    height: 50px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    object-fit: cover;
+                    opacity: 0;
+                    transition: opacity 0.3s ease-out;
+                  }
                 }
               }
               .title {
@@ -205,16 +261,36 @@ export default {
               }
             }
             &:hover {
-              border-color: rgba(255, 255, 255, 0.6);
-              .img__list {
-                img {
-                  transform: scale(1.2);
+              transform: translateY(-10px);
+              background-color: rgba(255, 255, 255, 0.08);
+              .choice__main__a {
+                .imgs {
+                  .img__list {
+                    transform: scale(1.1);
+                    .dose_img {
+                      .layer {
+                        opacity: 1;
+                      }
+                    }
+                    .icon_img {
+                      opacity: 1;
+                    }
+                  }
                 }
               }
             }
           }
         }
       }
+      .explore {
+        margin-top: 96px;
+      }
+      .joins {
+        margin-top: 96px;
+      }
+    }
+    .all_tarot {
+      padding-bottom: 96px;
     }
   }
 }
@@ -230,11 +306,13 @@ export default {
       .baby {
         width: 100%;
         margin: 0 auto;
+        padding: 0 30px 48px;
         .choice {
           width: 100%;
           padding: 0 30px;
           &__main {
-            grid-template-columns: repeat(4, auto);
+            width: 100%;
+            grid-template-columns: repeat(4, 220px);
             justify-content: center;
           }
         }
@@ -248,7 +326,7 @@ export default {
       .baby {
         .choice {
           &__main {
-            grid-template-columns: repeat(3, auto);
+            grid-template-columns: repeat(3, 220px);
             justify-content: center;
           }
         }
@@ -261,15 +339,16 @@ export default {
   $pr: math.div(1vw, 3.75);
   .parenting {
     &_main {
-      padding: 0 16 * $pr;
       .google_ad_top {
         max-width: auto;
         height: 130 * $pr;
         margin: 0 auto;
       }
       .baby {
+        padding: 0 16 * $pr 0;
         .choice {
           margin: 48 * $pr auto 0;
+          padding: 0;
           &__title {
             padding-bottom: 16 * $pr;
             h3 {
@@ -303,14 +382,22 @@ export default {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
-                .img__list {
-                  width: 100%;
-                  height: 100 * $pr;
-                  margin-bottom: auto;
-                  img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain cover;
+                padding-bottom: 8 * $pr;
+                .imgs {
+                  display: flex;
+                  justify-content: center;
+                  padding: 0 0 16 * $pr;
+                  .img__list {
+                    width: 71 * $pr;
+                    height: 71 * $pr;
+                    border-radius: 6 * $pr;
+                    overflow: hidden;
+                    transition: transform 0.3s;
+                    position: relative;
+                    .icon_img {
+                      width: 40 * $pr;
+                      height: 30 * $pr;
+                    }
                   }
                 }
                 .title {
@@ -322,16 +409,18 @@ export default {
                   line-height: 16 * $pr;
                 }
               }
-              &:hover {
-                .img__list {
-                  img {
-                    transform: scale(1.1);
-                  }
-                }
-              }
             }
           }
         }
+        .explore {
+          margin-top: 48 * $pr;
+        }
+        .joins {
+          margin-top: 48 * $pr;
+        }
+      }
+      .all_tarot {
+        padding-bottom: 48 * $pr;
       }
     }
   }
