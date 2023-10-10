@@ -16,7 +16,8 @@
             :class="{
               active:
                 item.path == $route.path ||
-                (item.path !== '/' && $route.path.includes(item.path)),
+                (item.path !== '/' && $route.path.includes(item.path)) ||
+                verificationChild(item.children),
             }"
             :title="item.title"
             v-for="(item, index) in menu"
@@ -36,8 +37,26 @@
                   v-for="(item_i, index_i) in item.children"
                   :href="`${item_i.href}`"
                   :key="index_i"
+                  @mouseenter="showChildren(index_i)"
+                  @mouseleave="hideChildren"
                 >
                   {{ item_i.title }}
+                  <transition name="fade">
+                    <div
+                      class="children_mini"
+                      v-if="
+                        isDropdownChildren === index_i && item_i.childrenMini
+                      "
+                    >
+                      <a
+                        class="children_mini_a"
+                        v-for="(item_s, index_s) in item_i.childrenMini"
+                        :key="index_s"
+                        :href="`${item_s.href}`"
+                        >{{ item_s.title }}</a
+                      >
+                    </div>
+                  </transition>
                 </a>
               </div>
             </transition>
@@ -68,6 +87,7 @@ export default {
       visibleMenu: false,
       searchInput: '',
       isDropdownVisible: -1,
+      isDropdownChildren: -1,
       isScrolled: false,
       menu: [
         {
@@ -79,6 +99,18 @@ export default {
           title: 'Horroscope',
           path: '/horroscope/',
           href: '/horroscope/aries-1/',
+          children: [
+            {
+              title: 'Teenager',
+              path: '/teenager/',
+              href: '/teenager/aries-1/',
+            },
+            {
+              title: 'Pet',
+              path: '/petsign/',
+              href: '/petsign/aries-1/',
+            },
+          ],
         },
         {
           title: 'Zodiac Signs',
@@ -87,64 +119,76 @@ export default {
           childrenShow: false,
           children: [
             {
-              title: 'Aries ( Mar 21 - Apr 19 )',
-              path: '/zodiac/details/aries-1/',
-              href: '/zodiac/details/aries-1/',
+              title: 'Zodiac Signs',
+              path: '/zodiac/',
+              href: '/zodiac/',
+              childrenMini: [
+                {
+                  title: 'Aries ( Mar 21 - Apr 19 )',
+                  path: '/zodiac/details/aries-1/',
+                  href: '/zodiac/details/aries-1/',
+                },
+                {
+                  title: 'Taurus (Apr 20 - May 20 )',
+                  path: '/zodiac/details/taurus-2/',
+                  href: '/zodiac/details/taurus-2/',
+                },
+                {
+                  title: 'Gemini ( May 21 - Jun 20 )',
+                  path: '/zodiac/details/gemini-3/',
+                  href: '/zodiac/details/gemini-3/',
+                },
+                {
+                  title: 'Cancer ( Jun 21 - Jul 22 )',
+                  path: '/zodiac/details/cancer-4/',
+                  href: '/zodiac/details/cancer-4/',
+                },
+                {
+                  title: 'Leo ( Jul 23 - Aug 22 )',
+                  path: '/zodiac/details/leo-5/',
+                  href: '/zodiac/details/leo-5/',
+                },
+                {
+                  title: 'Virgo ( Aug 23 - Sep 22 )',
+                  path: '/zodiac/details/virgo-6/',
+                  href: '/zodiac/details/virgo-6/',
+                },
+                {
+                  title: 'Libra ( Sep 23 - Oct 22 )',
+                  path: '/zodiac/details/libra-7/',
+                  href: '/zodiac/details/libra-7/',
+                },
+                {
+                  title: 'Scorpio ( Oct 23 - Nov 21 )',
+                  path: '/zodiac/details/scorpio-8/',
+                  href: '/zodiac/details/scorpio-8/',
+                },
+                {
+                  title: 'Sagittarius ( Nov 22 - Dec 21 )',
+                  path: '/zodiac/details/sagittarius-9/',
+                  href: '/zodiac/details/sagittarius-9/',
+                },
+                {
+                  title: 'Capricorn ( Dec 22 - Jan 19 )',
+                  path: '/zodiac/details/capricorn-10/',
+                  href: '/zodiac/details/capricorn-10/',
+                },
+                {
+                  title: 'Aquarius ( Jan 20 - Feb 18 )',
+                  path: '/zodiac/details/aquarius-11/',
+                  href: '/zodiac/details/aquarius-11/',
+                },
+                {
+                  title: 'Pisces ( Feb 19 - Mar 20 )',
+                  path: '/zodiac/details/pisces-12/',
+                  href: '/zodiac/details/pisces-12/',
+                },
+              ],
             },
             {
-              title: 'Taurus (Apr 20 - May 20 )',
-              path: '/zodiac/details/taurus-2/',
-              href: '/zodiac/details/taurus-2/',
-            },
-            {
-              title: 'Gemini ( May 21 - Jun 20 )',
-              path: '/zodiac/details/gemini-3/',
-              href: '/zodiac/details/gemini-3/',
-            },
-            {
-              title: 'Cancer ( Jun 21 - Jul 22 )',
-              path: '/zodiac/details/cancer-4/',
-              href: '/zodiac/details/cancer-4/',
-            },
-            {
-              title: 'Leo ( Jul 23 - Aug 22 )',
-              path: '/zodiac/details/leo-5/',
-              href: '/zodiac/details/leo-5/',
-            },
-            {
-              title: 'Virgo ( Aug 23 - Sep 22 )',
-              path: '/zodiac/details/virgo-6/',
-              href: '/zodiac/details/virgo-6/',
-            },
-            {
-              title: 'Libra ( Sep 23 - Oct 22 )',
-              path: '/zodiac/details/libra-7/',
-              href: '/zodiac/details/libra-7/',
-            },
-            {
-              title: 'Scorpio ( Oct 23 - Nov 21 )',
-              path: '/zodiac/details/scorpio-8/',
-              href: '/zodiac/details/scorpio-8/',
-            },
-            {
-              title: 'Sagittarius ( Nov 22 - Dec 21 )',
-              path: '/zodiac/details/sagittarius-9/',
-              href: '/zodiac/details/sagittarius-9/',
-            },
-            {
-              title: 'Capricorn ( Dec 22 - Jan 19 )',
-              path: '/zodiac/details/capricorn-10/',
-              href: '/zodiac/details/capricorn-10/',
-            },
-            {
-              title: 'Aquarius ( Jan 20 - Feb 18 )',
-              path: '/zodiac/details/aquarius-11/',
-              href: '/zodiac/details/aquarius-11/',
-            },
-            {
-              title: 'Pisces ( Feb 19 - Mar 20 )',
-              path: '/zodiac/details/pisces-12/',
-              href: '/zodiac/details/pisces-12/',
+              title: 'Parenting',
+              path: '/parenting/',
+              href: '/parenting/',
             },
           ],
         },
@@ -178,6 +222,11 @@ export default {
               title: 'Tarot Cards',
               path: '/tarot/cards/',
               href: '/tarot/cards/',
+            },
+            {
+              title: 'Ai Tarot',
+              path: '/tarot/',
+              href: '/tarot/',
             },
           ],
         },
@@ -239,6 +288,18 @@ export default {
     },
     handleScroll() {
       this.isScrolled = window.scrollY > 10
+    },
+    showChildren(item) {
+      this.isDropdownChildren = item
+    },
+    hideChildren() {
+      this.isDropdownChildren = -1
+    },
+    //验证子级的路由
+    verificationChild(items) {
+      if (items) {
+        return items.some((it) => this.$route.path.includes(it.path))
+      }
     },
   },
 }
@@ -353,11 +414,6 @@ export default {
               color: rgba(255, 255, 255, 0.6);
               position: relative;
               padding: 0 20px;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              display: -webkit-box;
-              -webkit-line-clamp: 1;
-              -webkit-box-orient: vertical;
               transition: background-color 0.3s, color 0.3s ease-in-out;
               &::after {
                 content: '';
@@ -376,6 +432,52 @@ export default {
               &:hover {
                 color: #fff;
                 background-color: rgba(255, 255, 255, 0.2);
+              }
+              .children_mini {
+                position: absolute;
+                right: -260px;
+                top: -10px;
+                background-color: #000;
+                border-radius: 6px;
+                &_a {
+                  position: relative;
+                  display: block;
+                  max-width: 260px;
+                  height: 42px;
+                  display: block;
+                  font-family: 'Rubik';
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 16px;
+                  line-height: 42px;
+                  color: rgba(255, 255, 255, 0.6);
+                  padding: 0 20px;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 1;
+                  -webkit-box-orient: vertical;
+                  cursor: pointer;
+                  &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(
+                      90deg,
+                      rgba(255, 255, 255, 0) 0%,
+                      rgba(255, 255, 255, 0.2) 50.52%,
+                      rgba(255, 255, 255, 0) 100%
+                    );
+                  }
+                  &:hover {
+                    color: #fff;
+                    border-radius: 6px;
+                    background-color: rgba(255, 255, 255, 0.2);
+                  }
+                }
               }
             }
           }

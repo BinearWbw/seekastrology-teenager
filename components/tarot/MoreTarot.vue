@@ -57,6 +57,18 @@
           <button class="button">Read More</button>
         </a>
       </div>
+
+      <div class="more-tarot-items" v-show="type != 0">
+        <a :href="`/tarot/type/${3}/`" class="link">
+          <img src="~/assets/img/tarot/ai_tarot.webp" alt="general" />
+          <p class="item-title">Ai Tarot</p>
+          <p class="item-sub-title">
+            Welcome to the seeastrology tarot chatbot! ✨ Please choose a card
+            that resonates with you the most.
+          </p>
+          <button class="button">Read More</button>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -69,6 +81,9 @@ export default {
       type: [Number, String],
       default: '0',
     },
+  },
+  mounted() {
+    console.log('当前页面的type', this.type)
   },
 }
 </script>
@@ -139,6 +154,11 @@ export default {
     font-size: 14px;
     line-height: 18px;
     color: rgba(255, 255, 255, 0.6);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 }
 .button {

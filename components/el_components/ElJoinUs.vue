@@ -4,17 +4,40 @@
       <div class="content_main">
         <div class="title">Join us</div>
         <p class="h5 tips">Get your daily horoscope for free</p>
-        <button class="button">
+        <button class="button" @click="formTouched">
           <span class="pc">Get your daily horoscope for free</span>
           <span class="h5">Join now</span>
         </button>
       </div>
     </div>
+    <transition name="fade">
+      <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+    </transition>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      perform: false,
+    }
+  },
+  methods: {
+    // 登录弹出
+    formTouched() {
+      this.perform = true
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
+    },
+    // 登录隐藏
+    integerFormat() {
+      this.perform = false
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
