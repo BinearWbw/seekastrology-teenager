@@ -137,8 +137,6 @@ export default {
         border-radius: 17px;
         background-color: rgba(18, 7, 36, 0.9);
         border: 1px solid rgba(255, 255, 255, 0.2);
-        overflow: hidden;
-        z-index: 20000;
         .left_tab_list {
           width: 100%;
           padding: 6px 0 6px 24px;

@@ -20,21 +20,14 @@
           </div>
           <div class="list_main">
             <div class="list_tabs">
-              <el-tabs
-                :tabs="horroData"
-                :tabsId="tabsId"
-                @click="correspondingTime"
-              >
+              <el-tabs :tabs="horroData">
                 <template>
                   <div class="text_form">
-                    <div class="format_date">
-                      {{ $utils.horoscopeFormatDate(currentTime) }}
-                    </div>
                     <div
                       class="texts"
                       :class="{ texts_more: openExpand }"
                       ref="textMore"
-                      v-html="moreData[comentIds].texts"
+                      v-html="petlistData"
                     ></div>
                     <div class="more_btn" v-if="aoMore" @click="setOpenExpand">
                       {{ openExpand ? 'Show Less' : 'Show More' }}
@@ -44,7 +37,6 @@
               </el-tabs>
             </div>
           </div>
-          <!-- <google-ad classNames="google_ad" :id="'8124091233'"></google-ad> -->
         </div>
       </div>
       <div class="mexplore">
@@ -142,11 +134,7 @@ export default {
           type: 'w',
         },
       ],
-      comentId: 0,
-      currentTime: 'w',
-      comentIdSession: 0,
       isLoading: false,
-      isSetTimes: null,
       aoMore: false,
       openExpand: false,
       timeout: null,
@@ -155,99 +143,39 @@ export default {
   async asyncData({ error, $apiList, params }) {
     try {
       let ids = 1,
-        currentName = '',
-        comentIds = 0,
-        regey = /-([0-9]+)-/,
-        madeId = null,
-        tabsId = 0
-      let [youlistData] = await Promise.all([
+        currentName = ''
+      let [petlistData] = await Promise.all([
         $apiList.home
-          .getZodiacHoroscope({
+          .getZodiacHoroscopeWeekly({
             origin: process.env.origin,
             id: params.id.replace(
               /^.*?(\d*)$/,
               (str, match, index) => match || '0'
             ),
-            kind: 'w',
+            type: 'pet',
           })
           .then((res) => {
-            ids = res.id
-            madeId = regey.exec(params.id)
-            if (madeId && madeId[1] !== '5') {
-              comentIds = madeId[1]
-            }
-            if (madeId && madeId[1] == '5') {
-              tabsId = madeId[1]
-            }
+            ids = params.id.replace(
+              /^.*?(\d*)$/,
+              (str, match, index) => match || '0'
+            )
             currentName = res.name
-            return res.horoscope
+            return res.weekly
           }),
       ])
       return {
         ids,
-        youlistData,
+        petlistData,
         currentName,
-        comentIds,
-        tabsId,
       }
     } catch (e) {
       error({ statusCode: e.code, message: e.message })
     }
   },
-  computed: {
-    moreData() {
-      return [
-        {
-          name: 'Daily',
-          title: 'Daily Horoscope',
-          imgUrl: require('~/assets/img/horroscope/daily_horoscope.png'),
-          texts: this.youlistData?.general,
-        },
-        {
-          name: 'Love',
-          title: 'Love Horoscope',
-          imgUrl: require('~/assets/img/horroscope/love_horoscope.png'),
-          texts: this.youlistData?.love,
-        },
-        {
-          name: 'Health',
-          title: 'Health Horoscope',
-          imgUrl: require('~/assets/img/horroscope/health_horoscope.png'),
-          texts: this.youlistData?.health,
-        },
-        {
-          name: 'Career',
-          title: 'Career Horoscope',
-          imgUrl: require('~/assets/img/horroscope/career_horoscope.png'),
-          texts: this.youlistData?.career,
-        },
-        {
-          name: 'Money',
-          title: 'Money Horoscope',
-          imgUrl: require('~/assets/img/horroscope/money_horoscope.png'),
-          texts: this.youlistData?.finances,
-        },
-      ]
-    },
-  },
   mounted() {
     this.getCurrentTexts()
   },
   methods: {
-    async getHoroscopeData(id = 1, kind = 'w') {
-      this.isLoading = true
-      await this.$apiList.home
-        .getZodiacHoroscope({
-          origin: process.env.origin,
-          id,
-          kind,
-        })
-        .then((res) => {
-          this.isLoading = false
-          this.youlistData = res.horoscope
-          this.getCurrentTexts()
-        })
-    },
     handleDropdownChange(option) {
       // 点击下拉框
       this.ids = option.id
@@ -262,27 +190,6 @@ export default {
         .replace(/[^a-zA-Z0-9\\s]/g, '-')
         .toLowerCase()}-${option.id}/`
       this.isLoading = true
-    },
-    setCorresponding(i) {
-      // 点击其他运势
-      this.$nextTick(() => {
-        this.isLoading = true
-        this.isSetTimes = setTimeout(() => {
-          this.comentIds = i
-          this.isLoading = false
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
-        }, 500)
-        this.getCurrentTexts()
-      })
-    },
-    correspondingTime(i) {
-      // 点击tabs
-      this.currentTime = i.type
-      this.getHoroscopeData(this.ids, i.type)
-      this.openExpand = false
     },
     toUpperBig(str) {
       return str?.charAt(0).toUpperCase() + str?.slice(1)
@@ -305,7 +212,6 @@ export default {
     },
   },
   destroyed() {
-    if (this.isSetTimes) clearTimeout(this.isSetTimes)
     if (this.timeout) clearTimeout(this.timeout)
   },
 }
@@ -370,12 +276,7 @@ export default {
             width: 100%;
             .text_form {
               padding-top: 24px;
-              .format_date {
-                display: inline;
-                font-family: 'Rubik Medium';
-                font-style: normal;
-                font-size: 16px;
-                line-height: 28px;
+              :deep(strong) {
                 color: #9747ff;
               }
               .texts {

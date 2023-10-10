@@ -4,10 +4,17 @@
       <google-ad classNames="google_ad_top" :id="'9680645670'" />
       <div class="mains">
         <div class="remains">
-          <div class="remains_left">aas</div>
+          <div class="remains_left">
+            <h3 class="h3_title">{{ nameSign }} Baby and Child Horoscopes</h3>
+            <div
+              class="parentingText"
+              ref="parentingGoogle"
+              v-html="parentingDatails"
+            ></div>
+          </div>
           <div class="remains_right">
             <el-pairing-two class="pairing"></el-pairing-two>
-            <google-ad classNames="google_ad_right" :id="''" />
+            <google-ad classNames="google_ad_right" :id="'9001766394'" />
             <div class="choices">
               <home-your-choice-mini></home-your-choice-mini>
             </div>
@@ -20,9 +27,82 @@
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   data() {
-    return {}
+    return {
+      idAdArray: ['4256255492', '8383202764', '3000133706'],
+    }
+  },
+  // 获取育儿详情
+  async asyncData({ error, $apiList, params }) {
+    try {
+      let nameSign = ''
+      let [parentingDatails] = await Promise.all([
+        $apiList.home
+          .getZodiacDetails({
+            origin: process.env.origin,
+            id: params.id.replace(
+              /^.*?(\d*)$/,
+              (str, match, index) => match || '0'
+            ),
+          })
+          .then((res) => {
+            nameSign = res.name?.charAt(0).toUpperCase() + res.name?.slice(1)
+            return res.children_horoscopes
+          }),
+      ])
+      return {
+        nameSign,
+        parentingDatails,
+      }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.message })
+    }
+  },
+  mounted() {
+    this.getGoogleAd()
+  },
+  methods: {
+    getGoogleAd() {
+      this.$nextTick(() => {
+        const parentingGoogle = this.$refs.parentingGoogle
+        const h2Element = parentingGoogle.querySelectorAll('h2')
+        let counter = 0 // 用于保证每个广告id按顺序使用
+        let threeeIndex = [2, 4, 6] // 指定要展示广告的索引
+        h2Element.forEach((item, index) => {
+          const threeeDa = threeeIndex.includes(index)
+          if (threeeDa) {
+            // 顺序选择一个 id
+            const randomId = this.idAdArray[counter % this.idAdArray.length]
+            counter++
+
+            const adContainer = document.createElement('div')
+            adContainer.className = 'leftAdTextMain'
+
+            // 创建动态组件实例
+            const adComponent = new Vue({
+              render: (h) =>
+                h('google-observer-auto-ad', {
+                  props: {
+                    classNames: 'leftAdTextMain',
+                    id: randomId,
+                  },
+                }),
+            })
+
+            // 挂载动态组件
+            adComponent.$mount()
+
+            // 将动态组件的根 DOM 元素添加到容器
+            adContainer.appendChild(adComponent.$el)
+
+            // 在 h4 元素之前插入广告容器
+            item.parentNode.insertBefore(adContainer, item)
+          }
+        })
+      })
+    },
   },
 }
 </script>
@@ -47,6 +127,55 @@ export default {
         &_left {
           flex: 1;
           padding-right: 47px;
+          .h3_title {
+            color: #fff;
+            font-family: 'Cinzel Decorative';
+            font-size: 36px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 48px;
+            margin-bottom: 24px;
+          }
+          .parentingText {
+            :deep(h2) {
+              color: #fff;
+              font-family: 'Rubik';
+              font-size: 22px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 30px;
+              margin-top: 24px;
+            }
+            :deep(h3),
+            :deep(h4) {
+              color: #fff;
+              font-family: 'Rubik';
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 24px;
+              margin-top: 8px;
+            }
+            :deep(p),
+            :deep(li) {
+              color: rgba(255, 255, 255, 0.6);
+              font-family: 'Rubik';
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 28px;
+            }
+            :deep(.leftAdTextMain) {
+              .leftAdTextMain {
+                margin-top: 24px;
+                .title {
+                  height: 25px;
+                  margin: 0;
+                  color: #fff;
+                }
+              }
+            }
+          }
         }
         &_right {
           .pairing {
@@ -125,6 +254,30 @@ export default {
           padding-bottom: 48 * $pr;
           &_left {
             flex: 1;
+            .h3_title {
+              font-size: 26 * $pr;
+              line-height: 36 * $pr;
+              margin-bottom: 24 * $pr;
+            }
+            .parentingText {
+              padding-bottom: 48 * $pr;
+              :deep(h2) {
+                font-size: 16 * $pr;
+                line-height: 28 * $pr;
+                margin-top: 24 * $pr;
+              }
+              :deep(h3),
+              :deep(h4) {
+                font-size: 16 * $pr;
+                line-height: 24 * $pr;
+                margin-top: 8 * $pr;
+              }
+              :deep(p),
+              :deep(li) {
+                font-size: 14 * $pr;
+                line-height: 24 * $pr;
+              }
+            }
           }
           &_right {
             .pairing {

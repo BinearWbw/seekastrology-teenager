@@ -27,4 +27,7 @@ export default (axios) => ({
   getGameLocation() {
     return axios.get('api/user/loc')
   },
+  getZodiacHoroscopeWeekly(params) {
+    return axios.get('api/astro/horoscope/weekly', { params })
+  },
 })

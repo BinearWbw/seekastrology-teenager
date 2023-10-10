@@ -234,6 +234,18 @@ export default {
           title: 'Compatibility',
           path: '/astrology/',
           href: '/astrology/',
+          children: [
+            {
+              title: 'Love Compatibility',
+              path: '/astrology/',
+              href: '/astrology/',
+            },
+            {
+              title: 'Pet Compatibility',
+              path: '/petinquiry/',
+              href: '/petinquiry/',
+            },
+          ],
         },
         {
           title: 'Quizzes',

@@ -11,34 +11,38 @@
             <li v-for="item_i in parentingData" :key="item_i.id">
               <a
                 class="fade choice__main__a"
-                :href="`/horroscope/${item_i.name
+                :href="`/parenting/details/${item_i.name
                   .replace(/[^a-zA-Z0-9\\s]/g, '-')
                   .toLowerCase()}-${item_i.id}/`"
                 data-aos="zoom-out-up"
               >
                 <div class="imgs">
                   <div class="img__list">
-                    <!-- <nuxt-img
-                      :src="item_i.icon || '/'"
+                    <div class="dose_img">
+                      <nuxt-img
+                        :src="item_i.child_icon || '/'"
+                        fit="cover"
+                        width="114"
+                        height="114"
+                        :alt="item_i.name"
+                        loading="lazy"
+                        format="auto"
+                      ></nuxt-img>
+                      <i class="layer"></i>
+                    </div>
+                    <nuxt-img
+                      class="icon_img"
+                      :src="item_i.symbol_icon || '/'"
                       fit="cover"
-                      width="218"
-                      height="154"
+                      width="80"
+                      height="50"
                       :alt="item_i.name"
                       loading="lazy"
                       format="auto"
-                    ></nuxt-img> -->
-                    <div class="dose_img">
-                      <img :src="item_i.icon || '/'" :alt="item_i.name" />
-                      <i class="layer"></i>
-                    </div>
-                    <img
-                      class="icon_img"
-                      :src="item_i.icon_mini"
-                      :alt="item_i.name"
-                    />
+                    ></nuxt-img>
                   </div>
                 </div>
-                <p class="title">{{ item_i.name }}</p>
+                <p class="title">{{ toUpperBig(item_i.name) }}</p>
                 <p class="time">{{ item_i.dates }}</p>
               </a>
             </li>
@@ -55,94 +59,30 @@
 <script>
 export default {
   data() {
-    return {
-      parentingData: [
-        {
-          name: 'Aries',
-          id: 1,
-          icon: require('../../assets/img/parenting/aries.png'),
-          icon_mini: require('../../assets/img/parenting/aries_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Taurus',
-          id: 2,
-          icon: require('../../assets/img/parenting/taurus.png'),
-          icon_mini: require('../../assets/img/parenting/taurus_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Gemini',
-          id: 3,
-          icon: require('../../assets/img/parenting/gemini.png'),
-          icon_mini: require('../../assets/img/parenting/gemini_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Cancer',
-          id: 4,
-          icon: require('../../assets/img/parenting/cancar.png'),
-          icon_mini: require('../../assets/img/parenting/cancer_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Leo',
-          id: 5,
-          icon: require('../../assets/img/parenting/leo.png'),
-          icon_mini: require('../../assets/img/parenting/leo_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Virgo',
-          id: 6,
-          icon: require('../../assets/img/parenting/virgo.png'),
-          icon_mini: require('../../assets/img/parenting/virgin_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Libra',
-          id: 7,
-          icon: require('../../assets/img/parenting/libra.png'),
-          icon_mini: require('../../assets/img/parenting/libra_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Scorpic',
-          id: 8,
-          icon: require('../../assets/img/parenting/scorpic.png'),
-          icon_mini: require('../../assets/img/parenting/scorpio_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Sagittarius',
-          id: 9,
-          icon: require('../../assets/img/parenting/sagittarius.png'),
-          icon_mini: require('../../assets/img/parenting/sagittarius_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Capricorn',
-          id: 10,
-          icon: require('../../assets/img/parenting/capricorn.png'),
-          icon_mini: require('../../assets/img/parenting/capricorn_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Aquarius',
-          id: 11,
-          icon: require('../../assets/img/parenting/aquarius.png'),
-          icon_mini: require('../../assets/img/parenting/aquarius_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-        {
-          name: 'Pisces',
-          id: 12,
-          icon: require('../../assets/img/parenting/pisces.png'),
-          icon_mini: require('../../assets/img/parenting/pisces_icon.png'),
-          dates: 'Mar 21 - Apr 20',
-        },
-      ],
+    return {}
+  },
+  async asyncData({ error, $apiList, params }) {
+    try {
+      let [parentingData] = await Promise.all([
+        $apiList.home
+          .getZodiacHomeAstro({
+            origin: process.env.origin,
+          })
+          .then((res) => {
+            return res
+          }),
+      ])
+      return {
+        parentingData,
+      }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.message })
     }
+  },
+  methods: {
+    toUpperBig(str) {
+      return str?.charAt(0).toUpperCase() + str?.slice(1)
+    },
   },
 }
 </script>

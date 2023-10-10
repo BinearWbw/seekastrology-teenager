@@ -25,9 +25,10 @@
           </div>
         </div>
         <div class="context">
-          <div class="msgtext">
+          <div class="msgtext" v-if="newText">
+            <h3 class="h3_title">Aries and Pets Compatibility</h3>
             <transition name="fade">
-              <div class="teletext" v-if="newText" v-html="newText"></div>
+              <div class="teletext" v-html="newText"></div>
             </transition>
           </div>
           <google-auto-ad classNames="google_ad" :id="'4184846228'" />
@@ -36,6 +37,9 @@
         <el-daily-horoscope></el-daily-horoscope>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 
@@ -107,11 +111,22 @@ export default {
       ],
       malesId: 0,
       newText: '',
+      isLoading: false,
     }
   },
   methods: {
+    // 获取星座与宠物的配对内容
     handleDropdownChangeLeft(option) {
-      console.log('当前的选择', option)
+      this.isLoading = true
+      this.$apiList.home
+        .getZodiacDetails({
+          origin: process.env.origin,
+          id: option.id,
+        })
+        .then((res) => {
+          this.newText = res.pet_comp
+          this.isLoading = false
+        })
     },
   },
 }
@@ -192,12 +207,46 @@ export default {
         padding-top: 96px;
         .msgtext {
           width: 1164px;
+          .h3_title {
+            color: #fff;
+            font-family: 'Cinzel Decorative';
+            font-size: 36px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 48px;
+            margin-bottom: 24px;
+          }
           .teletext {
             padding-bottom: 48px;
+            :deep(h2) {
+              color: #fff;
+              font-family: 'Rubik';
+              font-size: 22px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 30px;
+              margin-top: 24px;
+            }
+            :deep(h3),
+            :deep(h4) {
+              color: #fff;
+              font-family: 'Rubik';
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 24px;
+              margin-top: 8px;
+            }
+            :deep(p),
+            :deep(li) {
+              color: rgba(255, 255, 255, 0.6);
+              font-family: 'Rubik';
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 28px;
+            }
           }
-        }
-        .google_ad {
-          width: 1200px;
         }
       }
       .quizzes {
@@ -282,8 +331,29 @@ export default {
         .context {
           padding-top: 48 * $pr;
           .msgtext {
+            .h3_title {
+              font-size: 26 * $pr;
+              line-height: 36 * $pr;
+              margin-bottom: 24 * $pr;
+            }
             .teletext {
               padding-bottom: 48 * $pr;
+              :deep(h2) {
+                font-size: 16 * $pr;
+                line-height: 28 * $pr;
+                margin-top: 24 * $pr;
+              }
+              :deep(h3),
+              :deep(h4) {
+                font-size: 16 * $pr;
+                line-height: 24 * $pr;
+                margin-top: 8 * $pr;
+              }
+              :deep(p),
+              :deep(li) {
+                font-size: 14 * $pr;
+                line-height: 24 * $pr;
+              }
             }
           }
           .google_ad {
