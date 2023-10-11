@@ -33,7 +33,7 @@
             <!-- 登录 -->
             <div class="form_login" v-if="openif">
               <h2 class="login_h2">LogIn</h2>
-              <no-ssr>
+              <client-only>
                 <a-form-model
                   ref="ruleForm"
                   :model="form"
@@ -89,7 +89,7 @@
                     </div>
                   </a-form-model-item>
                 </a-form-model>
-              </no-ssr>
+              </client-only>
               <div class="noaccount">
                 No account?
                 <span class="up" @click="toggleSignUp">Sign Up</span>
@@ -116,7 +116,7 @@
             <div class="form_sign" v-show="!openif">
               <h2 class="login_h2">Sign up</h2>
               <div class="next_one" v-show="nextif">
-                <no-ssr>
+                <client-only>
                   <a-form-model
                     ref="ruleFormUp"
                     :model="formup"
@@ -163,14 +163,14 @@
                       </div>
                     </a-form-model-item>
                   </a-form-model>
-                </no-ssr>
+                </client-only>
               </div>
               <!-- 注册下一步 -->
               <div class="next_user" v-show="!nextif">
                 <div class="btn">
                   <button class="button_top" @click="backUp">＜ back</button>
                 </div>
-                <no-ssr>
+                <client-only>
                   <a-form-model
                     ref="nextFormUp"
                     :model="nextFormUp"
@@ -222,7 +222,7 @@
                       </div>
                     </a-form-model-item>
                   </a-form-model>
-                </no-ssr>
+                </client-only>
               </div>
               <div class="noaccount" v-show="nextif">
                 Already have an account?

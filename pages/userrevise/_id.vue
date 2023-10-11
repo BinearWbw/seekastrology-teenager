@@ -43,7 +43,7 @@
           </div>
           <div class="h5_title">Change password</div>
           <div class="menu_password" v-if="activeMenu == 1 || isInnerWidthBox">
-            <no-ssr>
+            <client-only>
               <a-form-model
                 ref="changeForm"
                 :model="revisePwd"
@@ -85,7 +85,7 @@
                   </div>
                 </a-form-model-item>
               </a-form-model>
-            </no-ssr>
+            </client-only>
           </div>
         </div>
       </div>

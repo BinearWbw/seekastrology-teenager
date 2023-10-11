@@ -1,36 +1,45 @@
 <template>
   <div class="login">
-    <transition name="fade">
-      <button class="button" v-if="!getUserInfo.email" @click="loginTo">
-        Log in
-      </button>
-    </transition>
-    <div class="user_login" v-if="getUserInfo.email" @click="myProfile">
-      <div class="user_img">
-        <img :src="userImgIcon" alt="" />
-      </div>
-      <span class="names">{{ updateName }}</span>
-      <img
-        class="arrow"
-        :class="{ arrowto: opens }"
-        src="~/assets/img/login/down_arrow.svg"
-        alt="down arrow"
-      />
+    <client-only>
       <transition name="fade">
-        <div class="drop_down" tabindex="0" @blur="closeDropdown" v-if="opens">
-          <a
-            v-for="(item, index) in dropData"
-            :key="index"
-            :href="`${item.path}`"
-            >{{ item.name }}</a
-          >
-          <div class="log_out" @click="logOutTo">Log out</div>
-        </div>
+        <client-only>
+          <button class="button" v-if="!getUserInfo.email" @click="loginTo">
+            Log in
+          </button>
+        </client-only>
       </transition>
-    </div>
-    <transition name="fade">
-      <el-login-form v-if="formOf" @choce="showunde"></el-login-form>
-    </transition>
+      <div class="user_login" v-if="getUserInfo.email" @click="myProfile">
+        <div class="user_img">
+          <img :src="userImgIcon" alt="" />
+        </div>
+        <span class="names">{{ updateName }}</span>
+        <img
+          class="arrow"
+          :class="{ arrowto: opens }"
+          src="~/assets/img/login/down_arrow.svg"
+          alt="down arrow"
+        />
+        <transition name="fade">
+          <div
+            class="drop_down"
+            tabindex="0"
+            @blur="closeDropdown"
+            v-if="opens"
+          >
+            <a
+              v-for="(item, index) in dropData"
+              :key="index"
+              :href="`${item.path}`"
+              >{{ item.name }}</a
+            >
+            <div class="log_out" @click="logOutTo">Log out</div>
+          </div>
+        </transition>
+      </div>
+      <transition name="fade">
+        <el-login-form v-if="formOf" @choce="showunde"></el-login-form>
+      </transition>
+    </client-only>
   </div>
 </template>
 
@@ -142,7 +151,7 @@ export default {
       font-family: 'Cinzel Decorative';
       font-size: 14px;
       font-style: normal;
-      min-width: 100px;
+      max-width: 100px;
       font-weight: 700;
       line-height: 18px;
       padding: 0 8px;

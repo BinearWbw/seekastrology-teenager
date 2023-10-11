@@ -1,6 +1,6 @@
 <template>
   <div class="input_main">
-    <no-ssr>
+    <client-only>
       <a-form-model ref="aiForm" :model="aiData" :rules="rules">
         <template v-if="askInputVisible">
           <a-form-model-item label="" prop="text">
@@ -36,7 +36,7 @@
           </div>
         </div>
       </a-form-model>
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 

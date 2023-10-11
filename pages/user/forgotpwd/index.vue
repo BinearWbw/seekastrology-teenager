@@ -3,7 +3,7 @@
     <div class="forgotpwd_main">
       <div class="forms">
         <h3 class="h3">Reset Password</h3>
-        <no-ssr>
+        <client-only>
           <a-form-model
             ref="forgotForm"
             :model="forgotPwd"
@@ -43,7 +43,7 @@
               </div>
             </a-form-model-item>
           </a-form-model>
-        </no-ssr>
+        </client-only>
       </div>
     </div>
     <transition name="fade">
