@@ -13,6 +13,7 @@ const sitemap = [
       '/horroscope',
       '/tarot/details',
       '/tarot/type',
+      '/parenting/details',
     ],
     defaults: {
       changefred: 'always',
@@ -64,6 +65,18 @@ const sitemap = [
         },
         {
           url: '/user/',
+          changefreq: 'always',
+          priority: 0.7,
+          lastmod: new Date(),
+        },
+        {
+          url: '/parenting/',
+          changefreq: 'always',
+          priority: 0.7,
+          lastmod: new Date(),
+        },
+        {
+          url: '/petinquiry/',
           changefreq: 'always',
           priority: 0.7,
           lastmod: new Date(),
@@ -238,6 +251,18 @@ const sitemap = [
         res13.map((item_i) => {
           addArr.push(`/horroscope/${item.name}-${item_i}-${item.id}/`)
         })
+      })
+
+      res22.map((item_i) => {
+        addArr.push(`/teenager/${item_i.name}-${item_i.id}/`)
+      })
+
+      res22.map((item_i) => {
+        addArr.push(`/petsign/${item_i.name}-${item_i.id}/`)
+      })
+
+      res22.map((item_i) => {
+        addArr.push(`/parenting/details/${item_i.name}-${item_i.id}/`)
       })
 
       routes = routes.concat(addArr)

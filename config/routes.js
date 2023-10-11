@@ -171,6 +171,18 @@ const addRoutes = async () => {
     })
   })
 
+  res22.map((item_i) => {
+    routes.push(`/teenager/${item_i.name}-${item_i.id}/`)
+  })
+
+  res22.map((item_i) => {
+    routes.push(`/petsign/${item_i.name}-${item_i.id}/`)
+  })
+
+  res22.map((item_i) => {
+    routes.push(`/parenting/details/${item_i.name}-${item_i.id}/`)
+  })
+
   return routes
 }
 let routes = addRoutes()

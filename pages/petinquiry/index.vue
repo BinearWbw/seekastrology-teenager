@@ -16,7 +16,7 @@
               understand what makes them they are and how their basic behavior
               will
             </div>
-            <div class="pet_select">
+            <div class="pet_select" ref="petScroll">
               <el-selected-three
                 :options="selectOptions"
                 @changeSign="handleDropdownChangeLeft"
@@ -126,6 +126,10 @@ export default {
         .then((res) => {
           this.newText = res.pet_comp
           this.isLoading = false
+          this.$refs.petScroll.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          })
         })
     },
   },
@@ -156,6 +160,8 @@ export default {
         );
         backdrop-filter: blur(8px);
         padding: 3px;
+        position: relative;
+        z-index: 10;
         .peter {
           width: 100%;
           border-radius: 21px;
@@ -197,6 +203,7 @@ export default {
             flex-direction: column;
             padding-top: 46px;
             align-items: center;
+            scroll-margin-top: -100px;
           }
         }
       }
@@ -205,6 +212,7 @@ export default {
         flex-direction: column;
         align-items: center;
         padding-top: 96px;
+        z-index: 9;
         .msgtext {
           width: 1164px;
           .h3_title {
@@ -247,6 +255,10 @@ export default {
               line-height: 28px;
             }
           }
+        }
+        .google_ad {
+          width: 100%;
+          max-width: 1200px;
         }
       }
       .quizzes {
@@ -325,6 +337,7 @@ export default {
             }
             .pet_select {
               padding-top: 16 * $pr;
+              scroll-margin-top: -80 * $pr;
             }
           }
         }

@@ -573,10 +573,6 @@ export default {
   .header {
     height: 46 * $pr;
     &__main {
-      position: fixed;
-      left: 0;
-      top: 0;
-      z-index: 6;
       height: 46 * $pr;
       > div {
         padding: 0 17 * $pr 0 16 * $pr;
