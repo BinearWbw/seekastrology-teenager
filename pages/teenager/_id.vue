@@ -50,7 +50,7 @@
       </div>
     </div>
     <transition name="fade">
-      <tarot-more-tarot></tarot-more-tarot>
+      <el-lnformation></el-lnformation>
     </transition>
     <transition name="fade">
       <el-pairing></el-pairing>
@@ -62,7 +62,9 @@
 </template>
 
 <script>
+import ElLnformation from '../../components/el_components/ElLnformation.vue'
 export default {
+  components: { ElLnformation },
   name: 'Horroscopes',
   data() {
     return {

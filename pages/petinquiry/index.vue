@@ -26,7 +26,7 @@
         </div>
         <div class="context" v-if="newText">
           <div class="msgtext">
-            <h3 class="h3_title">Aries and Pets Compatibility</h3>
+            <h3 class="h3_title">{{ nameSign }} and Pets Compatibility</h3>
             <transition name="fade">
               <div class="teletext" v-html="newText"></div>
             </transition>
@@ -112,6 +112,7 @@ export default {
       malesId: 0,
       newText: '',
       isLoading: false,
+      nameSign: '',
     }
   },
   methods: {
@@ -125,6 +126,7 @@ export default {
         })
         .then((res) => {
           this.newText = res.pet_comp
+          this.nameSign = option.name
           this.isLoading = false
           this.$refs.petScroll.scrollIntoView({
             behavior: 'smooth',

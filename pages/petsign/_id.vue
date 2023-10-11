@@ -50,7 +50,7 @@
       <google-auto-ad classNames="google_ad" :id="'4184846228'" />
     </div>
     <transition name="fade">
-      <tarot-more-tarot></tarot-more-tarot>
+      <el-lnformation></el-lnformation>
     </transition>
     <transition name="fade">
       <el-pairing></el-pairing>
