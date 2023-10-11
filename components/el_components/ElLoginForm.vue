@@ -484,9 +484,19 @@ export default {
               } else {
                 this.$store.commit('SIGN_SUCCESS', res.email)
                 this.$eventBus.$emit('emails', res.email)
-                this.$emit('choce', false)
-                window.changePageUrl = `/user/`
-                window.location.href = '/user/' //跳转到账号激活页面
+                this.$emit('choce')
+                // window.changePageUrl = `/user/`
+                // window.location.href = '/user/' //跳转到账号激活页面
+
+                // 注册直接登录
+                this.$store.commit('UPDATE_USERINFO', res)
+                localStorage.setItem(
+                  'userInfo',
+                  JSON.stringify(this.$store.state)
+                )
+                sessionStorage.setItem('recom', 'one')
+                window.changePageUrl = '/userto/2/'
+                window.location.href = '/userto/2/'
               }
               this.isLoading = false
             })

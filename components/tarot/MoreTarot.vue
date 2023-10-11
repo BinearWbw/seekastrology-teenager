@@ -82,9 +82,6 @@ export default {
       default: '0',
     },
   },
-  mounted() {
-    console.log('当前页面的type', this.type)
-  },
 }
 </script>
 

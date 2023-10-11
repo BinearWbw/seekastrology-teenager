@@ -7,6 +7,7 @@
           class="tag_list"
           v-for="(item, index) in moreData"
           :key="index"
+          :class="`${item.name}`"
           v-show="isHorroscopePage(index)"
         >
           <a :href="`${item.path}`" class="tag_list_aos">
@@ -77,6 +78,16 @@ export default {
           name: 'Universal tarot',
           path: '/tarot/type/3/',
           imgUrl: require('~/assets/img/horroscope/today_tarot.svg'),
+        },
+        {
+          name: 'Pet',
+          path: '/petsign/aries-1/',
+          imgUrl: require('~/assets/img/horroscope/love_pairing.svg'),
+        },
+        {
+          name: 'Teen',
+          path: '/teenager/aries-1/',
+          imgUrl: require('~/assets/img/horroscope/love_pairing.svg'),
         },
         {
           name: 'Compatibility',
@@ -177,6 +188,7 @@ export default {
       ]
       this.moreData.splice(1, 4, ...moreDataTwo)
     }
+    this.isPageElimination()
   },
 
   methods: {
@@ -189,6 +201,15 @@ export default {
         this.$route.path.includes('horroscope') &&
         (index === 0 || index === 5)
       )
+    },
+    isPageElimination() {
+      const path = this.$route.path // 是否在指定页面
+      const isPet = path.includes('petsign')
+      const isPar = path.includes('parenting')
+      const isTeen = path.includes('teenager')
+      if (isPet || isPar || isTeen) {
+        this.moreData.splice(1, 4) // 清除指定运势
+      }
     },
   },
 }
@@ -218,12 +239,12 @@ export default {
         border-radius: 44px;
         margin-right: 16px;
         margin-top: 16px;
-        &:nth-child(11) {
+        &.Compatibility {
           .tag_list_aos {
             background: #ed6ddf;
           }
         }
-        &:nth-child(12) {
+        &.Quizs {
           .tag_list_aos {
             background: #6aa6ff;
           }

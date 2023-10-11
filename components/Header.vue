@@ -41,6 +41,12 @@
                   @mouseleave="hideChildren"
                 >
                   {{ item_i.title }}
+                  <img
+                    class="arrow"
+                    src="~/assets/img/login/down_arrow.svg"
+                    alt="down arrow"
+                    v-if="item_i.childrenMini"
+                  />
                   <transition name="fade">
                     <div
                       class="children_mini"
@@ -101,6 +107,31 @@ export default {
           href: '/horroscope/aries-1/',
           children: [
             {
+              title: 'Daily',
+              path: '/horroscope/aries-1/',
+              href: '/horroscope/aries-1/',
+            },
+            {
+              title: 'Love',
+              path: '/horroscope/aries-1-1/',
+              href: '/horroscope/aries-1-1/',
+            },
+            {
+              title: 'Health',
+              path: '/horroscope/aries-2-1/',
+              href: '/horroscope/aries-2-1/',
+            },
+            {
+              title: 'Career',
+              path: '/horroscope/aries-3-1/',
+              href: '/horroscope/aries-3-1/',
+            },
+            {
+              title: 'Money',
+              path: '/horroscope/aries-4-1/',
+              href: '/horroscope/aries-4-1/',
+            },
+            {
               title: 'Teenager',
               path: '/teenager/',
               href: '/teenager/aries-1/',
@@ -113,7 +144,7 @@ export default {
           ],
         },
         {
-          title: 'Zodiac Signs',
+          title: 'Astrology',
           path: '/zodiac/',
           href: '/zodiac/',
           childrenShow: false,
@@ -444,6 +475,14 @@ export default {
               &:hover {
                 color: #fff;
                 background-color: rgba(255, 255, 255, 0.2);
+              }
+              .arrow {
+                position: absolute;
+                right: 20px;
+                top: 15px;
+                width: 12px;
+                height: 12px;
+                transform: rotate(-90deg);
               }
               .children_mini {
                 position: absolute;

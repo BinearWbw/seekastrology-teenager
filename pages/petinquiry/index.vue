@@ -24,14 +24,14 @@
             </div>
           </div>
         </div>
-        <div class="context">
-          <div class="msgtext" v-if="newText">
+        <div class="context" v-if="newText">
+          <div class="msgtext">
             <h3 class="h3_title">Aries and Pets Compatibility</h3>
             <transition name="fade">
               <div class="teletext" v-html="newText"></div>
             </transition>
           </div>
-          <google-auto-ad classNames="google_ad" :id="'4184846228'" />
+          <!-- <google-auto-ad classNames="google_ad" :id="'4184846228'" /> -->
         </div>
         <home-quizzes class="quizzes"></home-quizzes>
         <el-daily-horoscope></el-daily-horoscope>
@@ -142,12 +142,12 @@ export default {
   &_pet {
     .google_ad_top {
       width: 1200px;
-      height: 315px;
+      height: 230px;
       margin: 48px auto 0;
     }
     .pairing {
       width: 1400px;
-      padding: 96px 0;
+      padding: 50px 0 96px;
       margin: 0 auto;
       &_petmain {
         width: 100%;
@@ -225,7 +225,7 @@ export default {
             margin-bottom: 24px;
           }
           .teletext {
-            padding-bottom: 48px;
+            // padding-bottom: 48px;
             :deep(h2) {
               color: #fff;
               font-family: 'Rubik';
@@ -350,7 +350,7 @@ export default {
               margin-bottom: 24 * $pr;
             }
             .teletext {
-              padding-bottom: 48 * $pr;
+              //   padding-bottom: 48 * $pr;
               :deep(h2) {
                 font-size: 16 * $pr;
                 line-height: 28 * $pr;

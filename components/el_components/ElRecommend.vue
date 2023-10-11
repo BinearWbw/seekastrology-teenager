@@ -48,7 +48,7 @@ export default {
           path: '/horroscope/aries-5-1/',
         },
         {
-          name: 'Daily Love Horoscope',
+          name: 'Love Horoscope',
           texts: 'Get Your Horoscope',
           imgs: require('../../assets/img/login/fall.png'),
           path: '/horroscope/aries-1-1/',
@@ -84,10 +84,10 @@ export default {
           path: '/astrology/',
         },
         {
-          name: 'OCTOBER 2023 Horoscopes',
-          texts: 'Get Your Reading',
-          imgs: require('../../assets/img/login/libra.avif'),
-          path: '/resources/details/attention--life-changing-eclipses--october-2023-horoscopes-for-all-12-signs--1313/',
+          name: 'Pet Compatibility',
+          texts: 'Get Pet Compatibility',
+          imgs: require('../../assets/img/login/goat.png'),
+          path: '/petinquiry/',
         },
         {
           name: 'Free Quiz',
