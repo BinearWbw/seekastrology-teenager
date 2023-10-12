@@ -12,7 +12,7 @@
         <div class="user_img">
           <img :src="userImgIcon" alt="" />
         </div>
-        <span class="names">{{ updateName }}</span>
+        <p class="names">{{ updateName }}</p>
         <img
           class="arrow"
           :class="{ arrowto: opens }"
@@ -147,6 +147,7 @@ export default {
       }
     }
     .names {
+      flex: 1;
       color: rgba(255, 255, 255, 0.6);
       font-family: 'Cinzel Decorative';
       font-size: 14px;
@@ -156,9 +157,10 @@ export default {
       line-height: 18px;
       padding: 0 8px;
       overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
+      white-space: nowrap;
       -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      text-overflow: ellipsis;
     }
     .arrow {
       width: 10px;

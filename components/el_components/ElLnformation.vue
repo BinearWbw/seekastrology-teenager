@@ -51,11 +51,12 @@ export default {
       this.$apiList.articles
         .getNews({
           origin: process.env.origin,
-          size: 20,
+          size: 30,
         })
         .then((res) => {
-          res.list = res.list?.filter((item) => item.type == 0).slice(0, 4) // 获取前面四条
-          return res.list
+          res.list = res.list?.filter((item) => item.type == 0)
+          let datas = res.list.sort(() => Math.random() - 0.5) // 打乱数据位置
+          return datas.slice(0, 4) // 获取前面四条
         }),
     ])
     this.lnformation = lnformation

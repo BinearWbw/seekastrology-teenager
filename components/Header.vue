@@ -440,13 +440,13 @@ export default {
           &_children {
             position: absolute;
             top: 100%;
-            left: -40%;
+            left: -30%;
             padding: 10px 0;
             width: auto;
             background-color: #000;
             border-radius: 6px;
             .nav_children {
-              min-width: 260px;
+              min-width: 200px;
               height: 42px;
               display: block;
               font-family: 'Rubik';
