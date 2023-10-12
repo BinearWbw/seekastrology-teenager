@@ -55,7 +55,7 @@
         <el-explore-more />
       </div>
       <div class="horoscope_more">
-        <h3>Read More Horoscope</h3>
+        <!-- <h3>Read More Horoscope</h3>
         <div class="more_main">
           <div
             class="more_list"
@@ -76,7 +76,7 @@
               <button class="button">Get Your Horoscope</button>
             </div>
           </div>
-        </div>
+        </div> -->
         <google-auto-ad classNames="google_ad" :id="'4184846228'" />
       </div>
     </div>

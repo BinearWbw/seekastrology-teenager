@@ -2,7 +2,7 @@
   <div class="explore">
     <div class="explore_main">
       <p class="title">Explore More</p>
-      <div class="explore_main_tag" data-aos="zoom-out" id="EXPLORE">
+      <div class="explore_main_tag" id="EXPLORE">
         <div
           class="tag_list"
           v-for="(item, index) in moreData"
