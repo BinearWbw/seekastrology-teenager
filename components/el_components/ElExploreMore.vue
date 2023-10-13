@@ -67,7 +67,7 @@ export default {
         {
           name: 'Ai tarot',
           path: '/tarot/',
-          imgUrl: require('~/assets/img/horroscope/today_tarot.svg'),
+          imgUrl: require('~/assets/img/horroscope/ai_tarot.svg'),
         },
         {
           name: 'Daily tarot',
@@ -77,17 +77,17 @@ export default {
         {
           name: 'Universal tarot',
           path: '/tarot/type/3/',
-          imgUrl: require('~/assets/img/horroscope/today_tarot.svg'),
+          imgUrl: require('~/assets/img/horroscope/universal_tarot.svg'),
         },
         {
           name: 'Pet',
           path: '/petsign/aries-1/',
-          imgUrl: require('~/assets/img/horroscope/love_pairing.svg'),
+          imgUrl: require('~/assets/img/horroscope/pet.svg'),
         },
         {
           name: 'Teen',
           path: '/teenager/aries-1/',
-          imgUrl: require('~/assets/img/horroscope/love_pairing.svg'),
+          imgUrl: require('~/assets/img/horroscope/teen.svg'),
         },
         {
           name: 'Compatibility',
