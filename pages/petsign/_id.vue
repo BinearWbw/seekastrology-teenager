@@ -1,9 +1,9 @@
 <template>
   <div class="horroscopes">
+    <google-ad classNames="horroscopes_googlead" :id="'7036206358'"></google-ad>
     <div class="horroscopes_top_bg">
       <div class="imgbg"></div>
     </div>
-    <google-ad classNames="horroscopes_googlead" :id="'7036206358'"></google-ad>
     <div class="horroscopes_main">
       <div class="horoscope_details">
         <google-ad classNames="google_ad" :id="'4376417914'"></google-ad>
@@ -386,7 +386,6 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .horroscopes {
-    padding-top: 96 * $pr;
     &_googlead {
       display: block;
       width: 343 * $pr;
@@ -395,6 +394,7 @@ export default {
       position: relative;
     }
     &_top_bg {
+      top: 139 * $pr;
       width: 450 * $pr;
       .imgbg {
         width: 100%;
@@ -407,7 +407,7 @@ export default {
       margin: 0 auto 48 * $pr;
       .horoscope_details {
         display: flex;
-        padding: 24 * $pr 0;
+        padding: 111 * $pr 0;
         position: relative;
         &::after {
           height: 1 * $pr;

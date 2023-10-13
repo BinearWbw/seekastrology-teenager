@@ -1,7 +1,7 @@
 <template>
   <div class="parenting">
     <div class="parenting_main">
-      <google-ad classNames="google_ad_top" :id="'9680645670'" />
+      <google-ad classNames="google_ad_top" :id="'3611076013'" />
       <div class="baby">
         <div class="choice">
           <div class="choice__title">
@@ -348,6 +348,10 @@ export default {
                   font-size: 12 * $pr;
                   line-height: 16 * $pr;
                 }
+              }
+              &:hover {
+                transform: translateY(0);
+                background-color: inherit;
               }
             }
           }

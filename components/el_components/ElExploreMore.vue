@@ -157,6 +157,9 @@ export default {
       ],
     }
   },
+  created() {
+    this.isPageElimination() // Dom加载前清除对应数据
+  },
   mounted() {
     const pathHome = this.$route.path.includes('horroscope') //是否在运势页
     if (pathHome) {
@@ -188,7 +191,6 @@ export default {
       ]
       this.moreData.splice(1, 4, ...moreDataTwo)
     }
-    this.isPageElimination()
   },
 
   methods: {

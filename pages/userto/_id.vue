@@ -282,53 +282,18 @@ export default {
       window.changePageUrl = `/tarot/answer/`
       window.location = `/tarot/answer/`
     },
-    onSearch(value) {
-      //   console.log(value)
-    },
     valueEmail(value) {
       //   console.log('email', value)
     },
-    chooseMend(item, index) {
+    chooseMend() {
       // 操作选择的内容
-      const userSub = this.getUserSub // 上次保存的选项
+      const userSub = this.getUserSub || [] // 上次保存的选项
       const userSubE = this.selectItem // 当前的选项
-      const sortedArray1 = userSub.slice().sort() // 排序数组, 值相同, 位置不相同的情况下对比
-      const sortedArray2 = userSubE.slice().sort()
+      const sortedArray1 = userSub?.slice().sort() // 排序数组, 值相同, 位置不相同的情况下对比
+      const sortedArray2 = userSubE?.slice().sort()
       const compare =
         JSON.stringify(sortedArray1) === JSON.stringify(sortedArray2) //对比上次==当前选择的值
       this.isSubscribe = compare // 保存按钮的状态
-
-      //   if (userSub) {
-      //     const screen2 = userSub?.filter((i) => i == item.type)
-      //     let numBtn = screen2[0] ? 1 : 2
-      //     this.$apiList.user
-      //       .subscribe({
-      //         origin: process.env.origin,
-      //         vote_type: item.type,
-      //         opt: numBtn,
-      //       })
-      //       .then((res) => {
-      //         if (res.data) {
-      //           this.$store.commit('UPDATE_USERSUB', [])
-      //         } else {
-      //           this.$store.commit('UPDATE_USERSUB', res)
-      //         }
-      //       })
-      //   } else {
-      //     this.$apiList.user
-      //       .subscribe({
-      //         origin: process.env.origin,
-      //         vote_type: item.type,
-      //         opt: 2,
-      //       })
-      //       .then((res) => {
-      //         if (res.data) {
-      //           this.$store.commit('UPDATE_USERSUB', [])
-      //         } else {
-      //           this.$store.commit('UPDATE_USERSUB', res)
-      //         }
-      //       })
-      //   }
     },
     // 点击选择文件
     triggerInput() {

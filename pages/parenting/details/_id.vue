@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <div class="details_start">
-      <google-ad classNames="google_ad_top" :id="'9680645670'" />
+      <google-ad classNames="google_ad_top" :id="'9601769292'" />
       <div class="mains">
         <div class="remains">
           <div class="remains_left">
@@ -31,7 +31,7 @@ import Vue from 'vue'
 export default {
   data() {
     return {
-      idAdArray: ['4256255492', '8383202764', '3000133706'],
+      idAdArray: ['5470952596', '9218625919', '3000133706'],
     }
   },
   // 获取育儿详情
@@ -187,6 +187,7 @@ export default {
           }
           .choices {
             width: 425px;
+            padding-top: 24px;
           }
         }
       }
