@@ -33,7 +33,7 @@ export default {
         )
         insElement.setAttribute('data-ad-client', 'ca-pub-6430486603399192')
         insElement.setAttribute('data-ad-slot', `${this.id}`)
-        insElement.setAttribute('data-full-width-responsive', 'false')
+        insElement.setAttribute('data-full-width-responsive', 'true')
         targetElement.appendChild(insElement)
         targetElement.appendChild(adScript)
         this.observer.unobserve(this.$refs.googleAdStyle)
@@ -49,7 +49,16 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .googleAdStyle {
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   .title {
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
     font-size: 20px;
     line-height: 25px;
     background: #282a31;
