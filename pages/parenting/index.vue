@@ -287,7 +287,7 @@ export default {
       .baby {
         padding: 0 16 * $pr 0;
         .choice {
-          margin: 48 * $pr auto 0;
+          margin: 24 * $pr auto 0;
           padding: 0;
           &__title {
             padding-bottom: 16 * $pr;

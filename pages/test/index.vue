@@ -1,13 +1,13 @@
 <template>
   <div class="test">
+    <google-ad classNames="google_top_ad" :id="'8758274141'"></google-ad>
     <div class="test_main">
-      <google-ad classNames="google_top_ad" :id="'8758274141'"></google-ad>
       <div class="test_main_line"></div>
       <div class="test_main_center">
         <div class="test_main_center_left">
           <div class="test_main_center_left_list">
             <a
-              v-for="(item, index) in list"
+              v-for="item in list"
               :key="item.id"
               class="test_main_center_left_list_item"
               :href="`/test/details/${item.name
@@ -206,12 +206,12 @@ $spacing: 16px;
 }
 .test {
   width: 100%;
+  .google_top_ad {
+    display: none;
+  }
   &_main {
     width: 1400px;
     margin: 0 auto;
-    .google_top_ad {
-      display: none;
-    }
     &_top {
       width: 100%;
       display: flex;
@@ -484,15 +484,15 @@ $spacing: 16px;
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .test {
+    .google_top_ad {
+      display: flex;
+      width: 100%;
+      height: 110 * $pr;
+      margin: 0 auto 24 * $pr;
+    }
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
-      .google_top_ad {
-        display: block;
-        width: 100%;
-        height: 110 * $pr;
-        margin: 0 auto 24 * $pr;
-      }
       &_top {
         align-items: center;
         &_tabs {

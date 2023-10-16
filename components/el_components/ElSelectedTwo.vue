@@ -65,9 +65,9 @@ export default {
     if (this.title) {
       this.titleName =
         this.title == 'First Sign'
-          ? 'Male'
+          ? 'Your Sign'
           : this.title == 'Second Sign'
-          ? 'Female'
+          ? "Partner's Sign"
           : ''
     }
     this.checkElementPosition()
@@ -171,6 +171,7 @@ export default {
       }
     }
     &_title {
+      width: 100%;
       position: absolute;
       left: 50%;
       top: -20px;
@@ -251,8 +252,8 @@ export default {
       }
       &_title {
         top: -20 * $pr;
-        font-size: 16 * $pr;
-        line-height: 22 * $pr;
+        font-size: 14 * $pr;
+        line-height: 18 * $pr;
       }
     }
     .options {

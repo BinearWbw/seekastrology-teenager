@@ -220,7 +220,7 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .new_google {
-    padding: 0 16 * $pr;
+    padding: 0;
     .google_top_ad {
       width: 100%;
       height: 110 * $pr;

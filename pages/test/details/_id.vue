@@ -34,8 +34,8 @@
                       :src="dataInfo.icon || '/'"
                       fit="cover"
                       :alt="dataInfo.name"
-                      width="700"
-                      height="338"
+                      width="290"
+                      height="148"
                       loading="lazy"
                       format="auto"
                     ></nuxt-img>
@@ -188,7 +188,7 @@
                 .replace(/[^\w\d]/g, '-')
                 .toLowerCase()}-${item.id}/`"
               class="details_main_left_btm_list_item"
-              v-for="(item, index) in btmList"
+              v-for="item in btmList"
               :key="item.id"
             >
               <div class="details_main_left_btm_list_item_img">
@@ -950,10 +950,9 @@ $spacing: 55px;
   $pr: math.div(1vw, 3.75);
   .details {
     .google_top {
-      display: block;
-      width: 345 * $pr;
-      height: 100 * $pr;
-      margin: 0 auto;
+      display: flex;
+      width: 100%;
+      height: 110 * $pr;
     }
     &_main {
       width: 100%;

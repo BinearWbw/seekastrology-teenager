@@ -620,9 +620,9 @@ export default {
   $pr: math.div(1vw, 3.75);
   .horroscope {
     &_googlead {
-      display: block;
-      width: 343 * $pr;
-      height: 110 * $pr;
+      display: flex;
+      width: 100%;
+      height: 130 * $pr;
       margin: 0 auto 24 * $pr;
     }
     &_main {
@@ -631,7 +631,7 @@ export default {
       margin: 0 auto 48 * $pr;
       .horoscope_details {
         display: flex;
-        padding: 10 * $pr 0 24 * $pr;
+        padding: 0 0 24 * $pr;
         position: relative;
         &::after {
           height: 1 * $pr;

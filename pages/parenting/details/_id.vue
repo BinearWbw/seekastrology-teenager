@@ -245,12 +245,13 @@ export default {
   $pr: math.div(1vw, 3.75);
   .details {
     &_start {
-      padding: 0 16 * $pr;
+      padding: 0;
       .google_ad_top {
-        height: 280 * $pr;
+        width: 100%;
+        height: 130 * $pr;
       }
       .mains {
-        padding: 30 * $pr 0 48 * $pr;
+        padding: 24 * $pr 16 * $pr 48 * $pr;
         .remains {
           padding-bottom: 48 * $pr;
           &_left {

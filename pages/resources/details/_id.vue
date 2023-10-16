@@ -123,8 +123,8 @@
                 :src="item.icon || '/'"
                 fit="cover"
                 :alt="item.name"
-                width="632"
-                height="225"
+                width="408"
+                height="230"
                 class="details_footer_list_item_img_pic"
                 loading="lazy"
                 format="auto"
@@ -478,6 +478,7 @@ $spacing: 16px;
                   height: 25px;
                   margin: 0;
                   color: #fff;
+                  background-color: #282a31 !important;
                 }
               }
             }
@@ -555,10 +556,12 @@ $spacing: 16px;
       &_item {
         display: block;
         &_img {
-          width: 100%px;
+          width: 100%;
           height: 225px;
           position: relative;
           object-fit: cover;
+          border-radius: 6px;
+          overflow: hidden;
           &_pic {
             width: 100%;
             height: 100%;
@@ -740,16 +743,15 @@ $spacing: 16px;
   $pr: math.div(1vw, 3.75);
   .details {
     .google_top {
-      display: block;
-      width: 343 * $pr;
-      height: 83 * $pr;
-      margin: 0 auto;
+      display: flex;
+      width: 100%;
+      height: 110 * $pr;
     }
     &_main {
       width: 100%;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 32 * $pr;
+      margin-top: 24 * $pr;
       &_left {
         width: 343 * $pr;
         margin-left: 0;
@@ -865,15 +867,17 @@ $spacing: 16px;
         line-height: 36 * $pr;
       }
       &_list {
-        grid-gap: 24 * $pr 0;
-        grid-template-columns: repeat(1, 343 * $pr);
+        width: 100%;
+        grid-gap: 16 * $pr 5 * $pr;
+        grid-template-columns: repeat(2, 1fr);
         margin-bottom: 48 * $pr;
         &_item {
-          width: 343 * $pr;
+          width: auto;
           object-fit: contain;
           &_img {
             width: 100%;
-            height: 179 * $pr;
+            height: 95 * $pr;
+            border-radius: 6 * $pr;
             &_pic,
             &_video {
               width: 100%;
@@ -890,20 +894,19 @@ $spacing: 16px;
             }
           }
           &_vtitle {
-            background: rgba(255, 255, 255, 0.1);
             margin-top: 0;
-            width: 343 * $pr;
-            font-size: 22 * $pr;
-            line-height: 30 * $pr;
+            width: 100%;
+            font-size: 14 * $pr;
+            line-height: 18 * $pr;
           }
           &_text {
-            background: rgba(255, 255, 255, 0.1);
             &_title {
-              font-size: 22 * $pr;
-              line-height: 30 * $pr;
-              width: 343 * $pr;
+              font-size: 14 * $pr;
+              line-height: 18 * $pr;
+              width: 100%;
               margin-top: 0;
-              padding-top: 16 * $pr;
+              padding-top: 12 * $pr;
+              color: rgba(255, 255, 255, 0.7);
             }
             &_subscribe,
             &_date {

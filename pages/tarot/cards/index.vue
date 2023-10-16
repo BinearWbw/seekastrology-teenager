@@ -432,6 +432,7 @@ export default {
       .major-list-item {
         width: 106 * $pr;
         .major-item-img {
+          width: 100%;
           height: 213 * $pr;
         }
         .item-text {

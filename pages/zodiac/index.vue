@@ -126,7 +126,6 @@ export default {
           .google_ad {
             width: 100%;
             height: 164px;
-            margin: 0 auto 24px;
           }
         }
       }
@@ -311,7 +310,7 @@ export default {
       &_news {
         width: 100%;
         &_top {
-          padding: 0 16 * $pr 24 * $pr;
+          padding-bottom: 24 * $pr;
           width: 100%;
           background-position-y: 0;
           background-size: contain;
@@ -346,7 +345,7 @@ export default {
             }
             .google_ad {
               order: 1;
-              margin: 0 0 24 * $pr;
+              height: 130 * $pr;
             }
           }
         }

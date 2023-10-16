@@ -1,8 +1,8 @@
 <template>
   <div class="astrology">
     <div class="astrology_main">
+      <google-ad classNames="google_ad" :id="'7460896194'"></google-ad>
       <div class="pairing">
-        <google-ad classNames="google_ad" :id="'7460896194'"></google-ad>
         <h3>ZODIAC COMPATIBILITY</h3>
         <div class="pairing_main">
           <p class="choose">Choose Two Zodiac Signs</p>
@@ -266,15 +266,15 @@ export default {
     margin: 0 auto;
     width: 1400px;
     z-index: 5;
+    .google_ad {
+      margin: 24px auto 0;
+      &:first-child {
+        width: 1152px;
+        height: 130px;
+      }
+    }
     .pairing {
       padding: 24px 0 0;
-      .google_ad {
-        margin: 0 auto;
-        &:first-child {
-          width: 1152px;
-          height: 90px;
-        }
-      }
       > h3 {
         font-family: 'Cinzel Decorative';
         font-style: normal;
@@ -283,7 +283,6 @@ export default {
         line-height: 64px;
         text-align: center;
         color: #ffffff;
-        padding-top: 60px;
       }
       .pairing_main {
         margin-top: 24px;
@@ -480,12 +479,12 @@ export default {
 @media (max-width: 1250px) {
   .astrology {
     &_main {
-      .pairing {
-        .google_ad {
-          &:first-child {
-            width: 100%;
-          }
+      .google_ad {
+        &:first-child {
+          width: 100%;
         }
+      }
+      .pairing {
         .pairing_main {
           .dynamic {
             &_love {
@@ -537,9 +536,15 @@ export default {
     &_main {
       margin: 0 auto;
       width: 100%;
-      padding: 0 16 * $pr;
+      padding: 0;
+      .google_ad {
+        margin: 0;
+        &:first-child {
+          height: 130 * $pr;
+        }
+      }
       .pairing {
-        padding: 0;
+        padding: 0 16 * $pr;
         > h3 {
           font-size: 36 * $pr;
           line-height: 48 * $pr;

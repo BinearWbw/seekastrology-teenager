@@ -10,9 +10,7 @@
             <a
               :href="`${item.href}`"
               :class="{
-                active:
-                  item.path == $route.path ||
-                  (item.path !== '/' && $route.path.includes(item.path)),
+                active: item.path == $route.path,
               }"
               v-if="!item.children"
             >
@@ -91,10 +89,7 @@ export default {
       }
     },
     setStatusUrl(item) {
-      return (
-        item == this.$route.path ||
-        (item !== '/' && this.$route.path.includes(item))
-      )
+      return item == this.$route.path
     },
     //验证子级的路由
     verificationChild(items) {
@@ -194,14 +189,8 @@ export default {
             }
           }
           &.active {
-            background: linear-gradient(
-              90deg,
-              rgba(255, 255, 255, 0) 0%,
-              rgba(255, 255, 255, 0.2) 50.52%,
-              rgba(255, 255, 255, 0) 100%
-            );
             .name {
-              color: #fff;
+              color: #9747ff;
             }
           }
         }
@@ -252,15 +241,7 @@ export default {
               }
             }
             &.active {
-              background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.2) 50.52%,
-                rgba(255, 255, 255, 0) 100%
-              );
-              .name {
-                color: #fff;
-              }
+              color: #9747ff;
             }
             .icon {
               width: 12px;
@@ -268,22 +249,23 @@ export default {
               display: inline-block;
               position: absolute;
               right: 40px;
-              background: url('~/assets/img/astrology/boult_icon.png') no-repeat;
-              transform: rotate(180deg);
+              background: url('~/assets/img/login/down_arrow.svg') no-repeat;
+              background-size: cover;
+              transform: rotate(0);
               transition: transform 0.3s ease;
             }
             .icon_active {
-              transform: rotate(0deg);
+              transform: rotate(180deg);
             }
           }
 
           .unfold_a {
             background: linear-gradient(
-              90deg,
-              rgba(255, 255, 255, 0) 0%,
-              rgba(255, 255, 255, 0.1) 50.52%,
-              rgba(255, 255, 255, 0) 100%
-            );
+                0deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.08) 100%
+              ),
+              #000;
             .path_item {
               display: block;
               width: 100%;
@@ -295,16 +277,29 @@ export default {
               font-weight: 400;
               font-size: 16px;
               line-height: 28px;
-              text-decoration: underline;
               color: #fff;
+              position: relative;
               &.active {
                 color: #9747ff;
+              }
+              &::after {
+                position: absolute;
+                content: '';
+                left: 0;
+                bottom: 0;
+                height: 1px;
+                width: 100%;
                 background: linear-gradient(
                   90deg,
                   rgba(255, 255, 255, 0) 0%,
-                  rgba(255, 255, 255, 0.1) 50.52%,
+                  rgba(255, 255, 255, 0.2) 50.52%,
                   rgba(255, 255, 255, 0) 100%
                 );
+              }
+              &:last-child {
+                &::after {
+                  display: none;
+                }
               }
             }
           }

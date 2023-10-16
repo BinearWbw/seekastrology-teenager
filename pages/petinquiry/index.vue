@@ -272,12 +272,12 @@ export default {
 @media (max-width: 1470px) {
   .inquiry {
     &_pet {
-      padding: 0 30px;
       .google_ad_top {
         width: 100%;
         max-width: 1200px;
       }
       .pairing {
+        padding: 50px 30px 96px;
         width: 100%;
         .context {
           .msgtext {
@@ -296,7 +296,6 @@ export default {
   $pr: math.div(1vw, 3.75);
   .inquiry {
     &_pet {
-      padding: 0 16 * $pr;
       .google_ad_top {
         width: 100%;
         max-width: auto;
@@ -305,7 +304,7 @@ export default {
       }
       .pairing {
         width: 100%;
-        padding: 34 * $pr 0 48 * $pr;
+        padding: 24 * $pr 16 * $pr 48 * $pr;
         &_petmain {
           border-radius: 24 * $pr;
           border: 1 * $pr solid rgba(255, 255, 255, 0.4);

@@ -103,7 +103,7 @@ export default {
         },
         {
           title: 'Horroscope',
-          path: '/horroscope/',
+          path: '/horroscope/aries-1/',
           href: '/horroscope/aries-1/',
           children: [
             {
@@ -133,12 +133,12 @@ export default {
             },
             {
               title: 'Teenager',
-              path: '/teenager/',
+              path: '/teenager/aries-1/',
               href: '/teenager/aries-1/',
             },
             {
               title: 'Pet',
-              path: '/petsign/',
+              path: '/petsign/aries-1/',
               href: '/petsign/aries-1/',
             },
           ],
