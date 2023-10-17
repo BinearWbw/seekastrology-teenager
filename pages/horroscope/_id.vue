@@ -1,6 +1,9 @@
 <template>
   <div class="horroscope">
-    <google-ad classNames="horroscope_googlead" :id="'7036206358'"></google-ad>
+    <google-auto-ad
+      classNames="horroscope_googlead"
+      :id="'7036206358'"
+    ></google-auto-ad>
     <div class="horroscope_main">
       <div class="horoscope_details">
         <google-ad classNames="google_ad" :id="'4376417914'"></google-ad>
@@ -620,9 +623,8 @@ export default {
   $pr: math.div(1vw, 3.75);
   .horroscope {
     &_googlead {
-      display: flex;
+      display: block;
       width: 100%;
-      height: 130 * $pr;
       margin: 0 auto 24 * $pr;
     }
     &_main {

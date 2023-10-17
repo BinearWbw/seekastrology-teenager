@@ -7,7 +7,6 @@
           :href="`/horroscope/${item_i.name
             .replace(/[^a-zA-Z0-9\\s]/g, '-')
             .toLowerCase()}-${item_i.id}/`"
-          data-aos="zoom-out-up"
         >
           <div class="img__list">
             <nuxt-img

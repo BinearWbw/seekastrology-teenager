@@ -9,7 +9,7 @@
               <p>A FREE Tarot Reading can help. Choose your cards now:</p>
             </div>
           </div>
-          <div class="tarot_carousel" data-aos="fade-left">
+          <div class="tarot_carousel">
             <div class="tarot_carousel_list">
               <div
                 class="slideshow_main"

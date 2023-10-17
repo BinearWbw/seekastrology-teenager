@@ -12,7 +12,10 @@
       <span></span>
       <span></span>
     </div>
-    <google-ad :id="'8015383208'" classNames="google_ad_h5"></google-ad>
+    <google-auto-ad
+      :id="'8015383208'"
+      classNames="google_ad_h5"
+    ></google-auto-ad>
     <div class="home__main">
       <section class="module choice">
         <google-auto-ad :id="'1087831010'" classNames="google_ad_pc" />
@@ -353,8 +356,9 @@ export default {
       width: 100%;
       margin: 0 0 24 * $pr;
       padding: 0;
-      height: 87 * $pr;
-      display: block;
+      display: flex;
+      //   min-height: 330 * $pr;
+      flex-direction: column;
     }
     &__main {
       padding: 0 16 * $pr;

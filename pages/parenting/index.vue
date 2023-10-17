@@ -14,7 +14,6 @@
                 :href="`/parenting/details/${item_i.name
                   .replace(/[^a-zA-Z0-9\\s]/g, '-')
                   .toLowerCase()}-${item_i.id}/`"
-                data-aos="zoom-out-up"
               >
                 <div class="imgs">
                   <div class="img__list">
