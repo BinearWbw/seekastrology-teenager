@@ -277,7 +277,6 @@ export default {
       width: 100%;
       height: 100%;
       position: relative;
-      background-color: rgb(0, 255, 255, 0.1);
       overflow-y: auto;
       &_scroll {
         width: 100%;

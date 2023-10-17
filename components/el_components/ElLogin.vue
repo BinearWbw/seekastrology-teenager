@@ -1,14 +1,10 @@
 <template>
   <div class="login">
     <client-only>
-      <transition name="fade">
-        <client-only>
-          <button class="button" v-if="!getUserInfo.email" @click="loginTo">
-            Log in
-          </button>
-        </client-only>
-      </transition>
-      <div class="user_login" v-if="getUserInfo.email" @click="myProfile">
+      <button class="button" v-if="!getUserInfo.email" @click="loginTo">
+        Log in
+      </button>
+      <div class="user_login" v-else @click="myProfile">
         <div class="user_img">
           <img :src="userImgIcon" alt="" />
         </div>
@@ -117,7 +113,9 @@ export default {
 .login {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-left: 16px;
+  min-width: 115px;
   .button {
     padding: 8px 32px;
     height: 44px;
@@ -317,6 +315,7 @@ export default {
     display: flex;
     align-items: center;
     margin-left: 16 * $pr;
+    min-width: 30 * $pr;
     .button {
       height: auto;
       font-family: Rubik;

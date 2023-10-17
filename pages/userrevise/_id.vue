@@ -186,26 +186,39 @@ export default {
       }
     },
     valueNames(value) {
-      this.$apiList.user
-        .setUserMsg({
-          origin: process.env.origin,
-          user_name: value,
+      const valueTrim = value.trim() !== '' //  不能只有空格
+      if (valueTrim) {
+        this.$apiList.user
+          .setUserMsg({
+            origin: process.env.origin,
+            user_name: value,
+          })
+          .then((res) => {
+            if (res.hasOwnProperty('token')) {
+              this.$store.commit('UPDATE_USERINFO', res)
+            } else {
+              // 提示通知
+              this.$notification.open({
+                message: 'Error',
+                description: res.msg,
+                duration: 2,
+                style: {
+                  color: '#f00',
+                },
+              })
+            }
+          })
+      } else {
+        // 提示通知
+        this.$notification.open({
+          message: 'Error',
+          description: 'Can not be empty',
+          duration: 3,
+          style: {
+            color: '#f00',
+          },
         })
-        .then((res) => {
-          if (res.hasOwnProperty('token')) {
-            this.$store.commit('UPDATE_USERINFO', res)
-          } else {
-            // 提示通知
-            this.$notification.open({
-              message: 'Error',
-              description: res.msg,
-              duration: 2,
-              style: {
-                color: '#f00',
-              },
-            })
-          }
-        })
+      }
     },
     valueEmail(value) {
       this.$apiList.user
