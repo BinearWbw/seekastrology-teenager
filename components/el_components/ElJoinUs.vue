@@ -7,6 +7,7 @@
         <button class="button" @click="formTouched">
           <span class="pc">Get your daily horoscope for free</span>
           <span class="h5">Join now</span>
+          <a href="/userto/2/" class="userto" v-if="getUserInfo.email"></a>
         </button>
       </div>
     </div>
@@ -17,16 +18,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       perform: false,
     }
   },
+  computed: {
+    ...mapGetters(['getUserInfo']),
+  },
   methods: {
     // 登录弹出
     formTouched() {
-      this.perform = true
+      if (!this.getUserInfo?.email) this.perform = true
       let bodyStyle = document.body.style
       bodyStyle.overflow = 'hidden'
     },
@@ -84,7 +89,15 @@ export default {
         padding: 8px 120px;
         border-radius: 42px;
         background: #fff;
+        position: relative;
         cursor: pointer;
+        .userto {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+        }
       }
       .h5 {
         display: none;

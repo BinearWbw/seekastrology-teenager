@@ -742,6 +742,7 @@ export default {
           .list {
             padding-top: 16px;
             display: flex;
+            flex-wrap: wrap;
             gap: 16px;
             .list_item {
               width: 220px;
