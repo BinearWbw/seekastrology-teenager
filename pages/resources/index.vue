@@ -565,7 +565,7 @@ $spacing: 16px;
       margin: 40px auto;
     }
     .google_ad {
-      width: 100%;
+      width: 1200px;
       height: 130px;
       margin: 40px auto;
     }
@@ -1051,7 +1051,7 @@ $spacing: 16px;
         }
       }
       .google_ad {
-        width: 343 * $pr;
+        width: 100%;
         height: 299 * $pr;
         margin: 48 * $pr auto;
       }
@@ -1061,7 +1061,7 @@ $spacing: 16px;
         margin: 0;
       }
       .google_ad_btm {
-        width: 343 * $pr;
+        width: 100%;
         margin: 48 * $pr auto;
       }
 
