@@ -1,9 +1,12 @@
 <template>
   <div class="details_content">
+    <google-auto-ad
+      :id="'8657229656'"
+      classNames="google_ad_h5"
+    ></google-auto-ad>
     <div class="details_type">
       <div class="details_type_main">
         <div class="pull_down">
-          <google-ad :id="'8657229656'" classNames="google_ad"></google-ad>
           <el-selected
             :options="tabList"
             :pint="ids"
@@ -469,6 +472,9 @@ export default {
 .details_content {
   width: 100%;
   padding-bottom: 96px;
+  .google_ad_h5 {
+    display: none;
+  }
   .details_type {
     margin: 0 auto;
     width: 1400px;
@@ -480,10 +486,6 @@ export default {
         position: absolute;
         top: 0;
         left: 708px;
-        .google_ad {
-          display: none;
-          height: 150px;
-        }
       }
       .details {
         display: flex;
@@ -711,6 +713,9 @@ export default {
   .details_content {
     width: 100%;
     padding-bottom: 48 * $pr;
+    .google_ad_h5 {
+      display: block;
+    }
     .details_type {
       margin: 0 auto;
       width: 100%;
@@ -722,11 +727,6 @@ export default {
           top: 0;
           left: 0;
           position: relative;
-          .google_ad {
-            display: block;
-            height: 90 * $pr;
-            margin-bottom: 36 * $pr;
-          }
         }
         .details {
           display: flex;

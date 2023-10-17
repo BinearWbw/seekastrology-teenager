@@ -1,9 +1,9 @@
 <template>
   <div class="zodiac_details">
+    <google-auto-ad :id="'7918863055'" classNames="google_ad_h5" />
     <div class="zodiac_details_main">
       <div class="part_details">
         <div class="pull_down">
-          <google-ad :id="'7918863055'" classNames="google_ad" />
           <el-selected
             :options="tabList"
             :pint="ids"
@@ -250,6 +250,9 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .zodiac_details {
+  .google_ad_h5 {
+    display: none;
+  }
   &_main {
     margin: 0 auto;
     width: 1400px;
@@ -272,10 +275,6 @@ export default {
         position: absolute;
         top: 34px;
         left: 708px;
-        .google_ad {
-          display: none;
-          height: 150px;
-        }
       }
       .introduce {
         width: 100%;
@@ -476,6 +475,10 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .zodiac_details {
+    .google_ad_h5 {
+      width: 100%;
+      display: block;
+    }
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
@@ -493,10 +496,6 @@ export default {
           left: 0;
           top: 0;
           margin: 24 * $pr 0;
-          .google_ad {
-            display: block;
-            height: 90 * $pr;
-          }
         }
         .introduce {
           width: 100%;

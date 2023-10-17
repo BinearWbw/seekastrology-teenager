@@ -10,7 +10,9 @@
             <a
               :href="`${item.href}`"
               :class="{
-                active: item.path == $route.path,
+                active:
+                  item.path == $route.path ||
+                  (item.path !== '/' && $route.path.includes(item.path)),
               }"
               v-if="!item.children"
             >
