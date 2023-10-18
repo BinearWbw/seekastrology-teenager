@@ -255,7 +255,7 @@ export default {
       transition: transform 0.3s ease-in-out;
       cursor: pointer;
       &:hover {
-        transform: translateY(-20px);
+        transform: translateY(-15px);
       }
     }
     .major-item-img {
@@ -441,6 +441,9 @@ export default {
           font-weight: 400;
           font-size: 14 * $pr;
           line-height: 18 * $pr;
+        }
+        &:hover {
+          transform: translateY(0);
         }
       }
     }

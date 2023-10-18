@@ -91,7 +91,6 @@ export default {
       this.$apiList.user
         .getAiDegree({ origin: process.env.origin })
         .then((res) => {
-          console.log(res)
           this.setNumberRequest = res
           if (res == 10) {
             this.localAskInputVisible = true

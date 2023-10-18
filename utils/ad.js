@@ -7,7 +7,6 @@ export const adBreakInit = () => {
   window.adConfig = window.adConfig || defaultHolderFn
   // 将星座的当前配置传递给 Ad Placement API。Ad Placement API 可以借此调整广告的预加载方式，并过滤所请求的广告类型，以选择合适的类型（例如，需要声音的视频广告）
   try {
-    console.log('config adBreak')
     window.adConfig({
       preloadAdBreaks: 'on',
       sound: 'off',
@@ -23,7 +22,6 @@ export const adBreakInit = () => {
 export const showAdBreak = (callback) => {
   if (tryAdTimes >= 2) return
   if (tryAdTimes < 2) {
-    console.log('Ad start :>>', window.adBreak)
     try {
       window.adBreak({
         type: 'preroll',

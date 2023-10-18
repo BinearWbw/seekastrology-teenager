@@ -43,13 +43,11 @@ export default {
   methods: {
     toggleDropdown() {
       this.isOpen = !this.isOpen
-      console.log('是否触发父元素点击事件')
     },
     selectOption(option) {
       this.$emit('changeSign', option)
       this.selectedOption = option
       this.isOpen = false
-      console.log('子元素点击事件')
     },
     closeDropdown() {
       this.isOpen = false

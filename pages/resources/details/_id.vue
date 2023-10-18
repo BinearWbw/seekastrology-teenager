@@ -205,8 +205,6 @@ export default {
   },
   mounted() {
     const dataDesc = this.$refs.dataDesc
-
-    console.log('dataDesc', dataDesc)
     if (dataDesc) {
       const h3Element = dataDesc.querySelectorAll('h2')
       h3Element.forEach((item, index) => {
