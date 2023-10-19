@@ -59,7 +59,7 @@
       </div>
 
       <div class="more-tarot-items" v-show="type != 0">
-        <a :href="`/tarot/type/${3}/`" class="link">
+        <a :href="`/tarot/`" class="link">
           <img src="~/assets/img/tarot/ai_tarot.webp" alt="general" />
           <p class="item-title">Ai Tarot</p>
           <p class="item-sub-title">

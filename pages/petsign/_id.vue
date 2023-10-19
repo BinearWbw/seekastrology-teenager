@@ -140,41 +140,9 @@ export default {
       timeout: null,
       ids: 1,
       currentName: '',
-      petlistData: null,
+      petlistData: '',
     }
   },
-  //   async asyncData({ error, $apiList, params }) {
-  //     try {
-  //       let ids = 1,
-  //         currentName = ''
-  //       let [petlistData] = await Promise.all([
-  //         $apiList.home
-  //           .getZodiacHoroscopeWeekly({
-  //             origin: process.env.origin,
-  //             id: params.id.replace(
-  //               /^.*?(\d*)$/,
-  //               (str, match, index) => match || '0'
-  //             ),
-  //             type: 'pet',
-  //           })
-  //           .then((res) => {
-  //             ids = params.id.replace(
-  //               /^.*?(\d*)$/,
-  //               (str, match, index) => match || '0'
-  //             )
-  //             currentName = res.name
-  //             return res.weekly
-  //           }),
-  //       ])
-  //       return {
-  //         ids,
-  //         petlistData,
-  //         currentName,
-  //       }
-  //     } catch (e) {
-  //       error({ statusCode: e.code, message: e.message })
-  //     }
-  //   },
   created() {
     this.isLoading = true
     this.ids = this.$route.params.id.replace(
@@ -220,7 +188,7 @@ export default {
         const moreConten = this.$refs.textMore
         const aoMore = moreConten.scrollHeight > moreConten.offsetHeight
         this.aoMore = aoMore
-      }, 500)
+      }, 1000)
     },
     setOpenExpand() {
       this.openExpand = !this.openExpand

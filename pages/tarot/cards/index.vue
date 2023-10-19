@@ -454,6 +454,7 @@ export default {
     .minor-list-item {
       .minor-item-img {
         height: 213 * $pr;
+        width: 100%;
       }
       .item-text {
         font-family: 'Rubik';

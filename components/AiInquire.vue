@@ -12,82 +12,90 @@
             </div>
             <div class="chat_board">
               <!-- AI问答 -->
-              <el-ai-chat
-                :disableds="disableds"
-                :cardName="cardDetails?.card_name"
-                :descType="cardDetails?.desc_type"
-                ref="chat"
-              ></el-ai-chat>
+              <el-ai-chat :cardData="cardDetails" ref="chat"></el-ai-chat>
             </div>
           </div>
         </div>
         <!-- 卡片选择 -->
-        <div class="ai_question_card">
-          <div class="content">
-            <div class="card_main" v-if="isCard">
-              <p class="h5_title">Choose a tarot card first</p>
-              <div class="card_list">
-                <div
-                  class="card_item"
-                  id="TOGGLEACTIVE"
-                  v-for="(item, index) in card_list"
-                  :class="{ card_active: isFinits == index }"
-                  :key="index"
-                  @click.once="toggleActive(index)"
-                >
-                  <img :src="item.icon" alt="" />
-                </div>
-                <div class="prohibit" v-if="isProhibit"></div>
-              </div>
-            </div>
-            <div class="card_details" v-if="!isCard">
-              <div class="details">
-                <div class="the_img">
+        <transition name="fade">
+          <div class="ai_question_card" ref="qu_card">
+            <div class="content">
+              <div class="card_main" v-if="isCard">
+                <p class="h5_title">
+                  Please choose a card that resonates with you the most.
+                </p>
+                <i class="icon_off" @click="hideCardNone">
+                  <img src="~/assets/img/login/openup.svg" alt="openup" />
+                </i>
+                <div class="card_list">
                   <div
-                    class="imgs"
-                    :class="{ imgs_rotate: cardDetails.desc_type == 2 }"
+                    class="card_item"
+                    id="TOGGLEACTIVE"
+                    v-for="(item, index) in card_list"
+                    :class="{ card_active: isFinits == index }"
+                    :key="index"
+                    @click="toggleActive(index)"
                   >
-                    <nuxt-img
-                      :src="cardDetails.icon"
-                      fit="cover"
-                      width="200"
-                      height="400"
-                      :alt="cardDetails.card_name"
-                      loading="lazy"
-                      format="auto"
-                    ></nuxt-img>
+                    <img :src="item.icon" alt="" />
                   </div>
-                  <!-- <p class="names">{{ cardDetails.card_name }}</p> -->
+                  <div class="prohibit" v-if="isProhibit"></div>
+                  <transition name="unfold">
+                    <div class="pro_text" v-if="isPopupVisible">
+                      Please start by asking a question that's deep in your
+                      heart.
+                    </div>
+                  </transition>
                 </div>
-                <div class="contens">
-                  <p class="title">{{ cardDetails.card_name }} Card :</p>
-                  <div class="texts" v-html="cardDetails.desc"></div>
-                  <div class="btns">
-                    <a
-                      class="more btn"
-                      id="SEECARDBTN"
-                      target="_blank"
-                      :href="`/tarot/details/${cardDetails.card_name
-                        .replace(/[^a-zA-Z0-9\\s]/g, '-')
-                        .toLowerCase()}-${cardDetails.card_id}/`"
-                      >See Card Meanings</a
+              </div>
+              <div class="card_details" v-if="!isCard">
+                <div class="details">
+                  <div class="the_img">
+                    <div
+                      class="imgs"
+                      :class="{ imgs_rotate: cardDetails.desc_type == 2 }"
                     >
-                    <button
-                      class="pick btn"
-                      id="HANDELPICKBTN"
-                      :class="{ btnds: isBtn }"
-                      @click="handelPick"
-                      v-if="!chatFlowDisabled"
-                      :disabled="isBtn"
-                    >
-                      Pick Another Card
-                    </button>
+                      <nuxt-img
+                        :src="cardDetails.icon"
+                        fit="cover"
+                        width="200"
+                        height="400"
+                        :alt="cardDetails.card_name"
+                        loading="lazy"
+                        format="auto"
+                      ></nuxt-img>
+                    </div>
+                    <!-- <p class="names">{{ cardDetails.card_name }}</p> -->
+                  </div>
+                  <div class="contens">
+                    <p class="title">{{ cardDetails.card_name }} Card :</p>
+                    <div class="texts" v-html="cardDetails.desc"></div>
+                    <div class="btns">
+                      <a
+                        class="more btn"
+                        id="SEECARDBTN"
+                        target="_blank"
+                        :href="`/tarot/details/${cardDetails.card_name
+                          .replace(/[^a-zA-Z0-9\\s]/g, '-')
+                          .toLowerCase()}-${cardDetails.card_id}/`"
+                        >See Card Meanings</a
+                      >
+                      <button
+                        class="pick btn"
+                        id="HANDELPICKBTN"
+                        :class="{ btnds: isBtn }"
+                        @click="handelPick"
+                        v-if="!chatFlowDisabled"
+                        :disabled="isBtn"
+                      >
+                        Ask again
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
     </div>
     <transition name="fade">
@@ -98,66 +106,70 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import ElAiChat from './el_components/ElAiChat.vue'
 export default {
+  components: { ElAiChat },
   data() {
     return {
       card_list: [
         {
           id: 1,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 2,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 3,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 4,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 5,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 6,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 7,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 8,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 9,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 10,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 11,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
         {
           id: 12,
-          icon: require('~/assets/img/tarot/card.png'),
+          icon: require('~/assets/img/tarot/card_ais.png'),
         },
       ],
       isFinits: -1,
       isProhibit: false,
       isCard: true,
-      disableds: true,
       cardDetails: {},
       formOf: false,
       isBtn: false,
+      meData: false,
+      isPopupVisible: false,
+      isPopup: null,
     }
   },
   computed: {
@@ -174,15 +186,30 @@ export default {
       let bodyStyle = document.body.style
       bodyStyle.overflow = 'hidden'
     })
+    this.$eventBus.$on('cardSelect', (val) => {
+      this.$refs.qu_card.style.display = 'block'
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
+      this.isCard = true // 打开pc逻辑中关闭的卡片列表
+    })
+    this.$eventBus.$on('meData', (val) => {
+      this.meData = val
+    })
   },
   methods: {
-    //
     handelPick() {
       this.isCard = true
       this.isFinits = -1
       this.isProhibit = false
     },
     async toggleActive(index) {
+      if (!this.meData) {
+        this.isPopupVisible = true
+        this.isPopup = setTimeout(() => {
+          this.isPopupVisible = false
+        }, 2000)
+        return // 没输入问题,后面都不执行
+      }
       this.$eventBus.$emit('disabos', false)
       this.isFinits = index
       this.isProhibit = true
@@ -193,12 +220,11 @@ export default {
         })
         .then((res) => {
           if (Array.isArray(res)) {
-            this.disableds = false
             this.isCard = false
-            // if (!this.getUserInfo?.token) {
-            //   this.isBtn = true
-            // }
+            this.meData = false
             this.cardDetails = res[0]
+            if (window.innerWidth < 751) this.hideCardNone()
+            this.isFinits = -1 // 卡片复位
           }
         })
     },
@@ -208,6 +234,15 @@ export default {
       let bodyStyle = document.body.style
       bodyStyle.overflow = ''
     },
+    // 关闭选牌弹窗
+    hideCardNone() {
+      this.$refs.qu_card.style.display = 'none'
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
+    },
+  },
+  destroyed() {
+    if (this.isPopup) clearTimeout(this.isPopup)
   },
 }
 </script>
@@ -297,6 +332,9 @@ export default {
             height: 100%;
             display: grid;
             place-items: center;
+            .icon_off {
+              display: none;
+            }
             .h5_title {
               display: none;
             }
@@ -311,6 +349,20 @@ export default {
                 width: 120%;
                 height: 100%;
                 cursor: not-allowed;
+              }
+              .pro_text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 8px 16px;
+                background-color: rgba(0, 0, 0, 0.5);
+                border-radius: 6px;
+                font-family: 'Rubik';
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px;
               }
               .card_item {
                 width: 190px;
@@ -522,16 +574,16 @@ export default {
       padding-bottom: 48 * $pr;
       .ai_question {
         gap: 0;
+        position: relative;
         &_inquire {
           flex: initial;
-          order: 2;
+          order: inherit;
           width: 100%;
           min-width: 100%;
           height: 547 * $pr;
           border-radius: 24 * $pr;
           border: 1 * $pr solid rgba(255, 255, 255, 0.4);
           padding: 3 * $pr;
-          margin-top: 24 * $pr;
           .content {
             width: 100%;
             height: 100%;
@@ -569,37 +621,67 @@ export default {
 
         &_card {
           flex: initial;
-          order: 1;
+          position: fixed;
+          top: 0;
+          order: inherit;
           width: 100%;
           min-width: 100%;
-          border-radius: 24 * $pr;
+          height: 100vh;
+          border-radius: 0;
           border: 1 * $pr solid rgba(255, 255, 255, 0.4);
-          padding: 3 * $pr;
+          background-color: rgba(0, 0, 0, 0.1);
+          padding: 0;
+          z-index: 100;
+          display: none;
           .content {
             width: 100%;
             height: 100%;
             border-radius: 21 * $pr;
-            border: 1 * $pr solid rgba(255, 255, 255, 0.4);
+            border: none;
+            background-color: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(8 * $pr);
             padding: 13 * $pr 10 * $pr;
             .card_main {
               width: 100%;
               height: 100%;
+              position: relative;
+              .icon_off {
+                display: inline-block;
+                position: absolute;
+                width: 30 * $pr;
+                height: 30 * $pr;
+                border-radius: 50%;
+                background-color: rgba(0, 0, 0, 0.4);
+                top: 20 * $pr;
+                right: 20 * $pr;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+              }
               .h5_title {
                 font-size: 16 * $pr;
                 padding-bottom: 16 * $pr;
+                position: relative;
+                top: 30 * $pr;
               }
               .card_list {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
                 gap: 6 * $pr 3 * $pr;
                 position: relative;
+                top: -30 * $pr;
                 .prohibit {
                   position: absolute;
                   top: 0;
                   left: 0;
                   width: 100%;
                   height: 100%;
+                  display: none;
+                }
+                .pro_text {
+                  display: none;
                 }
                 .card_item {
                   width: auto;
@@ -632,6 +714,7 @@ export default {
               }
             }
             .card_details {
+              display: none;
               .details {
                 .the_img {
                   .imgs {

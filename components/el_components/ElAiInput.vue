@@ -5,7 +5,7 @@
         <template v-if="askInputVisible">
           <a-form-model-item label="" prop="text">
             <a-input
-              placeholder="Ask a question"
+              placeholder="Type your question"
               allow-clear
               :disabled="disable"
               v-model="aiData.text"
@@ -243,7 +243,7 @@ export default {
     .button {
       position: absolute;
       top: 50%;
-      right: 8 * $pr;
+      right: 3 * $pr;
       transform: translateY(-50%);
       width: auto;
       padding: 8 * $pr 32 * $pr;

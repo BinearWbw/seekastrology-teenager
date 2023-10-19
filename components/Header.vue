@@ -102,7 +102,7 @@ export default {
           href: '/',
         },
         {
-          title: 'Horroscope',
+          title: 'Horoscopes',
           path: '/horroscope/aries-1/',
           href: '/horroscope/aries-1/',
           children: [
@@ -230,6 +230,11 @@ export default {
           childrenShow: true,
           children: [
             {
+              title: 'Ai Tarot',
+              path: '/tarot/',
+              href: '/tarot/',
+            },
+            {
               title: 'Daily Tarot',
               path: '/tarot/type/4/',
               href: '/tarot/type/4/',
@@ -253,11 +258,6 @@ export default {
               title: 'Tarot Cards',
               path: '/tarot/cards/',
               href: '/tarot/cards/',
-            },
-            {
-              title: 'Ai Tarot',
-              path: '/tarot/',
-              href: '/tarot/',
             },
           ],
         },

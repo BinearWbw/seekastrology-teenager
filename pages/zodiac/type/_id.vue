@@ -370,6 +370,9 @@ export default {
       error({ statusCode: e.code, message: e.message })
     }
   },
+  mounted() {
+    window.addEventListener('pageshow', this.handlePageShow)
+  },
   methods: {
     handleDropdownChange(option) {
       window.scrollTo({
@@ -380,6 +383,9 @@ export default {
       const pathNames = this.pathName.substring(0, this.pathName.indexOf('-'))
       window.changePageUrl = `/zodiac/type/${pathNames}-${option.id}/`
       window.location.href = `/zodiac/type/${pathNames}-${option.id}/`
+    },
+    handlePageShow() {
+      this.isLoading = false
     },
 
     setTitleCrumbs(name = 'aries') {

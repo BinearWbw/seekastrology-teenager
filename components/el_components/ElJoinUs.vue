@@ -4,7 +4,11 @@
       <div class="content_main">
         <div class="title">Join us</div>
         <p class="h5 tips">Get your daily horoscope for free</p>
-        <button class="button" @click="formTouched">
+        <button
+          class="button"
+          @click="formTouched"
+          :disabled="getUserInfo.email"
+        >
           <span class="pc">Get your daily horoscope for free</span>
           <span class="h5">Join now</span>
           <a href="/userto/2/" class="userto" v-if="getUserInfo.email"></a>

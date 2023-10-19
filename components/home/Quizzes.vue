@@ -349,8 +349,8 @@ export default {
     .google_ad_main {
       width: 100%;
       height: auto;
+      min-height: 299 * $pr;
       padding-top: 48 * $pr;
-      overflow: hidden;
       .google_ad {
         width: 100%;
       }

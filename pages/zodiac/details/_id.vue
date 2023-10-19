@@ -122,7 +122,7 @@
       <el-pairing></el-pairing>
     </transition> -->
     <transition name="fade">
-      <el-loading v-if="isLoading"></el-loading>
+      <el-loading v-show="isLoading"></el-loading>
     </transition>
   </div>
 </template>
@@ -229,6 +229,9 @@ export default {
       error({ statusCode: e.code, message: e.message })
     }
   },
+  mounted() {
+    window.addEventListener('pageshow', this.handlePageShow)
+  },
   methods: {
     handleDropdownChange(option) {
       window.scrollTo({
@@ -242,6 +245,9 @@ export default {
         .replace(/[^a-zA-Z0-9\\s]/g, '-')
         .toLowerCase()}-${option.id}/`
       this.isLoading = true
+    },
+    handlePageShow() {
+      this.isLoading = false
     },
   },
 }

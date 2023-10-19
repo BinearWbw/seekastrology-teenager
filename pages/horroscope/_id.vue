@@ -13,7 +13,7 @@
               {{ toUpperBig(currentName) }}
               <br />
               {{ moreData[comentIds].name }}
-              Horoscope
+              Horoscopes
             </h3>
             <div class="pull_down">
               <el-selected

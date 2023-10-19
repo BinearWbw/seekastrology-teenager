@@ -8,8 +8,39 @@
     >
       <div class="chat_wrapper" v-for="(item, index) in chatList" :key="index">
         <div class="chat_friend" v-if="item.uid !== 2">
-          <div class="chat_friend_text" v-show="item.msg !== ''">
-            {{ item.msg }}
+          <div class="chat_friend_msg">
+            <div class="chat_friend_msg_text" v-show="item.msg !== ''">
+              <div class="card_img" v-if="item.cho == 2">
+                <a
+                  class="card_img_li"
+                  v-if="item.img"
+                  :href="`/tarot/details/${item.nam
+                    .replace(/[^a-zA-Z0-9\\s]/g, '-')
+                    .toLowerCase()}-${item.cid}/`"
+                >
+                  <nuxt-img
+                    class="imgs"
+                    :src="item.img"
+                    fit="cover"
+                    width="80"
+                    height="160"
+                    :alt="item.nam"
+                    loading="lazy"
+                    format="auto"
+                  ></nuxt-img>
+                </a>
+                <p>{{ item.nam }}</p>
+              </div>
+              {{ item.msg }}
+              <button
+                class="btn_card"
+                v-if="item.cho == 1"
+                :disabled="!isLastLength(index)"
+                @click="openCardSelect"
+              >
+                Draw Cards
+              </button>
+            </div>
           </div>
         </div>
         <div class="chat_me" v-else>
@@ -20,15 +51,23 @@
       </div>
     </div>
     <div class="input_send" v-if="!localAskInputVisible">
-      <el-ai-input
+      <!-- <el-ai-input
         :btn="'Send'"
         id="SENDAIMATTER"
         :disable="disableds || flowDisabled || takeInput"
         @aited="meSendContent"
         @keyup.enter="meSendContent"
         :askInputVisible="askInputVisible"
+      ></el-ai-input> -->
+      <el-ai-input
+        :btn="'Send'"
+        id="SENDAIMATTER"
+        :disable="flowDisabled"
+        @aited="meSendContent"
+        @keyup.enter="meSendContent"
+        :askInputVisible="askInputVisible"
       ></el-ai-input>
-      <div class="doors" v-if="takeItOneAt">First draw a tarot card</div>
+      <!-- <div class="doors" v-if="takeItOneAt">First draw a tarot card</div> -->
     </div>
     <div class="login" v-if="localAskInputVisible">
       <div class="login_content">
@@ -48,18 +87,15 @@
 import { mapGetters } from 'vuex'
 import { EventSourcePolyfill } from 'event-source-polyfill'
 export default {
-  props: ['disableds', 'cardName', 'descType'],
+  props: ['cardData'],
   data() {
     return {
       askInputVisible: true,
       chatList: [
         {
-          msg: 'Welcome to the seeastrology tarot chatbot! ✨ Please choose a card that resonates with you the most.',
+          msg: '✨ Welcome to the seeastrology tarot chatbot! Please focus and ask a specific question that burns within you. You can ask your question up to once for free, log in to get more questions. Get started!',
           uid: 1,
-        },
-        {
-          msg: 'Then please focus your attention and ask a specific question that burns within you. Our mystical powers will reveal the answer you seek. You can ask up to 3 questions, log in to get more.',
-          uid: 1,
+          cho: '',
         },
       ],
       flowDisabled: false,
@@ -72,10 +108,21 @@ export default {
       prompt: null,
       frequency: true,
       setNumberRequest: 0,
+      cardDataAll: null,
+      meDataAll: '',
     }
   },
   computed: {
     ...mapGetters(['getUserInfo']),
+  },
+  watch: {
+    cardData(val) {
+      this.cardDataAll = this.cardData // 赋值
+      if (this.cardDataAll) {
+        this.handelAI(this.meDataAll)
+        this.stopScroll = true //可以滚动了
+      }
+    },
   },
   mounted() {
     window.addEventListener('beforeinstallprompt', this.beforeinstallprompt)
@@ -96,7 +143,7 @@ export default {
             this.localAskInputVisible = true
             this.frequency = false
             this.flowDisabled = true
-          } else if (res == 3 && !this.getUserInfo?.token) {
+          } else if (res == 1 && !this.getUserInfo?.token) {
             this.askInputVisible = false
             this.takeItOneAt = false
             this.flowDisabled = true
@@ -115,10 +162,10 @@ export default {
       this.lastScrollTop = to
 
       if (ty > 0) {
-        // console.log('向下滚动')
+        // 向下滚动
         this.stopScroll = true
       } else {
-        // console.log('向上滚动')
+        // 向上滚动
         this.stopScroll = false
       }
       //   this.scrollBottom()
@@ -133,10 +180,11 @@ export default {
       })
     },
     // 模拟Ai 回答
-    aiReplyContent() {
+    aiReplyContent(val) {
       let aiMsg = {
-        msg: 'ai 回复内容',
+        msg: val,
         uid: 1, //判断是输入还是回复内容
+        cho: 1, //没有值的时候,显示抽牌按钮
       }
       this.chatList.push(aiMsg)
       if (!this.stopScroll) {
@@ -152,15 +200,20 @@ export default {
         uid: 2, //uid
       }
       this.sendMsg(chatMsg)
-      this.handelAI(val)
-      this.stopScroll = true //可以滚动了
+      this.meDataAll = val
+      this.$eventBus.$emit('meData', true)
+      if (!this.cardDataAll) {
+        this.aiReplyContent(
+          'Please choose a card that resonates with you the most.'
+        )
+      }
     },
 
     // 调用Ai
     handelAI(val) {
       this.flowDisabled = true
       const eventSource = new EventSourcePolyfill(
-        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardName}&question=${val}&desc_type=${this.descType}`,
+        `https://astro.doitme.link/api/openai?origin=seekastrology&type=tarot&card=${this.cardData.card_name}&question=${val}&desc_type=${this.cardData.desc_type}`,
         {
           headers: {
             Authorization: this.getUserInfo?.token || '',
@@ -176,6 +229,10 @@ export default {
         this.$set(this.chatList, this.chatList.length, {
           msg: '',
           uid: 1,
+          cho: 2,
+          img: '',
+          nam: '',
+          cid: 1,
         })
       })
       // 监听事件流数据
@@ -195,6 +252,10 @@ export default {
             return (this.chatList[this.chatList.length - 1].msg = '')
           } else {
             this.chatList[this.chatList.length - 1].msg += data
+            this.chatList[this.chatList.length - 1].nam =
+              this.cardData.card_name
+            this.chatList[this.chatList.length - 1].img = this.cardData.icon
+            this.chatList[this.chatList.length - 1].cid = this.cardData.card_id
           }
           if (!this.stopScroll) {
             return
@@ -214,6 +275,8 @@ export default {
         this.askInputVisible = true
         this.takeInput = true
         this.takeItOneAt = true
+        this.cardDataAll = null // 滞空卡片数据
+        this.meDataAll = '' // 滞空已经回答的问题
       })
     },
     beforeinstallprompt(e) {
@@ -232,6 +295,14 @@ export default {
             console.log(err)
           })
       }
+    },
+    openCardSelect() {
+      console.log('打开卡牌选择')
+      this.$eventBus.$emit('cardSelect', true)
+    },
+    // 验证是否最后一个索引
+    isLastLength(index) {
+      return index === this.chatList.length - 1
     },
   },
 }
@@ -270,17 +341,25 @@ export default {
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        &_text {
+        &_msg {
           max-width: 80%;
-          padding: 16px 24px;
-          color: #fff;
-          font-family: 'Rubik';
-          font-size: 22px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 30px;
-          border-radius: 16px;
-          background: rgba(255, 255, 255, 0.08);
+          &_text {
+            padding: 16px 24px;
+            color: #fff;
+            font-family: 'Rubik';
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 30px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            .card_img {
+              display: none;
+            }
+            .btn_card {
+              display: none;
+            }
+          }
         }
       }
       .chat_me {
@@ -395,19 +474,77 @@ export default {
       }
       .chat_wrapper {
         position: relative;
-        word-break: break-all;
-
         .chat_friend {
           width: 100%;
           float: left;
           margin-bottom: 10 * $pr;
-          &_text {
-            max-width: 80%;
-            padding: 8 * $pr 16 * $pr;
-            font-size: 14 * $pr;
-            line-height: 18 * $pr;
-            border-radius: 8 * $pr;
-            background: rgba(255, 255, 255, 0.08);
+          &_msg {
+            max-width: 95%;
+            position: relative;
+            &_text {
+              padding: 8 * $pr 16 * $pr;
+              font-size: 14 * $pr;
+              line-height: 18 * $pr;
+              border-radius: 8 * $pr;
+              background: rgba(255, 255, 255, 0.08);
+              .card_img {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding-bottom: 15 * $pr;
+                > p {
+                  flex: 1;
+                  font-size: 16 * $pr;
+                  line-height: 20 * $pr;
+                  font-family: 'Cinzel Decorative';
+                }
+                .card_img_li {
+                  display: block;
+                  width: 80 * $pr;
+                  height: 160 * $pr;
+                  margin-right: 20 * $pr;
+                  border-radius: 10 * $pr;
+                  overflow: hidden;
+                  position: relative;
+                  &::before {
+                    content: 'See Card Meanings';
+                    position: absolute;
+                    width: 100%;
+                    bottom: 0;
+                    left: 0;
+                    background: rgba(0, 0, 0, 0.6);
+                    color: #fff;
+                    text-align: center;
+                    font-family: Rubik;
+                    font-size: 11 * $pr;
+                  }
+                  .imgs {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                  }
+                }
+              }
+              .btn_card {
+                display: table;
+                min-width: 10px;
+                padding: 6 * $pr 16 * $pr;
+                color: #333;
+                font-family: 'Rubik';
+                font-size: 14 * $pr;
+                line-height: 18 * $pr;
+                font-style: normal;
+                font-weight: 400;
+                text-align: right;
+                border-radius: 25 * $pr;
+                background-color: #fff;
+                margin-top: 6 * $pr;
+                &.btn_card[disabled] {
+                  background-color: rgba(255, 255, 255, 0.5);
+                }
+              }
+            }
           }
         }
         .chat_me {

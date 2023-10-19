@@ -153,6 +153,8 @@ export default {
                   .dose_img {
                     width: 100%;
                     height: 100%;
+                    border-radius: 50%;
+                    overflow: hidden;
                     position: relative;
                     > img {
                       width: 100%;

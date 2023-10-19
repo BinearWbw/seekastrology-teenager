@@ -168,6 +168,9 @@ export default {
       isLoading: false,
     }
   },
+  mounted() {
+    window.addEventListener('pageshow', this.handlePageShow)
+  },
   methods: {
     toUpperBig(str) {
       return str.charAt(0).toUpperCase() + str.slice(1)
@@ -188,6 +191,9 @@ export default {
           ? 3
           : 1
       return isSex
+    },
+    handlePageShow() {
+      this.isLoading = false
     },
   },
 }

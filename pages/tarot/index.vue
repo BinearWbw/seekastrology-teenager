@@ -9,13 +9,10 @@
   <div class="tarot-container">
     <div class="tarot_top_ad">
       <div class="content">
-        <p class="title">One Card Tarot</p>
-        <p class="text">
-          Pick a card then write down your question in the chatbot below to get
-          a FREE personalized reading.
-        </p>
+        <p class="title">AI Tarot Guides</p>
+        <p class="text">Find the deeper meaning with Al and Tarot</p>
       </div>
-      <google-ad classNames="ad-box_row mt-48 h5_google" id="4356182716" />
+      <google-ad classNames="ad-box_row  h5_google" id="4356182716" />
     </div>
     <div class="ai_reply">
       <ai-inquire></ai-inquire>
@@ -94,6 +91,7 @@ export default {
     }
     .h5_google {
       height: 280px;
+      margin-top: 48px;
     }
   }
 }
@@ -189,6 +187,7 @@ export default {
   $pr: math.div(1vw, 3.75);
   .tarot-container {
     padding: 16 * $pr;
+    margin-top: 0;
     .title {
       padding: 0;
     }
@@ -200,7 +199,7 @@ export default {
     }
     .tarot_top_ad {
       margin: 0 auto;
-      padding-bottom: 48 * $pr;
+      padding-bottom: 24 * $pr;
       max-width: 100%;
       .content {
         .title {
@@ -216,6 +215,7 @@ export default {
       }
       .h5_google {
         height: 130 * $pr;
+        margin-top: 24 * $pr;
       }
     }
   }
