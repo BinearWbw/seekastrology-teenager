@@ -32,7 +32,7 @@
           </div>
         </transition>
       </div>
-      <transition name="fade">
+      <transition name="unfold">
         <el-login-form v-if="formOf" @choce="showunde"></el-login-form>
       </transition>
     </client-only>

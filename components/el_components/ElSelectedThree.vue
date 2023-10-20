@@ -12,7 +12,7 @@
             <i class="select_icon" :class="{ rotate: isOpen }"></i>
           </div>
         </div>
-        <transition name="fade">
+        <transition name="unfold">
           <ul class="options" v-show="isOpen">
             <li
               class="left_tab_list"

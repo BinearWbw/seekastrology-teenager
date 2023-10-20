@@ -98,7 +98,7 @@
         </transition>
       </div>
     </div>
-    <transition name="fade">
+    <transition name="unfold">
       <el-login-form v-if="formOf" @choce="showLogin"></el-login-form>
     </transition>
   </div>

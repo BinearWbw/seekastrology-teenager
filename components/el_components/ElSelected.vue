@@ -9,7 +9,7 @@
         <i class="select_icon" :class="{ rotate: isOpen }"></i>
       </div>
     </div>
-    <transition name="fade">
+    <transition name="unfold">
       <ul class="options" v-show="isOpen">
         <li
           class="left_tab_list"
@@ -164,6 +164,9 @@ export default {
   .dropdown {
     border: 1 * $pr solid #ccc;
     border-radius: 34 * $pr;
+    [v-cloak] {
+      display: none;
+    }
     .selected {
       height: 60 * $pr;
       &_main {

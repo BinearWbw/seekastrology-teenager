@@ -139,7 +139,7 @@ export default {
         .getAiDegree({ origin: process.env.origin })
         .then((res) => {
           this.setNumberRequest = res
-          if (res == 10) {
+          if (res == 5) {
             this.localAskInputVisible = true
             this.frequency = false
             this.flowDisabled = true

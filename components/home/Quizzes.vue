@@ -3,36 +3,6 @@
     <div class="quizzes">
       <h3 :class="{ h5_size: $route.path !== '/' }">pOPULAR qUIZZES</h3>
       <div class="quizzes_sliding">
-        <div class="swiper_list">
-          <swiper class="swiper" :options="swiperOptions">
-            <swiper-slide
-              class="swiper__item"
-              v-for="item of homeQuizzesData"
-              :key="item.id"
-            >
-              <a
-                :href="`/test/details/${item.name
-                  .trim()
-                  .replace(/[^\w\d]/g, '-')
-                  .toLowerCase()}-${item.id}/${getCurrentRoute}`"
-              >
-                <div class="banner_img">
-                  <nuxt-img
-                    :src="item.icon || '/'"
-                    fit="cover"
-                    width="590"
-                    height="590"
-                    :alt="item.name"
-                    loading="lazy"
-                    format="auto"
-                  ></nuxt-img>
-                </div>
-                <p>{{ item.name }}</p>
-              </a>
-            </swiper-slide>
-          </swiper>
-          <div class="swiper_pagination"></div>
-        </div>
         <div class="quizzes_two">
           <div class="quizzes_two_list">
             <a
@@ -70,34 +40,12 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
-
 export default {
   name: 'quizzes',
   props: ['homeQuizzes'],
   data() {
     return {
       homeQuizzesData: [],
-      swiperOptions: {
-        slidesPerView: 'auto',
-        loop: true,
-        direction: 'horizontal',
-        autoplay: {
-          delay: 5000,
-          stopOnLastSlide: false,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: '.swiper_pagination',
-        },
-        navigation: {
-          nextEl: '.banner_next',
-          prevEl: '.banner_prev',
-        },
-        speed: 500,
-        grabCursor: true,
-      },
     }
   },
   async fetch() {
@@ -111,10 +59,6 @@ export default {
         }),
     ])
     this.homeQuizzesData = homeQuizzesData
-  },
-  components: {
-    Swiper,
-    SwiperSlide,
   },
   computed: {
     getCurrentRoute() {
@@ -176,60 +120,6 @@ export default {
         height: 220px;
         text-align: center;
         position: relative;
-      }
-      .swiper_list {
-        display: none;
-        flex: 1;
-        margin: 0 35px;
-        height: 100%;
-        overflow: hidden;
-        appearance: none;
-        backface-visibility: hidden;
-        -webkit-appearance: none;
-        -webkit-backface-visibility: hidden;
-        .swiper {
-          width: 100%;
-          height: 100%;
-          &__item {
-            width: 220px;
-            height: 280px;
-            color: rgba(255, 255, 255, 0.6);
-            overflow: hidden;
-            appearance: none;
-            backface-visibility: hidden;
-            transform: translate(0, 0, 0);
-            -webkit-appearance: none;
-            -webkit-backface-visibility: hidden;
-            -webkit-transform: translate3d(0, 0, 0);
-            margin-right: 16px;
-            .banner_img {
-              width: 220px;
-              height: 220px;
-              margin-bottom: 6px;
-              img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-              }
-            }
-            p {
-              font-family: 'Rubik';
-              font-size: 16px;
-              line-height: 22px;
-              text-align: center;
-              color: rgba(255, 255, 255, 0.6);
-              padding: 0 20px !important;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-line-clamp: 2;
-              -webkit-box-orient: vertical;
-            }
-          }
-        }
-        .swiper_pagination {
-          display: none;
-        }
       }
       .quizzes_two {
         width: 100%;
@@ -358,7 +248,7 @@ export default {
     .quizzes {
       width: 100%;
       height: 100%;
-      padding: 0 24 * $pr 0;
+      padding: 0 0 0;
       background-size: cover;
       h3 {
         font-size: 26 * $pr;
@@ -376,69 +266,46 @@ export default {
         .banner {
           display: none;
         }
-        .swiper_list {
-          display: block;
-          margin: 0;
-          .swiper {
+        .quizzes_two {
+          //   display: none;
+          width: 100%;
+          overflow-x: auto; /* 允许横向滚动 */
+          margin-bottom: 16 * $pr;
+          &_list {
             width: 100%;
-            height: 100%;
-            &__item {
-              width: 100%;
-              height: 100%;
-              .banner_img {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8 * $pr 16 * $pr;
+            .matrix {
+              width: 220 * $pr;
+              border-radius: 12 * $pr;
+              padding-bottom: 8 * $pr;
+              .imgs {
                 width: 100%;
-                height: 295 * $pr;
+                height: 220 * $pr;
                 margin-bottom: 16 * $pr;
                 img {
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
                   border-radius: 12 * $pr;
                 }
               }
               p {
-                font-size: 16 * $pr;
-                line-height: 22 * $pr;
-                padding: 0 !important;
+                width: 100%;
+                font-size: 14 * $pr;
+                line-height: 18 * $pr;
+                padding: 0 5 * $pr;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+              }
+
+              &:hover {
+                transform: scale(1);
+                background-color: rgba(238, 238, 244, 0.1);
               }
             }
           }
-          .swiper_pagination {
-            display: block;
-            text-align: center;
-            padding: 15 * $pr 0 32 * $pr;
-            :deep(swiper-pagination-bullet) {
-              padding: 0 5px;
-            }
-          }
-          :deep(.swiper-pagination-bullet) {
-            width: 6 * $pr;
-            height: 6 * $pr;
-            margin-right: 8 * $pr;
-            border-radius: 50%;
-            position: relative;
-            transition: transform 0.5s ease;
-            &::before {
-              content: '';
-              position: absolute;
-              left: 0;
-              top: 0;
-              width: 100%;
-              height: 100%;
-              border-radius: 50%;
-              background-color: #fff;
-            }
-          }
-          :deep(.swiper-pagination-bullet-active) {
-            border-color: #fff;
-            transform: scale(1.2);
-            &::before {
-              background-color: #ffffff;
-            }
-          }
-        }
-        .quizzes_two {
-          display: none;
         }
       }
       .button {

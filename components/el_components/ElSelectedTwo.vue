@@ -28,7 +28,7 @@
       </div>
       <div class="selected_title">{{ titleName }}</div>
     </div>
-    <transition name="fade">
+    <transition name="unfold">
       <ul class="options" v-show="isOpen" ref="absoluteElement">
         <li
           class="left_tab_list"

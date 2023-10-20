@@ -33,7 +33,7 @@ module.exports = {
     axios: {
       browserBaseURL: process.env.PUBLIC_URL,
     },
-    cdnUrl: 'https://asserts.gameseeks.com/',
+    cdnUrl: 'https://www.doitme.link/',
   },
 
   privateRuntimeConfig: {
@@ -80,8 +80,7 @@ module.exports = {
       { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
       {
         name: 'viewport',
-        content:
-          'width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui',
+        content: 'width=device-width,initial-scale=1,minimal-ui',
       },
       { name: 'format-detection', content: 'telephone=no' },
       {
@@ -171,7 +170,11 @@ module.exports = {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/scss/main.scss', 'ant-design-vue/dist/antd.css'],
+  css: [
+    '@/assets/scss/main.scss',
+    'aos/dist/aos.css',
+    'ant-design-vue/dist/antd.css',
+  ],
 
   loading: false,
 
@@ -181,6 +184,7 @@ module.exports = {
     '~plugins/utils',
     '~/plugins/event-bus.js', // 添加事件总线插件
     '~plugins/cookiePersistence',
+    { src: '~plugins/aos', ssr: false },
     { src: '~plugins/antd-ui', ssr: false, mode: 'client' },
     // { src: '~plugins/cookiePersistence', mode: 'client' },
   ],

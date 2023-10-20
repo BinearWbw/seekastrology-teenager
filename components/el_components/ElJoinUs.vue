@@ -15,7 +15,7 @@
         </button>
       </div>
     </div>
-    <transition name="fade">
+    <transition name="unfold">
       <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
     </transition>
   </div>

@@ -15,7 +15,7 @@
               {{ moreData[comentIds].name }}
               Horoscopes
             </h3>
-            <div class="pull_down">
+            <div class="pull_down" ref="pullscroll">
               <el-selected
                 :options="tabList"
                 :pint="ids"
@@ -337,9 +337,9 @@ export default {
     setOpenExpand() {
       this.openExpand = !this.openExpand
       if (!this.openExpand) {
-        window.scrollTo({
-          top: 0,
+        this.$refs.pullscroll.scrollIntoView({
           behavior: 'smooth',
+          block: 'start',
         })
       }
     },

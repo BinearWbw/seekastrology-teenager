@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="unfold">
     <aside class="dialog" v-if="visible">
       <div class="dialog__main">
         <div class="dialog__main__top">
