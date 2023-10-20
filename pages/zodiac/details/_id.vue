@@ -277,10 +277,10 @@ export default {
         margin-bottom: 64px;
       }
       .pull_down {
-        width: 220px;
+        width: 245px;
         position: absolute;
         top: 34px;
-        left: 708px;
+        left: 685px;
       }
       .introduce {
         width: 100%;

@@ -427,7 +427,7 @@ $spacing: 16px;
             position: relative;
             display: flex;
             justify-content: center;
-            height: 324px;
+            height: auto;
             &_video,
             &_pic {
               width: 100%;

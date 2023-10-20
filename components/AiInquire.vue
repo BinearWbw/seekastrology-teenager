@@ -626,7 +626,7 @@ export default {
           order: inherit;
           width: 100%;
           min-width: 100%;
-          height: 100vh;
+          height: 100%;
           border-radius: 0;
           border: 1 * $pr solid rgba(255, 255, 255, 0.4);
           background-color: rgba(0, 0, 0, 0.1);
@@ -671,7 +671,7 @@ export default {
                 grid-template-columns: repeat(4, 1fr);
                 gap: 6 * $pr 3 * $pr;
                 position: relative;
-                top: -30 * $pr;
+                top: -40 * $pr;
                 .prohibit {
                   position: absolute;
                   top: 0;
@@ -684,7 +684,7 @@ export default {
                   display: none;
                 }
                 .card_item {
-                  width: auto;
+                  width: 76 * $pr;
                   height: 130 * $pr;
                   border-radius: 12 * $pr;
                   margin-right: 0; /* 卡片重叠一半的位置 */

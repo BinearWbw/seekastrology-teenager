@@ -113,6 +113,24 @@ export default {
       formOf: false,
     }
   },
+  mounted() {
+    const currentURL = window.location.href
+    if (currentURL.includes('key=')) {
+      // 提取 key和type 参数的值
+      const urlParams = new URLSearchParams(window.location.search)
+      const key = urlParams.get('key')
+      console.log('key', key)
+      const res = {
+        token: key,
+        icon: '',
+        email: '',
+        user_name: '',
+        user_subscribe: [],
+      }
+      this.$store.commit('UPDATE_USERINFO', res)
+      localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
+    }
+  },
   methods: {
     revisePwdSend() {
       this.$refs.forgotForm.validate((valid) => {

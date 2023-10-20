@@ -118,11 +118,11 @@ export default {
     },
     getMainType(type) {
       switch (type) {
-        case 3:
+        case '3':
           return 'TAROT'
-        case 4:
+        case '4':
           return 'ASTROLOGY'
-        case 5:
+        case '5':
           return 'LOVE'
         default:
           return ''

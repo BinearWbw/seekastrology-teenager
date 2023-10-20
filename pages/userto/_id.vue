@@ -358,6 +358,15 @@ export default {
         .then((res) => {
           this.isLoading = false
           this.$store.commit('UPDATE_USERINFO', res)
+          // 提示通知
+          this.$notification.open({
+            message: 'Success',
+            description: 'Avatar updated successfully',
+            duration: 2,
+            style: {
+              color: '#32CD32',
+            },
+          })
         })
     },
     selectTab(index) {
