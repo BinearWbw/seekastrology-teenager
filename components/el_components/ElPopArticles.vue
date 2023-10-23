@@ -7,7 +7,7 @@
           :href="`/resources/details/${item.name
             .trim()
             .replace(/[^\w\d]/g, '-')
-            .toLowerCase()}-${item.id}`"
+            .toLowerCase()}-${item.id}/`"
           v-for="(item, index) in getHomeNewsData"
           :key="index"
         >

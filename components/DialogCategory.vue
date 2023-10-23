@@ -8,7 +8,7 @@
           <div class="list">
             <a
               class="item"
-              :href="`/category/#from=${$route.name}`"
+              :href="`/category/?from=${$route.name}`"
               :class="{ active: !info }"
               key="0"
             >
