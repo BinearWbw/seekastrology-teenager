@@ -1,10 +1,3 @@
-<!--
- * @Date: 2023-06-09 09:27:30
- * @LastEditors: tian 249682049@qq.com
- * @LastEditTime: 2023-06-15 10:57:26
- * @FilePath: /seekastrology/pages/tarot/index.vue
- * @Description: 
--->
 <template>
   <div class="tarot-container">
     <div class="tarot_top_ad">
@@ -17,19 +10,6 @@
     <div class="ai_reply">
       <ai-inquire></ai-inquire>
     </div>
-    <!-- <div class="title">Choose 1 Cards From The Deck Below:</div> -->
-    <!-- <div class="tarot-section"> -->
-    <!-- <div class="add-box-wrapper">
-        <google-ad classNames="ad-box" id="4068446091"></google-ad>
-      </div> -->
-    <!-- <div class="tarot-box"> -->
-    <!-- <tarot-play type="4"></tarot-play> -->
-    <!-- </div> -->
-    <!-- <div class="add-box-wrapper">
-        <google-ad classNames="ad-box" id="9572904273"></google-ad>
-      </div> -->
-    <!-- </div> -->
-
     <more-tarot class="mt-48"></more-tarot>
     <google-auto-ad classNames="ad-box_row mt-32" id="7816119415" />
     <all-tarot class="mt-48"></all-tarot>
@@ -42,14 +22,11 @@
 
 <script>
 import MoreTarot from '../../components/tarot/MoreTarot.vue'
-import TarotPlay from '../../components/tarot/TarotPlay.vue'
 import AllTarot from '../../components/tarot/AllTarot.vue'
-// import GoogleAd from '../../components/GoogleAd.vue'
 export default {
   name: 'tarot',
   components: {
     MoreTarot,
-    TarotPlay,
     AllTarot,
   },
   data() {

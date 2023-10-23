@@ -140,12 +140,6 @@ export default {
     handleScroll() {
       const rightAd = document.querySelector('.rightAd')
       const rightAdBox = this.$refs.right_google_ad
-      // const horoscope = this.$refs.horoscope
-      // const horoscope_main = horoscope.$el.querySelector(
-      //   '.daily_horoscope_main'
-      // )
-      // const marginTop = window.getComputedStyle(horoscope_main).marginTop
-      // console.log(marginTop)
       rightAd.style.display = 'block'
       const parentRect = rightAdBox.getBoundingClientRect()
       const childRect = rightAd.getBoundingClientRect()

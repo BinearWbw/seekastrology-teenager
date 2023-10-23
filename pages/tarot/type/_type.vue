@@ -22,7 +22,7 @@
         </div>
       </div>
       <google-auto-ad class="ad-box_row mt_80" id="6755169246" />
-      <more-tarot class="el_more" :type="type"></more-tarot>
+      <tarot-more-tarot class="el_more" :type="type"></tarot-more-tarot>
       <google-auto-ad class="ad-box_row mt_80" id="7545189503" />
     </div>
     <home-your-choice class="el_choice"></home-your-choice>
@@ -33,12 +33,10 @@
 </template>
 
 <script>
-import MoreTarot from '../../../components/tarot/MoreTarot.vue'
 import TarotPlay from '../../../components/tarot/TarotPlay.vue'
 export default {
   name: 'type',
   components: {
-    MoreTarot,
     TarotPlay,
   },
   watch: {
@@ -66,7 +64,7 @@ export default {
         },
         2: {
           title: 'About The Career Tarot Reading',
-          desc: 'Sometimes we know what we want, but we don’t necessarily have a path to achieve it. This spread is here for you to help you find that path, and the things within you that can help you achieve your goals. Unlike the previous spread, which was more along the lines of using the day to day as a foundation to build a future, this spread uses the first card, your goal, as a means to ground the entire spread, and how you can earn it.',
+          desc: "Sometimes we know what we want, but we don't necessarily have a path to achieve it. This spread is here for you to help you find that path, and the things within you that can help you achieve your goals. Unlike the previous spread, which was more along the lines of using the day to day as a foundation to build a future, this spread uses the first card, your goal, as a means to ground the entire spread, and how you can earn it.",
         },
         3: {
           title: 'About The Universal Tarot Reading',

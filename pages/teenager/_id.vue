@@ -62,9 +62,7 @@
 </template>
 
 <script>
-import ElLnformation from '../../components/el_components/ElLnformation.vue'
 export default {
-  components: { ElLnformation },
   name: 'Horroscopes',
   data() {
     return {

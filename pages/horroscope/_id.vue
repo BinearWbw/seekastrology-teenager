@@ -58,28 +58,6 @@
         <el-explore-more />
       </div>
       <div class="horoscope_more">
-        <!-- <h3>Read More Horoscope</h3>
-        <div class="more_main">
-          <div
-            class="more_list"
-            v-for="(item, index) in moreData"
-            :key="index"
-            @click="setCorresponding(index)"
-            id="HOROSCOPETYPE"
-            v-show="index != comentIds"
-          >
-            <div class="more_title">
-              <div class="img_top">
-                <img :src="item.imgUrl" :alt="item.title" />
-              </div>
-              <p>{{ item.title }}</p>
-            </div>
-            <div class="more_text">
-              <div class="p_text" v-html="item.texts"></div>
-              <button class="button">Get Your Horoscope</button>
-            </div>
-          </div>
-        </div> -->
         <google-auto-ad classNames="google_ad" :id="'4184846228'" />
       </div>
     </div>

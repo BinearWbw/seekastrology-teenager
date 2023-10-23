@@ -42,20 +42,14 @@
       </div> -->
     </div>
     <google-auto-ad classNames="google_ad" id="8937629395" />
-    <more-tarot class="mt-48"></more-tarot>
+    <tarot-more-tarot class="mt-48"></tarot-more-tarot>
     <google-auto-ad classNames="google_ad" id="6563597553" />
   </div>
 </template>
 
 <script>
-import GoogleAd from '../../../components/GoogleAd.vue'
-import MoreTarot from '../../../components/tarot/MoreTarot.vue'
 export default {
   name: 'answer',
-  components: {
-    MoreTarot,
-    GoogleAd,
-  },
   data() {
     return {
       cardsInfo: [],
@@ -74,8 +68,8 @@ export default {
           'Third Position: How Does the Future of This Relationship Look',
         ],
         2: [
-          'purpose ： Why did you choose this job in the first place?',
-          'responsibilities：- What is your role here?',
+          'purpose: Why did you choose this job in the first place?',
+          'responsibilities: - What is your role here?',
           'Progress - Your current state - How do you feel about the work?',
           'rewards - What you stand to gain from this job, financially, spiritually, or otherwise?',
           'future - What is a possible future that is coming from all of this',

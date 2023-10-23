@@ -158,24 +158,7 @@ export default {
       error({ statusCode: e.code, message: e.message })
     }
   },
-  mounted() {
-    // this.getDatas()
-  },
   methods: {
-    async getDatas() {
-      this.loading = true
-      const data = await this.$apiList.tarot.getTarotList({
-        origin: process.env.origin,
-      })
-      this.loading = false
-      const result = this.formatData(data)
-      this.majorList = result.majorList
-      this.minorList = result.minorList
-      this.wandsList = result.wandsList
-      this.cupsList = result.cupsList
-      this.swordsList = result.swordsList
-      this.pentaclesList = result.pentaclesList
-    },
     formatData(data) {
       let res = {
         majorList: [],

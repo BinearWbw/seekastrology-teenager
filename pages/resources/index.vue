@@ -53,9 +53,6 @@
                     loading="lazy"
                     format="auto"
                   ></nuxt-img>
-                  <!-- <div class="resources_main_btm_main_item_img_tarot">
-                  {{ item.main_label }}
-                </div> -->
                 </div>
                 <div class="resources_main_btm_main_item_text">
                   <div class="resources_main_btm_main_item_text_title">
@@ -64,9 +61,6 @@
                   <div class="resources_main_btm_main_item_text_subscribe">
                     {{ item.text }}
                   </div>
-                  <!-- <div class="resources_main_btm_main_item_text_date">
-                  {{ $utils.formatMMDD(item.created_at) }}
-                </div> -->
                 </div>
               </template>
               <template v-else>
@@ -92,9 +86,6 @@
                   <div class="resources_main_btm_main_item_img_time">
                     {{ $utils.formatMMSS(item.sec) }}
                   </div>
-                  <!-- <div class="resources_main_btm_main_item_img_tarot">
-                  {{ item.main_label }}
-                </div> -->
                 </div>
                 <div class="resources_main_btm_main_item_vtitle">
                   {{ item.name }}

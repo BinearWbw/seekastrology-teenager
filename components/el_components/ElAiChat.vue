@@ -51,14 +51,6 @@
       </div>
     </div>
     <div class="input_send" v-if="!localAskInputVisible">
-      <!-- <el-ai-input
-        :btn="'Send'"
-        id="SENDAIMATTER"
-        :disable="disableds || flowDisabled || takeInput"
-        @aited="meSendContent"
-        @keyup.enter="meSendContent"
-        :askInputVisible="askInputVisible"
-      ></el-ai-input> -->
       <el-ai-input
         :btn="'Send'"
         id="SENDAIMATTER"
@@ -67,7 +59,6 @@
         @keyup.enter="meSendContent"
         :askInputVisible="askInputVisible"
       ></el-ai-input>
-      <!-- <div class="doors" v-if="takeItOneAt">First draw a tarot card</div> -->
     </div>
     <div class="login" v-if="localAskInputVisible">
       <div class="login_content">
@@ -168,7 +159,6 @@ export default {
         // 向上滚动
         this.stopScroll = false
       }
-      //   this.scrollBottom()
     },
     scrollBottom() {
       this.$nextTick(() => {
@@ -222,7 +212,6 @@ export default {
       )
 
       let ifOpen = false //控制重新选牌按钮
-      let ifVisible = true // 控制重新登录状态
 
       // 监听事件open
       eventSource.addEventListener('open', (event) => {
@@ -247,7 +236,6 @@ export default {
             this.frequency = false
             return (this.chatList[this.chatList.length - 1].msg = '')
           } else if (data == '1002') {
-            ifVisible = false
             ifOpen = true
             return (this.chatList[this.chatList.length - 1].msg = '')
           } else {

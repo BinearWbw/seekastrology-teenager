@@ -258,7 +258,7 @@
 
 <script>
 import CryptoJS from 'crypto-js'
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 export default {
   data() {
     const validatePass2 = (rule, value, callback) => {
@@ -376,16 +376,6 @@ export default {
       nextif: true,
     }
   },
-  computed: {
-    // ...mapState(['userInfo']),
-  },
-  mounted() {
-    // if (this.getChildVisible) {
-    //   //添加滚动限制
-    //   let bodyStyle = document.body.style
-    //   bodyStyle.overflow = 'hidden'
-    // }
-  },
   methods: {
     ...mapMutations(['hideLoginBox']),
     // 登录
@@ -485,8 +475,6 @@ export default {
                 this.$store.commit('SIGN_SUCCESS', res.email)
                 this.$eventBus.$emit('emails', res.email)
                 this.$emit('choce')
-                // window.changePageUrl = `/user/`
-                // window.location.href = '/user/' //跳转到账号激活页面
 
                 // 注册直接登录
                 this.$store.commit('UPDATE_USERINFO', res)
