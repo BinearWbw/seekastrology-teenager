@@ -167,6 +167,7 @@ module.exports = {
 
   router: {
     mode: 'history',
+    trailingSlash: true, // 在生产环境中保留尾部斜杠
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

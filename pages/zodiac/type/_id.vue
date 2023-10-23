@@ -22,7 +22,7 @@
                 setTitleCrumbs().title
               }}
             </p>
-            <a :href="`${$route.path}`" class="crumbs">
+            <a :href="crumbsPath" class="crumbs">
               {{
                 setTitleCrumbs(zodiacIData.name).crumbs + pairingDetailsCrumbs
               }}
@@ -369,6 +369,11 @@ export default {
     } catch (e) {
       error({ statusCode: e.code, message: e.message })
     }
+  },
+  computed: {
+    crumbsPath() {
+      return this.$route.path
+    },
   },
   mounted() {
     window.addEventListener('pageshow', this.handlePageShow)
