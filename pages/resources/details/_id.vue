@@ -53,13 +53,6 @@
               </div>
             </div>
             <div class="details_main_left_top_content_video">
-              <!-- <nuxt-img
-                :src="dataInfo.icon"
-                fit="cover"
-                :alt="dataInfo.name"
-                class="details_main_left_top_content_img_video"
-                v-if="!playState"
-              ></nuxt-img> -->
               <iframe
                 id="video-element"
                 frameborder="0"
@@ -73,13 +66,6 @@
                 :src="dataInfo.desc"
                 :title="dataInfo.name"
               ></iframe>
-              <!-- <img
-                src="../../../assets/img/resources/play_icon.png"
-                alt="play icon"
-                class="details_main_left_top_content_img_play"
-                @click="playState = true"
-                v-if="!playState"
-              /> -->
             </div>
           </div>
         </div>
@@ -87,21 +73,6 @@
       </div>
       <div class="details_main_right">
         <google-ad classNames="rightAd" :id="'8812069528'"></google-ad>
-        <!-- 右侧列表 -->
-        <!-- <div class="details_main_right_list">
-          <a
-            :href="`/resources/details/${item.name
-              .trim()
-              .replace(/[^\w\d]/g, '-')
-              .toLowerCase()}-${item.id}/`"
-            class="details_main_right_list_item"
-            v-for="(item, index) in immedList"
-            :key="index"
-          >
-            <span>{{ item.name }}</span>
-            <img src="../../../assets/img/resources/d_02.png" alt="resources" />
-          </a>
-        </div> -->
       </div>
     </div>
     <div class="details_footer">
@@ -135,12 +106,6 @@
               <div class="details_footer_list_item_text_title">
                 {{ item.name }}
               </div>
-              <!-- <div class="details_footer_list_item_text_subscribe">
-                {{ item.text }}
-              </div> -->
-              <!-- <div class="details_footer_list_item_text_date">
-                {{ $utils.formatMMDD(item.created_at) }}
-              </div> -->
             </div>
           </template>
           <template v-else>
@@ -160,9 +125,6 @@
                 alt="play icon"
                 class="details_footer_list_item_img_play"
               />
-              <!-- <div class="details_footer_list_item_img_time">
-                {{ $utils.formatMMSS(item.sec) }}
-              </div> -->
               <div class="details_footer_list_item_img_tarot">TAROT</div>
             </div>
             <div class="details_footer_list_item_vtitle">
@@ -267,14 +229,6 @@ export default {
             return res || null
           }),
       ])
-      // let immedList = await $apiList.articles
-      //   .getNews({
-      //     origin: process.env.origin,
-      //     cate: dataInfo.main_type_id,
-      //   })
-      //   .then((res) => {
-      //     return res?.list || null
-      //   })
       return {
         footList,
         // immedList,
@@ -304,16 +258,16 @@ export default {
     /**
      * 获取右侧列表
      */
-    getNews() {
-      this.$apiList.articles
-        .getNews({
-          origin: process.env.origin,
-          cate: this.dataInfo.main_type_id,
-        })
-        .then((res) => {
-          this.immedList = res.list
-        })
-    },
+    // getNews() {
+    //   this.$apiList.articles
+    //     .getNews({
+    //       origin: process.env.origin,
+    //       cate: this.dataInfo.main_type_id,
+    //     })
+    //     .then((res) => {
+    //       this.immedList = res.list
+    //     })
+    // },
     /**通过id获取数据详情 */
     getDataInfo(id = null) {
       this.$apiList.articles

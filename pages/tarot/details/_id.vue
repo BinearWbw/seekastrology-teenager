@@ -1,10 +1,3 @@
-<!--
- * @Date: 2023-06-06 16:51:37
- * @LastEditors: tian 249682049@qq.com
- * @LastEditTime: 2023-06-20 17:15:14
- * @FilePath: /seekastrology/pages/tarot/detail/index.vue
- * @Description: 
--->
 <template>
   <div class="tarot-container">
     <div class="title mt-75 mt-44-mobile">
@@ -36,7 +29,6 @@
               <div class="card-text">{{ cardsInfo.name }}</div>
             </div>
             <div class="desc">
-              <!-- <div class="desc-title">{{ titleText[type][index] }}</div> -->
               <div class="desc-text" v-html="cardsInfo.desc"></div>
             </div>
           </li>
@@ -73,18 +65,6 @@ export default {
     } catch (e) {
       error({ statusCode: e.code, message: e.message })
     }
-  },
-  mounted() {
-    // this.getDatas()
-  },
-  methods: {
-    async getDatas() {
-      const data = await this.$apiList.tarot.getDetail({
-        origin: process.env.origin,
-        id: this.$route.query.id,
-      })
-      this.cardsInfo = data
-    },
   },
 }
 </script>

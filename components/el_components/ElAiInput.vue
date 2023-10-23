@@ -23,15 +23,6 @@
               Today's free Tarot AI count has been used up, please log in to
               your account for more counts!
             </div>
-            <!-- <div class="login_content_label">Email Address*</div> -->
-            <!-- <a-form-model-item label="" prop="emails">
-              <a-input
-                placeholder="Enter your email account"
-                allow-clear
-                @keyup.enter="emailSubmit"
-                v-model="emailData.email"
-              />
-            </a-form-model-item> -->
             <button class="emailButton" @click="emailSubmit">Login</button>
           </div>
         </div>
@@ -86,16 +77,6 @@ export default {
   methods: {
     emailSubmit() {
       this.$eventBus.$emit('loginShow', true)
-      //邮箱功能暂时不要
-      //   this.$refs.todayForm.validate((valid) => {
-      //     if (valid) {
-      //       console.log(valid)
-      //       // this.$emit('aited', this.aiData.text)
-      //     } else {
-      //       console.log('error submit!!')
-      //       return false
-      //     }
-      //   })
     },
     inputSubmit() {
       this.$refs.aiForm.validate((valid) => {

@@ -128,9 +128,7 @@
                         nextFlag
                       "
                     >
-                      <!-- <a class="get_result" :href="currentRoute"> -->
                       Get Your Result
-                      <!-- </a> -->
                     </div>
                     <div
                       v-else
@@ -296,8 +294,6 @@ export default {
     this.handleResize()
     adBreakInit()
     window.addEventListener('resize', this.handleResize)
-    //this.currentRoute = window.location.href
-    //this.initializeAnswer() //初始化是否有答案
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize)

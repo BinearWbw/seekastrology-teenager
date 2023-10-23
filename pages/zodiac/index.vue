@@ -49,19 +49,11 @@
       </div>
       <tarot-more-tarot></tarot-more-tarot>
     </div>
-
-    <!-- <transition name="fade">
-      <home-pop-articles></home-pop-articles>
-    </transition> -->
   </div>
 </template>
 
 <script>
-import GoogleAd from '../../components/GoogleAd.vue'
-
-import MoreTarot from '../../components/tarot/MoreTarot.vue'
 export default {
-  components: { GoogleAd, MoreTarot },
   name: 'Zodiac',
   async asyncData({ error, $apiList }) {
     try {

@@ -103,7 +103,6 @@ export default {
 @use 'sass:math';
 .dropdown {
   position: relative;
-  //   display: inline-block;
   .selected {
     cursor: pointer;
     position: relative;

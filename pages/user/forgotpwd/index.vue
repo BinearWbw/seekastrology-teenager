@@ -10,16 +10,6 @@
             :rules="rulesForgot"
             key="0"
           >
-            <!-- <p>Old password</p>
-            <a-form-model-item label="" prop="oldPwd">
-              <div class="names">
-                <a-input
-                  placeholder="Enter password"
-                  allow-clear
-                  v-model="forgotPwd.oldPwd"
-                />
-              </div>
-            </a-form-model-item> -->
             <p>New Password</p>
             <a-form-model-item label="" prop="password1">
               <div class="pwd1">

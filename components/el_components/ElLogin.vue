@@ -72,7 +72,6 @@ export default {
   methods: {
     ...mapMutations(['showLoginBox']),
     loginTo() {
-      //   this.showLoginBox()
       this.formOf = true
       let bodyStyle = document.body.style
       bodyStyle.overflow = 'hidden'
