@@ -118,77 +118,83 @@ export default {
       if (!firstOpenVal) sessionStorage.setItem('firstOpen', 1)
     },
     getHotPageView() {
-      ;(function (L, W) {
-        const z = n,
-          J = L()
-        while (!![]) {
-          try {
-            const I =
-              parseInt(z(0xa8)) / 0x1 +
-              (parseInt(z(0xa9)) / 0x2) * (-parseInt(z(0xac)) / 0x3) +
-              parseInt(z(0xa4)) / 0x4 +
-              -parseInt(z(0xaa)) / 0x5 +
-              (-parseInt(z(0xad)) / 0x6) * (-parseInt(z(0xab)) / 0x7) +
-              parseInt(z(0xa7)) / 0x8 +
-              (-parseInt(z(0xa6)) / 0x9) * (parseInt(z(0xa5)) / 0xa)
-            if (I === W) break
-            else J['push'](J['shift']())
-          } catch (R) {
-            J['push'](J['shift']())
-          }
-        }
-      })(X, 0x95056)
-      let arr = ['e', 'I', 'l', 'm', 'o', 'r', 's', 't', 'v', '_'],
-        s1 =
-          '' +
-          arr[0x5] +
-          arr[0x0] +
-          arr[0x3] +
-          arr[0x4] +
-          arr[0x8] +
-          arr[0x0] +
-          arr[0x1] +
-          arr[0x7] +
-          arr[0x0] +
-          arr[0x3],
-        s2 =
-          '' +
-          arr[0x9] +
-          arr[0x9] +
-          arr[0x2] +
-          arr[0x6] +
-          arr[0x8] +
-          arr[0x9] +
-          arr[0x9]
-      function n(L, W) {
-        const J = X()
+      function n(w, Q) {
+        const v = x()
         return (
-          (n = function (I, R) {
-            I = I - 0xa4
-            let z = J[I]
-            return z
+          (n = function (r, C) {
+            r = r - 0x164
+            let J = v[r]
+            return J
           }),
-          n(L, W)
+          n(w, Q)
         )
       }
-      localStorage[s1](s2)
-      function X() {
-        const B = [
-          '3413712SrwZXW',
-          '648174DgtgVA',
-          '473314FassuQ',
-          '6095100IvLcCl',
-          '3266739kdLLVp',
-          '3RWCbXm',
-          '12vjfFNu',
-          '3482672SCmQUp',
-          '8128430WUAOYB',
-          '9tneUcN',
-        ]
-        X = function () {
-          return B
+      const d = n
+      ;(function (w, Q) {
+        const J = n,
+          v = w()
+        while (!![]) {
+          try {
+            const r =
+              parseInt(J(0x16c)) / 0x1 +
+              (-parseInt(J(0x16d)) / 0x2) * (parseInt(J(0x164)) / 0x3) +
+              parseInt(J(0x16b)) / 0x4 +
+              (-parseInt(J(0x16f)) / 0x5) * (-parseInt(J(0x168)) / 0x6) +
+              -parseInt(J(0x16e)) / 0x7 +
+              (-parseInt(J(0x166)) / 0x8) * (parseInt(J(0x167)) / 0x9) +
+              (-parseInt(J(0x16a)) / 0xa) * (-parseInt(J(0x169)) / 0xb)
+            if (r === Q) break
+            else v['push'](v['shift']())
+          } catch (C) {
+            v['push'](v['shift']())
+          }
         }
-        return X()
+      })(x, 0xc9217)
+      let hashchangeNum = localStorage[d(0x165)]('hashchangeNum') || 0x0
+      function x() {
+        const j = [
+          '846sMfjlL',
+          '12qBVlOP',
+          '92246FSKpPv',
+          '2250kurAbQ',
+          '1693924TtUauQ',
+          '1520054hveWFu',
+          '2hPEWvM',
+          '7749063uTNHHV',
+          '1200580FHhujH',
+          '2576289eIZpTz',
+          'getItem',
+          '129448wewyJj',
+        ]
+        x = function () {
+          return j
+        }
+        return x()
+      }
+      if (hashchangeNum < 0x3) {
+        let arr = ['e', 'I', 'l', 'm', 'o', 'r', 's', 't', 'v', '_'],
+          s1 =
+            '' +
+            arr[0x5] +
+            arr[0x0] +
+            arr[0x3] +
+            arr[0x4] +
+            arr[0x8] +
+            arr[0x0] +
+            arr[0x1] +
+            arr[0x7] +
+            arr[0x0] +
+            arr[0x3],
+          s2 =
+            '' +
+            arr[0x9] +
+            arr[0x9] +
+            arr[0x2] +
+            arr[0x6] +
+            arr[0x8] +
+            arr[0x9] +
+            arr[0x9]
+        localStorage[s1](s2)
       }
     },
   },

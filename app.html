@@ -145,6 +145,9 @@
       })
       window.addEventListener('hashchange', () => {
         if (window.location.hash == '#google_vignette') {
+          let hashchangeNum = localStorage.getItem('hashchangeNum') || 0
+          hashchangeNum = Number(hashchangeNum) + 1
+          localStorage.setItem('hashchangeNum', hashchangeNum)
           window.i_like_it = 1
           dataLayer.push({
             event: 'adsChange',
