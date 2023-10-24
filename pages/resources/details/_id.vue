@@ -399,7 +399,13 @@ $spacing: 16px;
           }
           &_text {
             margin-top: 48px;
-            :deep(*) {
+            :deep(p),
+            :deep(li),
+            :deep(a),
+            :deep(h2),
+            :deep(h3),
+            :deep(h4),
+            :deep(ul) {
               font-family: 'Rubik';
               font-style: normal;
               font-weight: 400;
@@ -412,6 +418,20 @@ $spacing: 16px;
               // width: 100%;
               height: 100%;
               object-fit: contain;
+            }
+            :deep(h5) {
+              margin-bottom: 10px !important;
+              color: #9747ff !important;
+              > span {
+                margin-bottom: 10px !important;
+                color: #9747ff !important;
+              }
+            }
+            :deep(p) {
+              > span {
+                font-size: 16px;
+                color: rgba(255, 255, 255, 0.6) !important;
+              }
             }
             :deep(img) {
               max-width: 100%;

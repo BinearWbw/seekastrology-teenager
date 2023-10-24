@@ -22,11 +22,11 @@
                 setTitleCrumbs().title
               }}
             </p>
-            <a :href="crumbsPath" class="crumbs">
+            <span class="crumbs">
               {{
                 setTitleCrumbs(zodiacIData.name).crumbs + pairingDetailsCrumbs
               }}
-            </a>
+            </span>
             <div class="details_left_text">
               <div class="_item" v-if="containsWords($route.path)">
                 <div class="imgs">
@@ -369,11 +369,6 @@ export default {
     } catch (e) {
       error({ statusCode: e.code, message: e.message })
     }
-  },
-  computed: {
-    crumbsPath() {
-      return this.$route.path
-    },
   },
   mounted() {
     window.addEventListener('pageshow', this.handlePageShow)
