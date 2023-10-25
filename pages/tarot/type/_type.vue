@@ -22,7 +22,7 @@
         </div>
       </div>
       <google-auto-ad class="ad-box_row mt_80" id="6755169246" />
-      <tarot-more-tarot class="el_more" :type="type"></tarot-more-tarot>
+      <more-tarot class="el_more" :type="type"></more-tarot>
       <google-auto-ad class="ad-box_row mt_80" id="7545189503" />
     </div>
     <home-your-choice class="el_choice"></home-your-choice>
@@ -33,10 +33,12 @@
 </template>
 
 <script>
+import MoreTarot from '../../../components/tarot/MoreTarot.vue'
 import TarotPlay from '../../../components/tarot/TarotPlay.vue'
 export default {
   name: 'type',
   components: {
+    MoreTarot,
     TarotPlay,
   },
   watch: {

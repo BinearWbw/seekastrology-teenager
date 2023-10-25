@@ -42,14 +42,18 @@
       </div> -->
     </div>
     <google-auto-ad classNames="google_ad" id="8937629395" />
-    <tarot-more-tarot class="mt-48"></tarot-more-tarot>
+    <more-tarot class="mt-48"></more-tarot>
     <google-auto-ad classNames="google_ad" id="6563597553" />
   </div>
 </template>
 
 <script>
+import MoreTarot from '../../../components/tarot/MoreTarot.vue'
 export default {
   name: 'answer',
+  comments: {
+    MoreTarot,
+  },
   data() {
     return {
       cardsInfo: [],

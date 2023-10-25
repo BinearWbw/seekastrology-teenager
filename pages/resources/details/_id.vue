@@ -226,7 +226,8 @@ export default {
             origin: process.env.origin,
           })
           .then((res) => {
-            return res || null
+            let datas = res.sort(() => Math.random() - 0.5) // 打乱数据
+            return datas.slice(0, 8) || null
           }),
       ])
       return {
@@ -420,9 +421,11 @@ $spacing: 16px;
               object-fit: contain;
             }
             :deep(h5) {
+              font-size: 16px;
               margin-bottom: 10px !important;
               color: #9747ff !important;
               > span {
+                font-size: 16px;
                 margin-bottom: 10px !important;
                 color: #9747ff !important;
               }
@@ -777,10 +780,34 @@ $spacing: 16px;
             }
             &_text {
               margin-top: 32 * $pr;
-              :deep(*) {
+
+              :deep(p),
+              :deep(li),
+              :deep(a),
+              :deep(h2),
+              :deep(h3),
+              :deep(h4),
+              :deep(ul) {
                 font-size: 14 * $pr;
                 line-height: 24 * $pr;
                 margin-bottom: 20 * $pr;
+              }
+              :deep(h5) {
+                font-size: 14 * $pr !important;
+                margin-bottom: 10 * $pr !important;
+                > span {
+                  font-size: 14 * $pr !important;
+                  margin-bottom: 10 * $pr !important;
+                }
+              }
+              :deep(p) {
+                > span {
+                  font-size: 14 * $pr;
+                }
+              }
+              :deep(*) {
+                font-size: 14 * $pr;
+                line-height: 24 * $pr;
               }
               :deep(.leftAdText) {
                 .leftAdText {

@@ -26,13 +26,13 @@
         <google-auto-ad :id="'1626224357'" classNames="google_ad" />
       </section>
       <section class="module tarot">
-        <el-tarot-world />
+        <home-pop-articles></home-pop-articles>
       </section>
       <section class="module quizzes">
-        <home-quizzes></home-quizzes>
+        <el-tarot-world />
       </section>
       <section class="module new_pop">
-        <home-pop-articles></home-pop-articles>
+        <home-quizzes></home-quizzes>
         <google-auto-ad
           classNames="google_ad"
           :id="'2699524105'"
@@ -269,6 +269,11 @@ export default {
             width: 100%;
           }
         }
+        &.new_pop {
+          .google_ad {
+            width: 90%;
+          }
+        }
       }
     }
   }
@@ -387,11 +392,11 @@ export default {
         }
         &.tarot {
           margin-top: 48 * $pr;
-        }
-        &.new_pop {
           > .pop_maximum {
             padding: 0;
           }
+        }
+        &.new_pop {
           .google_ad {
             margin: 40 * $pr auto 0;
             width: 100%;
