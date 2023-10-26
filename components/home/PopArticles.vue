@@ -82,13 +82,18 @@ export default {
     }
   },
   async fetch() {
+    let search = {
+      page: 1,
+      size: 5,
+    }
     let [getHomeNewsData] = await Promise.all([
       this.$apiList.articles
-        .getNewsRec({
+        .getNews({
           origin: process.env.origin,
+          ...search,
         })
         .then((res) => {
-          return res.slice(0, 5) || []
+          return res.list || []
         }),
     ])
     this.getHomeNewsData = getHomeNewsData

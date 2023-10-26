@@ -9,7 +9,7 @@ export default (axios) => ({
   },
   /** 获取tabs对应的列表数据 */
   getNews(params) {
-    return axios.get('api/news', { params })
+    return axios.get('api/news/v2', { params })
   },
   /** 获取资讯详情 */
   getNewsDetail(params) {

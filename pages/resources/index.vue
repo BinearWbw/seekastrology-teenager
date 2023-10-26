@@ -138,7 +138,7 @@ export default {
         totalPage = 1,
         search = {
           page: 1,
-          size: 16,
+          size: 61,
         }
       let [list, tabs] = await Promise.all([
         /**顶部推荐 */
@@ -162,10 +162,15 @@ export default {
             return res || null
           }),
       ])
-      let allData = await $apiList.articles.getNews({
-        origin: process.env.origin,
-        ...search,
-      })
+      let allData = await $apiList.articles
+        .getNews({
+          origin: process.env.origin,
+          ...search,
+        })
+        .then((res) => {
+          res.list.splice(0, 5)
+          return res
+        })
       let tarotData = await $apiList.articles.getNews({
         origin: process.env.origin,
         cate: 3,
