@@ -268,7 +268,7 @@ export default {
           border-radius: 8px;
           a {
             width: 100%;
-            height: 96px;
+            height: 104px;
             display: flex;
             justify-content: space-between;
             .news_right_img {
@@ -355,6 +355,13 @@ export default {
           .left_img {
             &::after {
               bottom: 10px;
+            }
+          }
+        }
+        .news_right {
+          li {
+            a {
+              height: 96px;
             }
           }
         }
