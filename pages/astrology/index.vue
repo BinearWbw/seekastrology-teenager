@@ -67,9 +67,8 @@
 
 <script>
 import Vue from 'vue'
-import ElSelect from '../../components/el_components/ElSelected.vue'
+import { adBreakInit, showAdBreak } from '@/utils/ad'
 export default {
-  components: { ElSelect },
   name: 'astrology',
   data() {
     return {
@@ -146,6 +145,7 @@ export default {
   },
   mounted() {
     this.infoGetStartPairing()
+    adBreakInit()
   },
   watch: {
     compatibilityData(val) {
@@ -188,6 +188,7 @@ export default {
             this.isLoading = false
             this.compatibilityData = res
             sessionStorage.removeItem('genderList')
+            showAdBreak(this.adComplete)
             this.getGoogleAd()
           })
       } else {
@@ -253,6 +254,9 @@ export default {
           }
         })
       })
+    },
+    adComplete(data) {
+      console.log(data)
     },
   },
 }
