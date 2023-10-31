@@ -292,7 +292,6 @@ export default {
   },
   mounted() {
     this.handleResize()
-    adBreakInit()
     window.addEventListener('resize', this.handleResize)
   },
   beforeDestroy() {
@@ -473,6 +472,11 @@ export default {
         top: 0,
         behavior: 'smooth',
       })
+      const adBreakIndex =
+        this.dataInfo.questions.length - this.currentQuestionIndex
+      if (adBreakIndex == 1) {
+        adBreakInit() // 最后一道题时初始化插页广告
+      }
     },
     adComplete(data) {
       console.log(data)
