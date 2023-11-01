@@ -50,12 +50,12 @@
         </div>
       </div>
     </div>
-    <div class="poparticles">
-      <home-pop-articles></home-pop-articles>
-    </div>
     <transition name="fade">
       <el-daily-horoscope></el-daily-horoscope>
     </transition>
+    <div class="poparticles">
+      <home-pop-articles></home-pop-articles>
+    </div>
     <div class="all_tarot">
       <tarot-all-tarot></tarot-all-tarot>
     </div>

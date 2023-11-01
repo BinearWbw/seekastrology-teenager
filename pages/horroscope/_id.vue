@@ -1,9 +1,6 @@
 <template>
   <div class="horroscope">
-    <google-auto-ad
-      classNames="horroscope_googlead"
-      :id="'7036206358'"
-    ></google-auto-ad>
+    <google-ad classNames="horroscope_googlead" :id="'7036206358'"></google-ad>
     <div class="horroscope_main">
       <div class="horoscope_details">
         <google-ad classNames="google_ad" :id="'4376417914'"></google-ad>
@@ -81,14 +78,14 @@
       </div>
     </div>
     <transition name="fade">
-      <tarot-more-tarot></tarot-more-tarot>
-    </transition>
-    <transition name="fade">
       <el-pairing></el-pairing>
     </transition>
     <div class="daily_horo">
       <el-daily-horoscope></el-daily-horoscope>
     </div>
+    <transition name="fade">
+      <tarot-more-tarot class="more_tarot"></tarot-more-tarot>
+    </transition>
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
@@ -586,6 +583,9 @@ export default {
   .daily_horo {
     padding-bottom: 96px;
   }
+  .more_tarot {
+    padding-bottom: 48px;
+  }
 }
 @media (max-width: 1470px) {
   .horroscope {
@@ -647,8 +647,9 @@ export default {
   $pr: math.div(1vw, 3.75);
   .horroscope {
     &_googlead {
-      display: block;
+      display: flex;
       width: 100%;
+      height: 67 * $pr;
       margin: 0 auto 24 * $pr;
     }
     &_main {
@@ -808,6 +809,9 @@ export default {
       }
     }
     .daily_horo {
+      padding-bottom: 48 * $pr;
+    }
+    .more_tarot {
       padding-bottom: 48 * $pr;
     }
   }

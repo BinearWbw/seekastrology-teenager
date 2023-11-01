@@ -6,7 +6,6 @@
           <div class="top_text">
             <h3>Zodiac Signs Meanings and Characteristics</h3>
             <h3 class="h5_text">Zodiac Signs</h3>
-            <google-ad :id="'4424329425'" classNames="google_ad" />
           </div>
         </div>
         <div class="zodiac_main_news_list">
@@ -38,7 +37,7 @@
         <div class="other_main">
           <google-ad :id="'1578014121'" classNames="google_ad" />
           <el-pairing-two class="pairing"></el-pairing-two>
-          <el-pop-articles></el-pop-articles>
+          <el-pop-articles class="articles"></el-pop-articles>
         </div>
       </div>
     </div>
@@ -104,7 +103,6 @@ export default {
             font-size: 36px;
             line-height: 48px;
             color: #ffffff;
-            margin-bottom: 24px;
           }
           p {
             font-family: 'Rubik';
@@ -114,10 +112,6 @@ export default {
           }
           .h5_text {
             display: none;
-          }
-          .google_ad {
-            width: 100%;
-            height: 164px;
           }
         }
       }
@@ -318,7 +312,6 @@ export default {
             h3 {
               font-size: 26 * $pr;
               line-height: 36 * $pr;
-              margin-bottom: 0;
             }
             p {
               font-size: 16 * $pr;
@@ -334,10 +327,6 @@ export default {
               display: block;
               order: 2;
               padding-top: 24 * $pr;
-            }
-            .google_ad {
-              order: 1;
-              height: 130 * $pr;
             }
           }
         }
@@ -413,13 +402,21 @@ export default {
         padding: 48 * $pr 16 * $pr;
         .other_main {
           width: 100%;
+          display: flex;
+          flex-direction: column;
           .google_ad {
             width: 100%;
             height: 250 * $pr;
+            order: 2;
           }
           .pairing {
-            margin-top: 48 * $pr;
+            order: 1;
+            margin-top: 0;
             margin-bottom: 48 * $pr;
+          }
+          .articles {
+            order: 3;
+            margin-top: 48 * $pr;
           }
         }
       }
@@ -436,10 +433,8 @@ export default {
       }
       .quizzes {
         margin-bottom: 48 * $pr;
+        padding: 0 16 * $pr;
         order: 2;
-        :deep(.google_ad_main) {
-          display: none;
-        }
       }
     }
   }

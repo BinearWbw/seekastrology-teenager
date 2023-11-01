@@ -33,9 +33,6 @@
       </div>
       <button class="button" @click="pathToTestPage">Read More</button>
     </div>
-    <div class="google_ad_main">
-      <google-auto-ad :id="'1580825037'" classNames="google_ad" />
-    </div>
   </div>
 </template>
 
@@ -84,17 +81,7 @@ export default {
   display: flex;
   align-items: flex-start;
   padding-top: 36px;
-  justify-content: space-between;
-
-  .google_ad_main {
-    width: 338px;
-    height: 100%;
-    padding-top: 48px;
-    .google_ad {
-      width: 100%;
-      height: 74px;
-    }
-  }
+  justify-content: center;
   .quizzes {
     width: 928px;
     height: auto;
@@ -235,16 +222,6 @@ export default {
     margin: 48 * $pr auto 0;
     display: block;
     padding-top: 0;
-
-    .google_ad_main {
-      width: 100%;
-      height: auto;
-      min-height: 299 * $pr;
-      padding-top: 48 * $pr;
-      .google_ad {
-        width: 100%;
-      }
-    }
     .quizzes {
       width: 100%;
       height: 100%;

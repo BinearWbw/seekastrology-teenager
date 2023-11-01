@@ -12,10 +12,7 @@
       <span></span>
       <span></span>
     </div>
-    <google-auto-ad
-      :id="'8015383208'"
-      classNames="google_ad_h5"
-    ></google-auto-ad>
+    <google-ad :id="'8015383208'" classNames="google_ad_h5"></google-ad>
     <div class="home__main">
       <section class="module choice">
         <google-auto-ad :id="'1087831010'" classNames="google_ad_pc" />
@@ -35,7 +32,7 @@
         <home-quizzes></home-quizzes>
         <google-auto-ad
           classNames="google_ad"
-          :id="'2699524105'"
+          :id="'1626224357'"
         ></google-auto-ad>
       </section>
       <transition name="fade">
@@ -359,10 +356,10 @@ export default {
     }
     .google_ad_h5 {
       width: 100%;
+      height: 67 * $pr;
       margin: 0 0 24 * $pr;
       padding: 0;
       display: flex;
-      //   min-height: 330 * $pr;
       flex-direction: column;
     }
     &__main {

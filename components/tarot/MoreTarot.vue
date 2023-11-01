@@ -181,7 +181,7 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .container {
-    padding: 16 * $pr;
+    padding: 0 16 * $pr;
   }
   .title {
     font-family: 'Cinzel Decorative';

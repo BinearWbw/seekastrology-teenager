@@ -6,11 +6,11 @@
         <p class="text">Find the deeper meaning with Al and Tarot</p>
       </div>
       <google-ad classNames="ad-box_row  h5_google" id="4356182716" />
+      <div class="ai_reply">
+        <ai-inquire></ai-inquire>
+      </div>
     </div>
-    <div class="ai_reply">
-      <ai-inquire></ai-inquire>
-    </div>
-    <more-tarot class="mt-48"></more-tarot>
+    <more-tarot></more-tarot>
     <google-auto-ad classNames="ad-box_row mt-32" id="7816119415" />
     <all-tarot class="mt-48"></all-tarot>
     <google-auto-ad
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import MoreTarot from '../../components/tarot/MoreTarot.vue'
+import MoreTarot from '~/components/tarot/MoreTarot.vue'
 import AllTarot from '../../components/tarot/AllTarot.vue'
 export default {
   name: 'tarot',
@@ -42,7 +42,6 @@ export default {
   margin-top: 40px;
   .tarot_top_ad {
     margin: 0 auto;
-    padding-bottom: 48px;
     max-width: 1400px;
     .content {
       .title {
@@ -68,6 +67,9 @@ export default {
     }
     .h5_google {
       height: 280px;
+      margin-top: 48px;
+    }
+    .ai_reply {
       margin-top: 48px;
     }
   }
@@ -176,9 +178,11 @@ export default {
     }
     .tarot_top_ad {
       margin: 0 auto;
-      padding-bottom: 24 * $pr;
       max-width: 100%;
+      display: flex;
+      flex-direction: column;
       .content {
+        order: 1;
         .title {
           font-size: 26 * $pr;
           line-height: 36 * $pr;
@@ -191,7 +195,13 @@ export default {
         }
       }
       .h5_google {
+        order: 3;
         height: 130 * $pr;
+        margin-top: 0;
+        margin-bottom: 24 * $pr;
+      }
+      .ai_reply {
+        order: 2;
         margin-top: 24 * $pr;
       }
     }
