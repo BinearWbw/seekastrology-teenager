@@ -12,6 +12,7 @@
       <span></span>
       <span></span>
     </div>
+    <div class="tip_down" v-show="isScrolled"></div>
     <google-ad :id="'8015383208'" classNames="google_ad_h5"></google-ad>
     <div class="home__main">
       <section class="module choice">
@@ -48,8 +49,18 @@
 <script>
 export default {
   name: 'Home',
+  data() {
+    return {
+      isScrolled: false,
+    }
+  },
   mounted() {
     this.activeInit()
+    this.isScrolled = window.scrollY < 600
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     /* 检测账号激活 */
@@ -78,6 +89,12 @@ export default {
         })
       }
     },
+    handleScroll() {
+      this.isScrolled = window.scrollY < 600
+      if (window.scrollY > 600) {
+        window.removeEventListener('scroll', this.handleScroll)
+      }
+    },
   },
 }
 </script>
@@ -85,6 +102,37 @@ export default {
 @use 'sass:math';
 .home {
   position: relative;
+  .tip_down {
+    position: fixed;
+    left: 50%;
+    bottom: 100px;
+    width: 54px;
+    height: 36px;
+    background: url('../assets/img/home/tip_down.svg') no-repeat;
+    background-size: cover;
+    z-index: 50;
+    animation: bounce 1s linear infinite;
+    @keyframes bounce {
+      0% {
+        transform: translateY(0) translateX(-50%);
+      }
+      20% {
+        transform: translateY(-5px) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-15px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-20px) translateX(-50%);
+      }
+      80% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+      100% {
+        transform: translateY(0) translateX(-50%);
+      }
+    }
+  }
   .meteor {
     span {
       position: absolute;
@@ -303,6 +351,31 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .home {
+    .tip_down {
+      bottom: 100 * $pr;
+      width: 54 * $pr;
+      height: 36 * $pr;
+      @keyframes bounce {
+        0% {
+          transform: translateY(0) translateX(-50%);
+        }
+        20% {
+          transform: translateY(-5 * $pr) translateX(-50%);
+        }
+        40% {
+          transform: translateY(-15 * $pr) translateX(-50%);
+        }
+        60% {
+          transform: translateY(-20 * $pr) translateX(-50%);
+        }
+        80% {
+          transform: translateY(-10 * $pr) translateX(-50%);
+        }
+        100% {
+          transform: translateY(0) translateX(-50%);
+        }
+      }
+    }
     .meteor {
       span {
         &:nth-child(3) {
