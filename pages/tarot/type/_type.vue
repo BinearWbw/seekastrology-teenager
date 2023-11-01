@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div class="new_google">
-      <google-ad classNames="google_top_ad" :id="'7734920798'"></google-ad>
-    </div>
     <div class="tarot-container">
       <div class="title">{{ titleText[type] || '' }}</div>
       <div class="tarot-section">
@@ -85,13 +82,6 @@ export default {
 
 <style lang="scss" scoped>
 @use 'sass:math';
-.new_google {
-  .google_top_ad {
-    width: 1200px;
-    height: 315px;
-    margin: 24px auto;
-  }
-}
 .tarot-container {
   color: #fff;
   padding: 40px 0 0;
@@ -102,7 +92,6 @@ export default {
     font-size: 46px;
     line-height: 64px;
     text-align: center;
-    height: 64px;
   }
   .tarot-section {
     margin-top: 32px;
@@ -200,12 +189,6 @@ export default {
   }
 }
 @media (max-width: 1200px) {
-  .new_google {
-    padding: 0 30px;
-    .google_top_ad {
-      width: 100%;
-    }
-  }
   .tarot-container {
     .ad-box_row {
       padding: 0 30px;
@@ -219,20 +202,11 @@ export default {
 
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
-  .new_google {
-    padding: 0;
-    .google_top_ad {
-      width: 100%;
-      height: 110 * $pr;
-      margin: 0 auto 24 * $pr;
-    }
-  }
   .tarot-container {
     padding: 0 16 * $pr 0;
     .title {
       font-size: 26 * $pr;
       line-height: 36 * $pr;
-      height: auto;
     }
     .tarot-section {
       margin-top: 16 * $pr;

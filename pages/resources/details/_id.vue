@@ -151,52 +151,36 @@ export default {
   data() {
     return {
       playState: false,
-      idAdArray: [
-        '9753329066',
-        '4309430695',
-        '7374577739',
-        '4748414395',
-        '2122251057',
-        '2621794561',
-        '7107834487',
-        '8474539438',
-        '3030641061',
-        '3864909266',
-      ],
+      idAdArray: '9753329066',
     }
   },
   mounted() {
     const dataDesc = this.$refs.dataDesc
     if (dataDesc) {
-      const h3Element = dataDesc.querySelectorAll('h2')
-      h3Element.forEach((item, index) => {
-        // 顺序选择一个 id
-        const randomIdt = index % this.idAdArray.length //保证 index 的值都在 idAdArray.length 内
-        const randomId = this.idAdArray[randomIdt]
+      const h2Element = dataDesc.querySelector('h2')
 
-        const adContainer = document.createElement('div')
-        adContainer.className = 'leftAdText'
+      const adContainer = document.createElement('div')
+      adContainer.className = 'leftAdText'
 
-        // 创建动态组件实例
-        const adComponent = new Vue({
-          render: (h) =>
-            h('google-observer-auto-ad', {
-              props: {
-                classNames: 'leftAdText',
-                id: randomId,
-              },
-            }),
-        })
-
-        // 挂载动态组件
-        adComponent.$mount()
-
-        // 将动态组件的根 DOM 元素添加到容器
-        adContainer.appendChild(adComponent.$el)
-
-        // 在 h3 元素之前插入广告容器
-        item.parentNode.insertBefore(adContainer, item)
+      // 创建动态组件实例
+      const adComponent = new Vue({
+        render: (h) =>
+          h('google-observer-auto-ad', {
+            props: {
+              classNames: 'leftAdText',
+              id: this.idAdArray,
+            },
+          }),
       })
+
+      // 挂载动态组件
+      adComponent.$mount()
+
+      // 将动态组件的根 DOM 元素添加到容器
+      adContainer.appendChild(adComponent.$el)
+
+      // 在 h2 元素之前插入广告容器
+      h2Element.parentNode.insertBefore(adContainer, h2Element)
     }
   },
   async asyncData({ error, $apiList, params }) {

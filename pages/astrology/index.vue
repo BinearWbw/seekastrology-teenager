@@ -1,7 +1,6 @@
 <template>
   <div class="astrology">
     <div class="astrology_main">
-      <google-ad classNames="google_ad" :id="'7460896194'"></google-ad>
       <div class="pairing">
         <h3>ZODIAC COMPATIBILITY</h3>
         <div class="pairing_main">
@@ -140,7 +139,7 @@ export default {
       femalesId: 0,
       compatibilityData: '',
       isLoading: false,
-      idAdArray: ['4256255492', '8383202764', '3000133706'],
+      idAdArray: '4256255492',
     }
   },
   mounted() {
@@ -220,15 +219,8 @@ export default {
       this.$nextTick(() => {
         const astrologyData = this.$refs.astrologyData
         const h4Element = astrologyData.querySelectorAll('h4')
-        let counter = 0 // 用于保证每个广告id按顺序使用
         h4Element.forEach((item, index) => {
-          const threeeDa = (index + 1) % 3 === 0
-
-          if (threeeDa) {
-            // 顺序选择一个 id
-            const randomId = this.idAdArray[counter % this.idAdArray.length]
-            counter++
-
+          if (index == 2) {
             const adContainer = document.createElement('div')
             adContainer.className = 'leftAdText'
 
@@ -238,7 +230,7 @@ export default {
                 h('google-observer-auto-ad', {
                   props: {
                     classNames: 'leftAdText',
-                    id: randomId,
+                    id: this.idAdArray,
                   },
                 }),
             })
@@ -251,6 +243,7 @@ export default {
 
             // 在 h4 元素之前插入广告容器
             item.parentNode.insertBefore(adContainer, item)
+            return
           }
         })
       })
@@ -270,13 +263,6 @@ export default {
     margin: 0 auto;
     width: 1400px;
     z-index: 5;
-    .google_ad {
-      margin: 24px auto 0;
-      &:first-child {
-        width: 1152px;
-        height: 130px;
-      }
-    }
     .pairing {
       padding: 24px 0 0;
       > h3 {

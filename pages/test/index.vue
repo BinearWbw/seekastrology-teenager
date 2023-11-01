@@ -1,6 +1,5 @@
 <template>
   <div class="test">
-    <google-ad classNames="google_top_ad" :id="'8758274141'"></google-ad>
     <div class="test_main">
       <div class="test_main_line"></div>
       <div class="test_main_center">
@@ -36,11 +35,6 @@
               classNames="google_ad top"
               v-if="list.length >= 8"
               :id="'6715555076'"
-            />
-            <google-auto-ad
-              classNames="google_ad center"
-              v-if="list.length >= 16"
-              :id="'5870227324'"
             />
             <google-auto-ad
               classNames="google_ad btm"
@@ -200,9 +194,6 @@ $spacing: 16px;
 }
 .test {
   width: 100%;
-  .google_top_ad {
-    display: none;
-  }
   &_main {
     width: 1400px;
     margin: 0 auto;
@@ -328,9 +319,6 @@ $spacing: 16px;
           }
           .top {
             grid-row-end: 5;
-          }
-          .center {
-            grid-row-end: 9;
           }
           .btm {
             grid-row-end: 13;
@@ -478,12 +466,6 @@ $spacing: 16px;
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .test {
-    .google_top_ad {
-      display: flex;
-      width: 100%;
-      height: 110 * $pr;
-      margin: 0 auto 24 * $pr;
-    }
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
@@ -569,11 +551,8 @@ $spacing: 16px;
             .top {
               grid-row-end: 6;
             }
-            .center {
-              grid-row-end: 11;
-            }
             .btm {
-              display: none;
+              grid-row-end: 17;
             }
           }
           &_loading {

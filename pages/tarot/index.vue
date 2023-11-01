@@ -10,9 +10,8 @@
         <ai-inquire></ai-inquire>
       </div>
     </div>
-    <more-tarot></more-tarot>
-    <google-auto-ad classNames="ad-box_row mt-32" id="7816119415" />
-    <all-tarot class="mt-48"></all-tarot>
+    <more-tarot class="more_tarot"></more-tarot>
+    <all-tarot class="mt-h5-48"></all-tarot>
     <google-auto-ad
       classNames="ad-box_row mt-32 mt-120 mb-32"
       id="6503037744"
@@ -124,8 +123,8 @@ export default {
     background-color: #fff;
   }
 }
-.mt-48 {
-  margin-top: 48px;
+.mt-h5-48 {
+  margin-top: 96px;
 }
 .mt-32 {
   margin-top: 32px;
@@ -146,18 +145,12 @@ export default {
     max-width: 95vw;
     margin: 0 auto;
   }
-  .mt-48 {
-    margin-top: 48px;
-  }
   .mt-32 {
     margin-top: 32px;
   }
 }
 
 @media (max-width: 940px) {
-  .mt-48 {
-    margin-top: 48px;
-  }
   .mt-32 {
     margin-top: 32px;
   }
@@ -165,7 +158,7 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .tarot-container {
-    padding: 16 * $pr;
+    // padding: 16 * $pr;
     margin-top: 0;
     .title {
       padding: 0;
@@ -179,6 +172,7 @@ export default {
     .tarot_top_ad {
       margin: 0 auto;
       max-width: 100%;
+      padding: 16 * $pr;
       display: flex;
       flex-direction: column;
       .content {
@@ -220,10 +214,13 @@ export default {
   .ad-box_row {
     width: 100%;
   }
+  .more_tarot {
+    padding: 0 16 * $pr !important;
+  }
   .mt-120 {
     margin-top: 120 * $pr;
   }
-  .mt-48 {
+  .mt-h5-48 {
     margin-top: 48 * $pr;
   }
 }
