@@ -130,7 +130,7 @@ export default {
 .pairing_max_main {
   .pairing_module {
     width: 1400px;
-    margin: 96px auto;
+    margin: 0 auto;
     h3 {
       font-family: 'Cinzel Decorative';
       font-style: normal;
@@ -250,7 +250,6 @@ export default {
   .pairing_max_main {
     .pairing_module {
       width: 100%;
-      margin: 96px auto;
       .pairing_main {
         .dynamic {
           &_love {
@@ -300,10 +299,10 @@ export default {
     .pairing_module {
       width: 100%;
       padding: 0 16 * $pr;
-      margin: 48 * $pr auto 0;
+      margin: 32 * $pr auto 0;
       h3 {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
         padding: 0 5 * $pr;
       }
       .pairing_main {

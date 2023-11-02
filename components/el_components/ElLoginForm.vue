@@ -912,7 +912,7 @@ export default {
             .form_login,
             .form_sign {
               .login_h2 {
-                font-size: 26 * $pr;
+                font-size: 22 * $pr;
                 line-height: 48 * $pr;
                 margin-bottom: 16 * $pr;
               }

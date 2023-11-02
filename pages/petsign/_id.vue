@@ -53,7 +53,7 @@
       <el-lnformation></el-lnformation>
     </transition>
     <transition name="fade">
-      <el-pairing></el-pairing>
+      <el-pairing class="pairing"></el-pairing>
     </transition>
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
@@ -228,11 +228,11 @@ export default {
     }
   }
   &_main {
-    margin: 0 auto 48px;
+    margin: 0 auto 56px;
     width: 1400px;
     .horoscope_details {
       display: flex;
-      padding: 288px 0 48px;
+      padding: 288px 0 56px;
       .google_ad {
         width: 300px;
         height: 250px;
@@ -307,18 +307,21 @@ export default {
       }
     }
     .mexplore {
-      padding-top: 48px;
+      //   padding-top: 48px;
     }
   }
   .joins {
-    padding-top: 48px;
+    // padding-top: 48px;
   }
   .google_line {
-    padding: 96px 0;
+    padding: 24px 0;
     .google_ad {
       width: 1200px;
       margin: 0 auto;
     }
+  }
+  .pairing {
+    padding: 56px 0;
   }
 }
 @media (max-width: 1470px) {
@@ -344,7 +347,7 @@ export default {
 @media (max-width: 1350px) {
   .horroscopes {
     .google_line {
-      padding: 96px 30px;
+      padding: 24px 30px;
       .google_ad {
         max-width: 100%;
       }
@@ -392,7 +395,7 @@ export default {
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
-      margin: 0 auto 48 * $pr;
+      margin: 0 auto 32 * $pr;
       .horoscope_details {
         display: flex;
         padding: 110 * $pr 0 0;
@@ -413,8 +416,8 @@ export default {
             flex-direction: column-reverse;
             margin-bottom: 24 * $pr;
             h3 {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
               text-align: center;
             }
             .pull_down {
@@ -457,14 +460,17 @@ export default {
         }
       }
       .mexplore {
-        padding-top: 48 * $pr;
+        padding-top: 32 * $pr;
       }
     }
     .joins {
-      padding: 0 16 * $pr 48 * $pr;
+      padding: 0 16 * $pr;
     }
     .google_line {
-      padding: 0 16 * $pr 48 * $pr;
+      padding: 16 * $pr 0;
+    }
+    .pairing {
+      padding: 0 0 32 * $pr;
     }
   }
 }

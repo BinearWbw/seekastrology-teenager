@@ -145,11 +145,11 @@ export default {
     .google_ad_top {
       width: 1200px;
       height: 230px;
-      margin: 48px auto 0;
+      margin: 32px auto 0;
     }
     .pairing {
       width: 1400px;
-      padding: 50px 0 96px;
+      padding: 24px 0 56px;
       margin: 0 auto;
       &_petmain {
         width: 100%;
@@ -213,7 +213,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 96px;
+        padding-top: 56px;
         z-index: 9;
         .msgtext {
           width: 1164px;
@@ -227,7 +227,6 @@ export default {
             margin-bottom: 24px;
           }
           .teletext {
-            // padding-bottom: 48px;
             :deep(h2) {
               color: #fff;
               font-family: 'Rubik';
@@ -264,7 +263,7 @@ export default {
         }
       }
       .quizzes {
-        padding-top: 66px;
+        padding-top: 56px;
       }
     }
   }
@@ -304,7 +303,7 @@ export default {
       }
       .pairing {
         width: 100%;
-        padding: 24 * $pr 16 * $pr 48 * $pr;
+        padding: 16 * $pr 16 * $pr 32 * $pr;
         &_petmain {
           border-radius: 24 * $pr;
           border: 1 * $pr solid rgba(255, 255, 255, 0.4);
@@ -324,8 +323,8 @@ export default {
             background-size: contain;
             padding: 21 * $pr;
             > h3 {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
             }
             .tipsy {
               font-size: 14 * $pr;
@@ -343,10 +342,10 @@ export default {
           }
         }
         .context {
-          padding-top: 48 * $pr;
+          padding-top: 32 * $pr;
           .msgtext {
             .h3_title {
-              font-size: 26 * $pr;
+              font-size: 22 * $pr;
               line-height: 36 * $pr;
               margin-bottom: 24 * $pr;
             }
@@ -376,7 +375,7 @@ export default {
           }
         }
         .quizzes {
-          padding-top: 0;
+          padding-top: 32 * $pr;
         }
       }
     }

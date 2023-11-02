@@ -1,6 +1,6 @@
 <template>
   <div class="tarot-container">
-    <div class="title mt-75 mt-44-mobile">
+    <div class="title mt-48 mt-44-mobile">
       {{ cardsInfo.name }} Card Meaning
     </div>
     <div class="tarot-section">
@@ -38,7 +38,7 @@
         <google-ad classNames="ad-box" id="6727249080"></google-ad>
       </div> -->
     </div>
-    <google-ad classNames="ad-box_row mt-48 mb-48" id="1099517884"></google-ad>
+    <google-ad classNames="ad-box_row bottom_ad" id="1099517884"></google-ad>
   </div>
 </template>
 
@@ -112,14 +112,16 @@ export default {
   max-width: 1400px;
   height: 130px;
   margin: 0 auto;
-  //   background-color: #555761;
+}
+.bottom_ad {
+  padding: 24px 0;
 }
 .main-content {
-  margin: 40px 32px 0;
+  margin: 24px 32px 0;
   flex: 1;
   max-width: 1400px;
   .content-list-item {
-    margin-top: 92px;
+    margin-top: 24px;
     display: flex;
     &:not(:first-child) {
       margin-top: 97px;
@@ -213,7 +215,7 @@ export default {
     padding: 16 * $pr;
   }
   .main-content {
-    margin: 0;
+    margin: 0 !important;
     padding: 0 !important;
   }
   .add-box-wrapper {
@@ -229,8 +231,8 @@ export default {
     font-family: 'Cinzel Decorative';
     font-style: normal;
     font-weight: 700;
-    font-size: 36 * $pr;
-    line-height: 48 * $pr;
+    font-size: 26 * $pr;
+    line-height: 36 * $pr;
   }
   .content-list {
     .content-list-item {
@@ -250,13 +252,24 @@ export default {
         font-size: 14 * $pr;
         line-height: 24 * $pr;
         ::v-deep p {
-          margin-top: 30 * $pr;
+          margin-top: 16 * $pr;
+        }
+        ::deep(h3),
+        ::deep(h2) {
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
         }
       }
     }
   }
+  .mt-48 {
+    margin-top: 24 * $pr;
+  }
+  .mb-48 {
+    margin-bottom: 24 * $pr;
+  }
   .mt-44-mobile {
-    margin-top: 44 * $pr;
+    margin-top: 32 * $pr;
   }
 }
 </style>

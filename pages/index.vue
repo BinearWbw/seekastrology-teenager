@@ -257,42 +257,36 @@ export default {
     margin: 0 auto;
     width: 1400px;
     position: relative;
-    .various_ment {
-      padding-top: 100px;
-    }
     .module {
-      margin-top: 96px;
+      margin-top: 56px;
 
       .google_ad {
         width: 100%;
         color: #808080;
       }
       &.choice {
-        margin-top: 24px;
+        margin-top: 16px;
         .google_ad_pc {
           max-width: 1200px;
           margin: 0 auto;
           min-height: 305px;
-          margin-bottom: 24px;
         }
       }
       &.explore {
-        margin-top: 56px;
         .google_ad {
           display: none;
         }
       }
       &.new_pop {
         .google_ad {
-          margin: 96px auto;
+          margin: 24px auto;
           width: 1150px;
-          height: 90px;
         }
       }
     }
   }
   .all_tarot {
-    margin-bottom: 96px;
+    margin-bottom: 56px;
   }
 }
 @media (max-width: 1435px) {
@@ -308,7 +302,6 @@ export default {
     &__main {
       width: 1000px;
       .module {
-        margin-top: 100px;
         &.choice {
           .google_ad {
             width: 100%;
@@ -329,15 +322,12 @@ export default {
     &__main {
       width: 100%;
       .module {
-        margin-top: 100px;
-
         .google_ad {
           width: 100%;
         }
         &.choice {
           .google_ad {
             width: 100%;
-
             margin: 40px auto 0;
             padding: 0 50px;
             background-color: initial;
@@ -430,7 +420,7 @@ export default {
     .google_ad_h5 {
       width: 100%;
       height: 67 * $pr;
-      margin: 0 0 24 * $pr;
+      margin: 0 0 16 * $pr;
       padding: 0;
       display: flex;
       flex-direction: column;
@@ -438,11 +428,8 @@ export default {
     &__main {
       padding: 0 16 * $pr;
       width: 100%;
-      .various_ment {
-        padding-top: 48 * $pr;
-      }
       .module {
-        margin-top: 48 * $pr;
+        margin-top: 32 * $pr;
         &.choice {
           margin-top: 0;
           > .choice {
@@ -453,15 +440,15 @@ export default {
           }
         }
         &.explore {
-          margin-top: 48 * $pr;
           .google_ad {
-            display: block;
+            display: flex;
+            flex-direction: column;
             width: 100%;
-            margin-top: 48 * $pr;
+            margin-top: 16 * $pr;
           }
         }
         &.tarot {
-          margin-top: 48 * $pr;
+          //   margin-top: 48 * $pr;
           > .pop_maximum {
             padding: 0;
           }
@@ -481,7 +468,7 @@ export default {
     }
     .all_tarot {
       margin-bottom: 0;
-      padding-bottom: 48 * $pr;
+      padding-bottom: 32 * $pr;
     }
   }
 }

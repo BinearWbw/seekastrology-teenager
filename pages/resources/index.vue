@@ -558,19 +558,18 @@ $spacing: 16px;
     .google_ad_top {
       width: 1200px;
       height: 315px;
-      margin: 40px auto;
+      margin: 24px auto;
     }
     .google_ad {
       width: 1200px;
       height: 130px;
-      margin: 40px auto;
+      margin: 24px auto;
     }
     .google_ad_btm {
       width: 1200px;
-      margin: 48px auto 93px;
+      margin: 24px auto;
     }
     &_btm {
-      margin-top: 55px;
       scroll-margin-top: -50px;
       &_tabs {
         display: flex;
@@ -779,9 +778,8 @@ $spacing: 16px;
     }
   }
   .foot_components {
-    padding: 0 0 48px;
     .choice {
-      margin-bottom: 48px;
+      margin-bottom: 56px;
     }
   }
 }
@@ -885,9 +883,9 @@ $spacing: 16px;
     &_main {
       width: 100%;
       &_title {
-        margin-top: 24 * $pr;
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        margin-top: 16 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
         text-align: center;
         padding-bottom: 8 * $pr;
       }
@@ -1049,7 +1047,7 @@ $spacing: 16px;
       .google_ad {
         width: 100%;
         height: 299 * $pr;
-        margin: 48 * $pr auto;
+        margin: 16 * $pr auto;
       }
       .google_ad_top {
         width: 100%;
@@ -1058,13 +1056,12 @@ $spacing: 16px;
       }
       .google_ad_btm {
         width: 100%;
-        margin: 48 * $pr auto;
+        margin: 16 * $pr auto;
       }
 
       &_btm {
         width: 100%;
         scroll-margin-top: 60 * $pr;
-        margin-top: 48 * $pr;
         &_tabs {
           width: 91%;
           margin: 0 auto;
@@ -1186,9 +1183,8 @@ $spacing: 16px;
       }
     }
     .foot_components {
-      padding: 0 0 48 * $pr;
       .choice {
-        margin-bottom: 48 * $pr;
+        margin-bottom: 32 * $pr;
       }
     }
   }

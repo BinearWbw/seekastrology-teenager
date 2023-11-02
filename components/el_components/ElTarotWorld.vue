@@ -533,8 +533,8 @@ export default {
             height: auto;
             padding-top: 0;
             .title {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
               text-align: center;
               padding: 0 20 * $pr;
             }
@@ -653,7 +653,7 @@ export default {
           border-radius: 24 * $pr;
           border: 1 * $pr solid rgba(255, 255, 255, 0.4);
           padding: 3 * $pr;
-          margin: 48 * $pr auto 0;
+          margin: 24 * $pr auto 0;
           &_min {
             border-radius: 21 * $pr;
             border: 1 * $pr solid rgba(255, 255, 255, 0.4);
@@ -673,8 +673,8 @@ export default {
                   height: 40 * $pr;
                 }
                 > span {
-                  font-size: 26 * $pr;
-                  line-height: 36 * $pr;
+                  font-size: 22 * $pr;
+                  line-height: 30 * $pr;
                 }
               }
               > p {

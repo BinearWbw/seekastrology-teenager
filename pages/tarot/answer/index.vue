@@ -42,18 +42,14 @@
       </div> -->
     </div>
     <google-auto-ad classNames="google_ad" id="8937629395" />
-    <more-tarot class="mt-48"></more-tarot>
+    <tarot-more-tarot></tarot-more-tarot>
     <google-auto-ad classNames="google_ad" id="6563597553" />
   </div>
 </template>
 
 <script>
-import MoreTarot from '../../../components/tarot/MoreTarot.vue'
 export default {
   name: 'answer',
-  comments: {
-    MoreTarot,
-  },
   data() {
     return {
       cardsInfo: [],
@@ -128,7 +124,7 @@ export default {
     }
   }
   .main-content {
-    margin: 124px 32px 0;
+    margin: 24px 32px 0;
     flex: 1;
     max-width: 1400px;
     .content-list-item {
@@ -174,9 +170,6 @@ export default {
       }
     }
   }
-  .mt-48 {
-    margin-top: 48px;
-  }
   .mt-200 {
     margin-top: 200px;
   }
@@ -184,13 +177,16 @@ export default {
   .title_ad {
     width: 1200px;
     height: 130px;
-    margin: 48px auto 0;
+    margin: 24px auto 0;
   }
 
   .google_ad {
     width: 1200px;
     height: 130px;
-    margin: 48px auto;
+    margin: 24px auto;
+  }
+  :deep(.more-tarot) {
+    margin-bottom: 0;
   }
 }
 @media (max-width: 1550px) {
@@ -221,9 +217,6 @@ export default {
     }
     .ad-box_row {
       width: 100%;
-    }
-    .mt-48 {
-      margin-top: 48px;
     }
     .title_ad {
       width: 100%;
@@ -324,7 +317,7 @@ export default {
     }
     .google_ad {
       width: 100%;
-      margin: 48 * $pr auto;
+      margin: 16 * $pr auto;
       padding: 0;
     }
   }

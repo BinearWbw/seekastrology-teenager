@@ -156,9 +156,8 @@ export default {
   },
   mounted() {
     const dataDesc = this.$refs.dataDesc
-    if (dataDesc) {
-      const h2Element = dataDesc.querySelector('h2')
-
+    const h2Element = dataDesc.querySelector('h2')
+    if (dataDesc && h2Element) {
       const adContainer = document.createElement('div')
       adContainer.className = 'leftAdText'
 
@@ -404,6 +403,11 @@ $spacing: 16px;
               height: 100%;
               object-fit: contain;
             }
+            :deep(h1) {
+              font-size: 24px;
+              line-height: 30px;
+              color: rgba(255, 255, 255, 0.6);
+            }
             :deep(h5) {
               font-size: 16px;
               margin-bottom: 10px !important;
@@ -447,7 +451,7 @@ $spacing: 16px;
       .leftAd {
         width: 100%;
         margin: 0 auto;
-        margin-top: 47px;
+        margin-top: 24px;
       }
     }
     &_right {
@@ -496,7 +500,7 @@ $spacing: 16px;
   &_footer {
     width: 1400px;
     margin: 0 auto;
-    margin-top: 48px;
+    margin-top: 24px;
     &_title {
       font-family: 'Cinzel Decorative';
       font-style: normal;
@@ -511,7 +515,7 @@ $spacing: 16px;
       display: grid;
       grid-template-columns: repeat(4, 338px);
       grid-gap: 16px;
-      margin-bottom: 130px;
+      margin-bottom: 56px;
       &_item {
         display: block;
         &_img {
@@ -623,9 +627,8 @@ $spacing: 16px;
     }
   }
   .foot_components {
-    padding: 0 0 48px;
     .choice {
-      margin-bottom: 48px;
+      margin-bottom: 56px;
     }
   }
 }
@@ -710,7 +713,7 @@ $spacing: 16px;
       width: 100%;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 24 * $pr;
+      margin-top: 16 * $pr;
       &_left {
         width: 343 * $pr;
         margin-left: 0;
@@ -808,7 +811,7 @@ $spacing: 16px;
 
         .leftAd {
           width: 343 * $pr;
-          margin-top: 47 * $pr;
+          margin-top: 16 * $pr;
         }
       }
       &_right {
@@ -844,16 +847,17 @@ $spacing: 16px;
     &_footer {
       width: 100%;
       padding: 0 16 * $pr;
+      margin-top: 16 * $pr;
       &_title {
         text-align: center;
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
       }
       &_list {
         width: 100%;
         grid-gap: 16 * $pr 5 * $pr;
         grid-template-columns: repeat(2, 1fr);
-        margin-bottom: 48 * $pr;
+        margin-bottom: 16 * $pr;
         &_item {
           width: auto;
           object-fit: contain;
@@ -901,16 +905,18 @@ $spacing: 16px;
       }
     }
     .google_ad_footer {
-      margin: 0 auto;
+      margin-bottom: 16 * $pr;
       display: block;
-      width: 343 * $pr;
+      width: 100%;
       height: 299 * $pr;
       // overflow: hidden;
     }
     .foot_components {
-      padding: 0 0 48 * $pr;
       .choice {
-        margin-bottom: 48 * $pr;
+        margin-bottom: 32 * $pr;
+      }
+      .container {
+        margin-bottom: 32 * $pr;
       }
     }
   }

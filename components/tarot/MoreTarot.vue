@@ -91,8 +91,8 @@ export default {
   font-family: 'Cinzel Decorative';
   font-style: normal;
   font-weight: 700;
-  font-size: 46px;
-  line-height: 64px;
+  font-size: 36px;
+  line-height: 48px;
   text-align: center;
 }
 .more-tarot {
@@ -101,7 +101,7 @@ export default {
   justify-content: center;
   grid-gap: 16px;
   max-width: 1400px;
-  margin: 34px auto 48px;
+  margin: 24px auto 56px;
   flex-wrap: wrap;
   .more-tarot-items {
     width: 338px;
@@ -187,8 +187,8 @@ export default {
     font-family: 'Cinzel Decorative';
     font-style: normal;
     font-weight: 700;
-    font-size: 26 * $pr;
-    line-height: 36 * $pr;
+    font-size: 22 * $pr;
+    line-height: 30 * $pr;
     text-align: center;
   }
   .more-tarot {

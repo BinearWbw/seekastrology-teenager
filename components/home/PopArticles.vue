@@ -141,7 +141,7 @@ export default {
 @use 'sass:math';
 .pop_maximum {
   width: 1400px;
-  margin: 96px auto 0;
+  margin: 0 auto;
   z-index: 1;
   .pop_main {
     width: 100%;
@@ -414,7 +414,6 @@ export default {
 @media (max-width: (1024px)) {
   .pop_maximum {
     width: 100%;
-    margin: 80px auto 0;
     .pop_main {
       .pop_news {
         .news_left {
@@ -438,17 +437,16 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .pop_maximum {
-    margin: 48 * $pr auto 0;
     padding: 0 16 * $pr;
     .pop_main {
       position: relative;
       h3 {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
       }
       .h5_size {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
       }
       .pop_news {
         flex: 1;
@@ -604,7 +602,7 @@ export default {
   }
 
   .pop_maximum {
-    margin: 48 * $pr auto 0;
+    margin: 32 * $pr auto 0;
     padding: 0 16 * $pr;
     .pop_main_activity {
       display: initial;

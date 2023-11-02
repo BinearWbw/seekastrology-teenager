@@ -76,7 +76,7 @@ export default {
 @use 'sass:math';
 .choice {
   width: 1400px;
-  margin: 48px auto 0;
+  margin: 16px auto 0;
   &__title {
     padding-bottom: 16px;
     h3 {
@@ -103,7 +103,7 @@ export default {
   &__main {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 16px;
+    gap: 32px 16px;
     li {
       box-sizing: border-box;
       border: 1px solid transparent;
@@ -113,7 +113,7 @@ export default {
         box-sizing: border-box;
         height: 100%;
         display: block;
-        padding-bottom: 40px;
+        // padding-bottom: 40px;
         .img__list {
           width: 218px;
           height: 154px;
@@ -176,16 +176,16 @@ export default {
   $pr: math.div(1vw, 3.75);
   .choice {
     padding: 0 16 * $pr;
-    margin: 48 * $pr auto 0;
+    margin: 0 auto;
     &__title {
       padding-bottom: 16 * $pr;
       h3 {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
       }
       .h5_size {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
       }
       p {
         font-size: 14 * $pr;
@@ -197,12 +197,11 @@ export default {
     }
     &__main {
       grid-template-columns: repeat(3, 1fr);
-      row-gap: 0;
+      row-gap: 24 * $pr;
       column-gap: 11 * $pr;
       li {
         width: 100%;
         height: 147 * $pr;
-        margin-bottom: 24 * $pr;
         border: 0;
         .choice__main__a {
           height: 100%;

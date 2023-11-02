@@ -127,7 +127,7 @@ $spacing: 75px;
   background-image: url('~assets/img/tarot/card_bg.webp');
   background-size: 100%;
   background-repeat: no-repeat;
-  margin-top: 48px;
+  margin-top: 56px;
   .card-wrapper {
     display: flex;
     width: 1400px;
@@ -276,7 +276,7 @@ $spacing: 75px;
     margin-right: -16 * $pr;
     height: auto;
     padding: 0;
-    margin: 48 * $pr 0;
+    margin: 32 * $pr 0;
     .card-wrapper {
       width: 100%;
       flex-direction: column;
@@ -306,10 +306,10 @@ $spacing: 75px;
           color: #fff;
           text-align: center;
           font-family: 'Cinzel Decorative';
-          font-size: 26 * $pr;
+          font-size: 22 * $pr;
           font-style: normal;
           font-weight: 700;
-          line-height: 36 * $pr;
+          line-height: 30 * $pr;
         }
       }
       .card-righter {

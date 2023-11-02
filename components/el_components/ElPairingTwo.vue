@@ -212,8 +212,8 @@ export default {
     &_main {
       width: 100%;
       .title {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
         padding: 0 20 * $pr;
       }
       .select_main {

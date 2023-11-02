@@ -352,7 +352,7 @@ export default {
     display: none;
   }
   &_main {
-    margin: 0 auto 48px;
+    margin: 0 auto 24px;
     width: 1400px;
     .horoscope_details {
       display: flex;
@@ -470,110 +470,15 @@ export default {
         .google_ad {
           width: 924px;
           min-height: 130px;
-          margin: 48px auto 0;
+          margin: 24px auto 0;
         }
       }
     }
     .mexplore {
-      padding-top: 48px;
+      padding-top: 56px;
     }
     .horoscope_more {
-      padding: 48px 0 0;
-      h3 {
-        font-family: 'Cinzel Decorative';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 36px;
-        line-height: 48px;
-        text-align: center;
-        color: #ffffff;
-      }
-      .more_main {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        padding: 48px 0;
-        .more_list {
-          padding: 30px 24px 24px;
-          box-sizing: border-box;
-          border: 1px solid transparent;
-          border-radius: 6px;
-          cursor: pointer;
-          transition: transform 0.3s ease-in-out;
-          .more_title {
-            padding-bottom: 16px;
-            position: relative;
-            &::after {
-              content: '';
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              height: 1px;
-              background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.2) 50.52%,
-                rgba(255, 255, 255, 0) 100%
-              );
-            }
-            .img_top {
-              height: auto;
-              text-align: center;
-              img {
-                object-fit: contain;
-              }
-            }
-            p {
-              font-family: 'Rubik';
-              font-size: 22px;
-              line-height: 30px;
-              text-align: center;
-              color: #ffffff;
-            }
-          }
-          .more_text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            .p_text {
-              font-family: 'Rubik';
-              font-size: 16px;
-              line-height: 22px;
-              text-align: center;
-              color: rgba(255, 255, 255, 0.6);
-              margin: 16px 0;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-line-clamp: 4;
-              -webkit-box-orient: vertical;
-            }
-            .button {
-              width: 220px;
-              height: 32px;
-              border: 1px solid #45454d;
-              border-radius: 42px;
-              font-family: 'Rubik';
-              font-size: 14px;
-              line-height: 18px;
-              color: rgba(255, 255, 255, 0.6);
-              -webkit-transition: background-color 0.3s, -webkit-color 0.3s;
-              transition: background-color 0.3s, color 0.3s;
-            }
-          }
-          &:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.6);
-            .more_text {
-              .button {
-                color: #000;
-                background-color: #fff;
-              }
-            }
-          }
-        }
-      }
+      padding: 24px 0 0;
       .google_ad {
         width: 1200px;
         margin: 0 auto;
@@ -581,10 +486,7 @@ export default {
     }
   }
   .daily_horo {
-    padding-bottom: 96px;
-  }
-  .more_tarot {
-    padding-bottom: 48px;
+    padding-bottom: 56px;
   }
 }
 @media (max-width: 1470px) {
@@ -650,12 +552,12 @@ export default {
       display: flex;
       width: 100%;
       height: 67 * $pr;
-      margin: 0 auto 24 * $pr;
+      margin: 0 auto 16 * $pr;
     }
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
-      margin: 0 auto 48 * $pr;
+      margin: 0 auto;
       .horoscope_details {
         display: flex;
         padding: 0 0 24 * $pr;
@@ -676,8 +578,8 @@ export default {
             flex-direction: column-reverse;
             margin-bottom: 24 * $pr;
             h3 {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
               text-align: center;
             }
             .pull_down {
@@ -747,13 +649,13 @@ export default {
         }
       }
       .mexplore {
-        padding-top: 48 * $pr;
+        padding-top: 32 * $pr;
       }
       .horoscope_more {
-        padding: 48 * $pr 0 0;
+        padding: 16 * $pr 0 0;
         h3 {
-          font-size: 26 * $pr;
-          line-height: 36 * $pr;
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
         }
         .more_main {
           display: grid;
@@ -809,10 +711,10 @@ export default {
       }
     }
     .daily_horo {
-      padding-bottom: 48 * $pr;
+      padding-bottom: 32 * $pr;
     }
     .more_tarot {
-      padding-bottom: 48 * $pr;
+      padding-bottom: 32 * $pr;
     }
   }
 }

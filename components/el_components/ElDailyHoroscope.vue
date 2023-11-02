@@ -91,7 +91,7 @@ export default {
 .daily_horoscope {
   &_main {
     width: 1400px;
-    margin: 96px auto 0;
+    margin: 56px auto 0;
     > h3 {
       margin-bottom: 24px;
       font-family: 'Cinzel Decorative';
@@ -179,12 +179,12 @@ export default {
   $pr: math.div(1vw, 3.75);
   .daily_horoscope {
     &_main {
-      margin: 48 * $pr auto 0;
+      margin: 32 * $pr auto 0;
       padding: 0 16 * $pr;
       > h3 {
         margin-bottom: 24 * $pr;
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
         padding: 0 20 * $pr;
         display: none;
       }

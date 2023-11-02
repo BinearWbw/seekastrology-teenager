@@ -253,7 +253,7 @@ export default {
   width: 1400px;
   margin: 0 auto;
   &_main {
-    padding-bottom: 96px;
+    padding-bottom: 56px;
     .ai_question {
       display: flex;
       height: 757px;
@@ -571,7 +571,7 @@ export default {
   .inquire {
     width: 100%;
     &_main {
-      padding-bottom: 48 * $pr;
+      padding-bottom: 16 * $pr;
       .ai_question {
         gap: 0;
         position: relative;
@@ -730,8 +730,8 @@ export default {
                 .contens {
                   padding-top: 16 * $pr;
                   .title {
-                    font-size: 26 * $pr;
-                    line-height: 36 * $pr;
+                    font-size: 22 * $pr;
+                    line-height: 30 * $pr;
                   }
                   .texts {
                     font-size: 16 * $pr;

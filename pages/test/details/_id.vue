@@ -521,7 +521,7 @@ $spacing: 55px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    margin-top: 96px;
+    margin-top: 56px;
     &_left {
       width: 1046px;
       display: flex;
@@ -763,7 +763,7 @@ $spacing: 55px;
       }
       &_btm {
         width: 100%;
-        margin-top: 48px;
+        margin-top: 24px;
         &_title {
           font-family: 'Cinzel Decorative';
           font-style: normal;
@@ -813,7 +813,7 @@ $spacing: 55px;
       }
       .google_ad {
         width: 100%;
-        margin-top: 48px;
+        margin-top: 24px;
       }
     }
     &_right {
@@ -830,7 +830,7 @@ $spacing: 55px;
     }
   }
   .foot_components {
-    padding: 48px 0;
+    padding: 24px 0 0;
     .choice {
       margin-bottom: 48px;
     }
@@ -964,7 +964,7 @@ $spacing: 55px;
         &_top {
           padding: 32 * $pr 16 * $pr 48 * $pr;
           border-radius: 30 * $pr;
-          margin-top: 24 * $pr;
+          margin-top: 16 * $pr;
           &_menu {
             margin-top: 24 * $pr;
             padding: 0;
@@ -1120,12 +1120,13 @@ $spacing: 55px;
         }
         .google_ad {
           width: 343 * $pr;
+          margin-top: 16 * $pr;
         }
         &_btm {
-          margin-top: 48 * $pr;
+          margin-top: 16 * $pr;
           &_title {
-            font-size: 26 * $pr;
-            line-height: 36 * $pr;
+            font-size: 22 * $pr;
+            line-height: 30 * $pr;
             text-align: center;
           }
           &_list {
@@ -1155,9 +1156,9 @@ $spacing: 55px;
       }
     }
     .foot_components {
-      padding: 0 0 48 * $pr;
+      padding: 16 * $pr 0 32 * $pr;
       .choice {
-        margin-bottom: 48 * $pr;
+        margin-bottom: 32 * $pr;
       }
     }
   }

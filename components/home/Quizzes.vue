@@ -77,10 +77,9 @@ export default {
 @use 'sass:math';
 .quizzes_own {
   width: 1400px;
-  margin: 30px auto 0;
+  margin: 0 auto;
   display: flex;
   align-items: flex-start;
-  padding-top: 36px;
   justify-content: center;
   .quizzes {
     width: 928px;
@@ -219,22 +218,20 @@ export default {
   $pr: math.div(1vw, 3.75);
   .quizzes_own {
     width: 100%;
-    margin: 48 * $pr auto 0;
     display: block;
-    padding-top: 0;
     .quizzes {
       width: 100%;
       height: 100%;
       padding: 0 0 0;
       background-size: cover;
       h3 {
-        font-size: 26 * $pr;
+        font-size: 22 * $pr;
         line-height: 36 * $pr;
         text-align: center;
       }
       .h5_size {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
       }
       &_sliding {
         width: 100%;

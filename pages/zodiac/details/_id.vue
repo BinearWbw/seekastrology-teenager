@@ -105,7 +105,6 @@
             <google-ad :id="'2910078952'" classNames="google_ad"></google-ad>
           </div>
         </div>
-        <!-- <google-ad classNames="google_ad" :id="'3801702844'"></google-ad> -->
       </div>
       <div class="tab_control">
         <google-auto-ad classNames="google_ad" :id="'7549376164'" />
@@ -384,15 +383,15 @@ export default {
       width: 100%;
       .google_ad {
         width: 1200px;
-        margin: 95px auto 48px;
+        margin: 24px auto;
       }
     }
   }
   .sign_pop {
-    margin-bottom: 96px;
+    margin-bottom: 56px;
   }
   .sign_tarot {
-    margin-bottom: 96px;
+    margin-bottom: 56px;
     .google_ad {
       display: none;
     }
@@ -519,8 +518,8 @@ export default {
             order: 3;
             padding: 24 * $pr 0 0;
             h4 {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
               text-align: center;
             }
             .img_cont {
@@ -562,16 +561,19 @@ export default {
       .tab_control {
         .google_ad {
           width: 100%;
-          margin: 48 * $pr 0;
+          margin: 16 * $pr 0;
         }
       }
     }
     .sign_pop {
-      margin-bottom: 48 * $pr;
+      margin-bottom: 16 * $pr;
     }
     .sign_tarot {
       margin-bottom: 0;
-      padding-bottom: 48 * $pr;
+      padding-bottom: 32 * $pr;
+      :deep(.cards-box) {
+        margin-top: 16 * $pr;
+      }
       .google_ad {
         display: block;
         width: 100%;

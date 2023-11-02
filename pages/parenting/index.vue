@@ -93,15 +93,14 @@ export default {
     .google_ad_top {
       width: 1200px;
       height: 315px;
-      margin: 48px auto 0;
+      margin: 24px auto 0;
     }
     .baby {
       width: 1400px;
       margin: 0 auto;
-      padding: 0 0 48px;
       .choice {
         width: 1400px;
-        margin: 48px auto 0;
+        margin: 24px auto 0;
         &__title {
           padding-bottom: 16px;
           h3 {
@@ -224,14 +223,14 @@ export default {
         }
       }
       .explore {
-        margin-top: 96px;
+        margin-top: 56px;
       }
       .joins {
-        margin-top: 96px;
+        margin-top: 56px;
       }
     }
     .all_tarot {
-      padding-bottom: 96px;
+      padding-bottom: 56px;
     }
   }
 }
@@ -288,17 +287,17 @@ export default {
       .baby {
         padding: 0 16 * $pr 0;
         .choice {
-          margin: 24 * $pr auto 0;
+          margin: 16 * $pr auto 0;
           padding: 0;
           &__title {
             padding-bottom: 16 * $pr;
             h3 {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
             }
             .h5_size {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
             }
             p {
               font-size: 14 * $pr;
@@ -358,10 +357,10 @@ export default {
           }
         }
         .explore {
-          margin-top: 48 * $pr;
+          margin-top: 0;
         }
         .joins {
-          margin-top: 48 * $pr;
+          margin-top: 32 * $pr;
         }
       }
       .all_tarot {

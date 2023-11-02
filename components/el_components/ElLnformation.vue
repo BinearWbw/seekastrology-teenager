@@ -159,8 +159,8 @@ export default {
     &_main {
       padding: 0 16 * $pr;
       .h3_tion {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
       }
       .duration {
         display: grid;

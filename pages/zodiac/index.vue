@@ -84,7 +84,7 @@ export default {
   &_main {
     margin: 0 auto;
     width: 1400px;
-    padding: 32px 0 46px;
+    padding: 32px 0 56px;
     display: flex;
     justify-content: space-between;
     &_news {
@@ -206,14 +206,13 @@ export default {
   }
 
   &_el {
-    padding: 0 0 50px;
     display: flex;
     flex-direction: column;
     .zodiac_google {
       display: none;
     }
     .quizzes {
-      margin-bottom: 96px;
+      margin-bottom: 56px;
     }
   }
 }
@@ -310,8 +309,8 @@ export default {
             display: flex;
             flex-direction: column;
             h3 {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
             }
             p {
               font-size: 16 * $pr;
@@ -399,7 +398,7 @@ export default {
       }
       &_other {
         width: 100%;
-        padding: 48 * $pr 16 * $pr;
+        padding: 32 * $pr 16 * $pr;
         .other_main {
           width: 100%;
           display: flex;
@@ -412,11 +411,11 @@ export default {
           .pairing {
             order: 1;
             margin-top: 0;
-            margin-bottom: 48 * $pr;
+            margin-bottom: 16 * $pr;
           }
           .articles {
             order: 3;
-            margin-top: 48 * $pr;
+            margin-top: 16 * $pr;
           }
         }
       }
@@ -427,12 +426,12 @@ export default {
       .zodiac_google {
         display: block;
         width: 100%;
-        padding: 0 16 * $pr;
+        padding: 0;
         order: 1;
-        margin-top: 48 * $pr;
+        margin: 16 * $pr 0;
       }
       .quizzes {
-        margin-bottom: 48 * $pr;
+        margin-bottom: 32 * $pr;
         padding: 0 16 * $pr;
         order: 2;
       }

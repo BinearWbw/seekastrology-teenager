@@ -130,8 +130,8 @@ export default {
         backdrop-filter: blur(8 * $pr);
         padding: 21 * $pr 0;
         .title {
-          font-size: 26 * $pr;
-          line-height: 36 * $pr;
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
         }
         .button {
           margin-top: 16 * $pr;

@@ -325,8 +325,8 @@ export default {
     width: 100%;
     &_main {
       .title {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
         padding-bottom: 16 * $pr;
       }
       &_tag {

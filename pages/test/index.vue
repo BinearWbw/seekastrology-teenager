@@ -382,9 +382,9 @@ $spacing: 16px;
     }
   }
   .foot_components {
-    padding: 48px 0;
+    padding: 56px 0 0;
     .choice {
-      margin-bottom: 48px;
+      margin-bottom: 56px;
     }
   }
 }
@@ -581,14 +581,14 @@ $spacing: 16px;
         .google_ad_h5btm {
           display: block;
           width: 100%;
-          margin-top: 48 * $pr;
+          margin: 16 * $pr 0;
         }
       }
     }
     .foot_components {
-      padding: 0 0 48 * $pr;
+      padding: 0 0 32 * $pr;
       .choice {
-        margin-bottom: 48 * $pr;
+        margin-bottom: 32 * $pr;
       }
     }
   }

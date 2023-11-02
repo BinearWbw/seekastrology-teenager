@@ -119,11 +119,11 @@ export default {
     .mains {
       width: 1400px;
       margin: 0 auto;
-      padding: 48px 0 96px;
+      padding: 48px 0 56px;
       .remains {
         width: 100%;
         display: flex;
-        padding-bottom: 96px;
+        padding-bottom: 56px;
         &_left {
           flex: 1;
           padding-right: 47px;
@@ -251,18 +251,18 @@ export default {
         height: 130 * $pr;
       }
       .mains {
-        padding: 24 * $pr 16 * $pr 48 * $pr;
+        padding: 24 * $pr 16 * $pr 32 * $pr;
         .remains {
-          padding-bottom: 48 * $pr;
+          padding-bottom: 32 * $pr;
           &_left {
             flex: 1;
             .h3_title {
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
               margin-bottom: 24 * $pr;
             }
             .parentingText {
-              padding-bottom: 48 * $pr;
+              padding-bottom: 32 * $pr;
               :deep(h2) {
                 font-size: 16 * $pr;
                 line-height: 28 * $pr;
@@ -283,14 +283,14 @@ export default {
           }
           &_right {
             .pairing {
-              margin-bottom: 48 * $pr;
+              margin-bottom: 16 * $pr;
             }
             .google_ad_right {
               height: 280 * $pr;
             }
             .choices {
               width: 100%;
-              padding-top: 48 * $pr;
+              padding-top: 16 * $pr;
             }
           }
         }

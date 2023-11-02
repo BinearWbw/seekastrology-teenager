@@ -384,11 +384,11 @@ export default {
       }
       .pairing_text {
         width: 1164px;
-        margin: 72px auto 0;
+        margin: 0 auto;
         position: relative;
         .text_list {
           width: 100%;
-          padding-bottom: 48px;
+          padding-bottom: 24px;
           z-index: 5;
           position: relative;
           .title {
@@ -444,8 +444,11 @@ export default {
       }
     }
   }
+  .poparticles {
+    margin-top: 56px;
+  }
   .all_tarot {
-    padding: 48px 0 96px;
+    padding: 0 0 56px;
   }
 }
 @media (max-width: 1450px) {
@@ -600,7 +603,6 @@ export default {
         }
         .pairing_text {
           width: 100%;
-          margin: 48 * $pr auto 0;
           .text_list {
             width: 100%;
             padding-bottom: 24 * $pr;
@@ -641,6 +643,9 @@ export default {
           }
         }
       }
+    }
+    .poparticles {
+      margin-top: 0;
     }
     .all_tarot {
       padding: 0 0 48 * $pr;

@@ -1,7 +1,7 @@
 <template>
   <div class="tarot-container">
     <Loading v-if="loading" />
-    <div class="title mt-75 mt-44-mobile">the major</div>
+    <div class="title mt-48 mt-44-mobile">the major</div>
     <div class="tarot-section">
       <!-- <div class="add-box-wrapper mt-48_minus">
         <google-ad classNames="ad-box" id="3171147457"></google-ad>
@@ -41,8 +41,8 @@
         <google-ad classNames="ad-box" id="6918820771"></google-ad>
       </div> -->
     </div>
-    <google-auto-ad classNames="ad-box_row mt-32" id="9736555803" />
-    <div class="title mt-48">minor arcana definitions</div>
+    <google-auto-ad classNames="ad-box_row" id="9736555803" />
+    <div class="title mt-24">minor arcana definitions</div>
     <div class="minor-tab" @click="toggleMinor">
       <button
         class="button"
@@ -99,7 +99,7 @@
         </a>
       </li>
     </ul>
-    <google-auto-ad classNames="ad-box_row mt-48 mb-32" id="6311466051" />
+    <google-auto-ad classNames="ad-box_row mb-24" id="6311466051" />
   </div>
 </template>
 
@@ -325,11 +325,11 @@ export default {
 .mt-48_minus {
   margin-top: -48px;
 }
-.mt-32 {
-  margin-top: 32px;
+.mt-24 {
+  margin-top: 24px;
 }
-.mb-32 {
-  margin-bottom: 32px;
+.mb-24 {
+  margin-bottom: 24px;
 }
 .mt-75 {
   margin-top: 75px;
@@ -414,6 +414,7 @@ export default {
       justify-content: space-between;
       .major-list-item {
         width: 106 * $pr;
+        margin-bottom: 24 * $pr;
         .major-item-img {
           width: 100%;
           height: 213 * $pr;
@@ -434,7 +435,9 @@ export default {
   .minor-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, 106 * $pr);
+    margin: 24 * $pr auto 0;
     .minor-list-item {
+      margin-bottom: 24 * $pr;
       .minor-item-img {
         height: 213 * $pr;
         width: 100%;
@@ -454,7 +457,7 @@ export default {
     overflow-x: auto;
     overflow-y: hidden;
     text-align: center;
-    margin-top: 48 * $pr;
+    margin-top: 24 * $pr;
     position: relative;
     justify-content: initial;
     &::-webkit-scrollbar {
@@ -495,6 +498,12 @@ export default {
     color: #000 !important;
     background-color: #fff !important;
     border-radius: 42 * $pr;
+  }
+  .mt-24 {
+    margin-top: 16 * $pr;
+  }
+  .mb-24 {
+    margin-bottom: 16 * $pr;
   }
 
   .mt-44-mobile {

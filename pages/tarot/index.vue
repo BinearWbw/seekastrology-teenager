@@ -12,10 +12,7 @@
     </div>
     <more-tarot class="more_tarot"></more-tarot>
     <all-tarot class="mt-h5-48"></all-tarot>
-    <google-auto-ad
-      classNames="ad-box_row mt-32 mt-120 mb-32"
-      id="6503037744"
-    />
+    <google-auto-ad classNames="ad-box_row bottom_ad" id="6503037744" />
   </div>
 </template>
 
@@ -66,10 +63,9 @@ export default {
     }
     .h5_google {
       height: 280px;
-      margin-top: 48px;
     }
     .ai_reply {
-      margin-top: 48px;
+      margin-top: 24px;
     }
   }
 }
@@ -104,8 +100,9 @@ export default {
 }
 .ad-box_row {
   width: 1200px;
-  margin: 0 auto;
+  margin: 24px auto;
 }
+
 .button {
   margin-top: 18px;
   width: 124px;
@@ -124,7 +121,7 @@ export default {
   }
 }
 .mt-h5-48 {
-  margin-top: 96px;
+  margin-top: 56px;
 }
 .mt-32 {
   margin-top: 32px;
@@ -178,8 +175,8 @@ export default {
       .content {
         order: 1;
         .title {
-          font-size: 26 * $pr;
-          line-height: 36 * $pr;
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
         }
         .text {
           font-size: 16 * $pr;
@@ -192,7 +189,6 @@ export default {
         order: 3;
         height: 130 * $pr;
         margin-top: 0;
-        margin-bottom: 24 * $pr;
       }
       .ai_reply {
         order: 2;
@@ -204,8 +200,8 @@ export default {
     font-family: 'Cinzel Decorative';
     font-style: normal;
     font-weight: 700 * $pr;
-    font-size: 26 * $pr;
-    line-height: 36 * $pr;
+    font-size: 22 * $pr;
+    line-height: 30 * $pr;
     text-align: center;
   }
   .add-box-wrapper {
@@ -221,7 +217,10 @@ export default {
     margin-top: 120 * $pr;
   }
   .mt-h5-48 {
-    margin-top: 48 * $pr;
+    margin-top: 32 * $pr;
+  }
+  .bottom_ad {
+    padding-top: 32 * $pr;
   }
 }
 </style>

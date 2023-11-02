@@ -268,7 +268,7 @@ export default {
         flex-direction: column;
         justify-content: center;
         .logo_img {
-          width: 150px;
+          width: 200px;
           margin-bottom: 10px;
         }
         .media {
@@ -356,7 +356,7 @@ export default {
       padding: 48 * $pr 16 * $pr 0 35 * $pr;
       .logo_mobile_img {
         display: block;
-        width: 154 * $pr;
+        width: 235 * $pr;
         margin: 0 auto 32 * $pr;
       }
       .top {

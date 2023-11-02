@@ -149,8 +149,8 @@ export default {
   .articles {
     &_main {
       .title {
-        font-size: 26 * $pr;
-        line-height: 36 * $pr;
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
       }
       .content {
         padding-top: 34 * $pr;

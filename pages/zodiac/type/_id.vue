@@ -477,7 +477,7 @@ export default {
 @use 'sass:math';
 .details_content {
   width: 100%;
-  padding-bottom: 96px;
+  padding-bottom: 56px;
   .google_ad_h5 {
     display: none;
   }
@@ -605,7 +605,7 @@ export default {
           }
           .google_ad {
             width: 100%;
-            margin-top: 96px;
+            padding: 24px 0;
           }
         }
         &_right {
@@ -620,7 +620,7 @@ export default {
     }
   }
   .sign_type_pop {
-    margin-bottom: 96px;
+    margin-bottom: 56px;
   }
 }
 @media (max-width: 1470px) {
@@ -742,8 +742,8 @@ export default {
             width: 100%;
             .title {
               width: 100%;
-              font-size: 26 * $pr;
-              line-height: 36 * $pr;
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
               text-align: center;
               padding-right: 0;
             }

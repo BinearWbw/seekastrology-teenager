@@ -118,7 +118,7 @@ export default {
     width: 1200px;
     margin: 0 auto;
     &.mt_80 {
-      margin-top: 80px;
+      margin-top: 24px;
     }
   }
   .divination {
@@ -126,7 +126,7 @@ export default {
   }
   .introduce-box {
     max-width: 1400px;
-    margin: 62px auto 0;
+    margin: 0 auto;
     .intro {
       display: grid;
       grid-template-columns: 40% 50%;
@@ -165,14 +165,17 @@ export default {
     }
   }
   .el_more {
-    margin-top: 80px;
+    margin-top: 24px;
+    :deep(.more-tarot) {
+      margin-bottom: 0;
+    }
   }
 }
 .el_choice {
-  margin-top: 96px;
+  margin-top: 56px;
 }
 .el_pop {
-  margin-bottom: 96px;
+  margin: 56px 0;
 }
 @media (max-width: 1450px) {
   .tarot-container {
@@ -205,8 +208,8 @@ export default {
   .tarot-container {
     padding: 0 16 * $pr 0;
     .title {
-      font-size: 26 * $pr;
-      line-height: 36 * $pr;
+      font-size: 22 * $pr;
+      line-height: 30 * $pr;
     }
     .tarot-section {
       margin-top: 16 * $pr;
@@ -225,12 +228,11 @@ export default {
       width: 100%;
       padding: 0;
       &.mt_80 {
-        margin-top: 48 * $pr;
+        margin-top: 16 * $pr;
       }
     }
     .introduce-box {
       width: 100%;
-      margin: 48 * $pr auto 0;
       padding: 0;
       .intro {
         display: flex;
@@ -239,8 +241,8 @@ export default {
           font-family: 'Cinzel Decorative';
           font-style: normal;
           font-weight: 700;
-          font-size: 26 * $pr;
-          line-height: 36 * $pr;
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
           text-align: center;
         }
         .intro-content {
@@ -254,15 +256,15 @@ export default {
       }
     }
     .el_more {
-      margin-top: 48 * $pr;
+      margin-top: 16 * $pr;
       padding: 0;
     }
   }
   .el_choice {
-    margin-top: 48 * $pr;
+    margin-top: 16 * $pr;
   }
   .el_pop {
-    margin-bottom: 48 * $pr;
+    margin: 32 * $pr 0;
   }
 }
 </style>
