@@ -126,7 +126,7 @@ export default {
   }
   .introduce-box {
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 24px auto 0;
     .intro {
       display: grid;
       grid-template-columns: 40% 50%;
@@ -234,6 +234,7 @@ export default {
     .introduce-box {
       width: 100%;
       padding: 0;
+      margin: 16 * $pr auto 0;
       .intro {
         display: flex;
         flex-direction: column;
