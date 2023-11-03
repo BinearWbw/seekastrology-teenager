@@ -47,25 +47,6 @@
                 </template>
               </el-tabs>
             </div>
-            <div class="halloween">
-              <div class="halloween_li">
-                <i class="icon_ween"></i
-                ><a
-                  class="linka"
-                  href="/resources/details/spooky-halloween-horoscopes-for-every-zodiac-sign-1325/"
-                  >See the fun ways your zodiac sign can celebrate this
-                  fright-filled night!</a
-                >
-              </div>
-              <div class="halloween_li">
-                <i class="icon_ween"></i
-                ><a
-                  class="linka"
-                  href="/resources/details/the-best-classic-halloween-costume-for-each-zodiac-sign-1335/"
-                  >Let your Zodiac Sign decide your Halloween Costume!</a
-                >
-              </div>
-            </div>
           </div>
           <google-ad classNames="google_ad" :id="'8124091233'"></google-ad>
         </div>
@@ -439,33 +420,6 @@ export default {
               }
             }
           }
-          .halloween {
-            width: 100%;
-            &_li {
-              padding-top: 8px;
-              display: flex;
-              align-items: center;
-              .icon_ween {
-                width: 26px;
-                height: 28px;
-                display: block;
-                background-image: url('../../assets/img/home/link_icon.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-              }
-              .linka {
-                flex: 1;
-                padding-left: 8px;
-                color: #ffda8b;
-                font-family: Rubik;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 28px;
-                text-decoration-line: underline;
-              }
-            }
-          }
         }
         .google_ad {
           width: 924px;
@@ -551,7 +505,7 @@ export default {
     &_googlead {
       display: flex;
       width: 100%;
-      height: 67 * $pr;
+      height: 117 * $pr;
       margin: 0 auto 16 * $pr;
     }
     &_main {
@@ -618,24 +572,6 @@ export default {
                   flex: 1;
                   margin: 0;
                   padding: 7 * $pr 0;
-                }
-              }
-            }
-            .halloween {
-              width: 100%;
-              padding-top: 6 * $pr;
-              &_li {
-                padding-top: 10 * $pr;
-                display: flex;
-                align-items: center;
-                .icon_ween {
-                  width: 26 * $pr;
-                  height: 28 * $pr;
-                }
-                .linka {
-                  padding-left: 8 * $pr;
-                  font-size: 16 * $pr;
-                  line-height: 28 * $pr;
                 }
               }
             }

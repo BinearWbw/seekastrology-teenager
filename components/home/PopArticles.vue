@@ -175,34 +175,6 @@ export default {
           width: 100%;
           min-height: 320px;
           margin-bottom: 16px;
-          // -------------------------万圣节--------------------------------------
-          position: relative;
-          &::before {
-            content: '';
-            position: absolute;
-            display: block;
-            top: 0;
-            right: 0;
-            width: 306px;
-            height: 134px;
-            background-image: url('../../assets/img/home/spider.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-          }
-          &::after {
-            content: '';
-            position: absolute;
-            display: block;
-            bottom: 0;
-            left: 0;
-            width: 169px;
-            height: 175px;
-            background-image: url('../../assets/img/home/spider_1.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            border-bottom-left-radius: 12px;
-          }
-          //------------------------------
           .main_type {
             display: none;
           }
@@ -351,13 +323,6 @@ export default {
     width: 1200px;
     .pop_main {
       .pop_news {
-        .news_left {
-          .left_img {
-            &::after {
-              bottom: 10px;
-            }
-          }
-        }
         .news_right {
           li {
             a {
@@ -461,16 +426,7 @@ export default {
             width: 100%;
             min-height: 159 * $pr;
             margin-bottom: 16 * $pr;
-            &::before {
-              width: 100 * $pr;
-              height: 51 * $pr;
-              border-top-right-radius: 12 * $pr;
-            }
-            &::after {
-              width: 70 * $pr;
-              height: 76 * $pr;
-              border-bottom-left-radius: 12 * $pr;
-            }
+
             .main_type {
               display: none;
             }

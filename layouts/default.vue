@@ -212,11 +212,6 @@ export default {
   min-height: 100vh;
   overflow: hidden;
   position: relative;
-  //--------------------------万圣节-----------------------------------
-  background-image: url('../assets/img/home/halloween.webp');
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: top;
   .home_bg {
     display: inline-block;
     position: absolute;
@@ -265,9 +260,6 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .main {
-    // ------------------------------万圣节----------------------------------
-    background-image: url('../assets/img/home/halloween_h5.webp');
-    background-size: 100%;
     .home_bg {
       width: 100%;
       height: 900 * $pr;

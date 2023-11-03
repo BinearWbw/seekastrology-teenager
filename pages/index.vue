@@ -24,10 +24,10 @@
         <google-auto-ad :id="'1626224357'" classNames="google_ad" />
       </section>
       <section class="module tarot">
-        <home-pop-articles></home-pop-articles>
+        <el-tarot-world />
       </section>
       <section class="module quizzes">
-        <el-tarot-world />
+        <home-pop-articles></home-pop-articles>
       </section>
       <section class="module new_pop">
         <home-quizzes></home-quizzes>
@@ -419,7 +419,7 @@ export default {
     }
     .google_ad_h5 {
       width: 100%;
-      height: 67 * $pr;
+      height: 117 * $pr;
       margin: 0 0 16 * $pr;
       padding: 0;
       display: flex;
@@ -447,11 +447,11 @@ export default {
             margin-top: 16 * $pr;
           }
         }
-        &.tarot {
-          //   margin-top: 48 * $pr;
+        &.quizzes {
           > .pop_maximum {
             padding: 0;
           }
+          //   margin-top: 48 * $pr;
         }
         &.new_pop {
           .google_ad {
