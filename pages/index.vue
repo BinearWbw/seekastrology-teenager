@@ -342,9 +342,9 @@ export default {
   $pr: math.div(1vw, 3.75);
   .home {
     .tip_down {
-      bottom: 100 * $pr;
-      width: 54 * $pr;
-      height: 36 * $pr;
+      bottom: 10 * $pr;
+      width: 36 * $pr;
+      height: 24 * $pr;
       @keyframes bounce {
         0% {
           transform: translateY(0) translateX(-50%);
