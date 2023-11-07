@@ -4,6 +4,7 @@ import {
   Input,
   FormModel,
   DatePicker,
+  Select,
   notification,
 } from 'ant-design-vue'
 
@@ -11,4 +12,5 @@ Vue.use(Button)
 Vue.use(Input)
 Vue.use(FormModel)
 Vue.use(DatePicker)
+Vue.use(Select)
 Vue.prototype.$notification = notification
