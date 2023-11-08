@@ -1,6 +1,6 @@
 <template>
   <div class="horroscope">
-    <google-ad classNames="horroscope_googlead" :id="'7036206358'"></google-ad>
+    <!-- <google-ad classNames="horroscope_googlead" :id="'7036206358'"></google-ad> -->
     <div class="horroscope_main">
       <div class="horoscope_details">
         <google-ad classNames="google_ad" :id="'4376417914'"></google-ad>
@@ -48,19 +48,19 @@
               </el-tabs>
             </div>
           </div>
-          <google-ad classNames="google_ad" :id="'8124091233'"></google-ad>
+          <google-ad classNames="google_ad" :id="'7036206358'"></google-ad>
         </div>
       </div>
       <div class="mexplore">
         <el-explore-more />
       </div>
-      <div class="horoscope_more">
-        <google-ad classNames="google_ad" :id="'4184846228'" />
-      </div>
     </div>
     <transition name="fade">
       <el-pairing></el-pairing>
     </transition>
+    <div class="horoscope_more">
+      <google-ad classNames="google_ad" :id="'4184846228'" />
+    </div>
     <div class="daily_horo">
       <el-daily-horoscope></el-daily-horoscope>
     </div>
@@ -333,7 +333,7 @@ export default {
     display: none;
   }
   &_main {
-    margin: 0 auto 24px;
+    margin: 0 auto 56px;
     width: 1400px;
     .horoscope_details {
       display: flex;
@@ -431,13 +431,13 @@ export default {
     .mexplore {
       padding-top: 56px;
     }
-    .horoscope_more {
-      padding: 24px 0 0;
-      .google_ad {
-        width: 1200px;
-        height: 305px;
-        margin: 0 auto;
-      }
+  }
+  .horoscope_more {
+    padding: 24px 0 0;
+    .google_ad {
+      width: 1200px;
+      height: 305px;
+      margin: 0 auto;
     }
   }
   .daily_horo {
@@ -463,17 +463,11 @@ export default {
 
 @media (max-width: 1350px) {
   .horroscope {
-    &_main {
-      .horoscope_more {
-        .more_main {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      .horoscope_more {
-        .google_ad {
-          max-width: 100%;
-          margin: 0 auto;
-        }
+    .horoscope_more {
+      .google_ad {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 30px;
       }
     }
   }
@@ -490,11 +484,11 @@ export default {
           padding-left: 0;
         }
       }
-      .horoscope_more {
-        .google_ad {
-          width: 100%;
-          margin: 0 auto;
-        }
+    }
+    .horoscope_more {
+      .google_ad {
+        width: 100%;
+        margin: 0 auto;
       }
     }
   }
@@ -529,18 +523,54 @@ export default {
           padding-left: 0;
           .list_top {
             display: flex;
-            justify-content: initial;
-            flex-direction: column-reverse;
+            justify-content: space-between;
             margin-bottom: 24 * $pr;
+            padding-top: 24 * $pr;
             h3 {
+              font-family: Rubik;
               font-size: 22 * $pr;
               line-height: 30 * $pr;
-              text-align: center;
+              font-weight: 500;
+              position: relative;
+              padding-left: 7 * $pr;
+              &::before {
+                position: absolute;
+                display: inline-block;
+                width: 2 * $pr;
+                height: 30 * $pr;
+                content: '';
+                top: 0;
+                left: 0;
+                background: #9747ff;
+              }
             }
             .pull_down {
-              width: 100%;
-              height: auto;
-              margin-bottom: 24 * $pr;
+              width: 106 * $pr;
+              height: 30 * $pr;
+              :deep(.selected) {
+                height: auto;
+                .selected_main {
+                  padding: 7 * $pr 16 * $pr;
+                  height: auto;
+                  .select_img {
+                    display: none;
+                  }
+                  .select_text {
+                    font-size: 12 * $pr;
+                    line-height: 16 * $pr;
+                  }
+                  .select_icon {
+                    width: 8 * $pr;
+                    height: 8 * $pr;
+                  }
+                }
+              }
+              :deep(.options) {
+                top: 36 * $pr;
+                .left_tab_list {
+                  padding-left: 10 * $pr;
+                }
+              }
             }
           }
           .list_main {
@@ -578,74 +608,21 @@ export default {
             }
           }
           .google_ad {
-            display: none;
-            width: 100%;
-            height: 299 * $pr;
-            margin: 23 * $pr auto 0;
+            width: 336 * $pr;
+            height: 297 * $pr;
+            margin: 16 * $pr auto 0;
           }
         }
       }
       .mexplore {
         padding-top: 32 * $pr;
       }
-      .horoscope_more {
-        padding: 16 * $pr 0 0;
-        h3 {
-          font-size: 22 * $pr;
-          line-height: 30 * $pr;
-        }
-        .more_main {
-          display: grid;
-          grid-template-columns: repeat(1, 1fr);
-          gap: 24 * $pr;
-          padding: 24 * $pr 0 49 * $pr;
-          .more_list {
-            padding: 16 * $pr 24 * $pr 24 * $pr;
-            border: 1 * $pr solid rgba(255, 255, 255, 0.7);
-            border-radius: 6 * $pr;
-            .more_title {
-              padding-bottom: 16 * $pr;
-              &::after {
-                height: 1 * $pr;
-              }
-              p {
-                font-size: 22 * $pr;
-                line-height: 30 * $pr;
-              }
-              .img_top {
-                img {
-                  width: 170 * $pr;
-                  height: 154 * $pr;
-                  object-fit: cover;
-                }
-              }
-            }
-            .more_text {
-              .p_text {
-                font-size: 16 * $pr;
-                line-height: 22 * $pr;
-                margin: 16 * $pr 0;
-                -webkit-line-clamp: 2;
-                height: 44 * $pr;
-              }
-              .button {
-                width: 220 * $pr;
-                height: 32 * $pr;
-                border: 1 * $pr solid #45454d;
-                border-radius: 42 * $pr;
-                font-size: 14 * $pr;
-                line-height: 18 * $pr;
-              }
-            }
-            &:hover {
-              transform: translateY(0);
-            }
-          }
-        }
-        .google_ad {
-          width: 336 * $pr;
-          height: 297 * $pr;
-        }
+    }
+    .horoscope_more {
+      .google_ad {
+        width: 336 * $pr;
+        height: 297 * $pr;
+        padding: 0;
       }
     }
     .daily_horo {

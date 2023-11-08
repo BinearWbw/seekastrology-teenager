@@ -29,11 +29,6 @@ export default {
     return {
       moreData: [
         {
-          name: 'Daily horoscope',
-          path: '/horroscope/aries-1/',
-          imgUrl: require('~/assets/img/horroscope/today.svg'),
-        },
-        {
           name: 'Career',
           path: '/horroscope/aries-3-1/',
           imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
@@ -52,6 +47,11 @@ export default {
           name: 'Health',
           path: '/horroscope/aries-2-1/',
           imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
+        },
+        {
+          name: 'Daily horoscope',
+          path: '/horroscope/aries-1/',
+          imgUrl: require('~/assets/img/horroscope/today.svg'),
         },
         {
           name: '2023 horoscope',
@@ -188,7 +188,7 @@ export default {
           imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
         },
       ]
-      this.moreData.splice(1, 4, ...moreDataTwo)
+      this.moreData.splice(0, 4, ...moreDataTwo)
     }
   },
 
@@ -200,7 +200,7 @@ export default {
     isHorroscopePage(index) {
       return !(
         this.$route.path.includes('horroscope') &&
-        (index === 0 || index === 5)
+        (index === 4 || index === 5)
       )
     },
     isPageElimination() {
@@ -209,7 +209,7 @@ export default {
       const isPar = path.includes('parenting')
       const isTeen = path.includes('teenager')
       if (isPet || isPar || isTeen) {
-        this.moreData.splice(1, 4) // 清除指定运势
+        this.moreData.splice(0, 4) // 清除指定运势
       }
     },
   },
