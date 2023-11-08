@@ -1,8 +1,11 @@
 <template>
   <div class="astrolabe">
     <div class="astrolabe_main">
-      <google-auto-ad :id="''" classNames="google_ad_top"></google-auto-ad>
-      <div class="astrolabe_count" v-if="birthChart">
+      <google-ad :id="''" classNames="google_ad_top"></google-ad>
+      <div class="astrolabe_birth" v-if="getUserInfo.natal" v-cloak>
+        <el-birth-chart></el-birth-chart>
+      </div>
+      <div class="astrolabe_count" v-else v-cloak>
         <h3 class="title">Free Birth Chart Calculator</h3>
         <div class="form_main">
           <div class="form">
@@ -155,9 +158,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="astrolabe_birth">
-        <el-birth-chart></el-birth-chart>
       </div>
     </div>
     <transition name="unfold">
@@ -397,7 +397,14 @@ export default {
                   },
                 })
               } else {
-                this.getUserInfo?.natal_res
+                this.$store.commit('setUserNatalData', res.natal) // 出生盘数据
+                this.$store.commit('setUserNatalBirthMsg', res.birth) // 用户出生盘信息
+                this.$store.commit('setUserReqData', res.req) // 用户出生盘信息
+                this.$store.commit('SETNATAL', true) // 用户出生信息获取状态
+                localStorage.setItem(
+                  'userInfo',
+                  JSON.stringify(this.$store.state) // 更新用户存储信息
+                )
               }
             })
         }
@@ -428,12 +435,16 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .astrolabe {
+  [v-cloak] {
+    display: none !important;
+  }
   &_main {
     width: 1400px;
     padding: 24px 0 56px;
     margin: 0 auto;
     .google_ad_top {
       width: 1200px;
+      height: 305px;
       margin: 0 auto 24px;
     }
     .astrolabe_count {
@@ -622,8 +633,6 @@ export default {
         }
       }
     }
-    .astrolabe_birth {
-    }
   }
 }
 @media (max-width: 1450px) {
@@ -640,8 +649,6 @@ export default {
             margin-right: 20px;
           }
         }
-      }
-      .astrolabe_birth {
       }
     }
   }
@@ -667,8 +674,6 @@ export default {
           }
         }
       }
-      .astrolabe_birth {
-      }
     }
   }
 }
@@ -680,7 +685,8 @@ export default {
       padding: 0 0 32 * $pr;
       margin: 0 auto;
       .google_ad_top {
-        width: 100%;
+        width: 320 * $pr;
+        height: 117 * $pr;
         margin: 0 auto 16 * $pr;
       }
       .astrolabe_count {
@@ -824,8 +830,6 @@ export default {
             }
           }
         }
-      }
-      .astrolabe_birth {
       }
     }
   }

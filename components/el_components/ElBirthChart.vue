@@ -26,13 +26,19 @@
           <p class="title">Your Birth Information</p>
           <div class="location">
             <div class="location_item">
-              <span>Date of birth:</span>&nbsp;June 2, 1990
+              <span>Date of birth:</span>&nbsp;{{
+                getUserNatalBirthMsg?.birth_day
+              }}
             </div>
             <div class="location_item">
-              <span>Time of birth:</span>&nbsp;5:26 P.M.
+              <span>Time of birth:</span>&nbsp;{{
+                getUserNatalBirthMsg?.birth_time
+              }}
             </div>
             <div class="location_item">
-              <span>Birth place:</span>&nbsp;加拿大
+              <span>Birth place:</span>&nbsp;{{
+                getUserNatalBirthMsg?.birth_place
+              }}
             </div>
           </div>
         </div>
@@ -44,49 +50,18 @@
               <div class="os">Planet</div>
               <div class="os">Position Degrees</div>
             </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Sun</div>
-              <div class="item_list_two">12°</div>
+            <div
+              class="item_list"
+              v-for="(item, index) in birthData"
+              :key="index"
+            >
+              <div class="item_list_one">{{ item }}</div>
+              <div class="item_list_two">
+                {{
+                  getUserNatalData.planets?.[item].position.degreesInSign
+                    .degree
+                }}°
+              </div>
             </div>
           </div>
           <div class="planet_sign">
@@ -94,64 +69,46 @@
               <div class="os">Sign</div>
               <div class="os">Position Minutes</div>
             </div>
-            <div class="item_list">
-              <div class="item_list_one">Virgo</div>
-              <div class="item_list_two">12`</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Virgo</div>
-              <div class="item_list_two">12`</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Virgo</div>
-              <div class="item_list_two">12`</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Virgo</div>
-              <div class="item_list_two">12`</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Virgo</div>
-              <div class="item_list_two">12`</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Virgo</div>
-              <div class="item_list_two">12`</div>
-            </div>
-            <div class="item_list">
-              <div class="item_list_one">Virgo</div>
-              <div class="item_list_two">12`</div>
+            <div
+              class="item_list"
+              v-for="(item, index) in birthData"
+              :key="index"
+            >
+              <div class="item_list_one">
+                {{ getUserNatalData.planets?.[item].position.sign }}
+              </div>
+              <div class="item_list_two">
+                {{
+                  getUserNatalData.planets?.[item].position.degreesInSign
+                    .minute
+                }}`
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="message">
-        <div class="message_item">
-          <p class="name">SUN</p>
-          <p class="title">SCORPIO, 19°12'56"<br />FIFTH HOUSE</p>
-          <p class="texts">
-            The sun determines your ego, identity, and "role" in life. It's the
-            core of who you are, and is the sign you're most likely to already
-            know. Your Sun is in Scorpio, meaning you have a fundamental urge to
-            get to the bottom of things, which can at times lead you to be
-            manipulative or power-hungry, but it comes down to an intense
-            passion for authenticity, real intimacy, and the truth. It's in your
-            fifth house, meaning you feel the need to distinguish yourself from
-            others through romance, self-expression, creativity, and pleasure
+        <div
+          class="message_item"
+          v-for="(item, index) in birthData"
+          :key="index"
+        >
+          <p class="name">{{ item }}</p>
+          <p class="title">
+            {{ getUserNatalData.planets?.[item].position.sign }},
+            {{
+              getUserNatalData.planets?.[item].position.degreesInSign.degree
+            }}°{{
+              getUserNatalData.planets?.[item].position.degreesInSign.minute
+            }}'{{
+              getUserNatalData.planets?.[item].position.degreesInSign.second
+            }}"<br />
+            {{
+              houseNumber[getUserNatalData.planets?.[item].position.house - 1]
+            }}
           </p>
-        </div>
-        <div class="message_item">
-          <p class="name">SUN</p>
-          <p class="title">SCORPIO, 19°12'56"<br />FIFTH HOUSE</p>
           <p class="texts">
-            The sun determines your ego, identity, and "role" in life. It's the
-            core of who you are, and is the sign you're most likely to already
-            know. Your Sun is in Scorpio, meaning you have a fundamental urge to
-            get to the bottom of things, which can at times lead you to be
-            manipulative or power-hungry, but it comes down to an intense
-            passion for authenticity, real intimacy, and the truth. It's in your
-            fifth house, meaning you feel the need to distinguish yourself from
-            others through romance, self-expression, creativity, and pleasure
+            {{ getUserNatalData.planets?.[item].text }}
           </p>
         </div>
       </div>
@@ -160,7 +117,45 @@
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+export default {
+  data() {
+    return {
+      birthData: [
+        'Sun',
+        'Ascendant',
+        'Jupiter',
+        'Mars',
+        'Mercury',
+        'Moon',
+        'Neptune',
+        'Pluto',
+        'Saturn',
+        'Uranus',
+        'Venus',
+      ],
+      houseNumber: [
+        'FIRST HOUSE',
+        'SECOND HOUSE',
+        'THIRD HOUSE',
+        'FOURTH HOUSE',
+        'FIFTH HOUSE',
+        'SIXTH HOUSE',
+        'SEVENTH HOUSE',
+        'EIGHTH HOUSE',
+        'NINTH HOUSE',
+        'TENTH HOUSE',
+        'ELEVENTH HOUSE',
+        'TWELFTH HOUSE',
+      ],
+    }
+  },
+  computed: {
+    ...mapGetters(['getUserInfo', 'getUserNatalData', 'getUserNatalBirthMsg']),
+  },
+  mounted() {},
+  methods: {},
+}
 </script>
 
 <style lang="scss" scoped>

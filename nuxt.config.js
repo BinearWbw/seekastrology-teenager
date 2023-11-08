@@ -34,7 +34,7 @@ module.exports = {
       browserBaseURL: process.env.PUBLIC_URL,
     },
     cdnUrl: 'https://www.doitme.link/',
-    // cdnUrl: 'http://192.168.6.63:9907/',  // 徐波
+    // cdnUrl: 'http://192.168.6.63:9907/', // 徐波
   },
 
   privateRuntimeConfig: {
