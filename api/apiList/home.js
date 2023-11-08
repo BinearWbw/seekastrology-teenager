@@ -27,6 +27,16 @@ export default (axios) => ({
   getGameLocation() {
     return axios.get('api/user/loc')
   },
+  /* 城市搜索 */
+  getCity(params) {
+    return axios.get('api/astro/city', { params })
+  },
+  /* 星盘-出生盘 */
+
+  getNatal(data) {
+    return axios.post('api/astro/natal', data)
+  },
+
   getZodiacHoroscopeWeekly(params) {
     return axios.get('api/astro/horoscope/weekly', { params })
   },

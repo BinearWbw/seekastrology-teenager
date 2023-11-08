@@ -158,6 +158,31 @@ const scrollAnimation = (obj, target, fn1) => {
     }
   }, 10)
 }
+function formatDateNatal(year, month, day, hour, minute, period) {
+  const yearStr = year
+  const monthStr = (month < 10 ? '0' : '') + month.toString()
+  const dayStr = (day < 10 ? '0' : '') + day.toString()
+  let hour_i = Number(hour) // 转number
+  // 处理小时部分
+  if (period == 'PM') {
+    hour_i += 12
+  }
+  const hourStr = (hour_i < 10 ? '0' : '') + hour_i.toString()
+  const minuteStr = (minute < 10 ? '0' : '') + minute.toString()
+
+  const dateTimeString = `${yearStr}-${monthStr}-${dayStr}T${hourStr}:${minuteStr}`
+
+  return dateTimeString
+}
+
+// 示例用法
+const year = 1995
+const month = 2
+const day = 20
+const hour = 1
+const minute = 4
+const period = 'PM'
+
 export default {
   formatMMSS,
   formatMMDD,
@@ -166,4 +191,5 @@ export default {
   debounce,
   horoscopeFormatDate,
   scrollAnimation,
+  formatDateNatal,
 }

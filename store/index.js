@@ -19,6 +19,8 @@ export const state = () => ({
     email: '',
     user_name: '',
     user_subscribe: [],
+    natal: false,
+    natal_res: {},
   },
   isChildVisible: false, //登录框显示隐藏
   signSuccessData: {

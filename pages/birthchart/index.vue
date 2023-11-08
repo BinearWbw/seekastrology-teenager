@@ -42,16 +42,25 @@
                     <p>Date birth</p>
                     <div class="form_date_list">
                       <a-form-model-item prop="year">
-                        <a-input v-model="birthForm.year" placeholder="Year" />
+                        <a-input
+                          v-model="birthForm.year"
+                          placeholder="Year"
+                          type="number"
+                        />
                       </a-form-model-item>
                       <a-form-model-item prop="month">
                         <a-input
                           v-model="birthForm.month"
                           placeholder="Month"
+                          type="number"
                         />
                       </a-form-model-item>
-                      <a-form-model-item prop="daily">
-                        <a-input v-model="birthForm.daily" placeholder="Date" />
+                      <a-form-model-item prop="day">
+                        <a-input
+                          v-model="birthForm.day"
+                          placeholder="Date"
+                          type="number"
+                        />
                       </a-form-model-item>
                     </div>
                   </div>
@@ -59,12 +68,17 @@
                     <p>Time birth</p>
                     <div class="form_time_list">
                       <a-form-model-item prop="hour">
-                        <a-input v-model="birthForm.hour" placeholder="Hour" />
-                      </a-form-model-item>
-                      <a-form-model-item prop="minute">
                         <a-input
-                          v-model="birthForm.minute"
+                          v-model="birthForm.hour"
+                          placeholder="Hour"
+                          type="number"
+                        />
+                      </a-form-model-item>
+                      <a-form-model-item prop="min">
+                        <a-input
+                          v-model="birthForm.min"
                           placeholder="Minute"
+                          type="number"
                         />
                       </a-form-model-item>
                       <a-form-model-item prop="mol">
@@ -78,10 +92,30 @@
                   <div class="form_place">
                     <p>Birth Place</p>
                     <a-form-model-item prop="place">
-                      <a-input
-                        v-model="birthForm.place"
+                      <a-select
+                        show-search
                         placeholder="Enter Place of Birth"
-                      />
+                        style="width: 100%"
+                        :filter-option="false"
+                        :not-found-content="fetching ? undefined : null"
+                        :default-active-first-option="false"
+                        @search="fetchCity"
+                        @change="cityChange"
+                      >
+                        <a-spin
+                          v-if="fetching"
+                          slot="notFoundContent"
+                          size="small"
+                        />
+                        <a-select-option
+                          v-for="d in cityData"
+                          :key="d.name"
+                          :channel="d"
+                          :value="d.name"
+                        >
+                          {{ d.name }}
+                        </a-select-option>
+                      </a-select>
                     </a-form-model-item>
                   </div>
                 </div>
@@ -126,10 +160,13 @@
         <el-birth-chart></el-birth-chart>
       </div>
     </div>
+    <transition name="unfold">
+      <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+    </transition>
   </div>
 </template>
-
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -138,9 +175,9 @@ export default {
         gender: undefined,
         year: '',
         month: '',
-        daily: '',
+        day: '',
         hour: '',
-        minute: '',
+        min: '',
         mol: undefined,
         place: '',
       },
@@ -165,6 +202,11 @@ export default {
             message: 'Please enter year',
             trigger: 'change',
           },
+          {
+            max: 4,
+            message: 'Year is too long',
+            trigger: 'blur',
+          },
         ],
         month: [
           {
@@ -172,12 +214,22 @@ export default {
             message: 'Please enter month',
             trigger: 'change',
           },
+          {
+            max: 2,
+            message: 'Month is too long',
+            trigger: 'blur',
+          },
         ],
-        daily: [
+        day: [
           {
             required: true,
             message: 'Please enter daily',
             trigger: 'change',
+          },
+          {
+            max: 2,
+            message: 'Daily is too long',
+            trigger: 'blur',
           },
         ],
         hour: [
@@ -186,12 +238,22 @@ export default {
             message: 'Please enter hour',
             trigger: 'change',
           },
+          {
+            max: 2,
+            message: 'Hour is too long',
+            trigger: 'blur',
+          },
         ],
-        minute: [
+        min: [
           {
             required: true,
             message: 'Please enter minute',
             trigger: 'change',
+          },
+          {
+            max: 2,
+            message: 'Minute is too long',
+            trigger: 'blur',
           },
         ],
         mol: [
@@ -214,73 +276,150 @@ export default {
           name: 'The Sun',
           texts:
             'The location of the sun in your chart is your main sign. It represents your conscious self, ego, and sense of self. ',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/sun.svg'),
         },
         {
           name: 'The Moon',
           texts:
             'Your emotional, inner world—your shadow self—is best represented by your moon sign. You can look at the key traits of this sign to learn more about your most private self, your intuition, and your relationships with the main maternal influences in your life. ',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/moon.svg'),
         },
         {
           name: 'Mercury',
           texts:
             'Mercury rules communication as well as our thought process. Consider where Mercury falls in your birth chart for how you perceive and rationalize things. It will reveal to you how you make decisions and how you process and disseminate information.',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/mercury-1.svg'),
         },
         {
           name: 'Venus',
           texts:
             'The divine feminine planet of Venus represents pleasure, love, and money. Your sign in Venus can provide you with the awareness of how you perceive love, your views on courtship and romance, as well as your personal tastes.',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/mercury-2.svg'),
         },
         {
           name: 'Mars',
           texts:
             'Mars represents action, physical passion, and drive. The divine masculine planet of Mars embodies how you assert yourself in the world. Consider this planet for an insight into what gives you a sense of direction and the raw energy of which you get out of bed every day. You can see the manifestation of this energy clearly when you are under pressure, competing, or racing to meet a deadline.',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/mercury.svg'),
         },
         {
           name: 'Jupiter',
           texts:
             'Jupiter is the planet of expansion, abundance, spirituality, and philosophy. Your Jupiter sign can give you insight into your attitudes around education, your philosophies, and what morals govern your life. Its location in your birth chart can reveal your perceptions around wealth, receiving gifts and blessings, and experiences of travel and long journeys.',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/jupiter.svg'),
         },
         {
           name: 'Saturn',
           texts:
             'Saturn concerns your approach to work and your professional achievements. You can look to your Saturn sign to tell you about your ambition, discipline, and maturity to life.',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/saturn.svg'),
         },
         {
           name: 'Uranus',
           texts:
             'Uranus is an eccentric planet and its position in your chart can symbolize your individuality and the way you handle change or the unexpected.',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/jupiter-1.svg'),
         },
         {
           name: 'Neptune',
           texts:
             'Being a planet of fantasy and illusion, the placement of Neptune in your chart can demonstrate the areas in your life that could bring up confusion. It may address the parts of your life that you tend to avoid or try to sweep under the rug.',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/neptune.svg'),
         },
         {
           name: 'Pluto',
           texts:
             'Though it is a small planet, the energy of Pluto is not to be reckoned with. The placement of this planet in your chart indicates the areas of your life where creation meets destruction. It is the hidden, primal self that can slip out in intense moments.',
-          imgs: require('../../assets/img/horroscope/today_tarot.svg'),
+          imgs: require('~/assets/img/home/birth/pluto.svg'),
         },
       ],
-      birthChart: false,
+      birthChart: true,
+      fetching: false,
+      cityData: [],
+      perform: false,
     }
+  },
+  watch: {},
+  computed: {
+    ...mapGetters(['getUserInfo']),
   },
   mounted() {},
   methods: {
+    // 登录弹出
+    formTouched() {
+      this.perform = true
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
+    },
+    // 登录隐藏
+    integerFormat() {
+      this.perform = false
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
+    },
     submintForm() {
       console.log('输入', this.$refs.birthForm)
+      if (!this.getUserInfo?.email) {
+        this.formTouched()
+        return
+      }
       this.$refs.birthForm.validate((valid) => {
         console.log(valid)
+        if (valid) {
+          const birthLocalTime = this.$utils.formatDateNatal(
+            this.birthForm.year,
+            this.birthForm.month,
+            this.birthForm.day,
+            this.birthForm.hour,
+            this.birthForm.min,
+            this.birthForm.mol
+          )
+          console.log('时间转换', birthLocalTime)
+          console.log('信息确认提交', this.birthForm)
+          this.$apiList.home
+            .getNatal({
+              birthLocalTime: birthLocalTime,
+              birthPlace: this.birthForm.place.name,
+              email: this.getUserInfo?.email,
+              lat: this.birthForm.place.lat.toString(),
+              lng: this.birthForm.place.lng.toString(),
+            })
+            .then((res) => {
+              console.log('出生图接口信息', res)
+              if (res.code) {
+                // 提示通知
+                this.$notification.open({
+                  message: 'Errors',
+                  description: res.msg,
+                  duration: 4,
+                  style: {
+                    color: '#f00',
+                  },
+                })
+              } else {
+                this.getUserInfo?.natal_res
+              }
+            })
+        }
       })
+    },
+    // 城市搜索
+    fetchCity(value) {
+      this.fetching = true
+      this.cityData = []
+      this.$apiList.home.getCity({ name: value }).then((res) => {
+        this.cityData = res.items
+        this.fetching = false
+      })
+    },
+    cityChange(value, option) {
+      console.log('选择的数据birthForm', this.birthForm.place)
+      console.log('value', value)
+      console.log('option', option.data.attrs.channel)
+      this.birthForm.place = option.data.attrs.channel
+      console.log('选择的数据birthForm后后', this.birthForm)
+      //   this.cityData = [] // 清除搜索的城市内容
+      this.fetching = false
     },
   },
 }
