@@ -18,9 +18,9 @@
           ></div>
         </div>
       </div>
-      <google-auto-ad class="ad-box_row mt_80" id="6755169246" />
+      <google-ad class="ad-box_row mt_80" id="6755169246" />
       <more-tarot class="el_more" :type="type"></more-tarot>
-      <google-auto-ad class="ad-box_row mt_80" id="7545189503" />
+      <google-ad class="ad-box_row mt_80" id="7545189503" />
     </div>
     <home-your-choice class="el_choice"></home-your-choice>
     <div class="el_pop">
@@ -116,6 +116,7 @@ export default {
   }
   .ad-box_row {
     width: 1200px;
+    height: 305px;
     margin: 0 auto;
     &.mt_80 {
       margin-top: 24px;
@@ -225,10 +226,11 @@ export default {
       }
     }
     .ad-box_row {
-      width: 100%;
+      width: 336 * $pr;
+      height: 297 * $pr;
       padding: 0;
       &.mt_80 {
-        margin-top: 16 * $pr;
+        margin: 16 * $pr auto 0;
       }
     }
     .introduce-box {

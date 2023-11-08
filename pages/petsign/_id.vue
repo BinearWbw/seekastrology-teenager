@@ -47,7 +47,7 @@
       <el-join-us class="joins"></el-join-us>
     </transition>
     <div class="google_line">
-      <google-auto-ad classNames="google_ad" :id="'4184846228'" />
+      <google-ad classNames="google_ad" :id="'4184846228'" />
     </div>
     <transition name="fade">
       <el-lnformation></el-lnformation>
@@ -317,6 +317,7 @@ export default {
     padding: 24px 0;
     .google_ad {
       width: 1200px;
+      height: 305px;
       margin: 0 auto;
     }
   }
@@ -380,8 +381,9 @@ export default {
   .horroscopes {
     &_googlead {
       display: flex;
-      width: 100%;
-      height: 110 * $pr;
+      width: 320 * $pr;
+      height: 117 * $pr;
+      margin: 0 auto;
       position: relative;
     }
     &_top_bg {
@@ -468,6 +470,11 @@ export default {
     }
     .google_line {
       padding: 16 * $pr 0;
+      .google_ad {
+        width: 336 * $pr;
+        height: 297 * $pr;
+        margin: 0 auto;
+      }
     }
     .pairing {
       padding: 0 0 32 * $pr;

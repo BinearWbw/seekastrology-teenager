@@ -55,7 +55,7 @@
         <el-explore-more />
       </div>
       <div class="horoscope_more">
-        <google-auto-ad classNames="google_ad" :id="'4184846228'" />
+        <google-ad classNames="google_ad" :id="'4184846228'" />
       </div>
     </div>
     <transition name="fade">
@@ -435,6 +435,7 @@ export default {
       padding: 24px 0 0;
       .google_ad {
         width: 1200px;
+        height: 305px;
         margin: 0 auto;
       }
     }
@@ -504,7 +505,7 @@ export default {
   .horroscope {
     &_googlead {
       display: flex;
-      width: 100%;
+      width: 320 * $pr;
       height: 117 * $pr;
       margin: 0 auto 16 * $pr;
     }
@@ -642,7 +643,8 @@ export default {
           }
         }
         .google_ad {
-          width: 100%;
+          width: 336 * $pr;
+          height: 297 * $pr;
         }
       }
     }

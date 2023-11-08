@@ -33,7 +33,7 @@ export default {
         )
         insElement.setAttribute('data-ad-client', 'ca-pub-6430486603399192')
         insElement.setAttribute('data-ad-slot', `${this.id}`)
-        insElement.setAttribute('data-full-width-responsive', 'true')
+        // insElement.setAttribute('data-full-width-responsive', 'true')
         targetElement.appendChild(insElement)
         targetElement.appendChild(adScript)
         this.observer.unobserve(this.$refs.googleAdStyle)

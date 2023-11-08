@@ -34,16 +34,6 @@ export default {
           imgUrl: require('~/assets/img/horroscope/today.svg'),
         },
         {
-          name: 'Love',
-          path: '/horroscope/aries-1-1/',
-          imgUrl: require('~/assets/img/horroscope/love_sign.svg'),
-        },
-        {
-          name: 'Health',
-          path: '/horroscope/aries-2-1/',
-          imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
-        },
-        {
           name: 'Career',
           path: '/horroscope/aries-3-1/',
           imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
@@ -52,6 +42,16 @@ export default {
           name: 'Money',
           path: '/horroscope/aries-4-1/',
           imgUrl: require('~/assets/img/horroscope/wealth_sign.svg'),
+        },
+        {
+          name: 'Love',
+          path: '/horroscope/aries-1-1/',
+          imgUrl: require('~/assets/img/horroscope/love_sign.svg'),
+        },
+        {
+          name: 'Health',
+          path: '/horroscope/aries-2-1/',
+          imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
         },
         {
           name: '2023 horoscope',
@@ -168,16 +168,6 @@ export default {
       const ids = this.tabListData.find((lis) => extractedValue == lis.name) // 拿到对应星座id
       const moreDataTwo = [
         {
-          name: 'Love',
-          path: `/horroscope/${extractedValue}-1-${ids.id}/`,
-          imgUrl: require('~/assets/img/horroscope/love_sign.svg'),
-        },
-        {
-          name: 'Health',
-          path: `/horroscope/${extractedValue}-2-${ids.id}/`,
-          imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
-        },
-        {
           name: 'Career',
           path: `/horroscope/${extractedValue}-3-${ids.id}/`,
           imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
@@ -186,6 +176,16 @@ export default {
           name: 'Money',
           path: `/horroscope/${extractedValue}-4-${ids.id}/`,
           imgUrl: require('~/assets/img/horroscope/wealth_sign.svg'),
+        },
+        {
+          name: 'Love',
+          path: `/horroscope/${extractedValue}-1-${ids.id}/`,
+          imgUrl: require('~/assets/img/horroscope/love_sign.svg'),
+        },
+        {
+          name: 'Health',
+          path: `/horroscope/${extractedValue}-2-${ids.id}/`,
+          imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
         },
       ]
       this.moreData.splice(1, 4, ...moreDataTwo)
@@ -253,6 +253,16 @@ export default {
         &:last-child {
           .tag_list_aos {
             background: #f09968;
+          }
+        }
+        &.Career {
+          .tag_list_aos {
+            background: #4ab26e;
+          }
+        }
+        &.Money {
+          .tag_list_aos {
+            background: #ff7d45;
           }
         }
         .isvisible {

@@ -12,7 +12,7 @@
     </div>
     <more-tarot class="more_tarot"></more-tarot>
     <all-tarot class="mt-h5-48"></all-tarot>
-    <google-auto-ad classNames="ad-box_row bottom_ad" id="6503037744" />
+    <google-ad classNames="ad-box_row bottom_ad" id="6503037744" />
   </div>
 </template>
 
@@ -100,6 +100,7 @@ export default {
 }
 .ad-box_row {
   width: 1200px;
+  height: 305px;
   margin: 24px auto;
 }
 
@@ -186,8 +187,9 @@ export default {
         }
       }
       .h5_google {
+        width: 336 * $pr;
         order: 3;
-        height: 130 * $pr;
+        height: 297 * $pr;
         margin-top: 0;
       }
       .ai_reply {
@@ -208,7 +210,8 @@ export default {
     display: none;
   }
   .ad-box_row {
-    width: 100%;
+    width: 336 * $pr;
+    height: 297 * $pr;
   }
   .more_tarot {
     padding: 0 16 * $pr !important;
@@ -220,7 +223,9 @@ export default {
     margin-top: 32 * $pr;
   }
   .bottom_ad {
-    padding-top: 32 * $pr;
+    padding-top: 48 * $pr;
+    margin: 0 auto;
+    height: 345 * $pr;
   }
 }
 </style>

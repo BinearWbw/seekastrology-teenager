@@ -41,7 +41,7 @@
         <google-ad classNames="ad-box" id="6918820771"></google-ad>
       </div> -->
     </div>
-    <google-auto-ad classNames="ad-box_row" id="9736555803" />
+    <google-ad classNames="ad-box_row" id="9736555803" />
     <div class="title mt-24">minor arcana definitions</div>
     <div class="minor-tab" @click="toggleMinor">
       <button
@@ -99,7 +99,7 @@
         </a>
       </li>
     </ul>
-    <google-auto-ad classNames="ad-box_row mb-24" id="6311466051" />
+    <google-ad classNames="ad-box_row mb-24" id="6311466051" />
   </div>
 </template>
 
@@ -278,6 +278,7 @@ export default {
 }
 .ad-box_row {
   width: 1200px;
+  height: 305px;
   margin: 0 auto;
 }
 .minor-tab {
@@ -395,8 +396,10 @@ export default {
     display: none;
   }
   .ad-box_row {
-    width: 100%;
+    width: 336 * $pr;
+    height: 297 * $pr;
     padding: 0;
+    margin: 0 auto;
   }
   .title {
     font-family: 'Cinzel Decorative';

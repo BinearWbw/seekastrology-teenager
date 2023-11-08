@@ -227,7 +227,7 @@ export default {
             // 创建动态组件实例
             const adComponent = new Vue({
               render: (h) =>
-                h('google-observer-auto-ad', {
+                h('google-ad', {
                   props: {
                     classNames: 'leftAdText',
                     id: this.idAdArray,
@@ -595,8 +595,8 @@ export default {
                 }
               }
               .google_ad {
-                width: 100%;
-                height: 299 * $pr;
+                width: 336 * $pr;
+                height: 297 * $pr;
               }
             }
           }
@@ -627,9 +627,9 @@ export default {
               }
               :deep(.leftAdText) {
                 .leftAdText {
-                  height: auto;
-                  max-height: 299 * $pr;
-                  margin-top: 24 * $pr;
+                  width: 300 * $pr;
+                  height: 267 * $pr;
+                  margin: 24 * $pr auto 0;
                   .title {
                     height: 17 * $pr;
                   }
@@ -638,8 +638,8 @@ export default {
             }
           }
           .google_ad {
-            width: 100%;
-            height: 299 * $pr;
+            width: 336 * $pr;
+            height: 297 * $pr;
           }
         }
       }

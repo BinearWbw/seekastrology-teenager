@@ -296,9 +296,9 @@ export default {
   .inquiry {
     &_pet {
       .google_ad_top {
-        width: 100%;
+        width: 320 * $pr;
         max-width: auto;
-        height: 130 * $pr;
+        height: 117 * $pr;
         margin: 0 auto;
       }
       .pairing {

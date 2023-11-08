@@ -41,9 +41,9 @@
         <google-ad classNames="ad-box" id="6372025868"></google-ad>
       </div> -->
     </div>
-    <google-auto-ad classNames="google_ad" id="8937629395" />
+    <google-ad classNames="google_ad" id="8937629395" />
     <tarot-more-tarot></tarot-more-tarot>
-    <google-auto-ad classNames="google_ad" id="6563597553" />
+    <google-ad classNames="google_ad" id="6563597553" />
   </div>
 </template>
 
@@ -182,7 +182,7 @@ export default {
 
   .google_ad {
     width: 1200px;
-    height: 130px;
+    height: 305px;
     margin: 24px auto;
   }
   :deep(.more-tarot) {
@@ -316,7 +316,8 @@ export default {
       display: none;
     }
     .google_ad {
-      width: 100%;
+      width: 336 * $pr;
+      height: 297 * $pr;
       margin: 16 * $pr auto;
       padding: 0;
     }

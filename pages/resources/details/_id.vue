@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-        <google-auto-ad classNames="leftAd" :id="'9575035598'" />
+        <google-ad classNames="leftAd" :id="'9575035598'" />
       </div>
       <div class="details_main_right">
         <google-ad classNames="rightAd" :id="'8812069528'"></google-ad>
@@ -134,7 +134,7 @@
         </a>
       </div>
     </div>
-    <google-auto-ad classNames="google_ad_footer" :id="'4872824519'" />
+    <google-ad classNames="google_ad_footer" :id="'4872824519'" />
     <div class="foot_components" ref="foot_components">
       <transition name="fade">
         <home-your-choice></home-your-choice>
@@ -164,7 +164,7 @@ export default {
       // 创建动态组件实例
       const adComponent = new Vue({
         render: (h) =>
-          h('google-observer-auto-ad', {
+          h('google-ad', {
             props: {
               classNames: 'leftAdText',
               id: this.idAdArray,
@@ -450,6 +450,7 @@ $spacing: 16px;
       }
       .leftAd {
         width: 100%;
+        height: 305px;
         margin: 0 auto;
         margin-top: 24px;
       }
@@ -706,8 +707,9 @@ $spacing: 16px;
   .details {
     .google_top {
       display: flex;
-      width: 100%;
-      height: 110 * $pr;
+      width: 320 * $pr;
+      height: 117 * $pr;
+      margin: 0 auto;
     }
     &_main {
       width: 100%;
@@ -798,8 +800,9 @@ $spacing: 16px;
               }
               :deep(.leftAdText) {
                 .leftAdText {
-                  height: 100 * $pr;
-                  margin-bottom: 48 * $pr;
+                  width: 300 * $pr;
+                  height: 267 * $pr;
+                  margin: 0 auto 24 * $pr;
                   .title {
                     height: 17 * $pr;
                   }
@@ -810,7 +813,8 @@ $spacing: 16px;
         }
 
         .leftAd {
-          width: 343 * $pr;
+          width: 336 * $pr;
+          height: 297 * $pr;
           margin-top: 16 * $pr;
         }
       }
@@ -905,11 +909,11 @@ $spacing: 16px;
       }
     }
     .google_ad_footer {
-      margin-bottom: 16 * $pr;
-      display: block;
-      width: 100%;
-      height: 299 * $pr;
-      // overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 336 * $pr;
+      height: 297 * $pr;
+      margin: 0 auto 16 * $pr;
     }
     .foot_components {
       .choice {

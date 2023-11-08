@@ -107,7 +107,7 @@
           </button>
         </div>
       </div>
-      <google-auto-ad classNames="google_ad_btm" :id="'1344643045'" />
+      <google-ad classNames="google_ad_btm" :id="'1344643045'" />
     </div>
     <div class="foot_components" ref="foot_components">
       <transition name="fade">
@@ -557,7 +557,7 @@ $spacing: 16px;
     }
     .google_ad_top {
       width: 1200px;
-      height: 315px;
+      height: 305px;
       margin: 24px auto;
     }
     .google_ad {
@@ -567,6 +567,7 @@ $spacing: 16px;
     }
     .google_ad_btm {
       width: 1200px;
+      height: 305px;
       margin: 24px auto;
     }
     &_btm {
@@ -1045,17 +1046,18 @@ $spacing: 16px;
         }
       }
       .google_ad {
-        width: 100%;
-        height: 299 * $pr;
+        width: 336 * $pr;
+        height: 297 * $pr;
         margin: 16 * $pr auto;
       }
       .google_ad_top {
-        width: 100%;
-        height: 130 * $pr;
-        margin: 0;
+        width: 320 * $pr;
+        height: 117 * $pr;
+        margin: 0 auto;
       }
       .google_ad_btm {
-        width: 100%;
+        width: 336 * $pr;
+        height: 297 * $pr;
         margin: 16 * $pr auto;
       }
 

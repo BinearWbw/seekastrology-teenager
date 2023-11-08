@@ -21,7 +21,7 @@
       </section>
       <section class="module explore">
         <el-explore-more />
-        <google-auto-ad :id="'1626224357'" classNames="google_ad" />
+        <google-ad :id="'1626224357'" classNames="google_ad" />
       </section>
       <section class="module tarot">
         <el-tarot-world />
@@ -418,9 +418,9 @@ export default {
       }
     }
     .google_ad_h5 {
-      width: 100%;
+      width: 320 * $pr;
       height: 117 * $pr;
-      margin: 0 0 16 * $pr;
+      margin: 0 auto 16 * $pr;
       padding: 0;
       display: flex;
       flex-direction: column;
@@ -443,8 +443,9 @@ export default {
           .google_ad {
             display: flex;
             flex-direction: column;
-            width: 100%;
-            margin-top: 16 * $pr;
+            width: 336 * $pr;
+            height: 297 * $pr;
+            margin: 16 * $pr auto 0;
           }
         }
         &.quizzes {
@@ -455,9 +456,6 @@ export default {
         }
         &.new_pop {
           .google_ad {
-            margin: 40 * $pr auto 0;
-            width: 100%;
-            padding: 0;
             display: none;
           }
         }

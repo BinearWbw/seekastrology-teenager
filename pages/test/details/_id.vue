@@ -176,7 +176,7 @@
             </div>
           </div>
         </div>
-        <google-auto-ad classNames="google_ad" :id="'5595713395'" />
+        <google-ad classNames="google_ad" :id="'5595713395'" />
         <div class="details_main_left_btm">
           <div class="details_main_left_btm_title">MOST POPULAR QUIZZES</div>
           <div class="details_main_left_btm_list">
@@ -208,7 +208,7 @@
             </a>
           </div>
         </div>
-        <google-auto-ad classNames="google_ad" :id="'5404141708'" />
+        <google-ad classNames="google_ad" :id="'5404141708'" />
       </div>
       <div class="details_main_right">
         <google-ad classNames="google_ad" :id="'2626483862'"></google-ad>
@@ -813,6 +813,7 @@ $spacing: 55px;
       }
       .google_ad {
         width: 100%;
+        height: 305px;
         margin-top: 24px;
       }
     }
@@ -951,8 +952,10 @@ $spacing: 55px;
   .details {
     .google_top {
       display: flex;
-      width: 100%;
-      height: 110 * $pr;
+      flex-direction: column;
+      width: 320 * $pr;
+      height: 117 * $pr;
+      margin: 0 auto;
     }
     &_main {
       width: 100%;
@@ -1099,6 +1102,11 @@ $spacing: 55px;
                   font-size: 16 * $pr;
                 }
               }
+              .google_ad {
+                width: 336 * $pr;
+                height: 297 * $pr;
+                margin-top: 16 * $pr;
+              }
             }
           }
 
@@ -1119,7 +1127,8 @@ $spacing: 55px;
           }
         }
         .google_ad {
-          width: 343 * $pr;
+          width: 336 * $pr;
+          height: 297 * $pr;
           margin-top: 16 * $pr;
         }
         &_btm {

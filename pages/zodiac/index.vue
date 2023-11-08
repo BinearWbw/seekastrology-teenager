@@ -44,7 +44,7 @@
     <div class="zodiac_el">
       <home-quizzes class="quizzes"></home-quizzes>
       <div class="zodiac_google">
-        <google-auto-ad :id="'3950489038'" classNames="google_ad" />
+        <google-ad :id="'3950489038'" classNames="google_ad" />
       </div>
       <tarot-more-tarot></tarot-more-tarot>
     </div>
@@ -404,8 +404,9 @@ export default {
           display: flex;
           flex-direction: column;
           .google_ad {
-            width: 100%;
-            height: 250 * $pr;
+            width: 336 * $pr;
+            height: 297 * $pr;
+            margin: 0 auto;
             order: 2;
           }
           .pairing {
@@ -425,10 +426,13 @@ export default {
       padding: 0;
       .zodiac_google {
         display: block;
-        width: 100%;
         padding: 0;
+        width: 336 * $pr;
         order: 1;
-        margin: 16 * $pr 0;
+        margin: 16 * $pr auto;
+        .google_ad {
+          height: 297 * $pr;
+        }
       }
       .quizzes {
         margin-bottom: 32 * $pr;

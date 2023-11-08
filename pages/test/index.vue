@@ -31,12 +31,12 @@
                 </div>
               </div>
             </a>
-            <google-auto-ad
+            <google-ad
               classNames="google_ad top"
               v-if="list.length >= 8"
               :id="'6715555076'"
             />
-            <google-auto-ad
+            <google-ad
               classNames="google_ad btm"
               v-if="list.length >= 32"
               :id="'2535818672'"
@@ -58,7 +58,7 @@
             </button>
           </div>
         </div>
-        <google-auto-ad classNames="google_ad_h5btm" :id="'3465756968'" />
+        <google-ad classNames="google_ad_h5btm" :id="'3465756968'" />
         <div class="test_main_center_right" ref="right_google_ad">
           <google-ad
             classNames="google_ad rightAd"
@@ -312,6 +312,7 @@ $spacing: 16px;
           }
           .google_ad {
             width: 924px;
+            height: 305px;
             margin: -16px 0 0;
             grid-column-end: 5;
             grid-column-start: span 4;
@@ -545,8 +546,9 @@ $spacing: 16px;
               grid-column-end: 3;
               grid-column-start: span 2;
               grid-row-start: span 2;
-              width: 100%;
-              margin: 24 * $pr 0;
+              width: 336 * $pr;
+              height: 297 * $pr;
+              margin: 24 * $pr auto;
             }
             .top {
               grid-row-end: 6;
@@ -579,9 +581,11 @@ $spacing: 16px;
           display: none;
         }
         .google_ad_h5btm {
-          display: block;
-          width: 100%;
-          margin: 16 * $pr 0;
+          display: flex;
+          flex-direction: column;
+          width: 336 * $pr;
+          height: 297 * $pr;
+          margin: 16 * $pr auto;
         }
       }
     }

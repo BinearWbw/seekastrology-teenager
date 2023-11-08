@@ -1,9 +1,6 @@
 <template>
   <div class="details_content">
-    <google-auto-ad
-      :id="'8657229656'"
-      classNames="google_ad_h5"
-    ></google-auto-ad>
+    <google-ad :id="'8657229656'" classNames="google_ad_h5"></google-ad>
     <div class="details_type">
       <div class="details_type_main">
         <div class="pull_down">
@@ -237,7 +234,7 @@
                 </div>
               </div>
             </div>
-            <google-auto-ad :id="'2531956384'" classNames="google_ad" />
+            <google-ad :id="'2531956384'" classNames="google_ad" />
           </div>
           <div class="details_right">
             <el-select-menu
@@ -605,7 +602,8 @@ export default {
           }
           .google_ad {
             width: 100%;
-            padding: 24px 0;
+            height: 305px;
+            margin: 24px 0;
           }
         }
         &_right {
@@ -720,7 +718,11 @@ export default {
     width: 100%;
     padding-bottom: 48 * $pr;
     .google_ad_h5 {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      width: 320 * $pr;
+      height: 117 * $pr;
+      margin: 0 auto;
     }
     .details_type {
       margin: 0 auto;
@@ -819,7 +821,9 @@ export default {
               }
             }
             .google_ad {
-              margin-top: 48 * $pr;
+              width: 336 * $pr;
+              height: 297 * $pr;
+              margin: 16 * $pr auto 0;
             }
           }
           &_right {

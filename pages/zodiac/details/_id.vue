@@ -1,6 +1,6 @@
 <template>
   <div class="zodiac_details">
-    <google-auto-ad :id="'7918863055'" classNames="google_ad_h5" />
+    <google-ad :id="'7918863055'" classNames="google_ad_h5" />
     <div class="zodiac_details_main">
       <div class="part_details">
         <div class="pull_down">
@@ -107,14 +107,14 @@
         </div>
       </div>
       <div class="tab_control">
-        <google-auto-ad classNames="google_ad" :id="'7549376164'" />
+        <google-ad classNames="google_ad" :id="'7549376164'" />
       </div>
     </div>
     <transition name="fade">
       <home-pop-articles class="sign_pop"></home-pop-articles>
     </transition>
     <div class="sign_tarot">
-      <google-auto-ad classNames="google_ad" :id="'6197461548'" />
+      <google-ad classNames="google_ad" :id="'6197461548'" />
       <tarot-all-tarot></tarot-all-tarot>
     </div>
     <!-- <transition name="fade">
@@ -383,6 +383,7 @@ export default {
       width: 100%;
       .google_ad {
         width: 1200px;
+        height: 305px;
         margin: 24px auto;
       }
     }
@@ -481,8 +482,11 @@ export default {
   $pr: math.div(1vw, 3.75);
   .zodiac_details {
     .google_ad_h5 {
-      width: 100%;
-      display: block;
+      display: flex;
+      flex-direction: column;
+      width: 320 * $pr;
+      height: 117 * $pr;
+      margin: 0 auto;
     }
     &_main {
       width: 100%;
@@ -560,8 +564,9 @@ export default {
       }
       .tab_control {
         .google_ad {
-          width: 100%;
-          margin: 16 * $pr 0;
+          width: 336 * $pr;
+          height: 297 * $pr;
+          margin: 16 * $pr auto;
         }
       }
     }
@@ -575,9 +580,11 @@ export default {
         margin-top: 16 * $pr;
       }
       .google_ad {
-        display: block;
-        width: 100%;
-        padding: 0 16 * $pr;
+        display: flex;
+        flex-direction: column;
+        width: 336 * $pr;
+        height: 297 * $pr;
+        margin: 0 auto;
       }
     }
   }

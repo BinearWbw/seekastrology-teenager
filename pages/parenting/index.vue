@@ -280,8 +280,8 @@ export default {
   .parenting {
     &_main {
       .google_ad_top {
-        max-width: auto;
-        height: 130 * $pr;
+        width: 320 * $pr;
+        height: 117 * $pr;
         margin: 0 auto;
       }
       .baby {
