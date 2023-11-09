@@ -29,14 +29,14 @@ export default {
     return {
       moreData: [
         {
-          name: 'Career',
-          path: '/horroscope/aries-3-1/',
-          imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
-        },
-        {
           name: 'Money',
           path: '/horroscope/aries-4-1/',
           imgUrl: require('~/assets/img/horroscope/wealth_sign.svg'),
+        },
+        {
+          name: 'Career',
+          path: '/horroscope/aries-3-1/',
+          imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
         },
         {
           name: 'Love',
@@ -49,12 +49,22 @@ export default {
           imgUrl: require('~/assets/img/horroscope/healthy_sign.svg'),
         },
         {
-          name: 'Daily horoscope',
+          name: 'Daily',
           path: '/horroscope/aries-1/',
           imgUrl: require('~/assets/img/horroscope/today.svg'),
         },
         {
-          name: '2023 horoscope',
+          name: 'Pet',
+          path: '/petsign/aries-1/',
+          imgUrl: require('~/assets/img/horroscope/pet.svg'),
+        },
+        {
+          name: 'Teen',
+          path: '/teenager/aries-1/',
+          imgUrl: require('~/assets/img/horroscope/teen.svg'),
+        },
+        {
+          name: '2023',
           path: '/horroscope/aries-5-1/',
           imgUrl: require('~/assets/img/horroscope/2023.svg'),
         },
@@ -77,16 +87,6 @@ export default {
           name: 'Universal tarot',
           path: '/tarot/type/3/',
           imgUrl: require('~/assets/img/horroscope/universal_tarot.svg'),
-        },
-        {
-          name: 'Pet',
-          path: '/petsign/aries-1/',
-          imgUrl: require('~/assets/img/horroscope/pet.svg'),
-        },
-        {
-          name: 'Teen',
-          path: '/teenager/aries-1/',
-          imgUrl: require('~/assets/img/horroscope/teen.svg'),
         },
         {
           name: 'Compatibility',
@@ -168,14 +168,14 @@ export default {
       const ids = this.tabListData.find((lis) => extractedValue == lis.name) // 拿到对应星座id
       const moreDataTwo = [
         {
-          name: 'Career',
-          path: `/horroscope/${extractedValue}-3-${ids.id}/`,
-          imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
-        },
-        {
           name: 'Money',
           path: `/horroscope/${extractedValue}-4-${ids.id}/`,
           imgUrl: require('~/assets/img/horroscope/wealth_sign.svg'),
+        },
+        {
+          name: 'Career',
+          path: `/horroscope/${extractedValue}-3-${ids.id}/`,
+          imgUrl: require('~/assets/img/horroscope/cupational_sign.svg'),
         },
         {
           name: 'Love',
@@ -200,7 +200,7 @@ export default {
     isHorroscopePage(index) {
       return !(
         this.$route.path.includes('horroscope') &&
-        (index === 4 || index === 5)
+        (index === 4 || index === 7)
       )
     },
     isPageElimination() {
@@ -252,17 +252,56 @@ export default {
         }
         &:last-child {
           .tag_list_aos {
-            background: #f09968;
+            background: #4abba0;
+          }
+        }
+        &.tarot {
+          .tag_list_aos {
+            background: #ea9220;
           }
         }
         &.Career {
           .tag_list_aos {
-            background: #4ab26e;
+            position: relative;
+            overflow: hidden;
+            &::after {
+              display: inline-block;
+              position: absolute;
+              animation: flow 1.7s infinite;
+              bottom: -50%;
+              content: '';
+              left: -50%;
+              right: -50%;
+              top: -50%;
+              background: linear-gradient(
+                180deg,
+                hsla(21, 63%, 73%, 0),
+                hsla(0, 0%, 100%, 0.5) 50%,
+                hsla(21, 63%, 73%, 0)
+              );
+            }
           }
         }
         &.Money {
           .tag_list_aos {
-            background: #ff7d45;
+            position: relative;
+            overflow: hidden;
+            &::after {
+              display: inline-block;
+              position: absolute;
+              animation: flow 1.8s infinite;
+              bottom: -50%;
+              content: '';
+              left: -50%;
+              right: -50%;
+              top: -50%;
+              background: linear-gradient(
+                180deg,
+                hsla(21, 63%, 73%, 0),
+                hsla(0, 0%, 100%, 0.5) 50%,
+                hsla(21, 63%, 73%, 0)
+              );
+            }
           }
         }
         .isvisible {
@@ -309,6 +348,14 @@ export default {
         }
       }
     }
+  }
+}
+@keyframes flow {
+  0% {
+    transform: rotate(-30deg) translate(1em, -9em);
+  }
+  100% {
+    transform: rotate(-30deg) translate(2em, 13.5em);
   }
 }
 
