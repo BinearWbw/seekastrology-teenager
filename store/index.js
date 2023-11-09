@@ -19,7 +19,7 @@ export const state = () => ({
     email: '',
     user_name: '',
     user_subscribe: [],
-    natal: false,
+    natal: '',
     natal_res: {},
     birth_msg: {},
     req: {},

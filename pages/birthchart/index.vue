@@ -333,7 +333,7 @@ export default {
           imgs: require('~/assets/img/home/birth/pluto.svg'),
         },
       ],
-      birthChart: true,
+      birthChart: '',
       fetching: false,
       cityData: [],
       perform: false,
@@ -420,9 +420,6 @@ export default {
       })
     },
     cityChange(value, option) {
-      console.log('选择的数据birthForm', this.birthForm.place)
-      console.log('value', value)
-      console.log('option', option.data.attrs.channel)
       this.birthForm.place = option.data.attrs.channel
       console.log('选择的数据birthForm后后', this.birthForm)
       //   this.cityData = [] // 清除搜索的城市内容

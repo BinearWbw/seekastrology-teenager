@@ -217,7 +217,7 @@ export default {
               ],
             },
             // {
-            //   title: 'Birth chart',
+            //   title: 'Birth Chart',
             //   path: '/birthchart/',
             //   href: '/birthchart/',
             // },
