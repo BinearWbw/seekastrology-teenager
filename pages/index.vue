@@ -20,8 +20,8 @@
         <home-your-choice></home-your-choice>
       </section>
       <section class="module explore">
-        <el-explore-more />
         <google-ad :id="'1626224357'" classNames="google_ad" />
+        <el-explore-more />
       </section>
       <section class="module tarot">
         <el-tarot-world />
@@ -440,12 +440,13 @@ export default {
           }
         }
         &.explore {
+          margin-top: 16 * $pr;
           .google_ad {
             display: flex;
             flex-direction: column;
             width: 336 * $pr;
             height: 297 * $pr;
-            margin: 16 * $pr auto 0;
+            margin: 0 auto 16 * $pr;
           }
         }
         &.quizzes {
