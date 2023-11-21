@@ -404,6 +404,8 @@ export default {
                   JSON.stringify(res) // 更新用户存储信息
                 )
                 this.isLoading = false
+                window.changePageUrl = '/birthchart/details/'
+                window.location.href = '/birthchart/details/'
               }
             })
         }

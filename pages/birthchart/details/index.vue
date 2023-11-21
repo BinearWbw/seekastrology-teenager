@@ -90,37 +90,31 @@
               </div>
               <div class="tabs_lists">
                 <div class="tabs_lists_title">Panchang Details</div>
-                <div class="item_list">
-                  <div class="item_list_one">1</div>
-                  <div class="item_list_two">2</div>
+                <div
+                  class="item_list"
+                  v-for="(item, index) in astroPanChang"
+                  :key="index"
+                >
+                  <div class="item_list_one">{{ item }}</div>
+                  <div class="item_list_two">{{ astro_dtls[item] }}</div>
                 </div>
                 <div class="item_list">
-                  <div class="item_list_one">1</div>
-                  <div class="item_list_two">2</div>
-                </div>
-                <div class="item_list">
-                  <div class="item_list_one">1</div>
-                  <div class="item_list_two">2</div>
-                </div>
-                <div class="item_list">
-                  <div class="item_list_one">1</div>
-                  <div class="item_list_two">2</div>
-                </div>
-                <div class="item_list">
-                  <div class="item_list_one">1</div>
-                  <div class="item_list_two">2</div>
-                </div>
-                <div class="item_list">
-                  <div class="item_list_one">1</div>
-                  <div class="item_list_two">2</div>
+                  <div class="item_list_one">Nakshatra</div>
+                  <div class="item_list_two">{{ astro_dtls.Naksahtra }}</div>
                 </div>
               </div>
             </div>
             <div class="tabs_lists">
               <div class="tabs_lists_title">Avakhada Details</div>
-              <div class="item_list">
-                <div class="item_list_one">1</div>
-                <div class="item_list_two">2</div>
+              <div
+                class="item_list"
+                v-for="(item, index) in astroAvak"
+                :key="index"
+              >
+                <div class="item_list_one avakhada">{{ item.name }}</div>
+                <div class="item_list_two avakhada">
+                  {{ astro_dtls[item.type] }}
+                </div>
               </div>
             </div>
           </div>
@@ -216,43 +210,80 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      birthData: [
-        'Sun',
-        'Ascendant',
-        'Jupiter',
-        'Mars',
-        'Mercury',
-        'Moon',
-        'Neptune',
-        'Pluto',
-        'Saturn',
-        'Uranus',
-        'Venus',
+      astroPanChang: ['Tithi', 'Karan', 'Yog'],
+      astroAvak: [
+        {
+          name: 'Varna',
+          type: 'Varna',
+        },
+        {
+          name: 'Vashya',
+          type: 'Vashya',
+        },
+        {
+          name: 'Yoni',
+          type: 'Yoni',
+        },
+        {
+          name: 'Gan',
+          type: 'Gan',
+        },
+        {
+          name: 'Nadi',
+          type: 'Nadi',
+        },
+        {
+          name: 'Sign',
+          type: 'sign',
+        },
+        {
+          name: 'Sign Lord',
+          type: 'SignLord',
+        },
+        {
+          name: 'Nakshatra-Charan',
+          type: 'NaksahtraLord',
+        },
+        {
+          name: 'Yog',
+          type: 'Yog',
+        },
+        {
+          name: 'Karan',
+          type: 'Karan',
+        },
+        {
+          name: 'Tithi',
+          type: 'Tithi',
+        },
+        {
+          name: 'Yunja',
+          type: 'yunja',
+        },
+        {
+          name: 'Tatva',
+          type: 'tatva',
+        },
+        {
+          name: 'Name alphabet',
+          type: 'name_alphabet',
+        },
+        {
+          name: 'Paya',
+          type: 'paya',
+        },
       ],
-      houseNumber: [
-        'FIRST HOUSE',
-        'SECOND HOUSE',
-        'THIRD HOUSE',
-        'FOURTH HOUSE',
-        'FIFTH HOUSE',
-        'SIXTH HOUSE',
-        'SEVENTH HOUSE',
-        'EIGHTH HOUSE',
-        'NINTH HOUSE',
-        'TENTH HOUSE',
-        'ELEVENTH HOUSE',
-        'TWELFTH HOUSE',
-      ],
-      births: {},
       birth_dtls: {},
+      astro_dtls: {},
     }
   },
   computed: {},
   created() {
     if (process.client) {
-      this.births = JSON.parse(localStorage.getItem('births'))
-      console.log('出生数据', this.births)
-      this.birth_dtls = this.births.general.birth_dtls
+      const births = JSON.parse(localStorage.getItem('births'))
+      //   console.log('出生数据', births)
+      this.birth_dtls = births.general?.birth_dtls
+      this.astro_dtls = births.general?.astro_dtls
     }
   },
   mounted() {},
@@ -424,6 +455,9 @@ export default {
                 background: rgba(255, 255, 255, 0.1);
                 padding: 3px 8px;
               }
+            }
+            .avakhada {
+              padding: 3.5px 8px;
             }
           }
         }
