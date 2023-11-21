@@ -43,6 +43,9 @@
     <section class="all_tarot">
       <tarot-all-tarot></tarot-all-tarot>
     </section>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </article>
 </template>
 
@@ -52,12 +55,26 @@ export default {
   data() {
     return {
       isScrolled: false,
+      isLoading: true,
+      timer: null,
     }
   },
   mounted() {
     this.activeInit()
     this.isScrolled = window.scrollY < 600
     window.addEventListener('scroll', this.handleScroll)
+
+    //首页loading
+    let newUser = localStorage.getItem('newUser')
+    if (!newUser) {
+      localStorage.setItem('newUser', JSON.stringify(1))
+      window.addEventListener('message', this.handleMessage)
+      this.timer = setTimeout(() => {
+        this.isLoading = false
+      }, 3000)
+    } else {
+      this.isLoading = false
+    }
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
@@ -93,6 +110,19 @@ export default {
       this.isScrolled = window.scrollY < 600
       if (window.scrollY > 600) {
         window.removeEventListener('scroll', this.handleScroll)
+      }
+    },
+    //首页loading
+    handleMessage(e) {
+      if (
+        typeof e.data === 'string' &&
+        e.data.includes('adReady') &&
+        e.origin == 'https://googleads.g.doubleclick.net'
+      ) {
+        console.log('ok')
+        this.show = false
+        this.timer && clearTimeout(this.timer)
+        this.timer = null
       }
     },
   },
