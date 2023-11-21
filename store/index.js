@@ -19,10 +19,6 @@ export const state = () => ({
     email: '',
     user_name: '',
     user_subscribe: [],
-    natal: '',
-    natal_res: {},
-    birth_msg: {},
-    req: {},
   },
   isChildVisible: false, //登录框显示隐藏
   signSuccessData: {
@@ -42,12 +38,6 @@ export const getters = {
   },
   getChildVisible(state) {
     return state.isChildVisible
-  },
-  getUserNatalData(state) {
-    return state.userInfo.natal_res
-  },
-  getUserNatalBirthMsg(state) {
-    return state.userInfo.birth_msg
   },
 }
 export const mutations = {
@@ -71,18 +61,6 @@ export const mutations = {
   },
   restoreStateFromLocalStorage(state, restoredState) {
     Object.assign(state, restoredState)
-  },
-  setUserNatalData(state, payload) {
-    state.userInfo.natal_res = payload
-  },
-  setUserNatalBirthMsg(state, payload) {
-    state.userInfo.birth_msg = payload
-  },
-  setUserReqData(state, payload) {
-    state.userInfo.req = payload
-  },
-  SETNATAL(state, payload) {
-    state.userInfo.natal = payload
   },
 }
 export const actions = {

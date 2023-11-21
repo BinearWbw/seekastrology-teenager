@@ -2,10 +2,7 @@
   <div class="astrolabe">
     <div class="astrolabe_main">
       <google-ad :id="''" classNames="google_ad_top"></google-ad>
-      <div class="astrolabe_birth" v-if="getUserInfo.natal" v-cloak>
-        <el-birth-chart></el-birth-chart>
-      </div>
-      <div class="astrolabe_count" v-else v-cloak>
+      <div class="astrolabe_count">
         <h3 class="title">Free Birth Chart Calculator</h3>
         <div class="form_main">
           <div class="form">
@@ -34,9 +31,9 @@
                         placeholder="Choose your gender"
                         allow-clear
                       >
-                        <a-select-option value="male"> male </a-select-option>
-                        <a-select-option value="female">
-                          female
+                        <a-select-option value="Male"> Male </a-select-option>
+                        <a-select-option value="Female">
+                          Female
                         </a-select-option>
                       </a-select>
                     </a-form-model-item>
@@ -162,6 +159,9 @@
     </div>
     <transition name="unfold">
       <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+    </transition>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
     </transition>
   </div>
 </template>
@@ -337,6 +337,7 @@ export default {
       fetching: false,
       cityData: [],
       perform: false,
+      isLoading: false,
     }
   },
   watch: {},
@@ -364,28 +365,29 @@ export default {
         return
       }
       this.$refs.birthForm.validate((valid) => {
-        console.log(valid)
         if (valid) {
           const birthLocalTime = this.$utils.formatDateNatal(
-            this.birthForm.year,
-            this.birthForm.month,
-            this.birthForm.day,
             this.birthForm.hour,
-            this.birthForm.min,
             this.birthForm.mol
           )
           console.log('时间转换', birthLocalTime)
           console.log('信息确认提交', this.birthForm)
+          this.isLoading = true
           this.$apiList.home
             .getNatal({
-              birthLocalTime: birthLocalTime,
-              birthPlace: this.birthForm.place.name,
-              email: this.getUserInfo?.email,
-              lat: this.birthForm.place.lat.toString(),
-              lng: this.birthForm.place.lng.toString(),
+              year: Number(this.birthForm.year),
+              month: Number(this.birthForm.month),
+              day: Number(this.birthForm.day),
+              hour: birthLocalTime,
+              min: Number(this.birthForm.min),
+              sec: 1,
+              name: this.birthForm.name,
+              gender: this.birthForm.gender,
+              lat: this.birthForm.place.lat,
+              lon: this.birthForm.place.lng,
+              place: this.birthForm.place.name,
             })
             .then((res) => {
-              console.log('出生图接口信息', res)
               if (res.code) {
                 // 提示通知
                 this.$notification.open({
@@ -397,14 +399,11 @@ export default {
                   },
                 })
               } else {
-                this.$store.commit('setUserNatalData', res.natal) // 出生盘数据
-                this.$store.commit('setUserNatalBirthMsg', res.birth) // 用户出生盘信息
-                this.$store.commit('setUserReqData', res.req) // 用户出生盘信息
-                this.$store.commit('SETNATAL', true) // 用户出生信息获取状态
                 localStorage.setItem(
-                  'userInfo',
-                  JSON.stringify(this.$store.state) // 更新用户存储信息
+                  'births',
+                  JSON.stringify(res) // 更新用户存储信息
                 )
+                this.isLoading = false
               }
             })
         }
@@ -432,9 +431,6 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .astrolabe {
-  [v-cloak] {
-    display: none !important;
-  }
   &_main {
     width: 1400px;
     padding: 24px 0 56px;
@@ -585,7 +581,7 @@ export default {
         .form_img {
           width: 456px;
           height: 456px;
-          background: url('../../assets/img/home/birthplace.png') no-repeat;
+          background: url('~/assets/img/home/birthplace.png') no-repeat;
           background-size: cover;
         }
       }

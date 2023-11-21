@@ -158,21 +158,33 @@ const scrollAnimation = (obj, target, fn1) => {
     }
   }, 10)
 }
-function formatDateNatal(year, month, day, hour, minute, period) {
-  const yearStr = year
-  const monthStr = (month < 10 ? '0' : '') + month.toString()
-  const dayStr = (day < 10 ? '0' : '') + day.toString()
+function formatDateNatal(hour, period) {
   let hour_i = Number(hour) // 转number
   // 处理小时部分
   if (period == 'PM') {
     hour_i += 12
   }
-  const hourStr = (hour_i < 10 ? '0' : '') + hour_i.toString()
-  const minuteStr = (minute < 10 ? '0' : '') + minute.toString()
 
-  const dateTimeString = `${yearStr}-${monthStr}-${dayStr}T${hourStr}:${minuteStr}`
+  return hour_i
+}
 
-  return dateTimeString
+function formatBasicDate(m, d, y) {
+  if (!m) return '--'
+  const formattedDate = `${String(m).padStart(2, '0')}/${String(d).padStart(
+    2,
+    '0'
+  )}/${y}`
+  return formattedDate
+}
+
+function formatBasicTime(h, m) {
+  if (!m && !h) return '--'
+  const hour = h % 12 || 12
+  const period = h < 12 ? 'AM' : 'PM'
+  return `${String(hour).padStart(2, '0')}:${String(m).padStart(
+    2,
+    '0'
+  )} ${period}`
 }
 
 // 示例用法
@@ -192,4 +204,6 @@ export default {
   horoscopeFormatDate,
   scrollAnimation,
   formatDateNatal,
+  formatBasicDate,
+  formatBasicTime,
 }

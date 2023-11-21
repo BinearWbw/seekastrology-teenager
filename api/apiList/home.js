@@ -32,9 +32,8 @@ export default (axios) => ({
     return axios.get('api/astro/city', { params })
   },
   /* 星盘-出生盘 */
-
   getNatal(data) {
-    return axios.post('api/astro/natal', data)
+    return axios.post('api/astro/natal/v2', data)
   },
 
   getZodiacHoroscopeWeekly(params) {
