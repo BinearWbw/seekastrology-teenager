@@ -285,7 +285,6 @@ export default {
       }
     },
     openCardSelect() {
-      console.log('打开卡牌选择')
       this.$eventBus.$emit('cardSelect', true)
     },
     // 验证是否最后一个索引

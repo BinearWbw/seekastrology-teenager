@@ -1,6 +1,7 @@
 <template>
   <div class="chart_details">
     <div class="universe">
+      <google-ad :id="''" classNames="google_ad_top"></google-ad>
       <div class="universe_chart">
         <i class="logos"></i>
         <div class="icon_bg">
@@ -13,7 +14,7 @@
         <div class="codex">
           <div class="codex_left">
             <h3 class="title">
-              {{ birth_dtls?.name }}'s <br />Birth Chart Report
+              {{ birth_dtls?.name || '****' }}'s <br />Birth Chart Report
             </h3>
             <p class="text">
               Seekastrlogy.com provides you with a personal birth horoscope that
@@ -34,7 +35,7 @@
                 <div class="item_list">
                   <div class="item_list_one">Name</div>
                   <div class="item_list_two">
-                    {{ birth_dtls?.name }}
+                    {{ birth_dtls?.name || '--' }}
                   </div>
                 </div>
                 <div class="item_list">
@@ -59,15 +60,21 @@
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Place</div>
-                  <div class="item_list_two">{{ birth_dtls.place }}</div>
+                  <div class="item_list_two">
+                    {{ birth_dtls.place || '--' }}
+                  </div>
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Latitude</div>
-                  <div class="item_list_two">{{ birth_dtls.latitude }}</div>
+                  <div class="item_list_two">
+                    {{ birth_dtls.latitude || '--' }}
+                  </div>
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Longitude</div>
-                  <div class="item_list_two">{{ birth_dtls.longitude }}</div>
+                  <div class="item_list_two">
+                    {{ birth_dtls.longitude || '--' }}
+                  </div>
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Timezone</div>
@@ -81,11 +88,15 @@
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Sunset</div>
-                  <div class="item_list_two">{{ birth_dtls.sunset }}</div>
+                  <div class="item_list_two">
+                    {{ birth_dtls.sunset || '--' }}
+                  </div>
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Ayanamsha</div>
-                  <div class="item_list_two">{{ birth_dtls.ayanamsha }}</div>
+                  <div class="item_list_two">
+                    {{ birth_dtls.ayanamsha || '--' }}
+                  </div>
                 </div>
               </div>
               <div class="tabs_lists">
@@ -96,11 +107,15 @@
                   :key="index"
                 >
                   <div class="item_list_one">{{ item }}</div>
-                  <div class="item_list_two">{{ astro_dtls[item] }}</div>
+                  <div class="item_list_two">
+                    {{ astro_dtls[item] || '--' }}
+                  </div>
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Nakshatra</div>
-                  <div class="item_list_two">{{ astro_dtls.Naksahtra }}</div>
+                  <div class="item_list_two">
+                    {{ astro_dtls.Naksahtra || '--' }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -113,7 +128,7 @@
               >
                 <div class="item_list_one avakhada">{{ item.name }}</div>
                 <div class="item_list_two avakhada">
-                  {{ astro_dtls[item.type] }}
+                  {{ astro_dtls[item.type] || '--' }}
                 </div>
               </div>
             </div>
@@ -139,28 +154,18 @@
                 </tr>
               </thead>
               <tbody class="tbodys">
-                <tr>
-                  <td>Row 1, Cell 1</td>
-                  <td>Aquarius</td>
-                  <td>Row 1, Cell 3</td>
-                </tr>
-                <tr>
-                  <td>Row 2, Cell 1</td>
-                  <td>Row 2, Cell 2</td>
-                  <td>Row 2, Cell 3</td>
-                </tr>
-                <tr>
-                  <td>Row 3, Cell dakjdwajw</td>
-                  <td>Row 3, Cell 2</td>
-                  <td>Row 3, Cell 3</td>
-                  <td>Row 3, Cell 3</td>
-                  <td>Row 3, Cell 3</td>
-                  <td>Row 3,adw Cell 3</td>
-                  <td>Row 3, Cell 3</td>
-                  <td>Row 3, Cell 3</td>
-                  <td>Row 3, 3</td>
-                  <td>Row 3, Cell 3</td>
-                  <td>Row 3, Cell 3</td>
+                <tr v-for="(t, i) in planet_ext_dtls" :key="i">
+                  <td>{{ nameToLower(t.name) }}</td>
+                  <td>{{ t.sign }}</td>
+                  <td>{{ t.signLord }}</td>
+                  <td>{{ t.nakshatra }}</td>
+                  <td>{{ t.nakshatraLord }}</td>
+                  <td>{{ degreeNum(t.fullDegree) }}</td>
+                  <td>{{ retroFelg(t.isRetro) }}</td>
+                  <td>{{ t.is_planet_set ? 'Yes' : 'No' }}</td>
+                  <td>{{ t.planet_awastha }}</td>
+                  <td>{{ t.house }}</td>
+                  <td>{{ nameToLower(t.status) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -168,40 +173,35 @@
         </div>
         <div class="message">
           <p class="titles">General</p>
-          <div class="message_item">
-            <p class="name">Sun</p>
+          <div
+            class="message_item"
+            v-for="(item, index) in general"
+            :key="index"
+          >
+            <p class="name">{{ item.title }}</p>
             <p class="texts">
-              The sun determines your ego, identity, and "role" in life. It's
-              the core of who you are, and is the sign you're most likely to
-            </p>
-          </div>
-          <div class="message_item">
-            <p class="name">Sun</p>
-            <p class="texts">
-              The sun determines your ego, identity, and "role" in life. It's
-              the core of who you are, and is the sign you're most likely to
+              {{ item.content }}
             </p>
           </div>
         </div>
         <div class="message">
-          <p class="titles">Planets</p>
-          <div class="message_item">
-            <p class="name">Sun</p>
+          <p class="titles">Planetary</p>
+          <div
+            class="message_item"
+            v-for="(item_i, index_i) in planetary"
+            :key="index_i"
+          >
+            <p class="name">{{ item_i.Planet_name }} Consideration</p>
             <p class="texts">
-              The sun determines your ego, identity, and "role" in life. It's
-              the core of who you are, and is the sign you're most likely to
-            </p>
-          </div>
-          <div class="message_item">
-            <p class="name">Sun</p>
-            <p class="texts">
-              The sun determines your ego, identity, and "role" in life. It's
-              the core of who you are, and is the sign you're most likely to
+              {{ item_i.Result }}
             </p>
           </div>
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 
@@ -275,19 +275,46 @@ export default {
       ],
       birth_dtls: {},
       astro_dtls: {},
+      planet_ext_dtls: [],
+      general: [],
+      planetary: [],
+      isLoading: true,
     }
   },
   computed: {},
-  created() {
+  mounted() {
     if (process.client) {
       const births = JSON.parse(localStorage.getItem('births'))
-      //   console.log('出生数据', births)
+      if (!births) return
       this.birth_dtls = births.general?.birth_dtls
       this.astro_dtls = births.general?.astro_dtls
+      this.planet_ext_dtls = births.general?.planet_ext_dtls
+      this.general = births.report?.Ascendant?.Result
+      this.planetary = births.report?.planet_report
+      this.isLoading = false
     }
   },
-  mounted() {},
-  methods: {},
+  methods: {
+    retroFelg(i) {
+      const retro = String(i)
+      return retro == 'true' ? 'Retro' : 'Direct'
+    },
+    // 全大写转首字母大写
+    nameToLower(i) {
+      let originalString = i
+      let formattedString =
+        originalString.charAt(0) + originalString.slice(1).toLowerCase()
+      return formattedString || '--'
+    },
+
+    // 角度转换为度分秒形式
+    degreeNum(i) {
+      const deg = Math.floor(i)
+      const min = Math.floor((i - deg) * 60)
+      const sec = Math.round((i - deg - min / 60) * 3600)
+      return `${deg}∘${min}′${sec}″ `
+    },
+  },
 }
 </script>
 
@@ -296,6 +323,11 @@ export default {
 .chart_details {
   .universe {
     width: 100%;
+    .google_ad_top {
+      width: 980px;
+      height: 145px;
+      margin: 24px auto 0;
+    }
     &_chart {
       width: 1400px;
       margin: 48px auto;
@@ -344,8 +376,8 @@ export default {
       }
       .feature_icon {
         position: absolute;
-        top: 0;
-        right: -58px;
+        top: -180px;
+        right: 60px;
         border-radius: 6px;
         background: rgba(0, 0, 0, 0.6);
         overflow: hidden;
@@ -448,11 +480,11 @@ export default {
               font-weight: 400;
               line-height: 22px;
               &_one {
-                background: rgba(255, 255, 255, 0.03);
+                background: rgba(255, 255, 255, 0.04);
                 padding: 3px 8px;
               }
               &_two {
-                background: rgba(255, 255, 255, 0.1);
+                background: rgba(255, 255, 255, 0.08);
                 padding: 3px 8px;
               }
             }
@@ -463,6 +495,9 @@ export default {
         }
       }
       .sign_table {
+        .titles {
+          width: 100%;
+        }
         .planet {
           width: 100%;
           padding-top: 9px;
@@ -526,19 +561,69 @@ export default {
     }
   }
 }
+@media (max-width: 1500px) {
+  .chart_details {
+    .universe {
+      padding: 0 40px;
+      &_chart {
+        width: 100%;
+        .feature_icon {
+          top: 24px;
+          right: 24px;
+        }
+        .codex {
+          &_left {
+            width: 640px;
+          }
+          &_imgs {
+            width: 300px;
+            height: 300px;
+          }
+        }
+        .sign_table {
+          .planet {
+            overflow-x: scroll;
+            &::-webkit-scrollbar {
+              height: 5px;
+            }
+            &::-webkit-scrollbar-thumb {
+              background-color: #888;
+              border-radius: 6px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+              background-color: #555;
+            }
+            .table_main {
+              width: 1164px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 @media (max-width: 1250px) {
-  .universe {
-    &_chart {
-      width: 100%;
-      .feature_icon {
-        top: 16px;
-        right: 16px;
+  .chart_details {
+    .universe {
+      padding: 0 40px;
+      &_chart {
+        width: 100%;
+        .codex {
+          &_left {
+            flex: 1;
+          }
+        }
       }
     }
   }
 }
 @media (max-width: 1100px) {
   .universe {
+    .google_ad_top {
+      width: 100% !important;
+      padding: 0 30px;
+    }
     &_chart {
       padding: 78px 60px 105px;
       .codex {
@@ -555,97 +640,186 @@ export default {
           }
         }
       }
+      .your_birth {
+        &_basic {
+          grid-template-columns: repeat(1, 1fr) !important;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 900px) {
+  .chart_details {
+    .universe {
+      &_chart {
+        padding: 48px;
+        .codex {
+          &_left {
+            width: 100%;
+          }
+        }
+      }
     }
   }
 }
 
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
-  .universe {
-    padding: 0 16 * $pr;
-    &_chart {
+
+  .chart_details {
+    .universe {
       width: 100%;
-      margin: 0 auto;
-      padding: 60 * $pr 16 * $pr 105 * $pr;
-      background-size: 100%;
-      box-shadow: 0px 8 * $pr 26 * $pr 0px rgba(0, 0, 0, 0.25);
-      .logos {
-        top: 16 * $pr;
-        left: 16 * $pr;
-        width: 112 * $pr;
-        height: 20 * $pr;
+      padding: 0 16 * $pr;
+      .google_ad_top {
+        width: 320 * $pr !important;
+        height: 117 * $pr !important;
+        margin: 16 * $pr auto 0;
+        padding: 0;
       }
-      .icon_bg {
-        height: 1500 * $pr;
-        padding-top: 300 * $pr;
-        i {
-          width: 343 * $pr;
-          height: 658 * $pr;
-          flex-shrink: 0;
-          border-radius: 658.56 * $pr;
-          background: rgba(151, 71, 255, 0.69);
-          filter: blur(90 * $pr);
+      &_chart {
+        margin: 16 * $pr auto 48 * $pr;
+        padding: 60 * $pr 16 * $pr 33 * $pr;
+        box-shadow: 0 8 * $pr 26 * $pr 0 rgba(0, 0, 0, 0.25);
+        background-position: -18 * $pr 0;
+        background-size: 343 * $pr;
+
+        .logos {
+          top: 16 * $pr;
+          left: 16 * $pr;
+          width: 113 * $pr;
+          height: 20 * $pr;
         }
-      }
-      .feature_icon {
-        top: 500 * $pr;
-        right: 9 * $pr;
-        border-radius: 6 * $pr;
-        display: flex;
-        .share {
-          padding: 9 * $pr;
-          > i {
-            width: 24 * $pr;
-            height: 24 * $pr;
-          }
-        }
-        .down {
-          padding: 9 * $pr;
-          > i {
-            width: 24 * $pr;
-            height: 24 * $pr;
-          }
-        }
-      }
-      .codex {
-        &_left {
+        .icon_bg {
+          position: absolute;
           width: 100%;
-          margin-bottom: 24 * $pr;
-          .title {
-            font-size: 22 * $pr;
-            line-height: 30 * $pr;
-          }
-          .text {
-            font-size: 14 * $pr;
-            line-height: 28 * $pr;
-            color: rgba(255, 255, 255, 0.6);
+          height: 1500 * $pr;
+          left: 0;
+          top: 0;
+          padding-top: 300 * $pr;
+          overflow: hidden;
+          z-index: -1;
+          i {
+            width: 404 * $pr;
+            height: 500 * $pr;
+            filter: blur(220 * $pr);
           }
         }
-        &_imgs {
-          width: 311 * $pr;
-          height: 311 * $pr;
-        }
-      }
-      .sign_table {
-        padding: 0 0 24 * $pr;
-        .planet {
-        }
-      }
-      .message {
-        row-gap: 24 * $pr;
-        &_item {
-          .name {
-            font-weight: 500;
-            font-size: 16 * $pr;
-            line-height: 28 * $pr;
+        .feature_icon {
+          top: 467 * $pr;
+          right: 9 * $pr;
+          border-radius: 6 * $pr;
+          display: flex;
+          .share {
+            padding: 9 * $pr;
+            > i {
+              width: 24 * $pr;
+              height: 24 * $pr;
+            }
           }
-          .title {
-            font-size: 16 * $pr;
-            line-height: 28 * $pr;
+          .down {
+            padding: 9 * $pr;
+            > i {
+              width: 24 * $pr;
+              height: 24 * $pr;
+            }
           }
-          .texts {
-            font-size: 14 * $pr;
-            line-height: 24 * $pr;
+        }
+        .codex {
+          &_left {
+            .title {
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
+              margin-bottom: 0;
+            }
+            .text {
+              font-size: 14 * $pr;
+              line-height: 24 * $pr;
+            }
+          }
+          &_imgs {
+            width: 311 * $pr;
+            height: 311 * $pr;
+          }
+        }
+        .titles {
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
+        }
+        .your_birth {
+          margin: 16 * $pr 0;
+          &_basic {
+            gap: 16 * $pr;
+            padding-top: 9 * $pr;
+            .item_lists {
+              gap: 16 * $pr;
+            }
+            .tabs_lists {
+              width: 100%;
+              &_title {
+                font-size: 14 * $pr;
+                line-height: 22 * $pr;
+                padding: 3 * $pr 8 * $pr;
+              }
+              .item_list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                padding-top: 1 * $pr;
+                gap: 1 * $pr 1 * $pr;
+                font-size: 14 * $pr;
+                line-height: 22 * $pr;
+                &_one {
+                  padding: 3 * $pr 8 * $pr;
+                }
+                &_two {
+                  padding: 3 * $pr 8 * $pr;
+                }
+              }
+              .avakhada {
+                padding: 3 * $pr 8 * $pr;
+              }
+            }
+          }
+        }
+        .sign_table {
+          .planet {
+            padding-top: 9 * $pr;
+            .table_main {
+              width: 1030 * $pr;
+              border-collapse: separate;
+              border-spacing: 1 * $pr 1 * $pr;
+              .theads {
+                tr {
+                  th {
+                    padding: 3 * $pr 8 * $pr;
+                    font-size: 14 * $pr;
+                    line-height: 22 * $pr;
+                  }
+                }
+              }
+              .tbodys {
+                tr {
+                  td {
+                    padding: 3 * $pr 8 * $pr;
+                    font-size: 14 * $pr;
+                    line-height: 22 * $pr;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .message {
+          row-gap: 9 * $pr;
+          margin-top: 16 * $pr;
+          &_item {
+            .name {
+              font-size: 16 * $pr;
+              line-height: 28 * $pr;
+            }
+            .texts {
+              font-size: 14 * $pr;
+              line-height: 24 * $pr;
+            }
           }
         }
       }
