@@ -68,6 +68,9 @@
             </transition>
           </a>
         </nav>
+        <div class="search_icon">
+          <div class="icon" @click="openSearch"></div>
+        </div>
         <Desktop></Desktop>
         <div class="menu common__btn" @click="visibleMenu = true"></div>
         <!-- 登录暂时隐藏 -->
@@ -80,6 +83,9 @@
           @close="visibleMenu = false"
         >
         </lazy-dialog-menu>
+        <div class="search_top">
+          <el-search :hidden="isSearch" @toggleHidden="openSearch"></el-search>
+        </div>
       </div>
     </div>
   </header>
@@ -95,6 +101,7 @@ export default {
       isDropdownVisible: -1,
       isDropdownChildren: -1,
       isScrolled: false,
+      isSearch: false,
       menu: [
         {
           title: 'Home',
@@ -327,6 +334,9 @@ export default {
         window.location = `/search/?input=${search}`
       }
     },
+    openSearch() {
+      this.isSearch = !this.isSearch
+    },
     showDropdown(item) {
       this.isDropdownVisible = item
     },
@@ -370,15 +380,39 @@ export default {
       rgba(0, 0, 0, 0) 100%
     );
     transition: background-color 0.3s ease-in-out;
+
     > div {
       margin: 0 auto;
       width: 100%;
-      max-width: 1400px;
+      max-width: 1920px;
+      padding: 0 46px 0 48px;
       height: 100%;
       display: flex;
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
+      position: relative;
+      .search_icon {
+        display: flex;
+        align-items: center;
+        .icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.24);
+          background: url('../assets/img/header/search.svg') no-repeat;
+          background-position: center;
+          background-size: 24px;
+          cursor: pointer;
+        }
+      }
+      .search_top {
+        position: absolute;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+      }
       .logo {
         height: 100%;
         display: flex;
@@ -389,12 +423,14 @@ export default {
           display: block;
         }
         .img {
-          width: 248px;
+          width: 235px;
           object-fit: cover;
         }
       }
       .nav {
+        flex: 1;
         display: flex;
+        justify-content: center;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;

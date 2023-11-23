@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev:prod": "cross-env NODE_ENV=production PUBLIC_URL=https://astro.doitme.link PRIVATE_URL=https://astro.doitme.link PUBLIC_PATH=/.nuxt nuxt",
-    "dev": "cross-env NODE_ENV=development PUBLIC_URL=https://astro.doitme.link PRIVATE_URL=https://astro.doitme.link PUBLIC_PATH=/.nuxt nuxt",
+    "dev": "cross-env NODE_ENV=development PUBLIC_URL=http://192.168.6.63:9907 PRIVATE_URL=http://192.168.6.63:9907 PUBLIC_PATH=/.nuxt nuxt",
     "generate": "cross-env NODE_ENV=production PUBLIC_URL=https://astro.doitme.link PRIVATE_URL=https://astro.doitme.link PUBLIC_PATH=/.nuxt nuxt generate --fail-on-error",
     "generate:prod": "cross-env NODE_ENV=production PUBLIC_URL=https://astro.doitme.link PRIVATE_URL=https://astro.doitme.link PUBLIC_PATH=/.nuxt nuxt generate --fail-on-error",
     "lint:prettier": "prettier --check .",

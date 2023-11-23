@@ -35,7 +35,10 @@ export default (axios) => ({
   getNatal(data) {
     return axios.post('api/astro/natal/v2', data)
   },
-
+  /* 星座搜索 */
+  getSearchData(params) {
+    return axios.get('api/astro/search', { params })
+  },
   getZodiacHoroscopeWeekly(params) {
     return axios.get('api/astro/horoscope/weekly', { params })
   },
