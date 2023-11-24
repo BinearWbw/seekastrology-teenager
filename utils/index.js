@@ -189,7 +189,7 @@ function formatBasicTime(h, m) {
 
 function formatSearch(time) {
   if (time == 0) return ''
-  const date = new Date(time)
+  const date = new Date(time * 1000)
 
   const year = date.getFullYear()
   const month = (date.getMonth() + 1).toString().padStart(2, '0')

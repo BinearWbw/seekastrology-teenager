@@ -23,7 +23,6 @@
             <nuxt-img
               :src="item?.icon"
               fit="cover"
-              width="152"
               height="101"
               :alt="item.name"
               loading="lazy"
@@ -34,12 +33,12 @@
             <p class="grey">
               {{ item.url }}
             </p>
-            <p class="heading">
-              {{ item.name }}
-            </p>
-            <p class="text" v-show="item.desc">
-              {{ item.desc }}
-            </p>
+            <div class="heading" v-html="highlightKeyword(item.name)"></div>
+            <div
+              class="text"
+              v-show="item.desc"
+              v-html="highlightKeyword(item.desc)"
+            ></div>
             <p class="grey" v-show="item.created_at">
               {{ $utils.formatSearch(item.created_at) }}
             </p>
@@ -53,9 +52,10 @@
             @change="getPagination"
           />
         </div>
+        <google-ad :id="'3000133706'" classNames="google_ad" />
       </div>
       <div class="recommend" v-else>
-        <google-ad :id="'1626224357'" classNames="google_ad" />
+        <google-ad :id="'3000133706'" classNames="google_ad" />
         <el-explore-more />
       </div>
     </div>
@@ -107,11 +107,19 @@ export default {
           this.nums = (end - start) / 1000
         })
     },
+    highlightKeyword(text) {
+      const pattern = new RegExp(`\\b(${this.searchName})\\b`, 'gi')
+      return text.replace(
+        pattern,
+        (match) => `<span class="crux">${match}</span>`
+      )
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:math';
 .init_search {
   .google_ad_top {
     width: 970px;
@@ -161,12 +169,10 @@ export default {
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.08);
         .img_i {
-          width: 152px;
-          height: 101px;
           flex-shrink: 0;
           > img {
-            width: 100%;
-            height: 100%;
+            max-width: 152px;
+            max-height: 101px;
             object-fit: cover;
           }
         }
@@ -174,9 +180,7 @@ export default {
           padding: 16px 32px;
           display: grid;
           gap: 8px;
-          .crux {
-            color: #ffda8b;
-          }
+
           .grey {
             color: rgba(255, 255, 255, 0.6);
             font-family: Rubik;
@@ -192,6 +196,9 @@ export default {
             font-style: normal;
             font-weight: 400;
             line-height: 30px;
+            :deep(.crux) {
+              color: #ffda8b !important;
+            }
           }
           .text {
             max-width: 700px;
@@ -204,6 +211,16 @@ export default {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            :deep(h1),
+            :deep(h2),
+            :deep(h3),
+            :deep(h4),
+            :deep(p) {
+              color: #fff;
+            }
+            :deep(.crux) {
+              color: #ffda8b !important;
+            }
           }
         }
       }
@@ -240,6 +257,147 @@ export default {
         }
         :deep(.ant-pagination-item-ellipsis) {
           color: #fff;
+        }
+      }
+      .google_ad {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 1500px) {
+  .init_search {
+    &_main {
+      width: 100%;
+      padding: 0 50px;
+    }
+  }
+}
+@media (max-width: 1050px) {
+  .init_search {
+    .google_ad_top {
+      width: 100%;
+      padding: 0 24px;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .init_search {
+    .google_ad_top {
+      width: 300 * $pr;
+      height: 67 * $pr;
+      margin: 16 * $pr auto 0;
+      padding: 0;
+    }
+    &_main {
+      width: 100%;
+      padding: 0 16 * $pr;
+      margin: 16 * $pr auto 32 * $pr;
+      .search_title {
+        .title {
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
+        }
+        .tips {
+          font-size: 16 * $pr;
+          line-height: 22 * $pr;
+          margin-top: 8 * $pr;
+        }
+      }
+      .recommend {
+        width: 100%;
+        margin-top: 24 * $pr;
+        .google_ad {
+          display: flex;
+          flex-direction: column;
+          width: 336 * $pr;
+          height: 297 * $pr;
+          margin: 0 auto 24 * $pr;
+        }
+      }
+      .result {
+        margin-top: 16 * $pr;
+        &_item {
+          width: 100%;
+          display: flex;
+          align-items: inherit;
+          padding: 8 * $pr;
+          margin-bottom: 16 * $pr;
+          border-radius: 8 * $pr;
+          .img_i {
+            flex-shrink: 0;
+            > img {
+              max-width: 72 * $pr;
+              max-height: auto;
+              object-fit: cover;
+            }
+          }
+          .link_i {
+            padding: 8 * $pr;
+            gap: 8 * $pr;
+            .crux {
+              color: #ffda8b;
+            }
+            .grey {
+              max-width: 250 * $pr;
+              font-size: 12 * $pr;
+              line-height: 16 * $pr;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+            .heading {
+              font-size: 18 * $pr;
+              line-height: 24 * $pr;
+            }
+            .text {
+              max-width: auto;
+              font-size: 12 * $pr;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 16 * $pr;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              white-space: inherit;
+            }
+          }
+        }
+        .pagination {
+          :deep(.ant-pagination-item) {
+            width: 38 * $pr !important;
+            height: 38 * $pr;
+            border-radius: 50%;
+            border: 1 * $pr solid rgba(255, 255, 255, 0.3);
+            > a {
+              font-family: Rubik;
+              font-size: 16 * $pr;
+              line-height: 38 * $pr;
+            }
+          }
+          :deep(.ant-pagination-item-active) {
+            background: #9747ff;
+            border: none;
+          }
+          :deep(.ant-pagination-prev),
+          :deep(.ant-pagination-next) {
+            display: none;
+          }
+          :deep(.ant-pagination-item-ellipsis) {
+            color: #fff;
+          }
+        }
+        .google_ad {
+          display: flex;
+          flex-direction: column;
+          width: 336 * $pr;
+          height: 297 * $pr;
+          margin: 16 * $pr auto;
         }
       }
     }

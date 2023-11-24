@@ -5,6 +5,9 @@
         <div class="dialog__main__top">
           <button class="close common__btn" @click="close"></button>
         </div>
+        <div class="search_menu">
+          <el-search-two></el-search-two>
+        </div>
         <div class="menu">
           <div class="href" v-for="(item, index) in menu" :key="index">
             <a
@@ -142,11 +145,17 @@ export default {
         background-size: contain;
       }
     }
+    .search_menu {
+      width: 100%;
+      height: 50px;
+      background-color: #000;
+      padding: 0 30px;
+    }
     .menu {
       width: 100%;
       overflow: hidden;
       background-color: #000;
-      padding: 0 0 30px;
+      padding: 16px 0 30px;
       .href {
         > a {
           width: 100%;
@@ -326,9 +335,14 @@ export default {
           height: 20 * $pr;
         }
       }
+      .search_menu {
+        width: 100%;
+        height: 50 * $pr;
+        padding: 0 16 * $pr;
+      }
       .menu {
         width: 100%;
-        padding: 0 0 30 * $pr;
+        padding: 16 * $pr 0 30 * $pr;
         .href {
           > a {
             width: 100%;

@@ -611,6 +611,16 @@ export default {
             width: 180px;
           }
         }
+        .search_icon {
+          .icon {
+            width: 30px;
+            height: 30px;
+            background-size: 18px;
+          }
+        }
+        .search_top {
+          top: 60px;
+        }
         .nav {
           &__item {
             img {
@@ -662,6 +672,12 @@ export default {
             width: 172 * $pr;
             height: 30 * $pr;
           }
+        }
+        .search_icon {
+          display: none;
+        }
+        .search_top {
+          display: none;
         }
         .menu {
           margin-left: 14 * $pr;
