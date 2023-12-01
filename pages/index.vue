@@ -20,7 +20,7 @@
         <home-your-choice></home-your-choice>
       </section>
       <section class="module explore">
-        <google-ad :id="'1626224357'" classNames="google_ad" />
+        <!-- <google-ad :id="'1626224357'" classNames="google_ad" /> -->
         <el-explore-more />
       </section>
       <section class="module tarot">

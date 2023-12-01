@@ -47,7 +47,11 @@
       <el-join-us class="joins"></el-join-us>
     </transition>
     <div class="google_line">
-      <google-ad classNames="google_ad" :id="'4184846228'" />
+      <google-ad
+        classNames="google_ad"
+        dataFullWidth="true"
+        :id="'4184846228'"
+      />
     </div>
     <transition name="fade">
       <el-lnformation></el-lnformation>

@@ -1,6 +1,10 @@
 <template>
   <div class="init_search">
-    <google-ad :id="'1626224357'" classNames="google_ad_top" />
+    <google-ad
+      :id="'1626224357'"
+      :dataFullWidth="'true'"
+      classNames="google_ad_top"
+    />
     <div class="init_search_main">
       <div class="search_title">
         <p class="title">

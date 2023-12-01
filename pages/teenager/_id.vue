@@ -46,7 +46,11 @@
         <el-join-us class="joins"></el-join-us>
       </transition>
       <div class="horoscope_more">
-        <google-ad classNames="google_ad" :id="'4184846228'" />
+        <google-ad
+          classNames="google_ad"
+          dataFullWidth="true"
+          :id="'4184846228'"
+        />
       </div>
     </div>
     <transition name="fade">

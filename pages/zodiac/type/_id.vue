@@ -1,6 +1,10 @@
 <template>
   <div class="details_content">
-    <google-ad :id="'8657229656'" classNames="google_ad_h5"></google-ad>
+    <google-ad
+      :id="'8657229656'"
+      :dataFullWidth="'true'"
+      classNames="google_ad_h5"
+    ></google-ad>
     <div class="details_type">
       <div class="details_type_main">
         <div class="pull_down">

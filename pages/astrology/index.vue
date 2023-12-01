@@ -45,7 +45,11 @@
               ></div>
             </transition>
           </div>
-          <google-ad classNames="google_ad" :id="'3521651188'"></google-ad>
+          <google-ad
+            classNames="google_ad"
+            :dataFullWidth="'true'"
+            :id="'3521651188'"
+          ></google-ad>
         </div>
       </div>
     </div>

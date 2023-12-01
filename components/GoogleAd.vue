@@ -9,6 +9,7 @@ export default {
   props: {
     classNames: String,
     id: String,
+    dataFullWidth: String,
   },
   data() {
     return {
@@ -33,7 +34,10 @@ export default {
         )
         insElement.setAttribute('data-ad-client', 'ca-pub-6430486603399192')
         insElement.setAttribute('data-ad-slot', `${this.id}`)
-        // insElement.setAttribute('data-full-width-responsive', 'true')
+        insElement.setAttribute(
+          'data-full-width-responsive',
+          `${this.dataFullWidth || false}`
+        )
         targetElement.appendChild(insElement)
         targetElement.appendChild(adScript)
         this.observer.unobserve(this.$refs.googleAdStyle)

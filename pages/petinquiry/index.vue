@@ -31,7 +31,7 @@
               <div class="teletext" v-html="newText"></div>
             </transition>
           </div>
-          <!-- <google-auto-ad classNames="google_ad" :id="'4184846228'" /> -->
+          <!-- <google-auto-ad classNames="google_ad" dataFullWidth="true" :id="'4184846228'" /> -->
         </div>
         <home-quizzes class="quizzes"></home-quizzes>
         <el-daily-horoscope></el-daily-horoscope>

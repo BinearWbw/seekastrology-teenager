@@ -1,6 +1,10 @@
 <template>
   <div class="zodiac_details">
-    <google-ad :id="'7918863055'" classNames="google_ad_h5" />
+    <google-ad
+      :id="'7918863055'"
+      :dataFullWidth="'true'"
+      classNames="google_ad_h5"
+    />
     <div class="zodiac_details_main">
       <div class="part_details">
         <div class="pull_down">
