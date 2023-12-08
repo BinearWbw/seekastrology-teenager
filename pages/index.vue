@@ -17,32 +17,78 @@
     <div class="home__main">
       <section class="module choice">
         <google-auto-ad :id="'1087831010'" classNames="google_ad_pc" />
-        <home-your-choice></home-your-choice>
+        <!-- <home-your-choice></home-your-choice> -->
+        <el-more-free></el-more-free>
       </section>
       <section class="module explore">
         <!-- <google-ad :id="'1626224357'" classNames="google_ad" /> -->
-        <el-explore-more />
+        <!-- <el-explore-more /> -->
+        <div class="collection">
+          <home-report class="report"></home-report>
+          <home-matching class="matching"></home-matching>
+          <home-pairing class="pairing"></home-pairing>
+        </div>
       </section>
-      <section class="module tarot">
-        <el-tarot-world />
+      <section class="module article">
+        <!-- <el-tarot-world /> -->
+        <div class="infor_module">
+          <home-infor-module
+            title="Article"
+            :inforData="articleData"
+          ></home-infor-module>
+          <home-infor-module
+            title="Video"
+            :inforData="videoData"
+          ></home-infor-module>
+          <home-infor-module
+            title="Quiz"
+            :inforData="quizData"
+          ></home-infor-module>
+        </div>
+
+        <div class="list_tabs">
+          <home-tabs :tabs="horroData" @click-selected="handleTabSelected">
+            <template>
+              <home-infor-module
+                v-if="selectedTabIndex === 0"
+                title="Article"
+                :inforData="articleData"
+              ></home-infor-module>
+              <home-infor-module
+                v-if="selectedTabIndex === 1"
+                title="Video"
+                :inforData="videoData"
+              ></home-infor-module>
+              <home-infor-module
+                v-if="selectedTabIndex === 2"
+                title="Quiz"
+                :inforData="quizData"
+              ></home-infor-module>
+            </template>
+          </home-tabs>
+        </div>
+
+        <google-ad :id="''" classNames="google_ad_article"></google-ad>
       </section>
       <section class="module quizzes">
-        <home-pop-articles></home-pop-articles>
+        <!-- <home-pop-articles></home-pop-articles> -->
+        <home-horoscopes></home-horoscopes>
       </section>
       <section class="module new_pop">
-        <home-quizzes></home-quizzes>
+        <!-- <home-quizzes></home-quizzes>
         <google-auto-ad
           classNames="google_ad"
           :id="'1626224357'"
-        ></google-auto-ad>
+        ></google-auto-ad> -->
+        <home-tarot></home-tarot>
       </section>
-      <transition name="fade">
+      <!-- <transition name="fade">
         <el-pairing></el-pairing>
-      </transition>
+      </transition> -->
     </div>
-    <section class="all_tarot">
+    <!-- <section class="all_tarot">
       <tarot-all-tarot></tarot-all-tarot>
-    </section>
+    </section> -->
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
@@ -52,11 +98,66 @@
 <script>
 export default {
   name: 'Home',
+  async asyncData({ error, $apiList, params }) {
+    try {
+      let [articleData, videoData, quizData] = await Promise.all([
+        $apiList.articles
+          .getNewsList({
+            origin: process.env.origin,
+            page: 1,
+            size: 3,
+            kind: 1,
+          })
+          .then((res) => {
+            return res.list || []
+          }),
+        $apiList.articles
+          .getNewsList({
+            origin: process.env.origin,
+            page: 1,
+            size: 3,
+            kind: 2,
+          })
+          .then((res) => {
+            return res.list || []
+          }),
+
+        $apiList.test
+          .getTestList({
+            origin: process.env.origin,
+            page: 18,
+            size: 3,
+          })
+          .then((res) => {
+            return res.list || []
+          }),
+      ])
+      return {
+        articleData,
+        videoData,
+        quizData,
+      }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.message })
+    }
+  },
   data() {
     return {
       isScrolled: false,
       isLoading: true,
       timer: null,
+      horroData: [
+        {
+          tabs: 'Article',
+        },
+        {
+          tabs: 'Video',
+        },
+        {
+          tabs: 'Quiz',
+        },
+      ],
+      selectedTabIndex: 0,
     }
   },
   mounted() {
@@ -124,6 +225,9 @@ export default {
         this.timer && clearTimeout(this.timer)
         this.timer = null
       }
+    },
+    handleTabSelected(index) {
+      this.selectedTabIndex = index
     },
   },
 }
@@ -298,20 +402,39 @@ export default {
         margin-top: 16px;
         .google_ad_pc {
           max-width: 1200px;
-          margin: 0 auto;
+          margin: 0 auto 24px;
           min-height: 305px;
         }
       }
       &.explore {
+        .collection {
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
         .google_ad {
           display: none;
         }
       }
-      &.new_pop {
-        .google_ad {
-          margin: 24px auto;
-          width: 1150px;
+      &.article {
+        .infor_module {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
         }
+        .list_tabs {
+          display: none;
+        }
+
+        .google_ad_article {
+          width: 970px;
+          height: 115px;
+          margin: 56px auto 0;
+        }
+      }
+      &.new_pop {
+        margin-bottom: 56px;
       }
     }
   }
@@ -323,6 +446,22 @@ export default {
   .home {
     &__main {
       width: 1200px;
+      .module {
+        &.explore {
+          .collection {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 456px);
+            justify-content: center;
+          }
+        }
+        &.article {
+          .infor_module {
+            grid-template-columns: repeat(2, 456px);
+            justify-content: center;
+          }
+        }
+      }
     }
   }
 }
@@ -337,11 +476,6 @@ export default {
             width: 100%;
           }
         }
-        &.new_pop {
-          .google_ad {
-            width: 90%;
-          }
-        }
       }
     }
   }
@@ -354,6 +488,19 @@ export default {
       .module {
         .google_ad {
           width: 100%;
+        }
+        &.explore {
+          .collection {
+            grid-template-columns: repeat(1, 456px);
+          }
+        }
+        &.article {
+          .infor_module {
+            grid-template-columns: repeat(1, 456px);
+          }
+          .google_ad_article {
+            width: 90%;
+          }
         }
         &.choice {
           .google_ad {
@@ -470,13 +617,29 @@ export default {
           }
         }
         &.explore {
-          margin-top: 16 * $pr;
-          .google_ad {
-            display: flex;
-            flex-direction: column;
+          margin-top: 32 * $pr;
+
+          .collection {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 32 * $pr;
+            .report {
+              display: none;
+            }
+          }
+        }
+        &.article {
+          .infor_module {
+            display: none;
+          }
+          .list_tabs {
+            display: block;
+          }
+          .google_ad_article {
             width: 336 * $pr;
             height: 297 * $pr;
-            margin: 0 auto 16 * $pr;
+            margin: 32 * $pr auto 0;
           }
         }
         &.quizzes {
@@ -486,9 +649,7 @@ export default {
           //   margin-top: 48 * $pr;
         }
         &.new_pop {
-          .google_ad {
-            display: none;
-          }
+          margin-bottom: 32 * $pr;
         }
       }
       :deep(.pairing_max_main .pairing_module) {

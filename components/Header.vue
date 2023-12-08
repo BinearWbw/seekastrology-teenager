@@ -223,11 +223,11 @@ export default {
                 },
               ],
             },
-            // {
-            //   title: 'Birth Chart',
-            //   path: '/birthchart/',
-            //   href: '/birthchart/',
-            // },
+            {
+              title: 'Birth Chart',
+              path: '/birthchart/',
+              href: '/birthchart/',
+            },
             {
               title: 'Parenting',
               path: '/parenting/',

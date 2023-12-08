@@ -156,6 +156,7 @@ export default {
   },
   mounted() {
     const dataDesc = this.$refs.dataDesc
+    if (!dataDesc) return
     const h2Element = dataDesc.querySelector('h2')
     if (dataDesc && h2Element) {
       const adContainer = document.createElement('div')
