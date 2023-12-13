@@ -63,7 +63,7 @@
               <p>Welcome to Tarot Chatbot! ✨</p>
             </div>
             <div class="min_right">
-              <a :href="`/tarot/`">Try Now</a>
+              <a :href="`/tarot/${getCurrentRoute}`">Try Now</a>
             </div>
           </div>
         </div>

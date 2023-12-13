@@ -10,7 +10,7 @@
           :class="`${item.name}`"
           v-show="isHorroscopePage(index)"
         >
-          <a :href="`${item.path}`" class="tag_list_aos">
+          <a :href="`${item.path}${getCurrentRoute}`" class="tag_list_aos">
             <div class="tag_list_aos_round">
               <img :src="item.imgUrl" alt="item.name" />
             </div>
@@ -211,6 +211,11 @@ export default {
       if (isPet || isPar || isTeen) {
         this.moreData.splice(0, 4) // 清除指定运势
       }
+    },
+  },
+  computed: {
+    getCurrentRoute() {
+      return this.$route.path === '/' ? '?from=home' : ''
     },
   },
 }

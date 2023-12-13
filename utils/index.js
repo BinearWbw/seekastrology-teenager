@@ -130,7 +130,8 @@ const horoscopeFormatDate = (type = 'd') => {
     case 'm':
       return months[month] + ', ' + year
     case 'y':
-      return year
+      //   return year
+      return '2024'
     default:
       return year
   }

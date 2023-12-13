@@ -472,6 +472,10 @@ export default {
                 this.registerEmailValidateStatus = 'error'
                 this.errorMsg = `<span>your email has been registered, <a>login now</a></span>`
               } else {
+                dataLayer.push({
+                  event: 'signUpSuccess',
+                })
+
                 this.$store.commit('SIGN_SUCCESS', res.email)
                 this.$eventBus.$emit('emails', res.email)
                 this.$emit('choce')

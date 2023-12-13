@@ -387,6 +387,9 @@ export default {
             this.$store.commit('UPDATE_USERSUB', [])
           } else {
             this.$store.commit('UPDATE_USERSUB', res)
+            dataLayer.push({
+              event: 'subscribeCurrentSuccess',
+            })
             // 提示通知
             this.$notification.open({
               message: 'Subscription',

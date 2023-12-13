@@ -33,7 +33,6 @@
                     <div class="format_date">
                       {{ $utils.horoscopeFormatDate(currentTime) }}
                     </div>
-
                     <div
                       class="texts"
                       :class="{ texts_more: openExpand }"
@@ -158,7 +157,7 @@ export default {
           type: 'm',
         },
         {
-          tabs: '2023',
+          tabs: '2024',
           type: 'y',
         },
       ],

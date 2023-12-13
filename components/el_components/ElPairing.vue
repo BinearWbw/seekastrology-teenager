@@ -118,8 +118,12 @@ export default {
     getStartPairingEl() {
       sessionStorage.setItem('genderList', JSON.stringify(this.genderList))
       if (sessionStorage.getItem('genderList'))
-        window.changePageUrl = `/astrology/`
-      window.location.href = `/astrology/`
+        window.changePageUrl = `/astrology/${
+          this.$route.path === '/' ? '?from=home' : ''
+        }`
+      window.location.href = `/astrology/${
+        this.$route.path === '/' ? '?from=home' : ''
+      }`
     },
   },
 }
