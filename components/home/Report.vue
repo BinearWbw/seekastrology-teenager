@@ -6,7 +6,9 @@
         Discover the key to your life path & personality
       </div>
       <div class="linkmain">
-        <a href="/birthchart/" class="link">CREATE CHART</a>
+        <a :href="`/birthchart/${getCurrentRoute}`" class="link"
+          >CREATE CHART</a
+        >
       </div>
       <div class="imgin">
         <div class="imgin_imgs"></div>
@@ -16,7 +18,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    getCurrentRoute() {
+      return this.$route.path === '/' ? '?from=home' : ''
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

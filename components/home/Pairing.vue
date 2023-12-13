@@ -113,11 +113,11 @@ export default {
       if (this.genderList.males && this.genderList.females) {
         sessionStorage.setItem('genderList', JSON.stringify(this.genderList))
         if (sessionStorage.getItem('genderList'))
-          window.changePageUrl = `/astrology/`
-        window.location.href = `/astrology/`
+          window.changePageUrl = `/astrology/?from=home`
+        window.location.href = `/astrology/?from=home`
       } else if (!this.genderList.males && !this.genderList.females) {
-        window.changePageUrl = `/astrology/`
-        window.location.href = `/astrology/`
+        window.changePageUrl = `/astrology/?from=home`
+        window.location.href = `/astrology/?from=home`
       } else {
         // 提示通知
         this.$notification.open({

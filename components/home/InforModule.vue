@@ -8,7 +8,7 @@
           :href="`${getRouteLink}${item.name
             .trim()
             .replace(/[^\w\d]/g, '-')
-            .toLowerCase()}-${item.id}/`"
+            .toLowerCase()}-${item.id}/${getCurrentRoute}`"
           v-for="(item, index) in inforData"
           :key="index"
         >
@@ -48,6 +48,9 @@ export default {
   computed: {
     getRouteLink() {
       return this.title == 'Quiz' ? '/test/details/' : '/resources/details/'
+    },
+    getCurrentRoute() {
+      return this.$route.path === '/' ? '?from=home' : ''
     },
   },
 }
