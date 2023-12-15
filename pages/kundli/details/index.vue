@@ -10,21 +10,39 @@
       <div class="content">
         <p class="title">Kundli Matching Report</p>
         <div class="love_conjugate">
-          <div class="duo">Baibaili</div>
+          <div class="duo boys">{{ kundliBoth?.m_detail.name || '--' }}</div>
           <div class="love">
             <div class="numbers">26.3</div>
           </div>
-          <div class="duo">Baibaili</div>
+          <div class="duo girls">{{ kundliBoth?.f_detail.name || '--' }}</div>
         </div>
         <div class="bg_tabs">
           <div class="tabs_lists">
             <div class="tabs_lists_title">
               <i class="boys"></i>Basic Details
             </div>
-            <div class="item_list" v-for="(item, index) in boys" :key="index">
-              <div class="item_list_one">{{ item.name }}</div>
+            <div class="item_list">
+              <div class="item_list_one">Name</div>
               <div class="item_list_two">
-                {{ item.name_i || '--' }}
+                {{ kundliBoth?.m_detail.name || '--' }}
+              </div>
+            </div>
+            <div class="item_list">
+              <div class="item_list_one">Birth Date & Time</div>
+              <div class="item_list_two">
+                {{ kundliBoth?.m_detail.year || '--' }}
+              </div>
+            </div>
+            <div class="item_list">
+              <div class="item_list_one">Birth Place</div>
+              <div class="item_list_two">
+                {{ kundliBoth?.m_detail.place || '--' }}
+              </div>
+            </div>
+            <div class="item_list">
+              <div class="item_list_one">Janam Rashi</div>
+              <div class="item_list_two">
+                {{ sign[kundliData?.manglik.m_moon_sign] || '--' }}
               </div>
             </div>
           </div>
@@ -32,10 +50,28 @@
             <div class="tabs_lists_title">
               <i class="girls"></i>Basic Details
             </div>
-            <div class="item_list" v-for="(item, index) in boys" :key="index">
-              <div class="item_list_one">{{ item.name }}</div>
+            <div class="item_list">
+              <div class="item_list_one">Name</div>
               <div class="item_list_two">
-                {{ item.name_i || '--' }}
+                {{ kundliBoth?.f_detail.name || '--' }}
+              </div>
+            </div>
+            <div class="item_list">
+              <div class="item_list_one">Birth Date & Time</div>
+              <div class="item_list_two">
+                {{ kundliBoth?.f_detail.year || '--' }}
+              </div>
+            </div>
+            <div class="item_list">
+              <div class="item_list_one">Birth Place</div>
+              <div class="item_list_two">
+                {{ kundliBoth?.f_detail.place || '--' }}
+              </div>
+            </div>
+            <div class="item_list">
+              <div class="item_list_one">Janam Rashi</div>
+              <div class="item_list_two">
+                {{ sign[kundliData?.manglik.f_moon_sign] || '--' }}
               </div>
             </div>
           </div>
@@ -128,6 +164,9 @@
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading v-if="!kundliBoth"></el-loading>
+    </transition>
   </div>
 </template>
 
@@ -141,8 +180,33 @@ export default {
         { name: 'Birth Place', name_i: 'New Delhi, Delhi, India' },
         { name: 'Janam Rashi', name_i: 'Aries' },
       ],
+      sign: [
+        ' ',
+        'Aries',
+        'Taurus',
+        'Gemini',
+        'Cancer',
+        'Leo',
+        'Virgo',
+        'Libra',
+        'Scorpio',
+        'Sagittarius',
+        'Capricorn',
+        'Aquarius',
+        'Pisces',
+      ],
+      kundliBoth: null,
+      kundliData: null,
     }
   },
+  mounted() {
+    if (process.client) {
+      this.kundliBoth = JSON.parse(localStorage.getItem('kundliBoth'))
+      this.kundliData = JSON.parse(localStorage.getItem('kundli'))
+      console.log(this.kundliBoth, this.kundliData)
+    }
+  },
+  methods: {},
 }
 </script>
 
@@ -183,6 +247,7 @@ export default {
       width: 664px;
       height: 664px;
       background: url('~/assets/img/kundli/kundli_sun.png') no-repeat;
+      background-size: cover;
       mix-blend-mode: color-burn;
       z-index: -1;
       cursor: pointer;
@@ -227,13 +292,20 @@ export default {
         justify-content: center;
         align-items: center;
         .duo {
+          flex: 1;
           color: #fff;
-          text-align: right;
+
           font-family: Rubik;
           font-size: 22px;
           font-style: normal;
           font-weight: 400;
           line-height: 30px;
+        }
+        .boys {
+          text-align: right;
+        }
+        .girls {
+          text-align: left;
         }
         .love {
           width: 220px;
@@ -434,5 +506,145 @@ export default {
 
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
+  .kund {
+    padding: 0 16 * $pr 32 * $pr;
+    .google_ad_top {
+      width: 300 * $pr;
+      height: 117 * $pr;
+      margin: 0 auto 16 * $pr;
+    }
+    &_main {
+      box-shadow: 0px 8 * $pr 26 * $pr 0px rgba(0, 0, 0, 0.25);
+      position: relative;
+      padding: 60 * $pr 16 * $pr 32 * $pr;
+      .logos {
+        top: 16 * $pr;
+        left: 16 * $pr;
+        width: 112 * $pr;
+        height: 20 * $pr;
+      }
+      .bg {
+        width: 329 * $pr;
+        height: 329 * $pr;
+      }
+      .icon_bg {
+        height: 1450 * $pr;
+        padding-top: 205 * $pr;
+        i {
+          width: 343 * $pr;
+          height: 658 * $pr;
+          filter: blur(241 * $pr);
+        }
+      }
+      .content {
+        width: 100%;
+        display: grid;
+        gap: 24 * $pr;
+        .title {
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
+        }
+        .love_conjugate {
+          .duo {
+            font-size: 16 * $pr;
+            line-height: 22 * $pr;
+          }
+          .love {
+            width: 109 * $pr;
+            height: 88 * $pr;
+            margin: 0 16 * $pr;
+            .numbers {
+              font-size: 22 * $pr;
+              line-height: 30 * $pr;
+            }
+          }
+        }
+        .bg_tabs {
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+          gap: 24 * $pr;
+          .tabs_lists {
+            width: 100%;
+            &_title {
+              font-size: 14 * $pr;
+              line-height: 22 * $pr;
+              padding: 3 * $pr 8 * $pr;
+            }
+            .item_list {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              padding-top: 1 * $pr;
+              gap: 1 * $pr 1 * $pr;
+              font-size: 14 * $pr;
+              line-height: 22 * $pr;
+              &_one {
+                padding: 3 * $pr 8 * $pr;
+              }
+              &_two {
+                padding: 3 * $pr 8 * $pr;
+              }
+            }
+            .avakhada {
+              padding: 3 * $pr 8 * $pr;
+            }
+          }
+          .boys {
+            width: 16 * $pr;
+            height: 16 * $pr;
+            margin-right: 8 * $pr;
+          }
+          .girls {
+            width: 16 * $pr;
+            height: 16 * $pr;
+            margin-right: 8 * $pr;
+          }
+        }
+        .tips {
+          border-radius: 16 * $pr;
+          font-size: 14 * $pr;
+          line-height: 22 * $pr;
+          padding: 16 * $pr 24 * $pr;
+        }
+        .sign_table {
+          .titles {
+            font-size: 18 * $pr;
+            line-height: 30 * $pr;
+          }
+          .planet {
+            .table_main {
+              width: 1030 * $pr;
+              border-collapse: separate;
+              border-spacing: 1 * $pr 1 * $pr;
+              .theads {
+                tr {
+                  th {
+                    padding: 3 * $pr 8 * $pr;
+                    font-size: 14 * $pr;
+                    line-height: 22 * $pr;
+                    min-width: 70 * $pr;
+                  }
+                }
+              }
+              .tbodys {
+                tr {
+                  td {
+                    padding: 3 * $pr 8 * $pr;
+                    font-size: 14 * $pr;
+                    line-height: 22 * $pr;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .more {
+          .title {
+            font-size: 22 * $pr;
+            line-height: 30 * $pr;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

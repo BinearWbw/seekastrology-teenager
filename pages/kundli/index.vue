@@ -20,15 +20,23 @@
           <div class="fromor_item">
             <div class="boys">
               <p>Enter Boy's Details</p>
-              <el-kundli-from></el-kundli-from>
+              <el-kundli-from
+                ref="kundliFormRefMale"
+                @submitform="getMaleData"
+                sex="Male"
+              ></el-kundli-from>
             </div>
             <div class="girls">
               <p>Enter Girl's Details</p>
-              <el-kundli-from></el-kundli-from>
+              <el-kundli-from
+                ref="kundliFormRefFemale"
+                @submitform="getFemaleData"
+                sex="Female"
+              ></el-kundli-from>
             </div>
           </div>
           <div class="alink">
-            <a href="/kundli/details/" class="a">Match Your Kundli</a>
+            <a class="a" @click="submitKundli">Match Your Kundli</a>
           </div>
         </div>
         <div class="dasama">
@@ -90,7 +98,54 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      m_detail: null,
+      f_detail: null,
+    }
+  },
+  mounted() {},
+  methods: {
+    // 提交信息-获取子组件填写内容
+    submitKundli() {
+      const kundliForm = this.$refs.kundliFormRefMale
+      const kundliFormFemale = this.$refs.kundliFormRefFemale
+      if (kundliForm && kundliFormFemale) {
+        kundliForm.submitForm()
+        kundliFormFemale.submitForm()
+      }
+      if (this.f_detail && this.m_detail) {
+        this.$apiList.home
+          .getKundliMaking({
+            f_detail: this.f_detail,
+            m_detail: this.m_detail,
+          })
+          .then((res) => {
+            localStorage.setItem(
+              'kundli',
+              JSON.stringify(res) // 更新用户匹配数据
+            )
+            localStorage.setItem(
+              'kundliBoth',
+              JSON.stringify({
+                f_detail: this.f_detail,
+                m_detail: this.m_detail,
+              }) // 更新用户存储信息
+            )
+            this.m_detail = null
+            this.f_detail = null
+          })
+      }
+    },
+    getMaleData(value) {
+      this.m_detail = value
+    },
+    getFemaleData(value) {
+      this.f_detail = value
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

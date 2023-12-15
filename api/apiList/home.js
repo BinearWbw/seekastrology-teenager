@@ -42,4 +42,9 @@ export default (axios) => ({
   getZodiacHoroscopeWeekly(params) {
     return axios.get('api/astro/horoscope/weekly', { params })
   },
+
+  /* 昆德里匹配 */
+  getKundliMaking(data) {
+    return axios.post('api/match/making', data)
+  },
 })

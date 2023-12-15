@@ -2,9 +2,13 @@
   <div class="from_kund">
     <div class="from_kund_main">
       <client-only>
-        <a-form-model ref="birthFormMini" :model="birthFormMini">
+        <a-form-model
+          ref="birthFormKundli"
+          :model="birthFormMini"
+          :rules="rulesKundliForm"
+        >
           <div class="mini_name">
-            <a-form-model-item>
+            <a-form-model-item prop="name">
               <a-input
                 v-model="birthFormMini.name"
                 allow-clear
@@ -13,50 +17,51 @@
             </a-form-model-item>
           </div>
           <div class="mini_time">
-            <a-form-model-item>
+            <a-form-model-item prop="year">
               <a-input
                 v-model="birthFormMini.year"
                 placeholder="Year"
                 type="number"
               />
             </a-form-model-item>
-            <a-form-model-item>
+            <a-form-model-item prop="month">
               <a-input
                 v-model="birthFormMini.month"
                 placeholder="Mon"
                 type="number"
               />
             </a-form-model-item>
-            <a-form-model-item>
+            <a-form-model-item prop="day">
               <a-input
                 v-model="birthFormMini.day"
                 placeholder="Day"
                 type="number"
               />
             </a-form-model-item>
-            <a-form-model-item>
+            <a-form-model-item prop="hour">
               <a-input
                 v-model="birthFormMini.hour"
                 placeholder="Hour"
                 type="number"
               />
             </a-form-model-item>
-            <a-form-model-item>
+            <a-form-model-item prop="min">
               <a-input
                 v-model="birthFormMini.min"
                 placeholder="Min"
                 type="number"
               />
             </a-form-model-item>
-            <a-form-model-item>
-              <a-select v-model="birthFormMini.mol" placeholder="PM">
-                <a-select-option value="AM"> AM </a-select-option>
-                <a-select-option value="PM"> PM </a-select-option>
-              </a-select>
+            <a-form-model-item prop="sec">
+              <a-input
+                v-model="birthFormMini.sec"
+                placeholder="Sec"
+                type="number"
+              />
             </a-form-model-item>
           </div>
           <div class="mini_place">
-            <a-form-model-item>
+            <a-form-model-item prop="place">
               <a-select
                 show-search
                 placeholder="Birth Place"
@@ -87,22 +92,113 @@
 
 <script>
 export default {
+  props: ['sex'],
   data() {
     return {
       birthFormMini: {
         name: '',
-        gender: undefined,
         year: '',
         month: '',
         day: '',
         hour: '',
         min: '',
-        mol: undefined,
+        sec: '',
         place: '',
+      },
+      rulesKundliForm: {
+        name: [
+          {
+            required: true,
+            message: 'Please enter name',
+            trigger: 'change',
+          },
+        ],
+        year: [
+          {
+            required: true,
+            message: 'Please enter year',
+            trigger: 'change',
+          },
+          {
+            max: 4,
+            message: 'Year is too long',
+            trigger: 'blur',
+          },
+        ],
+        month: [
+          {
+            required: true,
+            message: 'Please enter month',
+            trigger: 'change',
+          },
+          {
+            max: 2,
+            message: 'Month is too long',
+            trigger: 'blur',
+          },
+        ],
+        day: [
+          {
+            required: true,
+            message: 'Please enter day',
+            trigger: 'change',
+          },
+          {
+            max: 2,
+            message: 'Daily is too long',
+            trigger: 'blur',
+          },
+        ],
+        hour: [
+          {
+            required: true,
+            message: 'Please enter hour',
+            trigger: 'change',
+          },
+          {
+            max: 2,
+            message: 'Hour is too long',
+            trigger: 'blur',
+          },
+        ],
+        min: [
+          {
+            required: true,
+            message: 'Please enter min',
+            trigger: 'change',
+          },
+          {
+            max: 2,
+            message: 'Minute is too long',
+            trigger: 'blur',
+          },
+        ],
+        sec: [
+          {
+            required: true,
+            message: 'Please enter sec',
+            trigger: 'change',
+          },
+          {
+            max: 2,
+            message: 'Seconds is too long',
+            trigger: 'blur',
+          },
+        ],
+        place: [
+          {
+            required: true,
+            message: 'Please enter Birth place',
+            trigger: 'change',
+          },
+        ],
       },
       fetching: false,
       cityData: [],
     }
+  },
+  mounted() {
+    // console.log('sex', this.sex)
   },
   methods: {
     // 城市搜索
@@ -116,9 +212,29 @@ export default {
     },
     cityChange(value, option) {
       this.birthFormMini.place = option.data.attrs.channel
-      //   console.log('选择的数据birthForm后后', this.birthFormMini)
       //   this.cityData = [] // 清除搜索的城市内容
       this.fetching = false
+    },
+    // 输入内容验证
+    submitForm() {
+      this.$refs.birthFormKundli.validate((valid) => {
+        if (valid) {
+          const dataForm = {
+            name: this.birthFormMini.name,
+            lat: String(this.birthFormMini.place.lat),
+            lon: String(this.birthFormMini.place.lng),
+            place: this.birthFormMini.place.name,
+            gender: this.sex,
+          }
+          // 转换为数字
+          for (const [key, value] of Object.entries(this.birthFormMini)) {
+            if (!isNaN(parseInt(value))) {
+              dataForm[key] = parseInt(value)
+            }
+          }
+          this.$emit('submitform', dataForm)
+        }
+      })
     },
   },
 }
@@ -206,6 +322,17 @@ export default {
           font-weight: 400;
         }
       }
+    }
+    :deep(.has-error .ant-input),
+    :deep(.has-error .ant-select-selection) {
+      border-color: #f5222d;
+      background: rgba(0, 0, 0, 0.2);
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+    :deep(.ant-form-explain) {
+      padding-left: 8px;
     }
   }
 }
