@@ -493,7 +493,7 @@ export default {
                   m_detail: m_detail,
                 }) // 更新用户存储信息
               )
-              window.location.href = '/kundli/details/'
+              window.location.href = '/kundli/details/?from=home'
             })
         }
       })
