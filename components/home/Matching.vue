@@ -2,12 +2,20 @@
   <div class="matching">
     <div class="matching_main">
       <div class="titles">Kundli Matching</div>
-      <p class="text">Enter Boy's Details (Enter girl's detail on next page)</p>
-      <div class="forms">
+      <!-- 男生信息 -->
+      <div class="forms boys" v-if="isform">
+        <p class="text">
+          Enter Boy's Details (Enter girl's detail on next page)
+        </p>
         <client-only>
-          <a-form-model ref="birthFormMini" :model="birthFormMini">
+          <a-form-model
+            ref="birthFormMini"
+            :model="birthFormMini"
+            :rules="rulesMaleForm"
+            key="1"
+          >
             <div class="mini_name">
-              <a-form-model-item>
+              <a-form-model-item prop="name">
                 <a-input
                   v-model="birthFormMini.name"
                   allow-clear
@@ -16,53 +24,78 @@
               </a-form-model-item>
             </div>
             <div class="mini_time">
-              <a-form-model-item>
-                <a-input
-                  v-model="birthFormMini.year"
+              <a-form-model-item prop="year">
+                <a-select
                   placeholder="Year"
-                  type="number"
-                />
+                  style="width: 100%"
+                  @change="yearChange"
+                >
+                  <a-select-option v-for="i in years" :key="i">
+                    {{ i }}
+                  </a-select-option>
+                </a-select>
               </a-form-model-item>
-              <a-form-model-item>
-                <a-input
-                  v-model="birthFormMini.month"
-                  placeholder="Month"
-                  type="number"
-                />
+              <a-form-model-item prop="month">
+                <a-select
+                  placeholder="Mon"
+                  style="width: 100%"
+                  @change="monthChange"
+                >
+                  <a-select-option v-for="i in months" :key="i.li">
+                    {{ i.name }}
+                  </a-select-option>
+                </a-select>
               </a-form-model-item>
-              <a-form-model-item>
-                <a-input
-                  v-model="birthFormMini.day"
-                  placeholder="Date"
-                  type="number"
-                />
+              <a-form-model-item prop="day">
+                <a-select
+                  placeholder="Day"
+                  style="width: 100%"
+                  @change="daysChange"
+                >
+                  <a-select-option v-for="l in 31" :key="l">
+                    {{ l }}
+                  </a-select-option>
+                </a-select>
               </a-form-model-item>
             </div>
             <div class="mini_time">
-              <a-form-model-item>
-                <a-input
-                  v-model="birthFormMini.hour"
+              <a-form-model-item prop="hour">
+                <a-select
                   placeholder="Hour"
-                  type="number"
-                />
+                  style="width: 100%"
+                  @change="hourChange"
+                >
+                  <a-select-option v-for="l in hours" :key="l">
+                    {{ l }}
+                  </a-select-option>
+                </a-select>
               </a-form-model-item>
-              <a-form-model-item>
-                <a-input
-                  v-model="birthFormMini.min"
-                  placeholder="Minute"
-                  type="number"
-                />
+              <a-form-model-item prop="min">
+                <a-select
+                  placeholder="Min"
+                  style="width: 100%"
+                  @change="minutesChange"
+                >
+                  <a-select-option v-for="l in minutes" :key="l">
+                    {{ l }}
+                  </a-select-option>
+                </a-select>
               </a-form-model-item>
-              <a-form-model-item>
-                <a-select v-model="birthFormMini.mol" placeholder="PM">
-                  <a-select-option value="AM"> AM </a-select-option>
-                  <a-select-option value="PM"> PM </a-select-option>
+              <a-form-model-item prop="sec">
+                <a-select
+                  placeholder="Sec"
+                  style="width: 100%"
+                  @change="secondChange"
+                >
+                  <a-select-option v-for="s in minutes" :key="s">
+                    {{ s }}
+                  </a-select-option>
                 </a-select>
               </a-form-model-item>
             </div>
             <div class="mini_place">
               <div class="place">
-                <a-form-model-item>
+                <a-form-model-item prop="place">
                   <a-select
                     show-search
                     placeholder="Birth Place"
@@ -90,42 +123,267 @@
                 </a-form-model-item>
               </div>
               <div class="button_a">
-                <a href="">CONTINUE</a>
+                <a @click="setContinue">CONTINUE</a>
+              </div>
+            </div>
+          </a-form-model>
+        </client-only>
+      </div>
+      <!-- 女生信息 -->
+      <div class="forms girls" v-else>
+        <p class="text">Enter Girl's Details</p>
+        <client-only>
+          <a-form-model
+            ref="femaleFormMini"
+            :model="femaleFormMini"
+            :rules="rulesMaleForm"
+            key="2"
+          >
+            <div class="mini_name">
+              <a-form-model-item prop="name">
+                <a-input
+                  v-model="femaleFormMini.name"
+                  allow-clear
+                  placeholder="Name"
+                />
+              </a-form-model-item>
+            </div>
+            <div class="mini_time">
+              <a-form-model-item prop="year">
+                <a-select
+                  placeholder="Year"
+                  style="width: 100%"
+                  @change="girlYearChange"
+                >
+                  <a-select-option v-for="i in years" :key="i">
+                    {{ i }}
+                  </a-select-option>
+                </a-select>
+              </a-form-model-item>
+              <a-form-model-item prop="month">
+                <a-select
+                  placeholder="Mon"
+                  style="width: 100%"
+                  @change="girlMonthChange"
+                >
+                  <a-select-option v-for="i in months" :key="i.li">
+                    {{ i.name }}
+                  </a-select-option>
+                </a-select>
+              </a-form-model-item>
+              <a-form-model-item prop="day">
+                <a-select
+                  placeholder="Day"
+                  style="width: 100%"
+                  @change="girlDaysChange"
+                >
+                  <a-select-option v-for="l in 31" :key="l">
+                    {{ l }}
+                  </a-select-option>
+                </a-select>
+              </a-form-model-item>
+            </div>
+            <div class="mini_time">
+              <a-form-model-item prop="hour">
+                <a-select
+                  placeholder="Hour"
+                  style="width: 100%"
+                  @change="girlHourChange"
+                >
+                  <a-select-option v-for="l in hours" :key="l">
+                    {{ l }}
+                  </a-select-option>
+                </a-select>
+              </a-form-model-item>
+              <a-form-model-item prop="min">
+                <a-select
+                  placeholder="Min"
+                  style="width: 100%"
+                  @change="girlMinutesChange"
+                >
+                  <a-select-option v-for="l in minutes" :key="l">
+                    {{ l }}
+                  </a-select-option>
+                </a-select>
+              </a-form-model-item>
+              <a-form-model-item prop="sec">
+                <a-select
+                  placeholder="Sec"
+                  style="width: 100%"
+                  @change="girlSecondChange"
+                >
+                  <a-select-option v-for="s in minutes" :key="s">
+                    {{ s }}
+                  </a-select-option>
+                </a-select>
+              </a-form-model-item>
+            </div>
+            <div class="mini_place">
+              <div class="place">
+                <a-form-model-item prop="place">
+                  <a-select
+                    show-search
+                    placeholder="Birth Place"
+                    style="width: 100%"
+                    :filter-option="false"
+                    :not-found-content="fetching ? undefined : null"
+                    :default-active-first-option="false"
+                    @search="girlFetchCity"
+                    @change="girlCityChange"
+                  >
+                    <a-spin
+                      v-if="fetching"
+                      slot="notFoundContent"
+                      size="small"
+                    />
+                    <a-select-option
+                      v-for="d in femaleCityData"
+                      :key="d.name"
+                      :channel="d"
+                      :value="d.name"
+                    >
+                      {{ d.name }}
+                    </a-select-option>
+                  </a-select>
+                </a-form-model-item>
+              </div>
+              <div class="button_a">
+                <a @click="retrieveData">OBTAIN</a>
               </div>
             </div>
           </a-form-model>
         </client-only>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading-mini v-if="isLoading"></el-loading-mini>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   data() {
+    const currentYear = new Date().getFullYear()
+    const startYear = 1928
+    const years = Array.from(
+      { length: currentYear - startYear + 1 },
+      (_, index) => startYear + index
+    )
+    const hours = Array.from({ length: 24 }, (_, index) => index)
+    const minutes = Array.from({ length: 60 }, (_, index) => index)
     return {
+      years,
+      months: [
+        { name: 'Jan', li: 1 },
+        { name: 'Feb', li: 2 },
+        { name: 'Mar', li: 3 },
+        { name: 'Apr', li: 4 },
+        { name: 'May', li: 5 },
+        { name: 'Jun', li: 6 },
+        { name: 'Jul', li: 7 },
+        { name: 'Aug', li: 8 },
+        { name: 'Sep', li: 9 },
+        { name: 'Oct', li: 10 },
+        { name: 'Nov', li: 11 },
+        { name: 'Dec', li: 12 },
+      ],
+      hours,
+      minutes,
       birthFormMini: {
         name: '',
-        gender: undefined,
+        gender: 'Male',
         year: '',
         month: '',
         day: '',
         hour: '',
         min: '',
-        mol: undefined,
+        sec: '',
+        place: '',
+      },
+      femaleFormMini: {
+        name: '',
+        gender: 'Female',
+        year: '',
+        month: '',
+        day: '',
+        hour: '',
+        min: '',
+        sec: '',
         place: '',
       },
       fetching: false,
       cityData: [],
+      femaleCityData: [],
+      rulesMaleForm: {
+        name: [
+          {
+            required: true,
+            message: 'Please enter name',
+            trigger: 'change',
+          },
+        ],
+        year: [
+          {
+            required: true,
+            message: 'Select',
+            trigger: 'change',
+          },
+        ],
+        month: [
+          {
+            required: true,
+            message: 'Select',
+            trigger: 'change',
+          },
+        ],
+        day: [
+          {
+            required: true,
+            message: 'Select',
+            trigger: 'change',
+          },
+        ],
+        hour: [
+          {
+            required: true,
+            message: 'Select',
+            trigger: 'change',
+          },
+        ],
+        min: [
+          {
+            required: true,
+            message: 'Select',
+            trigger: 'change',
+          },
+        ],
+        sec: [
+          {
+            required: true,
+            message: 'Select',
+            trigger: 'change',
+          },
+        ],
+        place: [
+          {
+            required: true,
+            message: 'Birth place',
+            trigger: 'change',
+          },
+        ],
+      },
+      isLoading: false,
+      isform: true,
     }
   },
   methods: {
-    // 城市搜索
+    // 男 - 信息
     fetchCity(value) {
       this.fetching = true
       this.cityData = []
-      this.$apiList.home.getCity({ name: value }).then((res) => {
-        this.cityData = res.items
+      this.$apiList.home.getKundliCity({ name: value }).then((res) => {
+        this.cityData = res.data
         this.fetching = false
       })
     },
@@ -135,6 +393,111 @@ export default {
       //   this.cityData = [] // 清除搜索的城市内容
       this.fetching = false
     },
+    yearChange(value) {
+      this.birthFormMini.year = value
+    },
+    monthChange(value) {
+      this.birthFormMini.month = value
+    },
+    daysChange(value) {
+      this.birthFormMini.day = value
+    },
+    hourChange(value) {
+      this.birthFormMini.hour = value
+    },
+    minutesChange(value) {
+      this.birthFormMini.min = value
+    },
+    secondChange(value) {
+      this.birthFormMini.sec = value
+    },
+
+    // 女 - 信息
+    girlFetchCity(value) {
+      this.fetching = true
+      this.femaleCityData = []
+      this.$apiList.home.getKundliCity({ name: value }).then((res) => {
+        this.femaleCityData = res.data
+        this.fetching = false
+      })
+    },
+    girlCityChange(value, option) {
+      this.femaleFormMini.place = option.data.attrs.channel
+      //   console.log('选择的数据birthForm后后', this.FemaleFormMini)
+      //   this.cityData = [] // 清除搜索的城市内容
+      this.fetching = false
+    },
+    girlYearChange(value) {
+      this.femaleFormMini.year = value
+    },
+    girlMonthChange(value) {
+      this.femaleFormMini.month = value
+    },
+    girlDaysChange(value) {
+      this.femaleFormMini.day = value
+    },
+    girlHourChange(value) {
+      this.femaleFormMini.hour = value
+    },
+    girlMinutesChange(value) {
+      this.femaleFormMini.min = value
+    },
+    girlSecondChange(value) {
+      this.femaleFormMini.sec = value
+    },
+
+    setContinue() {
+      this.$refs.birthFormMini.validate((valid) => {
+        if (valid) {
+          this.isLoading = true
+          setTimeout(() => {
+            this.isLoading = false
+            this.isform = false
+          }, 1000)
+        }
+      })
+    },
+    retrieveData() {
+      this.$refs.femaleFormMini.validate((valid) => {
+        if (valid) {
+          const m_detail = {
+            lat: String(this.birthFormMini?.place?.latitude),
+            lon: String(this.birthFormMini?.place?.longitude),
+            tzone: String(this.birthFormMini?.place?.timezoneOffset),
+          }
+          Object.assign(m_detail, this.birthFormMini)
+          m_detail.place = this.birthFormMini?.place?.name
+          const f_detail = {
+            lat: String(this.femaleFormMini?.place?.latitude),
+            lon: String(this.femaleFormMini?.place?.longitude),
+            tzone: String(this.femaleFormMini?.place?.timezoneOffset),
+          }
+          Object.assign(f_detail, this.femaleFormMini)
+          f_detail.place = this.femaleFormMini?.place?.name
+          this.isLoading = true
+          this.$apiList.home
+            .getKundliMaking({
+              f_detail: f_detail,
+              m_detail: m_detail,
+            })
+            .then((res) => {
+              this.isLoading = false
+              localStorage.setItem(
+                'kundli',
+                JSON.stringify(res) // 更新用户匹配数据
+              )
+              localStorage.setItem(
+                'kundliBoth',
+                JSON.stringify({
+                  f_detail: f_detail,
+                  m_detail: m_detail,
+                }) // 更新用户存储信息
+              )
+              window.location.href = '/kundli/details/'
+            })
+        }
+      })
+    },
   },
 }
 </script>
@@ -142,6 +505,7 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .matching {
+  position: relative;
   &_main {
     width: 456px;
     min-height: 282px;
@@ -187,6 +551,7 @@ export default {
       :deep(.ant-form-item-with-help) {
         margin-bottom: 0;
       }
+
       :deep(.ant-input) {
         height: 34px !important;
         border-radius: 24px !important;
@@ -207,6 +572,7 @@ export default {
 
       :deep(.ant-form-item-control) {
         line-height: 0;
+        position: relative;
       }
       :deep(.ant-select-selection) {
         height: 34px !important;
@@ -224,7 +590,7 @@ export default {
           height: 100%;
           margin: 0;
           .ant-select-selection-selected-value {
-            line-height: 42px;
+            line-height: 32px;
           }
           .ant-select-selection__placeholder {
             color: rgba(255, 255, 255, 0.3);
@@ -232,6 +598,25 @@ export default {
             font-style: normal;
             font-weight: 400;
           }
+        }
+        .ant-select-arrow {
+          display: none;
+        }
+      }
+      :deep(.ant-form-explain) {
+        padding: 0 18px 0 0;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        line-height: 8px;
+        font-size: 12px;
+      }
+      :deep(.has-error .ant-input),
+      :deep(.has-error .ant-select-selection) {
+        border-color: #f5222d;
+        background: rgba(0, 0, 0, 0.2);
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.2);
         }
       }
 
@@ -344,6 +729,14 @@ export default {
               font-weight: 400;
             }
           }
+        }
+        :deep(.ant-form-explain) {
+          padding: 0 8 * $pr 0 0;
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          line-height: 8 * $pr;
+          font-size: 12 * $pr;
         }
 
         // input内容

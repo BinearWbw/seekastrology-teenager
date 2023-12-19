@@ -94,6 +94,9 @@
         <home-pairing class="pairing"></home-pairing>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 
@@ -103,25 +106,28 @@ export default {
     return {
       m_detail: null,
       f_detail: null,
+      isLoading: false,
     }
   },
-  mounted() {},
   methods: {
     // 提交信息-获取子组件填写内容
     submitKundli() {
       const kundliForm = this.$refs.kundliFormRefMale
       const kundliFormFemale = this.$refs.kundliFormRefFemale
+
       if (kundliForm && kundliFormFemale) {
         kundliForm.submitForm()
         kundliFormFemale.submitForm()
       }
       if (this.f_detail && this.m_detail) {
+        this.isLoading = true
         this.$apiList.home
           .getKundliMaking({
             f_detail: this.f_detail,
             m_detail: this.m_detail,
           })
           .then((res) => {
+            this.isLoading = false
             localStorage.setItem(
               'kundli',
               JSON.stringify(res) // 更新用户匹配数据
@@ -135,6 +141,7 @@ export default {
             )
             this.m_detail = null
             this.f_detail = null
+            window.location.href = '/kundli/details/'
           })
       }
     },
@@ -348,9 +355,11 @@ export default {
         &_lis {
           .fromor_item {
             .boys {
+              flex: 1;
               padding-right: 24px;
             }
             .girls {
+              flex: 1;
               padding-left: 24px;
             }
           }

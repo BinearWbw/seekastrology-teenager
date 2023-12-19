@@ -10,11 +10,17 @@
       <div class="content">
         <p class="title">Kundli Matching Report</p>
         <div class="love_conjugate">
-          <div class="duo boys">{{ kundliBoth?.m_detail.name || '--' }}</div>
-          <div class="love">
-            <div class="numbers">26.3</div>
+          <div class="duo boys">
+            {{ capFirstLetter(kundliBoth?.m_detail.name) || '--' }}
           </div>
-          <div class="duo girls">{{ kundliBoth?.f_detail.name || '--' }}</div>
+          <div class="love">
+            <div class="numbers">
+              {{ kundliData?.ashtkoot.Total.received_points }}
+            </div>
+          </div>
+          <div class="duo girls">
+            {{ capFirstLetter(kundliBoth?.f_detail.name) || '--' }}
+          </div>
         </div>
         <div class="bg_tabs">
           <div class="tabs_lists">
@@ -30,7 +36,7 @@
             <div class="item_list">
               <div class="item_list_one">Birth Date & Time</div>
               <div class="item_list_two">
-                {{ kundliBoth?.m_detail.year || '--' }}
+                {{ timeDataList(kundliBoth?.m_detail.gender) }}
               </div>
             </div>
             <div class="item_list">
@@ -59,7 +65,7 @@
             <div class="item_list">
               <div class="item_list_one">Birth Date & Time</div>
               <div class="item_list_two">
-                {{ kundliBoth?.f_detail.year || '--' }}
+                {{ timeDataList(kundliBoth?.f_detail.gender) }}
               </div>
             </div>
             <div class="item_list">
@@ -77,14 +83,7 @@
           </div>
         </div>
         <div class="tips">
-          Ashtakoot Matching between male and female is 26.5 points out of 36
-          points. This is a reasonably good score. Hence, this is a favourable
-          Ashtakoot match.The overall points of this couple represent a great
-          combination, both the bride and the groom have no mangal dosh.
-          Marriage is preferred. Consult an astrologer to get rid of the few
-          remedies and the doshas present for a harmonious married life
-          ahead.Both boy and girl are not Manglik, which does not lead to any
-          problems.
+          {{ kundliData?.conclusion }}
         </div>
         <div class="sign_table">
           <p class="titles">Match Ashtakoot Points</p>
@@ -103,55 +102,34 @@
                 </tr>
               </thead>
               <tbody class="tbodys">
-                <tr>
-                  <td>Varna</td>
-                  <td>Vaishya</td>
-                  <td>Brahmin</td>
-                  <td>0</td>
-                  <td>1</td>
-                  <td>Natural Refinement / Work</td>
+                <tr v-for="(item, index) in boys" :key="index">
+                  <td>{{ capFirstLetter(item) }}</td>
                   <td>
-                    The work gunas don't match for this pair and the overall
-                    compatibility may not be at its best
+                    {{
+                      kundliData?.ashtkoot[item]?.male_koot_attribute || '--'
+                    }}
                   </td>
                   <td>
-                    Varna refers to the mental compatibility of the two persons
-                    involved. It holds nominal effect in the matters of marriage
-                    compatibility.
-                  </td>
-                </tr>
-                <tr>
-                  <td>Varna</td>
-                  <td>Vaishya</td>
-                  <td>Brahmin</td>
-                  <td>0</td>
-                  <td>1</td>
-                  <td>Natural Refinement / Work</td>
-                  <td>
-                    The work gunas don't match for this pair and the overall
-                    compatibility may not be at its best
+                    {{
+                      kundliData?.ashtkoot[item]?.female_koot_attribute || '--'
+                    }}
                   </td>
                   <td>
-                    Varna refers to the mental compatibility of the two persons
-                    involved. It holds nominal effect in the matters of marriage
-                    compatibility.
-                  </td>
-                </tr>
-                <tr>
-                  <td>Varna</td>
-                  <td>Vaishya</td>
-                  <td>Brahmin</td>
-                  <td>0</td>
-                  <td>1</td>
-                  <td>Natural Refinement / Work</td>
-                  <td>
-                    The work gunas don't match for this pair and the overall
-                    compatibility may not be at its best
+                    {{ kundliData?.ashtkoot[item]?.received_points }}
                   </td>
                   <td>
-                    Varna refers to the mental compatibility of the two persons
-                    involved. It holds nominal effect in the matters of marriage
-                    compatibility.
+                    {{ kundliData?.ashtkoot[item]?.total_points }}
+                  </td>
+                  <td>
+                    {{ kundliData?.ashtkoot[item]?.description || '--' }}
+                  </td>
+                  <td>
+                    {{ kundliData?.ashtkoot[item]?.description2 || '--' }}
+                  </td>
+                  <td>
+                    {{
+                      kundliData?.ashtkoot[item]?.attribute_description || '--'
+                    }}
                   </td>
                 </tr>
               </tbody>
@@ -175,13 +153,17 @@ export default {
   data() {
     return {
       boys: [
-        { name: 'name', name_i: 'Yang Wei Guo' },
-        { name: 'Birth Date & Time', name_i: '1 January 1990 | 1:1' },
-        { name: 'Birth Place', name_i: 'New Delhi, Delhi, India' },
-        { name: 'Janam Rashi', name_i: 'Aries' },
+        'varna',
+        'vashya',
+        'tara',
+        'yoni',
+        'maitri',
+        'gan',
+        'bhakut',
+        'nadi',
       ],
       sign: [
-        ' ',
+        '--',
         'Aries',
         'Taurus',
         'Gemini',
@@ -206,7 +188,42 @@ export default {
       console.log(this.kundliBoth, this.kundliData)
     }
   },
-  methods: {},
+  methods: {
+    capFirstLetter(i) {
+      if (i) {
+        return i.charAt(0).toUpperCase() + i.slice(1)
+      }
+    },
+    timeDataList(i) {
+      if (!i) return '--'
+      const months = [
+        ' ',
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ]
+      const male = this.kundliBoth?.m_detail
+      const female = this.kundliBoth?.f_detail
+      if (i == 'Male') {
+        return `${male.day}  ${months[male.month]}  ${male.year} | ${
+          male.hour
+        } : ${male.min}`
+      } else {
+        return `${female?.day}  ${months[female?.month]}  ${female?.year} | ${
+          female?.hour
+        } : ${female?.min}`
+      }
+    },
+  },
 }
 </script>
 
