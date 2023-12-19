@@ -47,7 +47,7 @@ export default {
         {
           name: 'Yes or No Tarot',
           imgUrl: require('../../assets/img/home/more/tarot3.png'),
-          link: '',
+          link: '/developing/',
         },
         {
           name: 'Career Tarot',

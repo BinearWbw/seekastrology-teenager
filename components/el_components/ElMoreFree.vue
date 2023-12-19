@@ -41,17 +41,17 @@ export default {
         {
           name: 'Palm Reading',
           imgs: require('~/assets/img/home/more/more4.svg'),
-          url: '',
+          url: '/developing/',
         },
         {
           name: 'Ask the Genie',
           imgs: require('~/assets/img/home/more/more5.svg'),
-          url: '',
+          url: '/developing/',
         },
         {
           name: 'Chinese Signs',
           imgs: require('~/assets/img/home/more/more6.svg'),
-          url: '',
+          url: '/developing/',
         },
         {
           name: 'Ai Tarot',
@@ -61,12 +61,12 @@ export default {
         {
           name: 'Numerology Calculator',
           imgs: require('~/assets/img/home/more/more8.svg'),
-          url: '',
+          url: '/developing/',
         },
         {
           name: 'Kundli Matching',
           imgs: require('~/assets/img/home/more/more9.svg'),
-          url: '',
+          url: '/developing/',
         },
         {
           name: 'Quizzes',
