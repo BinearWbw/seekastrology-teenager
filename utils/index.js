@@ -163,8 +163,13 @@ function formatDateNatal(hour, period) {
   let hour_i = Number(hour) // 转number
   // 处理小时部分
   if (period == 'PM') {
+    if (hour_i == 12) return 12
     hour_i += 12
+  } else {
+    if (hour_i == 12) return 0
   }
+
+  console.log('hour_i', hour_i)
 
   return hour_i
 }

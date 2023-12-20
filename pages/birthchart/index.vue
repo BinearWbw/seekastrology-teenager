@@ -42,25 +42,37 @@
                     <p>Date birth</p>
                     <div class="form_date_list">
                       <a-form-model-item prop="year">
-                        <a-input
-                          v-model="birthForm.year"
+                        <a-select
                           placeholder="Year"
-                          type="number"
-                        />
+                          style="width: 100%"
+                          @change="yearChange"
+                        >
+                          <a-select-option v-for="i in years" :key="i">
+                            {{ i }}
+                          </a-select-option>
+                        </a-select>
                       </a-form-model-item>
                       <a-form-model-item prop="month">
-                        <a-input
-                          v-model="birthForm.month"
-                          placeholder="Month"
-                          type="number"
-                        />
+                        <a-select
+                          placeholder="Mon"
+                          style="width: 100%"
+                          @change="monthChange"
+                        >
+                          <a-select-option v-for="i in months" :key="i.li">
+                            {{ i.name }}
+                          </a-select-option>
+                        </a-select>
                       </a-form-model-item>
                       <a-form-model-item prop="day">
-                        <a-input
-                          v-model="birthForm.day"
-                          placeholder="Date"
-                          type="number"
-                        />
+                        <a-select
+                          placeholder="Day"
+                          style="width: 100%"
+                          @change="daysChange"
+                        >
+                          <a-select-option v-for="l in 31" :key="l">
+                            {{ l }}
+                          </a-select-option>
+                        </a-select>
                       </a-form-model-item>
                     </div>
                   </div>
@@ -68,18 +80,26 @@
                     <p>Time birth</p>
                     <div class="form_time_list">
                       <a-form-model-item prop="hour">
-                        <a-input
-                          v-model="birthForm.hour"
+                        <a-select
                           placeholder="Hour"
-                          type="number"
-                        />
+                          style="width: 100%"
+                          @change="hourChange"
+                        >
+                          <a-select-option v-for="l in 12" :key="l">
+                            {{ l }}
+                          </a-select-option>
+                        </a-select>
                       </a-form-model-item>
                       <a-form-model-item prop="min">
-                        <a-input
-                          v-model="birthForm.min"
-                          placeholder="Minute"
-                          type="number"
-                        />
+                        <a-select
+                          placeholder="Min"
+                          style="width: 100%"
+                          @change="minutesChange"
+                        >
+                          <a-select-option v-for="l in minutes" :key="l">
+                            {{ l }}
+                          </a-select-option>
+                        </a-select>
                       </a-form-model-item>
                       <a-form-model-item prop="mol">
                         <a-select v-model="birthForm.mol" placeholder="PM">
@@ -169,7 +189,30 @@
 import { mapGetters } from 'vuex'
 export default {
   data() {
+    const currentYear = new Date().getFullYear()
+    const startYear = 1928
+    const years = Array.from(
+      { length: currentYear - startYear + 1 },
+      (_, index) => startYear + index
+    )
+    const minutes = Array.from({ length: 60 }, (_, index) => index)
     return {
+      years,
+      months: [
+        { name: 'Jan', li: 1 },
+        { name: 'Feb', li: 2 },
+        { name: 'Mar', li: 3 },
+        { name: 'Apr', li: 4 },
+        { name: 'May', li: 5 },
+        { name: 'Jun', li: 6 },
+        { name: 'Jul', li: 7 },
+        { name: 'Aug', li: 8 },
+        { name: 'Sep', li: 9 },
+        { name: 'Oct', li: 10 },
+        { name: 'Nov', li: 11 },
+        { name: 'Dec', li: 12 },
+      ],
+      minutes,
       birthForm: {
         name: '',
         gender: undefined,
@@ -199,61 +242,36 @@ export default {
         year: [
           {
             required: true,
-            message: 'Please enter year',
+            message: 'Please select year',
             trigger: 'change',
-          },
-          {
-            max: 4,
-            message: 'Year is too long',
-            trigger: 'blur',
           },
         ],
         month: [
           {
             required: true,
-            message: 'Please enter month',
+            message: 'Please select month',
             trigger: 'change',
-          },
-          {
-            max: 2,
-            message: 'Month is too long',
-            trigger: 'blur',
           },
         ],
         day: [
           {
             required: true,
-            message: 'Please enter daily',
+            message: 'Please select daily',
             trigger: 'change',
-          },
-          {
-            max: 2,
-            message: 'Daily is too long',
-            trigger: 'blur',
           },
         ],
         hour: [
           {
             required: true,
-            message: 'Please enter hour',
+            message: 'Please select hour',
             trigger: 'change',
-          },
-          {
-            max: 2,
-            message: 'Hour is too long',
-            trigger: 'blur',
           },
         ],
         min: [
           {
             required: true,
-            message: 'Please enter minute',
+            message: 'Please select minute',
             trigger: 'change',
-          },
-          {
-            max: 2,
-            message: 'Minute is too long',
-            trigger: 'blur',
           },
         ],
         mol: [
@@ -340,7 +358,6 @@ export default {
       isLoading: false,
     }
   },
-  watch: {},
   computed: {
     ...mapGetters(['getUserInfo']),
   },
@@ -375,11 +392,11 @@ export default {
           this.isLoading = true
           this.$apiList.home
             .getNatal({
-              year: Number(this.birthForm.year),
-              month: Number(this.birthForm.month),
-              day: Number(this.birthForm.day),
+              year: this.birthForm.year,
+              month: this.birthForm.month,
+              day: this.birthForm.day,
               hour: birthLocalTime,
-              min: Number(this.birthForm.min),
+              min: this.birthForm.min,
               sec: 1,
               name: this.birthForm.name,
               gender: this.birthForm.gender,
@@ -425,6 +442,21 @@ export default {
       console.log('选择的数据birthForm后后', this.birthForm)
       //   this.cityData = [] // 清除搜索的城市内容
       this.fetching = false
+    },
+    yearChange(value) {
+      this.birthForm.year = value
+    },
+    monthChange(value) {
+      this.birthForm.month = value
+    },
+    daysChange(value) {
+      this.birthForm.day = value
+    },
+    hourChange(value) {
+      this.birthForm.hour = value
+    },
+    minutesChange(value) {
+      this.birthForm.min = value
     },
   },
 }
