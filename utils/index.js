@@ -168,9 +168,6 @@ function formatDateNatal(hour, period) {
   } else {
     if (hour_i == 12) return 0
   }
-
-  console.log('hour_i', hour_i)
-
   return hour_i
 }
 

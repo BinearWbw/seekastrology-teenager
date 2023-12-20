@@ -376,7 +376,6 @@ export default {
       bodyStyle.overflow = ''
     },
     submintForm() {
-      console.log('输入', this.$refs.birthForm)
       if (!this.getUserInfo?.email) {
         this.formTouched()
         return
@@ -387,8 +386,6 @@ export default {
             this.birthForm.hour,
             this.birthForm.mol
           )
-          console.log('时间转换', birthLocalTime)
-          console.log('信息确认提交', this.birthForm)
           this.isLoading = true
           this.$apiList.home
             .getNatal({
@@ -439,7 +436,6 @@ export default {
     },
     cityChange(value, option) {
       this.birthForm.place = option.data.attrs.channel
-      console.log('选择的数据birthForm后后', this.birthForm)
       //   this.cityData = [] // 清除搜索的城市内容
       this.fetching = false
     },
