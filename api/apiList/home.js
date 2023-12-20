@@ -43,7 +43,7 @@ export default (axios) => ({
     return axios.get('api/astro/horoscope/weekly', { params })
   },
 
-  /* 昆德里城市搜索 */
+  /* 城市搜索+时区 */
   getKundliCity(params) {
     return axios.get('api/match/making/city', { params })
   },

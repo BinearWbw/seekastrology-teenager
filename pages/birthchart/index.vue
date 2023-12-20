@@ -131,7 +131,6 @@
                           v-for="d in cityData"
                           :key="d.name"
                           :channel="d"
-                          :value="d.name"
                         >
                           {{ d.name }}
                         </a-select-option>
@@ -397,9 +396,10 @@ export default {
               sec: 1,
               name: this.birthForm.name,
               gender: this.birthForm.gender,
-              lat: this.birthForm.place.lat,
-              lon: this.birthForm.place.lng,
+              lat: this.birthForm.place.latitude,
+              lon: this.birthForm.place.longitude,
               place: this.birthForm.place.name,
+              tzone: this.birthForm.place.timezoneOffset,
             })
             .then((res) => {
               if (res.code) {
@@ -429,8 +429,9 @@ export default {
     fetchCity(value) {
       this.fetching = true
       this.cityData = []
-      this.$apiList.home.getCity({ name: value }).then((res) => {
-        this.cityData = res.items
+      this.$apiList.home.getKundliCity({ name: value }).then((res) => {
+        console.log('res', res)
+        this.cityData = res.data
         this.fetching = false
       })
     },
@@ -438,6 +439,7 @@ export default {
       this.birthForm.place = option.data.attrs.channel
       //   this.cityData = [] // 清除搜索的城市内容
       this.fetching = false
+      console.log('地图数据', value, this.birthForm)
     },
     yearChange(value) {
       this.birthForm.year = value

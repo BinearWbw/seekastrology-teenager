@@ -78,7 +78,12 @@
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Timezone</div>
-                  <div class="item_list_two">--</div>
+                  <div class="item_list_two">
+                    <span v-if="birth_dtls.timezone">
+                      {{ 'GMT + ' + birth_dtls.timezone }}</span
+                    >
+                    <span v-else>--</span>
+                  </div>
                 </div>
                 <div class="item_list">
                   <div class="item_list_one">Sunrise</div>

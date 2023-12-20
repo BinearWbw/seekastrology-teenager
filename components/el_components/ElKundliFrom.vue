@@ -101,7 +101,6 @@
                   v-for="(d, index) in cityData"
                   :key="index"
                   :channel="d"
-                  :value="d.name"
                 >
                   {{ d.name }}
                 </a-select-option>
@@ -227,7 +226,6 @@ export default {
       this.$apiList.home.getKundliCity({ name: value }).then((res) => {
         this.cityData = res.data
         this.fetching = false
-        console.log(res.data)
       })
     },
     cityChange(value, option) {

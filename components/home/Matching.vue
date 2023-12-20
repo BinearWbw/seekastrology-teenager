@@ -115,7 +115,6 @@
                       v-for="d in cityData"
                       :key="d.name"
                       :channel="d"
-                      :value="d.name"
                     >
                       {{ d.name }}
                     </a-select-option>
@@ -240,7 +239,6 @@
                       v-for="d in femaleCityData"
                       :key="d.name"
                       :channel="d"
-                      :value="d.name"
                     >
                       {{ d.name }}
                     </a-select-option>
