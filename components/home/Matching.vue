@@ -718,7 +718,7 @@ export default {
             height: 100%;
             margin: 0;
             .ant-select-selection-selected-value {
-              line-height: 42 * $pr;
+              line-height: 34 * $pr;
             }
             .ant-select-selection__placeholder {
               color: rgba(255, 255, 255, 0.3);
