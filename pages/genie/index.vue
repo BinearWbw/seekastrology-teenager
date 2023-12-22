@@ -1,0 +1,323 @@
+<template>
+  <div class="elf">
+    <google-ad id="" classNames="elf_ad_top"></google-ad>
+    <div class="elf_answer">
+      <div class="genie">
+        <p class="genie_title">Answer Genie</p>
+        <p class="genie_text">
+          When you are hesitant to make a decision about a small matter in your
+          life, seriously ask a question to the Genie and click the button to
+          see what he can help you decide!
+        </p>
+        <div class="genie_book">
+          <div class="item">
+            <div class="book">
+              <div class="tips">
+                Focus on one question, gently click to get the answer
+              </div>
+              <img class="gently" src="~/assets/img/kundli/book.svg" />
+              <button class="button">Open Book</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="genie_el">
+        <el-widget></el-widget>
+        <google-ad id="" classNames="genie_ad"></google-ad>
+      </div>
+    </div>
+    <div class="more">
+      <p class="title">Horoscopes</p>
+      <el-explore-more />
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {}
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+@use 'sass:math';
+.elf {
+  width: 100%;
+  padding: 24px 0 48px;
+  .elf_ad_top {
+    width: 970px;
+    height: 275px;
+    margin: 0 auto;
+  }
+  &_answer {
+    width: 1400px;
+    margin: 24px auto 0;
+    display: flex;
+
+    .genie {
+      flex: 1;
+      &_title {
+        color: #fff;
+        font-family: Cinzel Decorative;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 48px;
+        margin-bottom: 8px;
+      }
+      &_text {
+        color: rgba(255, 255, 255, 0.6);
+        font-family: Rubik;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+      }
+      &_book {
+        width: 100%;
+        padding: 3px;
+        margin-top: 17px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.08) 0%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        .item {
+          width: 100%;
+          padding: 91px 0 67px;
+          border-radius: 21px;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          backdrop-filter: blur(8px);
+          display: flex;
+          justify-content: center;
+          .book {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            .tips {
+              padding: 16px 62px;
+              color: #fff;
+              text-align: center;
+              font-family: Rubik;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 22px;
+              border-radius: 16px;
+              background: #9747ff;
+              position: relative;
+              &::after {
+                position: absolute;
+                content: '';
+                display: block;
+                bottom: -12px;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 14px solid #9747ff;
+                transform: translateX(-50%) rotate(180deg);
+              }
+            }
+            .gently {
+              width: 199px;
+              margin: 28px 0 0;
+              object-fit: cover;
+            }
+            .button {
+              position: absolute;
+              bottom: 84px;
+              width: 220px;
+              height: 56px;
+              padding: 8px 32px;
+              flex-shrink: 0;
+              border-radius: 42px;
+              background: #fff;
+              color: #000;
+              font-family: Rubik;
+              font-size: 22px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 30px;
+            }
+          }
+        }
+      }
+    }
+    .genie_el {
+      width: 354px;
+      margin-left: 102px;
+      .genie_ad {
+        width: 336px;
+        height: 305px;
+        margin: 32px auto 0;
+      }
+    }
+  }
+  .more {
+    width: 1400px;
+    margin: 48px auto 0;
+    .title {
+      color: #fff;
+      text-align: center;
+      font-family: Cinzel Decorative;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 30px;
+    }
+    :deep(.explore_main) {
+      .title {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 1480px) {
+  .elf {
+    padding: 24px 30px 48px;
+    &_answer {
+      width: 100%;
+      .genie_el {
+        margin-left: 30px;
+      }
+    }
+    .more {
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 1050px) {
+  .elf {
+    width: 100%;
+    padding: 24px 30px 48px;
+    .elf_ad_top {
+      width: 90%;
+    }
+    &_answer {
+      display: flex;
+      flex-direction: column;
+      padding: 0 50px;
+      align-items: center;
+
+      .genie {
+        flex: inherit;
+        margin-bottom: 32px;
+      }
+      .genie_el {
+        width: 554px;
+        margin-left: 0;
+        .genie_ad {
+          width: 90%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .elf {
+    width: 100%;
+    padding: 0 16 * $pr 32 * $pr;
+    .elf_ad_top {
+      width: 336 * $pr;
+      height: 297 * $pr;
+      margin: 0 auto;
+    }
+    &_answer {
+      width: 100%;
+      margin: 16 * $pr auto 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      align-items: center;
+
+      .genie {
+        flex: inherit;
+        margin-bottom: 32 * $pr;
+        &_title {
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
+          margin-bottom: 8 * $pr;
+          text-align: center;
+        }
+        &_text {
+          font-size: 14 * $pr;
+          line-height: 24 * $pr;
+          text-align: center;
+        }
+        &_book {
+          width: 100%;
+          padding: 3 * $pr;
+          margin-top: 32 * $pr;
+          border-radius: 24 * $pr;
+          border: 1 * $pr solid rgba(255, 255, 255, 0.4);
+          .item {
+            width: 100%;
+            padding: 67 * $pr 0 45 * $pr;
+            border-radius: 21 * $pr;
+            border: 1 * $pr solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8 * $pr);
+            .book {
+              .tips {
+                width: 283 * $pr;
+                padding: 8 * $pr 16 * $pr;
+                font-size: 14 * $pr;
+                line-height: 18 * $pr;
+                border-radius: 8 * $pr;
+                &::after {
+                  bottom: -12 * $pr;
+                  border-left: 10 * $pr solid transparent;
+                  border-right: 10 * $pr solid transparent;
+                  border-bottom: 14 * $pr solid #9747ff;
+                }
+              }
+              .gently {
+                width: 199 * $pr;
+                margin: 28 * $pr 0 0;
+                object-fit: cover;
+              }
+              .button {
+                bottom: 84 * $pr;
+                width: 220 * $pr;
+                height: 56 * $pr;
+                padding: 8 * $pr 32 * $pr;
+                flex-shrink: 0;
+                border-radius: 42 * $pr;
+                background: #fff;
+                font-size: 22 * $pr;
+                line-height: 30 * $pr;
+              }
+            }
+          }
+        }
+      }
+      .genie_el {
+        width: 100%;
+        margin-left: 0;
+        .genie_ad {
+          width: 336 * $pr;
+          height: 297 * $pr;
+          margin: 32 * $pr auto 0;
+        }
+      }
+    }
+    .more {
+      margin: 32 * $pr auto 0;
+      .title {
+        font-size: 22 * $pr;
+        line-height: 30 * $pr;
+        padding-bottom: 16 * $pr;
+      }
+    }
+  }
+}
+</style>

@@ -42,9 +42,7 @@
 </template>
 
 <script>
-import ElSignNew from '../../components/el_components/ElSignNew.vue'
 export default {
-  components: { ElSignNew },
   data() {
     return {}
   },

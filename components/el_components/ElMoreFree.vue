@@ -46,12 +46,12 @@ export default {
         {
           name: 'Ask the Genie',
           imgs: require('~/assets/img/home/more/more5.svg'),
-          url: '/developing/',
+          url: '/genie/',
         },
         {
           name: 'Chinese Signs',
           imgs: require('~/assets/img/home/more/more6.svg'),
-          url: '/developing/',
+          url: '/chinazodiac/',
         },
         {
           name: 'Ai Tarot',
