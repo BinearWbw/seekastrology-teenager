@@ -107,7 +107,21 @@
                         @change="chooseAnswer(item, index)"
                         :disabled="disabledFlag"
                       />
-                      <p>{{ item.answer }}</p>
+                      <div
+                        class="img_answer"
+                        v-if="item.answer.includes('http')"
+                      >
+                        <nuxt-img
+                          :src="item.answer || '/'"
+                          fit="cover"
+                          :alt="item.answer"
+                          width="338"
+                          height="200"
+                          loading="lazy"
+                          format="auto"
+                        ></nuxt-img>
+                      </div>
+                      <p v-else>{{ item.answer }}</p>
                     </label>
                   </div>
                 </div>
@@ -163,6 +177,17 @@
                   </div>
                   <div class="details_main_left_top_result_desc">
                     {{ result.desc }}
+                  </div>
+                  <div class="img_desc" v-if="result.icon">
+                    <nuxt-img
+                      :src="result.icon || '/'"
+                      fit="cover"
+                      :alt="result.icon"
+                      width="400"
+                      height="250"
+                      loading="lazy"
+                      format="auto"
+                    ></nuxt-img>
                   </div>
                 </div>
                 <div
@@ -593,12 +618,9 @@ $spacing: 55px;
               grid-gap: 16px;
               margin-top: 16px;
               &_item {
-                width: 338px;
                 min-height: 40px;
                 background-color: rgba(255, 255, 255, 0.06);
                 border-radius: 18px;
-                display: flex;
-                align-items: center;
                 border: 1px solid transparent;
                 cursor: pointer;
                 &:hover {
@@ -614,21 +636,31 @@ $spacing: 55px;
                   font-size: 16px;
                   line-height: 22px;
                   color: rgba(255, 255, 255, 0.6);
-                  width: 100%;
+                  width: auto;
                   display: flex;
                   align-items: center;
                   cursor: pointer;
                   height: 100%;
+                  position: relative;
+                  .img_answer {
+                    border-radius: 18px;
+                    overflow: hidden;
+                    img {
+                      object-fit: cover;
+                    }
+                  }
                   p {
-                    flex: 1;
+                    // flex: 1;
+                    max-width: 338px;
+                    min-width: 338px;
                     cursor: pointer;
                     display: block;
                     word-wrap: break-word;
-                    padding: 19px 10px 19px 0;
+                    padding: 19px 10px 19px 46px;
                   }
                   input {
-                    margin-left: 31px;
-                    margin-right: 22px;
+                    position: absolute;
+                    left: 16px;
                     border: 1px solid rgba(255, 255, 255, 0.6);
                     height: 18px;
                     width: 18px;
@@ -639,7 +671,7 @@ $spacing: 55px;
                     flex-shrink: 0;
                     cursor: pointer;
                     &:checked {
-                      position: relative;
+                      //   position: relative;
                       &::before {
                         display: block;
                         position: absolute;
@@ -740,6 +772,12 @@ $spacing: 55px;
             line-height: 18px;
             color: #fff;
             margin-top: 16px;
+          }
+          .img_desc {
+            margin-top: 24px;
+            img {
+              object-fit: cover;
+            }
           }
           &_retake {
             display: flex;
@@ -1055,15 +1093,24 @@ $spacing: 55px;
                 margin-top: 16 * $pr;
                 &_item {
                   width: 311 * $pr;
-                  height: 60 * $pr;
+                  height: auto;
                   border-radius: 18 * $pr;
                   // padding: 0 10 * $pr;
                   label {
                     font-size: 16 * $pr;
                     line-height: 22 * $pr;
+                    .img_answer {
+                      width: 100%;
+                      border-radius: 18 * $pr;
+                      overflow: hidden;
+                      img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                      }
+                    }
                     input {
-                      margin-left: 31 * $pr;
-                      margin-right: 16 * $pr;
+                      left: 16 * $pr;
                       height: 18 * $pr;
                       width: 18 * $pr;
                       &:checked {
@@ -1074,7 +1121,9 @@ $spacing: 55px;
                       }
                     }
                     p {
-                      padding: 10 * $pr 10 * $pr 10 * $pr 0;
+                      max-width: inherit;
+                      min-width: inherit;
+                      padding: 10 * $pr 10 * $pr 10 * $pr 45 * $pr;
                     }
                   }
                 }
@@ -1114,6 +1163,13 @@ $spacing: 55px;
             &_score {
               font-size: 22 * $pr;
               line-height: 30 * $pr;
+            }
+            .img_desc {
+              margin-top: 16 * $pr;
+              img {
+                width: 100%;
+                object-fit: cover;
+              }
             }
             &_retake {
               margin: 0 auto;
