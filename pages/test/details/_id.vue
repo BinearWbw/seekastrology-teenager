@@ -109,7 +109,7 @@
                       />
                       <div
                         class="img_answer"
-                        v-if="item.answer.includes('http')"
+                        v-if="item.answer.includes('images')"
                       >
                         <nuxt-img
                           :src="item.answer || '/'"
