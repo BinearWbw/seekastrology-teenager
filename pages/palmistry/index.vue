@@ -121,9 +121,7 @@
 </template>
 
 <script>
-import PalmHave from '../../components/palm/PalmHave.vue'
 export default {
-  components: { PalmHave },
   data() {
     return {
       palmFrom: {
