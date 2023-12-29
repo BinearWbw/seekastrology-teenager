@@ -18,4 +18,14 @@ export default (axios) => ({
   getQuizResult(data) {
     return axios.post('api/quiz/result', data)
   },
+
+  /* 命理 */
+  getNumerology(params) {
+    return axios.get('api/numerology/calculator', { params })
+  },
+
+  /* 生肖 */
+  getAnimals(params) {
+    return axios.get('api/zodiac/animals', { params })
+  },
 })

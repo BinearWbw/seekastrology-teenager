@@ -130,6 +130,9 @@
         <el-widget class="widget"></el-widget>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 
@@ -145,18 +148,18 @@ export default {
     return {
       years,
       months: [
-        { name: 'Jan', li: 1 },
-        { name: 'Feb', li: 2 },
-        { name: 'Mar', li: 3 },
-        { name: 'Apr', li: 4 },
-        { name: 'May', li: 5 },
-        { name: 'Jun', li: 6 },
-        { name: 'Jul', li: 7 },
-        { name: 'Aug', li: 8 },
-        { name: 'Sep', li: 9 },
-        { name: 'Oct', li: 10 },
-        { name: 'Nov', li: 11 },
-        { name: 'Dec', li: 12 },
+        { name: 'Jan', li: '01' },
+        { name: 'Feb', li: '02' },
+        { name: 'Mar', li: '03' },
+        { name: 'Apr', li: '04' },
+        { name: 'May', li: '05' },
+        { name: 'Jun', li: '06' },
+        { name: 'Jul', li: '07' },
+        { name: 'Aug', li: '08' },
+        { name: 'Sep', li: '09' },
+        { name: 'Oct', li: '10' },
+        { name: 'Nov', li: '11' },
+        { name: 'Dec', li: '12' },
       ],
       numerologyData: {
         name: '',
@@ -194,6 +197,7 @@ export default {
           },
         ],
       },
+      isLoading: false,
     }
   },
   methods: {
@@ -209,7 +213,23 @@ export default {
     numerologySubmit() {
       this.$refs.numerologyFrom.validate((valid) => {
         if (valid) {
-          console.log('验证完成', this.numerologyData)
+          this.isLoading = true
+          let dayNumber = this.numerologyData.day.toString().padStart(2, '0') //处理小于10的数字,拼0
+          this.$apiList.test
+            .getNumerology({
+              name: this.numerologyData.name,
+              date: `${this.numerologyData.year}${this.numerologyData.month}${dayNumber}`,
+            })
+            .then((res) => {
+              this.isLoading = false
+              localStorage.setItem('numerology', JSON.stringify(res))
+              localStorage.setItem(
+                'numerUser',
+                JSON.stringify(this.numerologyData)
+              )
+              window.changePageUrl = '/numerology/details/'
+              window.location.href = '/numerology/details/'
+            })
         }
       })
     },

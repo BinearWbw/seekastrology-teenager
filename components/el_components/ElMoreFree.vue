@@ -61,7 +61,7 @@ export default {
         {
           name: 'Numerology Calculator',
           imgs: require('~/assets/img/home/more/more8.svg'),
-          url: '/developing/',
+          url: '/numerology/',
         },
         {
           name: 'Kundli Matching',

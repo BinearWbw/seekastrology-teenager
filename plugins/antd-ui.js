@@ -8,6 +8,7 @@ import {
   notification,
   Spin,
   Pagination,
+  Carousel,
 } from 'ant-design-vue'
 
 Vue.use(Button)
@@ -17,4 +18,5 @@ Vue.use(DatePicker)
 Vue.use(Select)
 Vue.use(Spin)
 Vue.use(Pagination)
+Vue.use(Carousel)
 Vue.prototype.$notification = notification

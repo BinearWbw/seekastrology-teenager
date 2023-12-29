@@ -43,6 +43,12 @@
 
 <script>
 export default {
+  async asyncData({ error, $apiList, params }) {
+    try {
+    } catch (e) {
+      error({ statusCode: e.code, message: e.message })
+    }
+  },
   data() {
     return {}
   },
