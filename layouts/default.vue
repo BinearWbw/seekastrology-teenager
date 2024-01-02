@@ -16,9 +16,6 @@
         <img src="~/assets/img/footer/arrow.svg" alt="totop" />
       </button>
     </transition>
-    <transition name="fade">
-      <Privacy v-if="visiblePrivacy" @close="visiblePrivacy = false"></Privacy>
-    </transition>
   </main>
 </template>
 
@@ -26,7 +23,6 @@
 export default {
   data() {
     return {
-      visiblePrivacy: false,
       showScrollToTop: false,
     }
   },
@@ -46,29 +42,8 @@ export default {
         localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
       })
     })
-    this.getLocation()
   },
   methods: {
-    getLocation() {
-      let cookiesPrivacyLoc = localStorage.getItem('cookiesPrivacy')
-      if (!cookiesPrivacyLoc) {
-        this.$apiList.home
-          .getGameLocation()
-          .then((res) => {
-            if (!res.loc) {
-              localStorage.setItem(
-                'cookiesPrivacy',
-                JSON.stringify({ accept: 0 })
-              )
-            } else {
-              this.visiblePrivacy = true
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      }
-    },
     handleScroll() {
       const scrollThreshold = 500
       this.showScrollToTop =
