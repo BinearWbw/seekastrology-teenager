@@ -66,7 +66,7 @@ export default {
         {
           name: 'Kundli Matching',
           imgs: require('~/assets/img/home/more/more9.svg'),
-          url: '/developing/',
+          url: '/kundli/',
         },
         {
           name: 'Quizzes',

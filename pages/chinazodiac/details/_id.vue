@@ -3,10 +3,10 @@
     <div class="china_details_top">
       <div class="item">
         <div class="imgs">
-          <img src="../../../assets/img/zodiac/chzo/mouse.svg" alt="" />
+          <img :src="imgId" alt="zodiacData.name" />
         </div>
         <div class="sign_text">
-          <p class="name">Rabbit</p>
+          <p class="name">{{ zodiacData.name }}</p>
           <p class="list">Chinese Horoscope</p>
         </div>
       </div>
@@ -14,48 +14,37 @@
     <div class="china_details_main">
       <div class="animal_left">
         <div class="details">
-          <p class="text_p">
-            For Chinese people, the rabbit is a tame creature representing hope
-            and life for a long time. It is tender and lovely. The moon goddess
-            Chang'e in the Chinese legend has a rabbit as her pet, which
-            stimulates the thought that only this creature is amiable enough to
-            match her noble beauty. Another way of saying is that the Rabbit is
-            the incarnation of the moon goddess per se and it is always a symbol
-            of pureness and auspiciousness. People born in the Year of the
-            Rabbit are gentle and approachable. They have a decent, noble and
-            elegant manner.
-          </p>
+          <div class="text_p" v-html="zodiacData.desc"></div>
           <div class="item_p">
+            <p class="title_p">Personality:</p>
+            <div class="text_fe" v-html="zodiacData.personality"></div>
+            <div class="google_ads">
+              <google-ad id="" classNames="text_ad"></google-ad>
+            </div>
             <p class="title_p">
-              Personality: Rabbits are are gentle, elegant, self-disciplined,
-              and alert
+              Love Compatibility Of The {{ zodiacData.name }}
             </p>
-            <p class="text_fe">
-              People born in the years of the Rabbit tend to have some
-              characteristics of the real rabbits which are quiet at most times
-              but also acted swiftly when needed. Generally, the Rabbits are
-              positive, gentle and elegant. They love freedom, but once set
-              goals, they just march forward for it without distractions. They
-              are also self-disciplined, the typical kind of people who are
-              strict with themselves but tolerant of others.
-            </p>
-            <p class="text_fe">
-              People born in the years of the Rabbit tend to have some
-              characteristics of the real rabbits which are quiet at most times
-              but also acted swiftly when needed. Generally, the Rabbits are
-              positive, gentle and elegant. They love freedom, but once set
-              goals, they just march forward for it without distractions. They
-              are also self-disciplined, the typical kind of people who are
-              strict with themselves but tolerant of others.
-            </p>
+            <client-only>
+              <div class="text_p" v-html="zodiacData.love_comp"></div>
+            </client-only>
+            <p class="title_p">Jobs Careers The {{ zodiacData.name }}</p>
+            <client-only>
+              <div class="text_p" v-html="zodiacData.jobs_careers || ''"></div>
+            </client-only>
+            <p class="title_p">Fortune :</p>
+            <client-only>
+              <div class="text_fe" v-html="zodiacData.fortune || ''"></div>
+            </client-only>
           </div>
         </div>
       </div>
       <div class="animal_right">
-        <el-china-lity class="lity"></el-china-lity>
-        <google-ad id="" classNames="right_ad"></google-ad>
-        <home-pairing class="pairing"></home-pairing>
-        <google-ad id="" classNames="right_ad two"></google-ad>
+        <div class="animal_right_list">
+          <el-china-lity class="lity"></el-china-lity>
+          <google-ad id="" classNames="right_ad"></google-ad>
+          <home-pairing class="pairing"></home-pairing>
+          <google-ad id="" classNames="right_ad two"></google-ad>
+        </div>
       </div>
     </div>
   </div>
@@ -63,8 +52,27 @@
 
 <script>
 export default {
-  data() {
-    return {}
+  async asyncData({ error, $apiList, params }) {
+    try {
+      let imgId = ''
+      let [zodiacData] = await Promise.all([
+        /**详情 */
+        $apiList.test
+          .getAnimalsDetail({
+            id: params.id.replace(
+              /^.*?(\d*)$/,
+              (str, match, index) => match || '0'
+            ),
+          })
+          .then((res) => {
+            imgId = require(`~/assets/img/zodiac/chin/chins_${res.id}.svg`)
+            return res || null
+          }),
+      ])
+      return { zodiacData, imgId }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.msg })
+    }
   },
 }
 </script>
@@ -89,7 +97,6 @@ export default {
       align-items: center;
       .imgs {
         width: 162px;
-        height: 99px;
         > img {
           width: 100%;
           height: 100%;
@@ -176,25 +183,34 @@ export default {
           display: grid;
           gap: 8px;
         }
+        .google_ads {
+          width: 100%;
+          .text_ad {
+            width: 750px;
+            height: 125px;
+            margin: 0 auto;
+          }
+        }
       }
     }
     .animal_right {
       width: 345px;
       margin-left: 102px;
-      display: grid;
-      gap: 32px;
+      &_list {
+        display: grid;
+        gap: 32px;
+        .right_ad {
+          width: 336px;
+          height: 305px;
+          margin: 0 auto;
+        }
 
-      .right_ad {
-        width: 336px;
-        height: 305px;
-        margin: 0 auto;
-      }
-
-      .pairing {
-        :deep(.pairing_two_main) {
-          width: 100%;
-          .select_main {
-            padding: 24px 16px;
+        .pairing {
+          :deep(.pairing_two_main) {
+            width: 100%;
+            .select_main {
+              padding: 24px 16px;
+            }
           }
         }
       }
@@ -212,6 +228,16 @@ export default {
     &_main {
       width: 100%;
       padding: 56px 30px;
+      .animal_left {
+        .details {
+          .google_ads {
+            width: 100%;
+            .text_ad {
+              width: 90%;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -237,7 +263,6 @@ export default {
         align-items: center;
         .imgs {
           width: 67 * $pr;
-          height: 41 * $pr;
         }
         .sign_text {
           margin-left: 8 * $pr;
@@ -286,33 +311,41 @@ export default {
             display: grid;
             gap: 8 * $pr;
           }
+          .google_ads {
+            width: 100%;
+            .text_ad {
+              width: 336 * $pr;
+              height: 297 * $pr;
+            }
+          }
         }
       }
       .animal_right {
         width: 100%;
         margin-left: 0;
-        display: grid;
-        gap: 16 * $pr;
         margin-top: 16 * $pr;
+        &_list {
+          display: grid;
+          gap: 16 * $pr;
+          .lity {
+            display: none;
+          }
 
-        .lity {
-          display: none;
-        }
+          .right_ad {
+            width: 336 * $pr;
+            height: 297 * $pr;
+            margin: 0 auto;
+          }
+          .two {
+            display: none;
+          }
 
-        .right_ad {
-          width: 336 * $pr;
-          height: 297 * $pr;
-          margin: 0 auto;
-        }
-        .two {
-          display: none;
-        }
-
-        .pairing {
-          :deep(.pairing_two_main) {
-            width: 100%;
-            .select_main {
-              padding: 24 * $pr 16 * $pr;
+          .pairing {
+            :deep(.pairing_two_main) {
+              width: 100%;
+              .select_main {
+                padding: 24 * $pr 16 * $pr;
+              }
             }
           }
         }

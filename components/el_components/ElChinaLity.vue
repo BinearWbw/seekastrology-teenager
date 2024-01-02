@@ -2,7 +2,13 @@
   <div class="lity">
     <p class="lity_title">Compatibility</p>
     <div class="lity_main">
-      <a class="list" v-for="item in lityData" :key="item">{{ item }}</a>
+      <a
+        class="list"
+        :href="`/chinazodiac/details/${index + 1}/`"
+        v-for="(item, index) in lityData"
+        :key="item"
+        >{{ item }}</a
+      >
     </div>
   </div>
 </template>
@@ -16,11 +22,11 @@ export default {
         'Ox',
         'Tiger',
         'Rabbit',
-        'Horse',
-        'Snack',
-        'Monkey',
-        'Sheep',
         'Dragon',
+        'Snake',
+        'Horse',
+        'Sheep',
+        'Monkey',
         'Rooster',
         'Dog',
         'Pig',

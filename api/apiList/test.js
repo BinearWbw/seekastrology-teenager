@@ -28,4 +28,14 @@ export default (axios) => ({
   getAnimals(params) {
     return axios.get('api/zodiac/animals', { params })
   },
+
+  /* 生肖详情 */
+  getAnimalsDetail(params) {
+    return axios.get('api/zodiac/animals/detail', { params })
+  },
+
+  /* 生肖判断 */
+  getAnimalsJudge(params) {
+    return axios.get('api/zodiac/animals/judge', { params })
+  },
 })

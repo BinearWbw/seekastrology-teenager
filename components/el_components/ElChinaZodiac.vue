@@ -57,6 +57,9 @@
         </a-form-model>
       </client-only>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 
@@ -113,6 +116,7 @@ export default {
           },
         ],
       },
+      isLoading: false,
     }
   },
   methods: {
@@ -128,7 +132,18 @@ export default {
     submitZodiac() {
       this.$refs.chinaFormMini.validate((valid) => {
         if (valid) {
-          console.log('提交星座日期', this.chinaZodiac)
+          this.isLoading = true
+          this.$apiList.test
+            .getAnimalsJudge({
+              year: this.chinaZodiac.year,
+              month: this.chinaZodiac.month,
+              day: this.chinaZodiac.day,
+            })
+            .then((res) => {
+              this.isLoading = false
+              window.changePageUrl = `/chinazodiac/details/${res.id}/`
+              window.location = `/chinazodiac/details/${res.id}/`
+            })
         }
       })
     },

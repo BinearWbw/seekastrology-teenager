@@ -19,17 +19,15 @@
         <div class="el_zod">
           <el-china-zodiac></el-china-zodiac>
         </div>
-        <el-sign-new></el-sign-new>
+        <el-sign-new :zodiac="chinaZodia"></el-sign-new>
         <div class="romantic">
           <p class="romantic_title">
             Personality and (romantic) compatibility between Chinese Zodiac
             signs
           </p>
-          <div class="romantic_text" v-for="i in 10" :key="i">
-            <span class="start">The Mouse </span>
-            is compatible with the Dragon, the Monkey and the Buffalo; it is
-            incompatible with the Goat,the Horse and the Rabbit. The Mouse is
-            wise, ambitious and persuasive.
+          <div class="romantic_text" v-for="i in chinaZodia" :key="i.id">
+            <span class="start">The {{ i.name }} </span>
+            <span class="desc" v-html="i.desc"></span>
           </div>
         </div>
         <div class="more">
@@ -45,6 +43,12 @@
 export default {
   async asyncData({ error, $apiList, params }) {
     try {
+      let chinaZodia = await $apiList.test.getAnimals().then((res) => {
+        return res
+      })
+      return {
+        chinaZodia,
+      }
     } catch (e) {
       error({ statusCode: e.code, message: e.message })
     }
@@ -107,6 +111,7 @@ export default {
           line-height: 30px;
         }
         &_text {
+          display: flex;
           font-family: Rubik;
           font-size: 16px;
           font-style: normal;
@@ -117,6 +122,16 @@ export default {
           position: relative;
           .start {
             color: #9747ff;
+            width: auto;
+            padding-right: 8px;
+          }
+          .desc {
+            flex: 1;
+            overflow: hidden;
+            white-space: normal;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            display: -webkit-box;
           }
           &::before {
             position: absolute;
@@ -219,6 +234,7 @@ export default {
             position: relative;
             .start {
               color: #9747ff;
+              padding-right: 8 * $pr;
             }
             &::before {
               width: 8 * $pr;

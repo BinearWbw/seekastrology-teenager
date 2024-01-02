@@ -1,10 +1,17 @@
 <template>
   <div class="star_sign">
     <div class="star_sign_item">
-      <a class="list" v-for="(item, index) in sign" :key="index">
-        <img class="imgs" :src="item.img" alt="" />
+      <a
+        class="list"
+        :href="`/chinazodiac/details/${item.id}/`"
+        v-for="item in sign"
+        :key="item.id"
+      >
+        <div class="imgs">
+          <img :src="item.img" alt="item.name" />
+        </div>
         <p class="title">{{ item.name }}</p>
-        <p class="time">{{ item.times }}</p>
+        <!-- <p class="time">{{ item.times }}</p> -->
       </a>
     </div>
   </div>
@@ -16,64 +23,64 @@ export default {
     return {
       sign: [
         {
-          name: 'Aries',
-          times: 'Mar21 - Apr19',
-          img: require('~/assets/img/zodiac/sign/aries.svg'),
+          name: 'Rat',
+          id: '1',
+          img: require('~/assets/img/zodiac/chin/chin_1.svg'),
         },
         {
-          name: 'Taurus',
-          times: 'Apr20 - May20',
-          img: require('~/assets/img/zodiac/sign/taurus.svg'),
+          name: 'Ox',
+          id: '2',
+          img: require('~/assets/img/zodiac/chin/chin_2.svg'),
         },
         {
-          name: 'Gemini',
-          times: 'May21 - Jun20',
-          img: require('~/assets/img/zodiac/sign/gemini.svg'),
+          name: 'Tiger',
+          id: '3',
+          img: require('~/assets/img/zodiac/chin/chin_3.svg'),
         },
         {
-          name: 'Cancer',
-          times: 'Jun21 - Jul22',
-          img: require('~/assets/img/zodiac/sign/cancer.svg'),
+          name: 'Rabbit',
+          id: '4',
+          img: require('~/assets/img/zodiac/chin/chin_4.svg'),
         },
         {
-          name: 'Leo',
-          times: 'Jul23 - Aug22',
-          img: require('~/assets/img/zodiac/sign/leo.svg'),
+          name: 'Dragon',
+          id: '5',
+          img: require('~/assets/img/zodiac/chin/chin_5.svg'),
         },
         {
-          name: 'Virgo',
-          times: 'Aug23 - Sep22',
-          img: require('~/assets/img/zodiac/sign/virgo.svg'),
+          name: 'Snake',
+          id: '6',
+          img: require('~/assets/img/zodiac/chin/chin_6.svg'),
         },
         {
-          name: 'Libra',
-          times: 'Sep23 - Oct22',
-          img: require('~/assets/img/zodiac/sign/libra.svg'),
+          name: 'Horse',
+          id: '7',
+          img: require('~/assets/img/zodiac/chin/chin_7.svg'),
         },
         {
-          name: 'Scorpio',
-          times: 'Oct23 - Nov21',
-          img: require('~/assets/img/zodiac/sign/aries.svg'),
+          name: 'Sheep',
+          id: '8',
+          img: require('~/assets/img/zodiac/chin/chin_8.svg'),
         },
         {
-          name: 'Sagittarius',
-          times: 'Nov22 - Dec21',
-          img: require('~/assets/img/zodiac/sign/aries.svg'),
+          name: 'Monkey',
+          id: '9',
+          img: require('~/assets/img/zodiac/chin/chin_9.svg'),
         },
         {
-          name: 'Capricorn',
-          times: 'Dec22 - Jan19',
-          img: require('~/assets/img/zodiac/sign/aries.svg'),
+          name: 'Rooster',
+          id: '10',
+          img: require('~/assets/img/zodiac/chin/chin_10.svg'),
         },
         {
-          name: 'Aquarius',
-          times: 'Jan20 - Feb18',
-          img: require('~/assets/img/zodiac/sign/aries.svg'),
+          name: 'Dog',
+          id: '11',
+          img: require('~/assets/img/zodiac/chin/chin_11.svg'),
         },
         {
-          name: 'Pisces',
-          times: 'Feb19 - Mar20',
-          img: require('~/assets/img/zodiac/sign/aries.svg'),
+          name: 'Pig',
+          id: '12',
+          img: require('~/assets/img/zodiac/chin/chin_12.svg'),
         },
       ],
     }
@@ -122,11 +129,13 @@ export default {
     grid-template-columns: repeat(auto-fill, minmax(102px, 1fr));
     gap: 16px;
     .list {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 102px;
       height: 102px;
       border-radius: 50%;
-      padding: 17px 16px;
+      padding: 10px 0;
       background: rgba(0, 0, 0, 0.5);
       font-family: Rubik;
       text-align: center;
@@ -138,14 +147,23 @@ export default {
         transform: scale(1.1);
       }
       .imgs {
-        width: 30px;
-        height: 30px;
-        object-fit: cover;
+        width: 60px;
+        height: 60px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
       .title {
         color: #fff;
         font-size: 16px;
         line-height: 22px;
+        overflow: hidden;
+        white-space: normal;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
       }
       .time {
         color: rgba(255, 255, 255, 0.6);
@@ -175,14 +193,13 @@ export default {
       grid-template-columns: repeat(3, 1fr);
       gap: 16 * $pr 5 * $pr;
       .list {
-        display: block;
         width: 111 * $pr;
         height: 111 * $pr;
         border-radius: 50%;
-        padding: 21 * $pr 0;
+        padding: 14 * $pr 0;
         .imgs {
-          width: 30 * $pr;
-          height: 30 * $pr;
+          width: 60 * $pr;
+          height: 60 * $pr;
         }
         .title {
           color: #fff;
