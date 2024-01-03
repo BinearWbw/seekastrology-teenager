@@ -7,36 +7,8 @@
           Hello , Your palm reading result is :
         </div>
         <div class="particulars_test">
-          * This analysis is based on your selection Your long fingers are
-          seeking more contact with the outer world and more information from
-          all others around you. You are mentally active people with
-          never-ending interesting ideas. You long-finger people love details,
-          are outer-directed in taking action, and need more data than
-          short-finger people before forming your opinions. Having a whorl
-          pattern on the thumb, you are independent, inflexible,
-          individualistic, highly focussed. The sweep of the life line reveals
-          more about the personality. Sometimes the life line hugs tightly
-          around the thumb as it curves around the Venus mount.The Venus mount
-          represents certain qualities in the nature, physical stamina and
-          endurance, physical passion, warmth, sympathy, friendship and love so
-          that when the mount is undeveloped, these qualities may well be
-          somewhat lacking in the personality. The ending of the life line is
-          important. When downward lines at the end of the life line are
-          present, the person will lose energ y, usually through illness. If the
-          life line is weak after the downward slash, the person should plan for
-          his old age because he will not have full energy to take care of
-          himself. If the line remains strong, he will recover and be active
-          again. Due to having short and wide nails, you believe in quarelling,
-          criticizing and interfering in others works. You could be stubborn in
-          nature. When a line rises from life line and proceeds towards Saturn
-          Mount. It represents sudden gain of wealth or property. There will be
-          sudden promotion in the jobs. If line of head begins without joining
-          the life line, person would be independent in thought and vociferous
-          in nature. People whos palms show the straight heart line are more
-          passive in their romance, and they are most content to be the receptor
-          of love, tending to dwell in their love rather than wearing it out on
-          their sleeve. Public Figure, Famous in society, Work for Charity,
-          Abroad travel.
+          <p>* This analysis is based on your selection</p>
+          <p v-for="(item, index) in palmistry" :key="index">{{ item }}</p>
         </div>
         <div class="particulars_lis">Know About Your Hand</div>
         <palm-tis class="eltis"></palm-tis>
@@ -50,7 +22,16 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      palmistry: [],
+    }
+  },
+  mounted() {
+    this.palmistry = JSON.parse(localStorage.getItem('palmistry'))
+  },
+}
 </script>
 
 <style lang="scss" scoped>

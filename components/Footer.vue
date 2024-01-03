@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="bottom">
-      <p>Copyright © 2023 Seekastrology All rights reserved.</p>
+      <p>Copyright © 2024 Seekastrology All rights reserved.</p>
     </div>
   </footer>
 </template>

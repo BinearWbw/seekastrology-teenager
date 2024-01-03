@@ -2,11 +2,24 @@
   <div class="have">
     <div class="have_title">What Kind of Hand You Have</div>
     <div class="have_main">
-      <a class="items" v-for="i in 4" :key="i">
+      <a
+        class="items"
+        :href="`/palmistry/referral/${item.id.toString()}/`"
+        v-for="item in haveData"
+        :key="item.id"
+      >
         <div class="imgs">
-          <img src="~/assets/img/zodiac/chzo/palm.png" alt="#" />
+          <nuxt-img
+            :src="item.icon"
+            fit="cover"
+            width="169"
+            height="169"
+            :alt="item.name"
+            loading="lazy"
+            format="auto"
+          ></nuxt-img>
         </div>
-        <div class="test">Air Hand</div>
+        <div class="test">{{ item.name }}</div>
       </a>
     </div>
   </div>
@@ -15,7 +28,21 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      haveData: [],
+    }
+  },
+  async fetch() {
+    let [haveData] = await Promise.all([
+      this.$apiList.test
+        .getPalmistryList({
+          type: 2,
+        })
+        .then((res) => {
+          return res
+        }),
+    ])
+    this.haveData = haveData
   },
 }
 </script>

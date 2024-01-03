@@ -38,4 +38,29 @@ export default (axios) => ({
   getAnimalsJudge(params) {
     return axios.get('api/zodiac/animals/judge', { params })
   },
+
+  /* 手相列表 */
+  getPalmistryList(params) {
+    return axios.get('api/hand', { params })
+  },
+
+  /* 手相详情 */
+  getPalmistryMsg(params) {
+    return axios.get('api/hand/msg', { params })
+  },
+
+  /* 手相二级详情 */
+  getPalmistryChild(params) {
+    return axios.get('api/hand/child', { params })
+  },
+
+  /* 手相题目列表 */
+  getPalmistryReading() {
+    return axios.get('api/hand/reading')
+  },
+
+  /* 手相题目结果获取 */
+  getPalmistryReadingResult(data) {
+    return axios.post('api/hand/reading/result', data)
+  },
 })

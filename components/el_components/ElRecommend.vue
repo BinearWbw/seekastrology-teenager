@@ -42,7 +42,7 @@ export default {
     return {
       captionData: [
         {
-          name: '2023 Horoscope',
+          name: '2024 Horoscope',
           texts: 'Get Your Horoscope',
           imgs: require('../../assets/img/login/2023.png'),
           path: '/horroscope/aries-5-1/',

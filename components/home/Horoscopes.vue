@@ -35,7 +35,7 @@ export default {
           imgUrl: require('~/assets/img/horroscope/today.svg'),
         },
         {
-          name: '2023 Horoscope',
+          name: '2024 Horoscope',
           path: '/horroscope/aries-5-1/',
           imgUrl: require('~/assets/img/horroscope/2023.svg'),
         },

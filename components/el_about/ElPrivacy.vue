@@ -309,7 +309,7 @@
                 <p class="detaile_text_matrix">
                   Email address: sevice@Seekastrology-inc.com
                 </p>
-                <p>© 2023 Seekastrology.com, Inc. All rights reserved.</p>
+                <p>© 2024 Seekastrology.com, Inc. All rights reserved.</p>
               </div>
             </template>
           </el-collapse>

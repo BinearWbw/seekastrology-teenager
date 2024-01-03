@@ -1,18 +1,49 @@
 <template>
   <div class="palmImg">
     <div class="palmImg_main">
-      <a class="items" v-for="i in 4" :key="i">
+      <a
+        class="items"
+        :href="`/palmistry/type/${item.id.toString()}/`"
+        v-for="item in tisData"
+        :key="item.id"
+      >
         <div class="imgs">
-          <img src="~/assets/img/zodiac/chzo/palm.png" alt="#" />
+          <nuxt-img
+            :src="item.icon"
+            fit="cover"
+            width="224"
+            height="135"
+            :alt="item.name"
+            loading="lazy"
+            format="auto"
+          ></nuxt-img>
         </div>
-        <div class="tesx">What the Poruthams Indicate:</div>
+        <div class="tesx">{{ item.name }}</div>
       </a>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      tisData: [],
+    }
+  },
+  async fetch() {
+    let [tisData] = await Promise.all([
+      this.$apiList.test
+        .getPalmistryList({
+          type: 1,
+        })
+        .then((res) => {
+          return res
+        }),
+    ])
+    this.tisData = tisData
+  },
+}
 </script>
 
 <style lang="scss" scoped>

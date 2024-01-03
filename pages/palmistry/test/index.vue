@@ -4,48 +4,135 @@
       <div class="title_test">Palm Reading: Online Palmistry Guide</div>
       <google-ad :id="''" classNames="google_ad_top"></google-ad>
       <div class="answer">
-        <p class="answer_title">Select the right finger type you have.</p>
+        <p class="answer_title">{{ readingTest[choseIndex].title }}</p>
         <div class="topic">
-          <div class="topic_item" v-for="i in 3" :key="i">
+          <div
+            class="topic_item"
+            v-for="(item, index) in readingTest[choseIndex].chose"
+            :key="index"
+          >
             <label>
               <div class="imgs">
-                <img src="~/assets/img/zodiac/chzo/palm.png" alt="#" />
+                <nuxt-img
+                  :src="item.icon"
+                  fit="cover"
+                  height="93"
+                  :alt="item.name"
+                  loading="lazy"
+                  format="auto"
+                ></nuxt-img>
               </div>
               <div class="input">
                 <input
                   class="radio"
                   type="radio"
                   name="radio"
-                  value="What the Poruthams Indicate:"
+                  :value="index + 1"
                   v-model="palmFromTest"
                   @change="choosePalmTest"
                 />
                 <div class="inimg">
-                  <img src="~/assets/img/zodiac/chzo/palm.png" alt="#" />
+                  <nuxt-img
+                    :src="item.icon"
+                    fit="cover"
+                    height="93"
+                    :alt="item.name"
+                    loading="lazy"
+                    format="auto"
+                  ></nuxt-img>
                 </div>
-                <span class="spans">What the Poruthams Indicate: </span>
+                <span class="spans">{{ item.name }}</span>
               </div>
             </label>
           </div>
         </div>
         <div class="button_i">
-          <button class="button">Next</button>
+          <button class="button" @click="chcoseNext">
+            <span v-if="nextOfsubmit">Next</span> <span v-else>Done</span>
+          </button>
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <el-loading v-if="isLoading"></el-loading>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
+  async asyncData({ error, $apiList, params }) {
+    try {
+      let readingTest = await $apiList.test
+        .getPalmistryReading()
+        .then((res) => {
+          return res
+        })
+      return {
+        readingTest,
+      }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.message })
+    }
+  },
   data() {
     return {
-      palmFromTest: null,
+      palmFromTest: null, // 选择当前的答案
+      choseIndex: 0, // 问题下标
+      answerChose: [], // 选择答案数组
+      choosePalmTestExecuted: false, // 是否选择当前题目列表
+      nextOfsubmit: true, // 按钮状态切换
+      isLoading: false,
     }
   },
   methods: {
     choosePalmTest() {
-      console.log('当前选择的答案', this.palmFromTest)
+      // 当前选择的答案
+      this.choosePalmTestExecuted = true
+    },
+    chcoseNext() {
+      if (this.choosePalmTestExecuted) {
+        if (this.answerChose.length !== this.readingTest.length) {
+          this.answerChose.push(this.palmFromTest)
+        } else {
+          this.answerChose[this.choseIndex] = this.palmFromTest // 当在最后一项选择时，只会替换最后的值，不能push
+        }
+        if (this.nextOfsubmit) {
+          this.choseIndex++
+          this.nextOfsubmit =
+            this.choseIndex == this.readingTest.length - 1 ? false : true
+          this.choosePalmTestExecuted = false
+          this.palmFromTest = null
+        } else {
+          this.chcoseSubmit()
+        }
+      } else {
+        // 提示通知
+        this.$notification.open({
+          message: 'Stop',
+          description: 'Please make a selection for 1.!',
+          duration: 2,
+          style: {
+            color: '#f00',
+          },
+        })
+      }
+    },
+    chcoseSubmit() {
+      // 获取选择的结果
+      if (this.answerChose.length == this.readingTest.length) {
+        this.isLoading = true
+        this.$apiList.test
+          .getPalmistryReadingResult({
+            chose: this.answerChose,
+          })
+          .then((res) => {
+            this.isLoading = false
+            localStorage.setItem('palmistry', JSON.stringify(res))
+            window.location = '/palmistry/details/'
+            window.changePageUrl = '/palmistry/details/'
+          })
+      }
     },
   },
 }
@@ -87,10 +174,11 @@ export default {
       }
       .topic {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        place-items: center;
+        gap: 24px;
         padding: 24px 0;
         &_item {
+          width: 928px;
           border-radius: 8px;
           background: rgba(255, 255, 255, 0.08);
           transition: transform 0.3s ease-in;
@@ -103,18 +191,21 @@ export default {
             cursor: pointer;
             .imgs {
               width: 100%;
-              height: 304px;
+              height: 93px;
               border-radius: 8px;
-              overflow: hidden;
               margin-bottom: 8px;
+              display: flex;
+              justify-content: center;
+              background: #fff;
               img {
-                width: 100%;
                 height: 100%;
+                border-radius: 8px;
                 object-fit: cover;
               }
             }
             .input {
               display: flex;
+              justify-content: center;
               align-items: center;
               .radio {
                 border: 1px solid rgba(255, 255, 255, 0.6);
@@ -191,6 +282,13 @@ export default {
         height: 115px;
         margin: 0 auto;
       }
+      .answer {
+        .topic {
+          &_item {
+            width: 100%;
+          }
+        }
+      }
     }
   }
 }
@@ -253,7 +351,7 @@ export default {
                 }
                 .inimg {
                   display: block;
-                  width: 76 * $pr;
+                  max-width: 76 * $pr;
                   height: 54 * $pr;
                   border-radius: 8 * $pr;
                   margin-right: 8 * $pr;

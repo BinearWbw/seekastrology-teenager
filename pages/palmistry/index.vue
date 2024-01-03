@@ -156,6 +156,8 @@ export default {
       this.$refs.palmFrom.validate((valid) => {
         if (valid) {
           if (!this.palmFrom.sex) this.palmFrom.sex = 'Female'
+          window.location = '/palmistry/test/'
+          window.changePageUrl = '/palmistry/test/'
         }
       })
     },

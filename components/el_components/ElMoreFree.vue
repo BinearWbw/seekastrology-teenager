@@ -41,7 +41,7 @@ export default {
         {
           name: 'Palm Reading',
           imgs: require('~/assets/img/home/more/more4.svg'),
-          url: '/developing/',
+          url: '/palmistry/',
         },
         {
           name: 'Ask the Genie',
