@@ -6,7 +6,7 @@
         <div class="title">Elementary Hand</div>
         <div class="main_text">
           <div class="img_text">
-            <div class="imgs">
+            <div class="imgs" v-if="!palmisRefData.hand_icons">
               <nuxt-img
                 :src="palmisRefData.icon"
                 fit="cover"
@@ -27,6 +27,26 @@
                 other branches of Astrology, the moment of birth is and mounts
                 on one's hand that hold the key to his future
               </p>
+            </div>
+          </div>
+          <div class="hands" v-if="palmisRefData.hand_icons">
+            <div
+              class="list_hand"
+              v-for="(item, index) in palmisRefData.hand_icons"
+              :key="index"
+            >
+              <div class="imgs">
+                <nuxt-img
+                  :src="item.icon"
+                  fit="cover"
+                  width="224"
+                  height="160"
+                  :alt="item.name"
+                  loading="lazy"
+                  format="auto"
+                ></nuxt-img>
+              </div>
+              <div class="text">{{ item.name }}</div>
             </div>
           </div>
           <div class="text_p" v-html="palmisRefData.desc"></div>
@@ -127,6 +147,35 @@ export default {
             flex: 1;
           }
         }
+        .hands {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+          margin: 16px 0;
+          .list_hand {
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+            .imgs {
+              height: 160px;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+            .text {
+              color: #fff;
+              text-align: center;
+              font-family: Rubik;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 22px;
+              padding: 8px;
+            }
+          }
+        }
         .text_p {
           color: rgba(255, 255, 255, 0.6);
           font-family: Rubik;
@@ -213,6 +262,28 @@ export default {
             }
             .pli {
               flex: 1;
+            }
+          }
+          .hands {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16 * $pr;
+            margin: 16 * $pr 0;
+            .list_hand {
+              border-radius: 8 * $pr;
+              .imgs {
+                height: 130 * $pr;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+              }
+              .text {
+                font-size: 14 * $pr;
+                line-height: 18 * $pr;
+                padding: 8 * $pr;
+              }
             }
           }
           .text_p {

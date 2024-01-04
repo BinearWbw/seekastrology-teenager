@@ -265,6 +265,30 @@ const sitemap = [
         addArr.push(`/parenting/details/${item_i.name}-${item_i.id}/`)
       })
 
+      let res23 = await axios.get('https://astro.doitme.link/api/hand?type=1')
+      res23.data.map((item) => {
+        addArr.push(`/palmistry/type/${item.id}/`)
+      })
+      let res24 = await axios.get('https://astro.doitme.link/api/hand?type=2')
+      res24.data.map((item) => {
+        addArr.push(`/palmistry/referral/${item.id}/`)
+      })
+
+      await Promise.all(
+        res23.data.map(async (item) => {
+          let items = await axios.get(
+            `https://astro.doitme.link/api/hand/msg?id=${item.id}`
+          )
+          items.data?.child?.map((item_i) => {
+            addArr.push(`/palmistry/referral/${item.id}-${item_i.id}/`)
+          })
+        })
+      )
+
+      res19.map((item) => {
+        addArr.push(`/chinazodiac/details/${item}/`)
+      })
+
       routes = routes.concat(addArr)
       return routes
     },
