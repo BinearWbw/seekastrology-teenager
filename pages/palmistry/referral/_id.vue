@@ -1,6 +1,6 @@
 <template>
   <div class="palmistry_type">
-    <google-ad :id="''" classNames="google_try_top"></google-ad>
+    <google-ad :id="'3078812648'" classNames="google_try_top"></google-ad>
     <div class="palmistry_type_main">
       <div class="content">
         <div class="title">Elementary Hand</div>
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="ad_list">
-        <google-ad :id="''" classNames="google_ad_list"></google-ad>
+        <google-ad :id="'4171622210'" classNames="google_ad_list"></google-ad>
       </div>
     </div>
   </div>

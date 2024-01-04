@@ -1,6 +1,6 @@
 <template>
   <div class="details_test">
-    <google-ad :id="''" classNames="google_ad_top"></google-ad>
+    <google-ad :id="'2311745632'" classNames="google_ad_top"></google-ad>
     <div class="details_test_main">
       <div class="particulars">
         <div class="particulars_title">
@@ -14,7 +14,7 @@
         <palm-tis class="eltis"></palm-tis>
       </div>
       <div class="palm_cent">
-        <google-ad :id="''" classNames="google_ad_cent"></google-ad>
+        <google-ad :id="'5867847260'" classNames="google_ad_cent"></google-ad>
         <palm-have></palm-have>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="kund">
-    <google-ad :id="''" classNames="google_ad_top"></google-ad>
+    <google-ad :id="'1440112129'" classNames="google_ad_top"></google-ad>
     <div class="kund_main">
       <i class="logos"></i>
       <i class="bg"></i>

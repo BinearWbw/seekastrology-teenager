@@ -1,6 +1,6 @@
 <template>
   <div class="numerology">
-    <google-ad :id="''" classNames="google_ad_top"></google-ad>
+    <google-ad :id="'1771284612'" classNames="google_ad_top"></google-ad>
     <div class="numerology_main">
       <div class="calculator">
         <p class="calculator_title">Numerology Calculator</p>
@@ -187,7 +187,7 @@
         </div>
       </div>
       <div class="cal_cent">
-        <google-ad :id="''" classNames="google_ad_cat"></google-ad>
+        <google-ad :id="'1248540435'" classNames="google_ad_cat"></google-ad>
         <el-widget class="widget"></el-widget>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="china">
     <div class="china_zodiac">
-      <google-ad :id="''" classNames="google_top"></google-ad>
+      <google-ad :id="'1860319499'" classNames="google_top"></google-ad>
       <div class="sage">
         <div class="sage_title">
           <p class="li">What is Chinese Zodiac?</p>

@@ -2,7 +2,7 @@
   <div class="numerology_detail">
     <div class="numerology_detail_main">
       <p class="de_title">Numerology Report</p>
-      <google-ad :id="''" classNames="google_de_top"></google-ad>
+      <google-ad :id="'6346359415'" classNames="google_de_top"></google-ad>
       <div class="process">
         <div class="course" v-if="ifCourse">
           <div class="tips">

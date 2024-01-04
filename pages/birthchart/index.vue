@@ -1,7 +1,7 @@
 <template>
   <div class="astrolabe">
     <div class="astrolabe_main">
-      <google-ad :id="''" classNames="google_ad_top"></google-ad>
+      <google-ad :id="'5954072207'" classNames="google_ad_top"></google-ad>
       <div class="astrolabe_count">
         <h3 class="title">Free Birth Chart Calculator</h3>
         <div class="form_main">

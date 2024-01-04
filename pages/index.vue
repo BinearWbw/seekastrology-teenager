@@ -17,12 +17,9 @@
     <div class="home__main">
       <section class="module choice">
         <google-auto-ad :id="'1087831010'" classNames="google_ad_pc" />
-        <!-- <home-your-choice></home-your-choice> -->
         <el-more-free></el-more-free>
       </section>
       <section class="module explore">
-        <!-- <google-ad :id="'1626224357'" classNames="google_ad" /> -->
-        <!-- <el-explore-more /> -->
         <div class="collection">
           <home-report class="report"></home-report>
           <home-matching class="matching"></home-matching>
@@ -30,7 +27,6 @@
         </div>
       </section>
       <section class="module article">
-        <!-- <el-tarot-world /> -->
         <div class="infor_module">
           <home-infor-module
             title="Article"
@@ -68,27 +64,18 @@
           </home-tabs>
         </div>
 
-        <google-ad :id="''" classNames="google_ad_article"></google-ad>
+        <google-ad
+          :id="'1626224357'"
+          classNames="google_ad_article"
+        ></google-ad>
       </section>
       <section class="module quizzes">
-        <!-- <home-pop-articles></home-pop-articles> -->
         <home-horoscopes></home-horoscopes>
       </section>
       <section class="module new_pop">
-        <!-- <home-quizzes></home-quizzes>
-        <google-auto-ad
-          classNames="google_ad"
-          :id="'1626224357'"
-        ></google-auto-ad> -->
         <home-tarot></home-tarot>
       </section>
-      <!-- <transition name="fade">
-        <el-pairing></el-pairing>
-      </transition> -->
     </div>
-    <!-- <section class="all_tarot">
-      <tarot-all-tarot></tarot-all-tarot>
-    </section> -->
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>

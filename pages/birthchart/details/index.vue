@@ -1,7 +1,7 @@
 <template>
   <div class="chart_details">
     <div class="universe">
-      <google-ad :id="''" classNames="google_ad_top"></google-ad>
+      <google-ad :id="'9510173830'" classNames="google_ad_top"></google-ad>
       <div class="universe_chart">
         <i class="logos"></i>
         <div class="icon_bg">

@@ -1,6 +1,6 @@
 <template>
   <div class="elf">
-    <google-ad id="" classNames="elf_ad_top"></google-ad>
+    <google-ad :id="'4296525541'" classNames="elf_ad_top"></google-ad>
     <div class="elf_answer">
       <div class="genie">
         <p class="genie_title">Answer Genie</p>
@@ -33,7 +33,7 @@
       </div>
       <div class="genie_el">
         <el-widget></el-widget>
-        <google-ad id="" classNames="genie_ad"></google-ad>
+        <google-ad :id="'5568464365'" classNames="genie_ad"></google-ad>
       </div>
     </div>
     <div class="more">

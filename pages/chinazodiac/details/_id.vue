@@ -1,5 +1,6 @@
 <template>
   <div class="china_details">
+    <google-ad :id="'4486482830'" classNames="china_ad_top"></google-ad>
     <div class="china_details_top">
       <div class="item">
         <div class="imgs">
@@ -19,7 +20,7 @@
             <p class="title_p">Personality:</p>
             <div class="text_fe" v-html="zodiacData.personality"></div>
             <div class="google_ads">
-              <google-ad id="" classNames="text_ad"></google-ad>
+              <google-ad :id="'7484181264'" classNames="text_ad"></google-ad>
             </div>
             <p class="title_p">
               Love Compatibility Of The {{ zodiacData.name }}
@@ -41,9 +42,9 @@
       <div class="animal_right">
         <div class="animal_right_list">
           <el-china-lity class="lity"></el-china-lity>
-          <google-ad id="" classNames="right_ad"></google-ad>
+          <google-ad :id="'3708587784'" classNames="right_ad"></google-ad>
           <home-pairing class="pairing"></home-pairing>
-          <google-ad id="" classNames="right_ad two"></google-ad>
+          <google-ad :id="'4830097762'" classNames="right_ad two"></google-ad>
         </div>
       </div>
     </div>
@@ -82,6 +83,9 @@ export default {
 .china_details {
   width: 100%;
   position: relative;
+  .china_ad_top {
+    display: none;
+  }
   &_top {
     width: 100%;
     background: linear-gradient(
@@ -253,6 +257,13 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .china_details {
+    .china_ad_top {
+      display: flex;
+      flex-direction: column;
+      width: 300 * $pr;
+      height: 67 * $pr;
+      margin: 0 auto;
+    }
     &_top {
       .item {
         width: 100%;

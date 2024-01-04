@@ -1,6 +1,6 @@
 <template>
   <div class="kundli">
-    <google-ad :id="''" classNames="google_h5_top"></google-ad>
+    <google-ad :id="'9547237827'" classNames="google_h5_top"></google-ad>
     <div class="kundli_main">
       <div class="fromor">
         <div class="title_top">

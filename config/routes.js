@@ -183,21 +183,21 @@ const addRoutes = async () => {
     routes.push(`/parenting/details/${item_i.name}-${item_i.id}/`)
   })
 
-  let res23 = await axios.get('https://astro.doitme.link/api/hand?type=1')
-  res23.data.map((item) => {
+  let res23 = await axios.get(`https://astro.doitme.link/api/hand?type=1`)
+  res23.data.data.map((item) => {
     routes.push(`/palmistry/type/${item.id}/`)
   })
-  let res24 = await axios.get('https://astro.doitme.link/api/hand?type=2')
-  res24.data.map((item) => {
+  let res24 = await axios.get(`https://astro.doitme.link/api/hand?type=2`)
+  res24.data.data.map((item) => {
     routes.push(`/palmistry/referral/${item.id}/`)
   })
 
   await Promise.all(
-    res23.data.map(async (item) => {
+    res23.data.data.map(async (item) => {
       let items = await axios.get(
         `https://astro.doitme.link/api/hand/msg?id=${item.id}`
       )
-      items.data?.child?.map((item_i) => {
+      items.data.data?.child?.map((item_i) => {
         routes.push(`/palmistry/referral/${item.id}-${item_i.id}/`)
       })
     })
