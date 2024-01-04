@@ -21,10 +21,13 @@
             <div class="book_open" v-else>
               <div class="imgs">
                 <div class="gently_text">“ {{ oneOfThese }} “</div>
-                <img class="gently" src="~/assets/img/kundli/book_open.svg" />
+                <img class="gently" src="~/assets/img/kundli/book_open.png" />
               </div>
               <button class="button" @click="resetSprite">Ask again</button>
             </div>
+            <transition name="fade">
+              <el-loading-mini v-if="isLoading"></el-loading-mini>
+            </transition>
           </div>
         </div>
       </div>
@@ -72,6 +75,7 @@ export default {
       ],
       oneOfThese: '',
       genieStatus: true,
+      isLoading: false,
     }
   },
   methods: {
@@ -80,7 +84,12 @@ export default {
       const randomIndex = Math.floor(Math.random() * this.genieData.length)
       // 获取随机选择的数据
       this.oneOfThese = this.genieData[randomIndex]
-      this.genieStatus = false
+
+      this.isLoading = true
+      setTimeout(() => {
+        this.isLoading = false
+        this.genieStatus = false
+      }, 500)
     },
     resetSprite() {
       this.genieStatus = true
@@ -142,6 +151,7 @@ export default {
           backdrop-filter: blur(8px);
           display: flex;
           justify-content: center;
+          position: relative;
           .book {
             display: flex;
             flex-direction: column;
@@ -207,9 +217,9 @@ export default {
               .gently_text {
                 width: 560px;
                 position: absolute;
-                top: 50%;
+                top: 40%;
                 left: 50%;
-                transform: translate(-50%, -50%);
+                transform: translate(-50%, -40%);
                 color: #ffda8b;
                 text-align: center;
                 font-family: Rubik;
@@ -219,7 +229,7 @@ export default {
                 line-height: 48px;
               }
               .gently {
-                width: 675px;
+                width: 650px;
                 object-fit: cover;
               }
             }

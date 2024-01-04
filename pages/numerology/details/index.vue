@@ -37,11 +37,18 @@
             </client-only>
           </div>
           <div class="push_button">
-            <button class="btn_left" @click="scrollToPrev">
-              <i></i><span>Your Personality Number</span>
-            </button>
+            <div>
+              <button
+                class="btn_left"
+                @click="scrollToPrev"
+                v-show="prevButtonText"
+              >
+                <i></i><span>&emsp;{{ prevButtonText }}</span>
+              </button>
+            </div>
             <button class="btn_right" @click="scrollToNext">
-              <span>Your </span> Personality Number<i></i>
+              <span v-show="marke !== 3">Your&nbsp;</span
+              >{{ nextButtonText }}&emsp;<i></i>
             </button>
           </div>
         </div>
@@ -113,6 +120,35 @@ export default {
       if (this.numerUser) {
         let li = this.months.find((item) => item.li == this.numerUser.month)
         return `${li.name}  ${this.numerUser.day} , ${this.numerUser.year}`
+      }
+    },
+    prevButtonText() {
+      // 根据当前页的信息设置按钮文本
+      switch (this.marke) {
+        case 0:
+          return null
+        case 1:
+          return 'Your Life Path Number'
+        case 2:
+          return 'Your Destiny Number'
+        case 3:
+          return 'Your Personality Number'
+        default:
+          return null
+      }
+    },
+
+    nextButtonText() {
+      // 下一页的信息设置按钮文本
+      switch (this.marke) {
+        case 0:
+          return ' Destiny Number'
+        case 1:
+          return ' Personality Number'
+        case 2:
+          return ' Soul Urge Number'
+        case 3:
+          return 'Summary'
       }
     },
   },
@@ -288,7 +324,6 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 269px;
           height: 44px;
           padding: 0 24px;
           border-radius: 32px;
@@ -315,7 +350,6 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 269px;
           height: 44px;
           padding: 0 24px;
           border-radius: 32px;
@@ -523,7 +557,6 @@ export default {
             }
           }
           .btn_right {
-            width: 231 * $pr;
             height: 44 * $pr;
             padding: 0 24 * $pr;
             border-radius: 32 * $pr;

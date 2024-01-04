@@ -75,35 +75,83 @@
         <div class="referral">
           <div>
             <p class="calculator_title_mini">
-              Dasama Porutham (Ten Compatibility Factors) for Kundali Matching
+              How do you calculate your name in numerology?
             </p>
             <p class="calculator_text">
-              Dasama (ten) Porutham or Thirumana (marriage) Porutham is a vital
-              part of India's traditional marriage process. Dasama Porutham was
-              devised by Indian sages of ancient times to match the prospective
-              couple's horoscopes to check the levels of compliance and
-              flexibility between them. These top ten factors have since been
-              perceived as the yardstick for gauging the compatibility of a
-              couple in Kundali Matching. The Poruthams are evaluated mainly
-              based on the comparison of Nakshatras (birth stars) of the boy and
-              the girl.
+              Numerology numbers are a sum value of the name numbers, which
+              vibrate various energies and expressions. The digits from 1 to 8
+              are assigned for alphabets in the Chaldean system. The digit nine
+              is omitted during calculation of Chaldean name number numeroloqv.
+              Just add these alphabets' number numerology as mentioned below.
             </p>
           </div>
           <div>
             <p class="calculator_title_mini">
-              Dasama Porutham (Ten Compatibility Factors) for Kundali Matching
+              How can you calcullate the numerology numbers?
             </p>
             <p class="calculator_text">
-              Dasama (ten) Porutham or Thirumana (marriage) Porutham is a vital
-              part of India's traditional marriage process. Dasama Porutham was
-              devised by Indian sages of ancient times to match the prospective
-              couple's horoscopes to check the levels of compliance and
-              flexibility between them. These top ten factors have since been
-              perceived as the yardstick for gauging the compatibility of a
-              couple in Kundali Matching. The Poruthams are evaluated mainly
-              based on the comparison of Nakshatras (birth stars) of the boy and
-              the girl.
+              Numerology has some types of numbers, such as a life path,
+              destiny, heart desire etc. Each type of number can be derived from
+              a specific method. For the name numerology number, you can
+              calculate the numerology number with the above tool or manually
+              from the number chart. For doing it yourself use the methods, like
+              the examples given below. For the prediction of your name numbers,
+              you can still use the calculator. lt does not store your
+              information, anywhere
             </p>
+          </div>
+          <div>
+            <div class="golden">Numerology</div>
+            <table class="table_main">
+              <thead class="theads">
+                <tr>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                  <th>6</th>
+                  <th>7</th>
+                  <th>8</th>
+                  <th>9</th>
+                </tr>
+              </thead>
+              <tbody class="tbodys">
+                <tr>
+                  <td class="one">A</td>
+                  <td>J</td>
+                  <td>C</td>
+                  <td>D</td>
+                  <td>E</td>
+                  <td>F</td>
+                  <td>G</td>
+                  <td>H</td>
+                  <td>R</td>
+                </tr>
+                <tr>
+                  <td class="one">A</td>
+                  <td>J</td>
+                  <td>C</td>
+                  <td>D</td>
+                  <td>E</td>
+                  <td>F</td>
+                  <td>G</td>
+                  <td>H</td>
+                  <td>R</td>
+                </tr>
+                <tr>
+                  <td class="one">A</td>
+                  <td>J</td>
+                  <td>C</td>
+                  <td>D</td>
+                  <td>E</td>
+                  <td></td>
+                  <td>G</td>
+                  <td>H</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div>
             <p class="calculator_title_mini">What is a Destiny number?</p>
@@ -115,12 +163,25 @@
             </p>
           </div>
           <div>
-            <p class="calculator_title_mini">What is a Destiny number?</p>
+            <p class="calculator_title_mini">What is a Soul Urge number?</p>
             <p class="calculator_text">
-              The name's core numeral is a destiny or expression number.This is
-              the digit, which describes who you are and what you are or what
-              you become.This is referred to as destiny and your life's purpose.
-              This is the sum of all name numbers of alphabets.
+              The Heart Desire number is known as the Soul Urge also. The
+              numeral is calculated from vowels in a name. This is the number,
+              which describes your inner potentials, inner likes, dislikes and
+              inner resources. In simple words, what you are actually, by your
+              inner core, what is your inner desire that you kept private from
+              others.
+            </p>
+          </div>
+          <div>
+            <p class="calculator_title_mini">What is a Dream number?</p>
+            <p class="calculator_text">
+              A personality number is known as a dream or inner-dream number
+              too. This numeral is calculated from consonants in a name. This is
+              the number, which describes your personality, indeed your first
+              impression on others. In simple words, this describes how and what
+              you present yourself to the world. This isyour outer personality,
+              which may be different from your inner soul.
             </p>
           </div>
         </div>
@@ -174,6 +235,10 @@ export default {
             message: 'Please enter name',
             trigger: 'change',
           },
+          {
+            validator: this.validateEnglishWords,
+            trigger: 'blur',
+          },
         ],
         year: [
           {
@@ -201,6 +266,14 @@ export default {
     }
   },
   methods: {
+    validateEnglishWords(rule, value, callback) {
+      const regex = /^[a-zA-Z\s]+$/
+      if (!regex.test(value)) {
+        callback(new Error('Please enter English'))
+      } else {
+        callback()
+      }
+    },
     yearChange(value) {
       this.numerologyData.year = value
     },
@@ -280,6 +353,51 @@ export default {
       .referral {
         display: grid;
         gap: 16px;
+      }
+      .golden {
+        color: #ffda8b;
+        font-family: Cinzel Decorative;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        margin-bottom: 9px;
+      }
+      .table_main {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 1px 1px;
+        .theads {
+          tr {
+            th {
+              padding: 3px 8px;
+              background: #9747ff;
+              color: #fff;
+              font-family: 'Rubik';
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 22px;
+            }
+          }
+        }
+        .tbodys {
+          tr {
+            td {
+              padding: 3px 8px;
+              color: #fff;
+              font-family: 'Rubik';
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 22px;
+              background: rgba(255, 255, 255, 0.08);
+            }
+            .one {
+              background: rgba(255, 255, 255, 0.04);
+            }
+          }
+        }
       }
 
       &_from {
@@ -504,6 +622,33 @@ export default {
         .referral {
           display: grid;
           gap: 16 * $pr;
+        }
+
+        .golden {
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
+          margin-bottom: 9 * $pr;
+        }
+        .table_main {
+          border-spacing: 1 * $pr 1 * $pr;
+          .theads {
+            tr {
+              th {
+                padding: 3 * $pr 8 * $pr;
+                font-size: 14 * $pr;
+                line-height: 22 * $pr;
+              }
+            }
+          }
+          .tbodys {
+            tr {
+              td {
+                padding: 3 * $pr 8 * $pr;
+                font-size: 14 * $pr;
+                line-height: 22 * $pr;
+              }
+            }
+          }
         }
 
         &_from {
