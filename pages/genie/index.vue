@@ -11,12 +11,19 @@
         </p>
         <div class="genie_book">
           <div class="item">
-            <div class="book">
+            <div class="book" v-if="genieStatus">
               <div class="tips">
                 Focus on one question, gently click to get the answer
               </div>
               <img class="gently" src="~/assets/img/kundli/book.svg" />
-              <button class="button">Open Book</button>
+              <button class="button" @click="getTheSprite">Open Book</button>
+            </div>
+            <div class="book_open" v-else>
+              <div class="imgs">
+                <div class="gently_text">“ {{ oneOfThese }} “</div>
+                <img class="gently" src="~/assets/img/kundli/book_open.svg" />
+              </div>
+              <button class="button" @click="resetSprite">Ask again</button>
             </div>
           </div>
         </div>
@@ -36,7 +43,48 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      genieData: [
+        'YES',
+        'NO',
+        'MAYBE',
+        'NOT YET',
+        'NOT ADVISABLE',
+        'ITS FATE',
+        'ONLY TIME WILL TELL',
+        'PROBABLY',
+        'PERHAPS',
+        'DOUBTFUL',
+        'DEFINITELY',
+        'TRUST YOUR INSTINCTS',
+        'FIND YOUR VOICE',
+        'OF COURSE',
+        "DON'T BE OVERLY ANXIOUS, FEAR WILL ONLY RESTRAIN YOU",
+        'TRUST THE VOICE WITHIN, IT WILL GUIDE YOUR PATH',
+        'KEEP GOING',
+        "DON'T WAIT FOR OPPORTUNITIES, CREATE THEM",
+        'YOU ARE WORTH WAITING FOR',
+        'ACT DECISIVELY',
+        'FOLLOW MY HEART',
+        'FIND BEAUTY IN EACH DAY, BE THANKFUL FOR LIFE',
+        "SEEK ADVICE, OTHERS' EXPERIENCES HELP IN MAKING WISE DECISIONS",
+        'UNDERSTAND THE SITUATION THOROUGHLY AND MAKE WISE CHOICES',
+      ],
+      oneOfThese: '',
+      genieStatus: true,
+    }
+  },
+  methods: {
+    getTheSprite() {
+      // 获取随机索引
+      const randomIndex = Math.floor(Math.random() * this.genieData.length)
+      // 获取随机选择的数据
+      this.oneOfThese = this.genieData[randomIndex]
+      this.genieStatus = false
+    },
+    resetSprite() {
+      this.genieStatus = true
+    },
   },
 }
 </script>
@@ -88,7 +136,7 @@ export default {
         );
         .item {
           width: 100%;
-          padding: 91px 0 67px;
+          padding: 40px 0 31px;
           border-radius: 21px;
           border: 1px solid rgba(255, 255, 255, 0.4);
           backdrop-filter: blur(8px);
@@ -99,6 +147,7 @@ export default {
             flex-direction: column;
             align-items: center;
             position: relative;
+            margin: 60px 0 30px;
             .tips {
               padding: 16px 62px;
               color: #fff;
@@ -133,6 +182,49 @@ export default {
             .button {
               position: absolute;
               bottom: 84px;
+              width: 220px;
+              height: 56px;
+              padding: 8px 32px;
+              flex-shrink: 0;
+              border-radius: 42px;
+              background: #fff;
+              color: #000;
+              font-family: Rubik;
+              font-size: 22px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 30px;
+            }
+          }
+          .book_open {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .imgs {
+              position: relative;
+              .gently_text {
+                width: 560px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #ffda8b;
+                text-align: center;
+                font-family: Rubik;
+                font-size: 36px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 48px;
+              }
+              .gently {
+                width: 675px;
+                object-fit: cover;
+              }
+            }
+            .button {
+              margin-top: 16px;
               width: 220px;
               height: 56px;
               padding: 8px 32px;
@@ -267,6 +359,7 @@ export default {
             border: 1 * $pr solid rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(8 * $pr);
             .book {
+              margin: 0;
               .tips {
                 width: 283 * $pr;
                 padding: 8 * $pr 16 * $pr;
@@ -293,6 +386,40 @@ export default {
                 flex-shrink: 0;
                 border-radius: 42 * $pr;
                 background: #fff;
+                font-size: 22 * $pr;
+                line-height: 30 * $pr;
+              }
+            }
+            .book_open {
+              position: relative;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin: 30 * $pr 0;
+              .imgs {
+                position: relative;
+                .gently_text {
+                  width: 100%;
+                  position: absolute;
+                  top: 30%;
+                  left: 50%;
+                  transform: translate(-50%, -30%);
+                  padding: 0 16 * $pr;
+                  font-size: 22 * $pr;
+                  line-height: 30 * $pr;
+                }
+                .gently {
+                  width: 100%;
+                  object-fit: cover;
+                }
+              }
+              .button {
+                margin-top: 32 * $pr;
+                width: 163 * $pr;
+                height: 44 * $pr;
+                padding: 8 * $pr 32 * $pr;
+                flex-shrink: 0;
+                border-radius: 42 * $pr;
                 font-size: 22 * $pr;
                 line-height: 30 * $pr;
               }
