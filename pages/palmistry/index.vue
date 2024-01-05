@@ -117,10 +117,14 @@
         <palm-have></palm-have>
       </div>
     </div>
+    <transition name="unfold">
+      <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+    </transition>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -137,9 +141,25 @@ export default {
           },
         ],
       },
+      perform: false,
     }
   },
+  computed: {
+    ...mapGetters(['getUserInfo']),
+  },
   methods: {
+    formTouched() {
+      this.perform = true
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
+    },
+    // 登录隐藏
+    integerFormat() {
+      this.perform = false
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
+    },
+
     // 点击单选
     choosePalm() {
       if (this.palmFrom.sex === 'Male') {
@@ -153,6 +173,10 @@ export default {
 
     // 点击提交
     submitUser() {
+      if (!this.getUserInfo?.email) {
+        this.formTouched()
+        return
+      }
       this.$refs.palmFrom.validate((valid) => {
         if (valid) {
           if (!this.palmFrom.sex) this.palmFrom.sex = 'Female'

@@ -97,21 +97,46 @@
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
+    <transition name="unfold">
+      <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+    </transition>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       m_detail: null,
       f_detail: null,
       isLoading: false,
+      perform: false,
     }
   },
+  computed: {
+    ...mapGetters(['getUserInfo']),
+  },
   methods: {
+    // 登录显示
+    formTouched() {
+      this.perform = true
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
+    },
+    // 登录隐藏
+    integerFormat() {
+      this.perform = false
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
+    },
+
     // 提交信息-获取子组件填写内容
     submitKundli() {
+      if (!this.getUserInfo?.email) {
+        this.formTouched()
+        return
+      }
       const kundliForm = this.$refs.kundliFormRefMale
       const kundliFormFemale = this.$refs.kundliFormRefFemale
 
