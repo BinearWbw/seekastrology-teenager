@@ -34,34 +34,14 @@ export default {
           url: '/zodiac/',
         },
         {
-          name: 'Love Compatibility',
-          imgs: require('~/assets/img/home/more/more3.svg'),
-          url: '/astrology/',
-        },
-        {
-          name: 'Palm Reading',
-          imgs: require('~/assets/img/home/more/more4.svg'),
-          url: '/palmistry/',
-        },
-        {
-          name: 'Ask the Genie',
-          imgs: require('~/assets/img/home/more/more5.svg'),
-          url: '/genie/',
-        },
-        {
-          name: 'Chinese Signs',
-          imgs: require('~/assets/img/home/more/more6.svg'),
-          url: '/chinazodiac/',
-        },
-        {
-          name: 'Ai Tarot',
-          imgs: require('~/assets/img/home/more/more7.svg'),
-          url: '/tarot/',
-        },
-        {
           name: 'Numerology Calculator',
           imgs: require('~/assets/img/home/more/more8.svg'),
           url: '/numerology/',
+        },
+        {
+          name: 'Birth Chart',
+          imgs: require('~/assets/img/home/more/more12.svg'),
+          url: '/birthchart/',
         },
         {
           name: 'Kundli Matching',
@@ -69,9 +49,29 @@ export default {
           url: '/kundli/',
         },
         {
-          name: 'Quizzes',
-          imgs: require('~/assets/img/home/more/more10.svg'),
-          url: '/test/',
+          name: 'Palm Reading',
+          imgs: require('~/assets/img/home/more/more4.svg'),
+          url: '/palmistry/',
+        },
+        {
+          name: 'Chinese Signs',
+          imgs: require('~/assets/img/home/more/more6.svg'),
+          url: '/chinazodiac/',
+        },
+        {
+          name: 'Ask the Genie',
+          imgs: require('~/assets/img/home/more/more5.svg'),
+          url: '/genie/',
+        },
+        {
+          name: 'Ai Tarot',
+          imgs: require('~/assets/img/home/more/more7.svg'),
+          url: '/tarot/',
+        },
+        {
+          name: 'Love Compatibility',
+          imgs: require('~/assets/img/home/more/more3.svg'),
+          url: '/astrology/',
         },
         {
           name: 'Articles',
@@ -79,9 +79,9 @@ export default {
           url: '/resources/',
         },
         {
-          name: 'Birth Chart',
-          imgs: require('~/assets/img/home/more/more12.svg'),
-          url: '/birthchart/',
+          name: 'Quizzes',
+          imgs: require('~/assets/img/home/more/more10.svg'),
+          url: '/test/',
         },
       ],
     }

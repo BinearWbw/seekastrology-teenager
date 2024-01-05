@@ -261,6 +261,7 @@ export default {
       border-radius: 20 * $pr;
       padding: 12 * $pr 0;
       border: 1 * $pr solid #fff;
+      z-index: 99;
       .left_tab_list {
         padding: 6 * $pr 0 6 * $pr 24 * $pr;
         .active {

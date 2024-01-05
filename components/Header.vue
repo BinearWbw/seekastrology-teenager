@@ -144,6 +144,11 @@ export default {
               href: '/teenager/aries-1/',
             },
             {
+              title: 'Parenting',
+              path: '/parenting/',
+              href: '/parenting/',
+            },
+            {
               title: 'Pet',
               path: '/petsign/aries-1/',
               href: '/petsign/aries-1/',
@@ -156,6 +161,13 @@ export default {
           href: '/zodiac/',
           childrenShow: false,
           children: [
+            {
+              title: 'Birth Chart',
+              path: '/birthchart/',
+              href: '/birthchart/',
+            },
+            { title: 'Kundli Matching', path: '/kundli/', href: '/kundli/' },
+            { title: 'Palm Reading', path: '/palmistry/', href: '/palmistry/' },
             {
               title: 'Zodiac Signs',
               path: '/zodiac/',
@@ -224,14 +236,14 @@ export default {
               ],
             },
             {
-              title: 'Birth Chart',
-              path: '/birthchart/',
-              href: '/birthchart/',
+              title: 'Chinese Signs',
+              path: '/chinazodiac/',
+              href: '/chinazodiac/',
             },
             {
-              title: 'Parenting',
-              path: '/parenting/',
-              href: '/parenting/',
+              title: 'Numerology',
+              path: '/numerology/',
+              href: '/numerology/',
             },
           ],
         },
@@ -260,6 +272,11 @@ export default {
               title: 'Career Tarot',
               path: '/tarot/type/2/',
               href: '/tarot/type/2/',
+            },
+            {
+              title: 'Yes or No tarot',
+              path: '/developing/',
+              href: '/developing/',
             },
             {
               title: 'Universal Tarot',

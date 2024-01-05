@@ -89,6 +89,9 @@ export default {
           font-weight: 400;
           line-height: 22px;
         }
+        &:not(:last-child) {
+          padding-right: 100px;
+        }
       }
       .ant-input-suffix {
         right: 16px;

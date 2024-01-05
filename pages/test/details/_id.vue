@@ -554,7 +554,7 @@ $spacing: 55px;
       align-items: center;
       &_top {
         padding: 24px 118px 103px 118px;
-        background: #1b102f;
+        background: rgba(255, 255, 255, 0.08);
         border-radius: 30px;
         width: 100%;
         &_menu {
@@ -806,10 +806,11 @@ $spacing: 55px;
           font-family: 'Cinzel Decorative';
           font-style: normal;
           font-weight: 700;
-          font-size: 26px;
-          line-height: 36px;
+          font-size: 36px;
+          line-height: 48px;
           text-transform: uppercase;
           color: #ffffff;
+          text-align: center;
         }
         &_list {
           display: grid;
@@ -1193,6 +1194,7 @@ $spacing: 55px;
             font-size: 22 * $pr;
             line-height: 30 * $pr;
             text-align: center;
+            padding: 0 30 * $pr;
           }
           &_list {
             grid-gap: 5 * $pr;

@@ -67,8 +67,7 @@ export default {
   width: 100%;
   .deployable {
     padding: 0 48px;
-    background: #000000;
-    border: 1px solid #ffffff;
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 6px;
     &_text1 {
       overflow: hidden;
@@ -111,7 +110,6 @@ export default {
   .collapse_main {
     .deployable {
       padding: 0 24 * $pr;
-      border: 1 * $pr solid #ffffff;
       border-radius: 6 * $pr;
       &_text1 {
         overflow: hidden;

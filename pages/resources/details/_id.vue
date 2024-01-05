@@ -423,6 +423,7 @@ $spacing: 16px;
               > span {
                 font-size: 16px;
                 color: rgba(255, 255, 255, 0.6) !important;
+                background: inherit !important;
               }
             }
             :deep(img) {
