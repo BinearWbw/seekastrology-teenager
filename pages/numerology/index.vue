@@ -1,6 +1,5 @@
 <template>
   <div class="numerology">
-    <google-ad :id="'1771284612'" classNames="google_ad_top"></google-ad>
     <div class="numerology_main">
       <div class="calculator">
         <p class="calculator_title">Numerology Calculator</p>
@@ -72,6 +71,7 @@
             <button @click="numerologySubmit">Match Your Kundli</button>
           </div>
         </div>
+        <google-ad :id="'1771284612'" classNames="google_ad_top"></google-ad>
         <div class="referral">
           <div>
             <p class="calculator_title_mini">
@@ -621,9 +621,9 @@ export default {
     .google_ad_top {
       display: flex;
       flex-direction: column;
-      width: 300 * $pr;
-      height: 67 * $pr;
-      margin: 0 auto;
+      width: 336 * $pr;
+      height: 297 * $pr;
+      margin: 0 auto 24 * $pr;
     }
     &_main {
       gap: 32 * $pr;
@@ -676,7 +676,7 @@ export default {
         }
 
         &_from {
-          margin: 32 * $pr 0;
+          margin: 24 * $pr 0;
           padding: 24 * $pr 0;
           position: relative;
           &::after {
@@ -773,14 +773,10 @@ export default {
         width: 100%;
         margin: 0 auto;
         display: grid;
-        .widget {
-          order: 1;
-        }
         .google_ad_cat {
           width: 336 * $pr;
           height: 297 * $pr;
-          margin: 32 * $pr auto 0;
-          order: 2;
+          margin: 0 auto 32 * $pr;
         }
       }
     }

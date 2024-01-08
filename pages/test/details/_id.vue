@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <google-ad classNames="google_top" :id="'4213491107'" />
+    <!-- <google-ad classNames="google_top" :id="'4213491107'" /> -->
     <div class="details_main">
       <div class="details_main_left">
         <div class="details_main_left_top">
@@ -233,21 +233,21 @@
             </a>
           </div>
         </div>
-        <google-ad classNames="google_ad" :id="'5404141708'" />
+        <!-- <google-ad classNames="google_ad" :id="'5404141708'" /> -->
       </div>
       <div class="details_main_right">
-        <google-ad classNames="google_ad" :id="'2626483862'"></google-ad>
+        <!-- <google-ad classNames="google_ad" :id="'2626483862'"></google-ad> -->
         <!-- <google-ad classNames="google_ad" :id="'3899488348'"></google-ad> -->
       </div>
     </div>
-    <div class="foot_components" ref="foot_components">
+    <!-- <div class="foot_components" ref="foot_components">
       <transition name="fade">
         <home-your-choice class="choice"></home-your-choice>
       </transition>
       <transition name="fade">
         <tarot-more-tarot></tarot-more-tarot>
       </transition>
-    </div>
+    </div> -->
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
@@ -998,7 +998,7 @@ $spacing: 55px;
     }
     &_main {
       width: 100%;
-      padding: 0 16 * $pr;
+      padding: 0 16 * $pr 32 * $pr;
       margin-top: 0;
 
       &_left {

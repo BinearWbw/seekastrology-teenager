@@ -757,7 +757,7 @@ export default {
       height: 100vh;
       top: 0;
       left: 0;
-      z-index: 7;
+      z-index: 100;
       background-size: 100% 100%;
       background-repeat: no-repeat;
 

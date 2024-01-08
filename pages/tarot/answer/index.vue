@@ -2,7 +2,9 @@
   <div class="tarot-container">
     <div class="title">What the Tarot Cards Mean in This Reading</div>
     <div class="title h5_title">Tarot Cards Reading</div>
-    <google-ad classNames="title_ad" id="3725681222" />
+    <div class="li_top_ad">
+      <google-ad classNames="title_ad" id="3725681222" />
+    </div>
     <div class="tarot-section">
       <!-- <div class="add-box-wrapper">
         <google-ad classNames="ad-box" id="1311270876"></google-ad>
@@ -42,8 +44,7 @@
       </div> -->
     </div>
     <google-ad classNames="google_ad" id="8937629395" />
-    <tarot-more-tarot></tarot-more-tarot>
-    <google-ad classNames="google_ad" id="6563597553" />
+    <tarot-more-tarot class="more"></tarot-more-tarot>
   </div>
 </template>
 
@@ -239,7 +240,9 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .tarot-container {
-    padding: 30 * $pr 16 * $pr 0;
+    padding: 0 16 * $pr 32 * $pr;
+    display: flex;
+    flex-direction: column;
     > .container {
       padding: 0;
     }
@@ -249,12 +252,14 @@ export default {
       font-weight: 700;
       font-size: 36 * $pr;
       line-height: 48 * $pr;
+      order: 2;
       display: none;
       &.h5_title {
         display: block;
       }
     }
     .tarot-section {
+      order: 3;
       .ad-box {
         display: none;
       }
@@ -263,12 +268,13 @@ export default {
       }
     }
     .main-content {
+      order: 4;
       margin: 0;
       width: 100%;
       .content-list {
         .content-list-item {
           flex-direction: column;
-          margin-top: 48 * $pr;
+          margin-top: 8 * $pr;
           background-image: url('~assets/img/tarot/explain-bg.png');
           background-repeat: no-repeat;
           background-size: 100%;
@@ -311,15 +317,21 @@ export default {
     .title_ad {
       width: 100%;
       height: 114 * $pr;
-      margin: 48 * $pr auto 0;
+      margin: 0 auto 16 * $pr;
       padding: 0;
-      display: none;
+    }
+    .li_top_ad {
+      order: 1;
     }
     .google_ad {
       width: 336 * $pr;
       height: 297 * $pr;
       margin: 16 * $pr auto;
       padding: 0;
+      order: 5;
+    }
+    .more {
+      order: 6;
     }
   }
 }

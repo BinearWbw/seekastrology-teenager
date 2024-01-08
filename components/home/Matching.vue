@@ -256,10 +256,14 @@
     <transition name="fade">
       <el-loading-mini v-if="isLoading"></el-loading-mini>
     </transition>
+    <transition name="unfold">
+      <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+    </transition>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     const currentYear = new Date().getFullYear()
@@ -373,9 +377,26 @@ export default {
       },
       isLoading: false,
       isform: true,
+      perform: false,
     }
   },
+  computed: {
+    ...mapGetters(['getUserInfo']),
+  },
   methods: {
+    // 登录显示
+    formTouched() {
+      this.perform = true
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
+    },
+    // 登录隐藏
+    integerFormat() {
+      this.perform = false
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
+    },
+
     // 男 - 信息
     fetchCity(value) {
       this.fetching = true
@@ -447,6 +468,10 @@ export default {
     setContinue() {
       this.$refs.birthFormMini.validate((valid) => {
         if (valid) {
+          if (!this.getUserInfo?.email) {
+            this.formTouched()
+            return
+          }
           this.isLoading = true
           setTimeout(() => {
             this.isLoading = false

@@ -400,8 +400,8 @@ export default {
                 // this.hideLoginBox() //隐藏
                 this.$emit('choce', false)
                 sessionStorage.setItem('recom', 'one')
-                window.changePageUrl = '/userto/2/'
-                window.location.href = '/userto/2/'
+                // window.changePageUrl = '/userto/2/'
+                // window.location.href = '/userto/2/'
               } else if (res.code === 400) {
                 this.passwordValidateStatus = 'error'
                 this.errorMsg = `<span>Incorrect username or password</span>`
@@ -487,8 +487,8 @@ export default {
                   JSON.stringify(this.$store.state)
                 )
                 sessionStorage.setItem('recom', 'one')
-                window.changePageUrl = '/userto/2/'
-                window.location.href = '/userto/2/'
+                // window.changePageUrl = '/userto/2/'
+                // window.location.href = '/userto/2/'
               }
               this.isLoading = false
             })

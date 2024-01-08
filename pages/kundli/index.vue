@@ -1,21 +1,21 @@
 <template>
   <div class="kundli">
-    <google-ad :id="'9547237827'" classNames="google_h5_top"></google-ad>
+    <!-- <google-ad :id="'9547237827'" classNames="google_h5_top"></google-ad> -->
     <div class="kundli_main">
       <div class="fromor">
         <div class="title_top">
           <p class="title">Kundli Matching</p>
           <p class="introduce">
-            Kundali matching or Kundali Milan plays a prominent role in finding
-            an ideal life partner. Since marriage is one of the important events
-            of an individual's life, it is vital to take each step carefully.
-            You cannot underestimate the power of Kundali matching. After all,
-            it was considered as one of the bases for a strong and happy
+            Kundali matching plays a prominent role in finding an ideal life
+            partner. Since marriage is one of the important events of an
+            individual's life, it is vital to take each step carefully. After
+            all, it was considered as one of the bases for a strong and happy
             marriage in the olden days. Even today, matching of kundalis is the
             first step in matrimonial discussions to ensure a harmonious bond
             among the duo.
           </p>
         </div>
+        <google-ad :id="'9547237827'" classNames="google_h5_top"></google-ad>
         <div class="fromor_lis">
           <div class="fromor_item">
             <div class="boys">
@@ -58,33 +58,74 @@
           </div>
           <div class="record">
             <p class="li">What the Poruthams Indicate:</p>
-            <p class="to lefts">
-              People born in the years of the Rabbit tend to have some
-              characteristics of the real rabbits which are quiet at most times
-              but also acted swiftly when needed. Generally, the Rabbits are
-              positive, gentle and elegant. They love freedom, but once set
-              goals, they just march forward for it without distractions. They
-              are also self-disciplined, the typical kind of people who are
-              strict with themselves but tolerant of others.
+            <p class="to">
+              A cursory look at each of the ten Poruthams will tell us what they
+              indicate.
             </p>
             <p class="to lefts">
-              Though looking mild and soft, the Rabbits in fact are alert to
-              strangers and outsiders. They don't trust others easily, unlikely
-              to be fooled by others. However, they do have courteous manners in
-              social settings. Strengths: Optimistic, gracious, generous,
-              kind-hearted, witty and alert
+              Dina/ Nakshatra Porutham - this is the first porutham to be
+              checked in Kundali Matching, and it involves matching the
+              prospective couple's birth stars. It indicates longevity, general
+              wellbeing, and prosperity of the couple. It ensures a married life
+              free from poverty and ill-health.
             </p>
             <p class="to lefts">
-              Weaknesses: A little vain, emotionally unstable, easily satisfied
-              with the status-quo
+              Rasi Porutham - indicates if their Rasi (zodiac signs) are in sync
+              with each other, which means that the union can result in a happy
+              and long-lasting marriage. It checks the level of compatibility
+              between the horoscopes of the prospective couple. This accord
+              indicates good camaraderie and unison that leads to the expansion
+              of the family.
             </p>
             <p class="to lefts">
-              Rabbit Men: Rabbit men are prone to be gentlemen but they are also
-              good at pretending. They may pretend that they don't care about
-              something, however, they do care deep inside. The active thinking
-              enables them excellent negotiation skills at work. What's more,
-              Rabbit men are family-oriented and glad to undertake the household
-              chores.
+              Gana Porutham - indicates the affinity in temperament between the
+              spouses. It affirms the level of mental and spiritual
+              compatibility. There are three types of Gana(m). <br />
+              ○ Deva - good-natured, affectionate, and soft-spoken. <br />
+              ○ Manushya - a mixture of good and bad traits (anger). <br />
+              ○ Rakshasa - rude, aggressive, and unpleasant.
+            </p>
+            <p class="to lefts">
+              Yoni Porutham - is about sexual compatibility between the couple.
+              This Porutham is considered a vital factor in Kundali Matching.
+              The marriage alliance will not be considered if it does not match.
+            </p>
+            <p class="to lefts">
+              Rajju Porutham - holds a lot of significance in Kundali Matching,
+              and it is also the most sensitive. It considers the longevity of
+              the husband that will decide the duration of married life and
+              marital happiness. For a compatible match, the birth stars (Janma
+              Nakshatras) of the boy and the girl whose Kundalis are being
+              matched should not belong to the same Rajju.
+            </p>
+            <p class="to lefts">
+              Rasi Athipathi - indicates the level of compatibility based on the
+              friendliness quotient between the House Lords of the couple's
+              zodiac signs. A good Porutham indicates a happy, long-lasting, and
+              prosperous marriage.
+            </p>
+            <p class="to lefts">
+              Mahendra Porutham - denotes chances of longevity, wealth, and
+              progeny in a marriage. In Kundali Matching, this Porutham is based
+              on the couple's birth stars and is an important indicator of the
+              level of compatibility. It indicates if the man can protect his
+              wife and children and provide for them. Kundali Matching is said
+              to be good if there is Mahendra Porutham.
+            </p>
+            <p class="to lefts">
+              Stree Dheerkha Porutham - indicates if the girl has a prosperous
+              life after marriage. A strong Stree Dheerkha Porutham indicates
+              the couple will be bestowed with wealth and prosperity. The couple
+              will have a long and happy marital life.
+            </p>
+            <p class="to lefts">
+              Vasiya Porutham - indicates the level of mutual attraction, love,
+              affection, respect, and co-operation between the couple. It
+              denotes the love and intimacy between a married couple.
+            </p>
+            <p class="to lefts">
+              Nadi Porutham - This is an important compatibility in Kundali
+              Matching. This indicates the health and well-being of the couple.
             </p>
           </div>
         </div>
@@ -414,9 +455,9 @@ export default {
     .google_h5_top {
       display: flex;
       flex-direction: column;
-      width: 300 * $pr;
-      height: 117 * $pr;
-      margin: 0 auto;
+      width: 336 * $pr;
+      height: 297 * $pr;
+      margin: 24 * $pr auto 0;
     }
     &_main {
       margin: 0 auto;

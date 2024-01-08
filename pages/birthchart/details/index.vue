@@ -723,8 +723,8 @@ export default {
       width: 100%;
       padding: 0 16 * $pr;
       .google_ad_top {
-        width: 320 * $pr !important;
-        height: 117 * $pr !important;
+        width: 336 * $pr !important;
+        height: 297 * $pr !important;
         margin: 16 * $pr auto 0;
         padding: 0;
       }

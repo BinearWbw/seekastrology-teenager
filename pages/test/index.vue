@@ -33,14 +33,14 @@
             </a>
             <google-ad
               classNames="google_ad top"
-              v-if="list.length >= 8"
+              v-if="list.length >= 2"
               :id="'6715555076'"
             />
-            <google-ad
+            <!-- <google-ad
               classNames="google_ad btm"
               v-if="list.length >= 32"
               :id="'2535818672'"
-            />
+            /> -->
           </div>
           <div class="test_main_center_left_loading" v-if="loading">
             <img
@@ -260,14 +260,8 @@ $spacing: 16px;
         display: none;
       }
     }
-    &_line {
-      margin-top: 20px;
-      width: 100%;
-      height: 1px;
-      background: rgba(179, 176, 191, 0.3);
-    }
     &_center {
-      margin-top: 32px;
+      margin-top: 48px;
       display: flex;
       justify-content: space-between;
       &_left {
@@ -320,6 +314,7 @@ $spacing: 16px;
           }
           .top {
             grid-row-end: 5;
+            display: none;
           }
           .btm {
             grid-row-end: 13;
@@ -516,11 +511,8 @@ $spacing: 16px;
           }
         }
       }
-      &_line {
-        margin-top: 21 * $pr;
-      }
       &_center {
-        margin-top: 16 * $pr;
+        margin-top: 32 * $pr;
         flex-direction: column;
         &_left {
           width: 100%;
@@ -551,7 +543,9 @@ $spacing: 16px;
               margin: 24 * $pr auto;
             }
             .top {
-              grid-row-end: 6;
+              grid-row-end: 5;
+              display: flex;
+              flex-direction: column;
             }
             .btm {
               grid-row-end: 17;

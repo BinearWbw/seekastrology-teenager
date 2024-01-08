@@ -20,6 +20,10 @@
         <el-more-free></el-more-free>
       </section>
       <section class="module explore">
+        <google-ad
+          :id="'6197461548'"
+          classNames="google_ad_h5_report"
+        ></google-ad>
         <div class="collection">
           <home-report class="report"></home-report>
           <home-matching class="matching"></home-matching>
@@ -394,6 +398,9 @@ export default {
         }
       }
       &.explore {
+        .google_ad_h5_report {
+          display: none;
+        }
         .collection {
           width: 100%;
           display: grid;
@@ -606,11 +613,20 @@ export default {
         &.explore {
           margin-top: 32 * $pr;
 
+          .google_ad_h5_report {
+            display: flex;
+            flex-direction: column;
+            width: 336 * $pr;
+            height: 297 * $pr;
+            margin: 32 * $pr auto 0;
+          }
+
           .collection {
             width: 100%;
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: 32 * $pr;
+            display: none;
             .report {
               display: none;
             }

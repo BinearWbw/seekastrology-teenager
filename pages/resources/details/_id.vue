@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-        <google-ad classNames="leftAd" :id="'9575035598'" />
+        <!-- <google-ad classNames="leftAd" :id="'9575035598'" /> -->
       </div>
       <div class="details_main_right">
         <google-ad classNames="rightAd" :id="'8812069528'"></google-ad>
@@ -134,15 +134,15 @@
         </a>
       </div>
     </div>
-    <google-ad classNames="google_ad_footer" :id="'4872824519'" />
-    <div class="foot_components" ref="foot_components">
+    <!-- <google-ad classNames="google_ad_footer" :id="'4872824519'" /> -->
+    <!-- <div class="foot_components" ref="foot_components">
       <transition name="fade">
         <home-your-choice></home-your-choice>
       </transition>
       <transition name="fade">
         <tarot-more-tarot></tarot-more-tarot>
       </transition>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -158,30 +158,30 @@ export default {
     const dataDesc = this.$refs.dataDesc
     if (!dataDesc) return
     const h2Element = dataDesc.querySelector('h2')
-    if (dataDesc && h2Element) {
-      const adContainer = document.createElement('div')
-      adContainer.className = 'leftAdText'
+    // if (dataDesc && h2Element) {
+    //   const adContainer = document.createElement('div')
+    //   adContainer.className = 'leftAdText'
 
-      // 创建动态组件实例
-      const adComponent = new Vue({
-        render: (h) =>
-          h('google-ad', {
-            props: {
-              classNames: 'leftAdText',
-              id: this.idAdArray,
-            },
-          }),
-      })
+    //   // 创建动态组件实例
+    //   const adComponent = new Vue({
+    //     render: (h) =>
+    //       h('google-ad', {
+    //         props: {
+    //           classNames: 'leftAdText',
+    //           id: this.idAdArray,
+    //         },
+    //       }),
+    //   })
 
-      // 挂载动态组件
-      adComponent.$mount()
+    //   // 挂载动态组件
+    //   adComponent.$mount()
 
-      // 将动态组件的根 DOM 元素添加到容器
-      adContainer.appendChild(adComponent.$el)
+    //   // 将动态组件的根 DOM 元素添加到容器
+    //   adContainer.appendChild(adComponent.$el)
 
-      // 在 h2 元素之前插入广告容器
-      h2Element.parentNode.insertBefore(adContainer, h2Element)
-    }
+    //   // 在 h2 元素之前插入广告容器
+    //   h2Element.parentNode.insertBefore(adContainer, h2Element)
+    // }
   },
   async asyncData({ error, $apiList, params }) {
     try {
@@ -329,7 +329,7 @@ $spacing: 16px;
               flex-direction: column;
               justify-content: center;
               align-items: center;
-              width: 78px;
+              padding: 0 8px;
               height: 24px;
               background: #ffffff;
               border-radius: 42px;
@@ -709,8 +709,8 @@ $spacing: 16px;
   .details {
     .google_top {
       display: flex;
-      width: 320 * $pr;
-      height: 117 * $pr;
+      width: 336 * $pr;
+      height: 297 * $pr;
       margin: 0 auto;
     }
     &_main {
@@ -750,11 +750,11 @@ $spacing: 16px;
             &_subtitle {
               margin-top: 16 * $pr;
               &_btn {
-                width: 78 * $pr;
                 height: 24 * $pr;
                 border-radius: 42 * $pr;
                 font-size: 14 * $pr;
                 line-height: 18 * $pr;
+                padding: 0 8 * $pr;
               }
               &_time {
                 font-size: 14 * $pr;
@@ -918,6 +918,7 @@ $spacing: 16px;
       margin: 0 auto 16 * $pr;
     }
     .foot_components {
+      margin-top: 32 * $pr;
       .choice {
         margin-bottom: 32 * $pr;
       }

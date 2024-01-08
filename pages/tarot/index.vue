@@ -12,7 +12,7 @@
     </div>
     <more-tarot class="more_tarot"></more-tarot>
     <all-tarot class="mt-h5-48"></all-tarot>
-    <google-ad classNames="ad-box_row bottom_ad" id="6503037744" />
+    <!-- <google-ad classNames="ad-box_row bottom_ad" id="6503037744" /> -->
   </div>
 </template>
 

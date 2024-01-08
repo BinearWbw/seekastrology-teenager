@@ -1,6 +1,6 @@
 <template>
   <div class="china_details">
-    <google-ad :id="'4486482830'" classNames="china_ad_top"></google-ad>
+    <!-- <google-ad :id="'4486482830'" classNames="china_ad_top"></google-ad> -->
     <div class="china_details_top">
       <div class="item">
         <div class="imgs">
@@ -16,9 +16,13 @@
       <div class="animal_left">
         <div class="details">
           <div class="text_p" v-html="zodiacData.desc"></div>
+          <google-ad :id="'4486482830'" classNames="china_ad_lity"></google-ad>
           <div class="item_p">
             <p class="title_p">Personality:</p>
-            <div class="text_fe" v-html="zodiacData.personality"></div>
+            <div
+              class="text_fe personality"
+              v-html="zodiacData.personality"
+            ></div>
             <div class="google_ads">
               <google-ad :id="'7484181264'" classNames="text_ad"></google-ad>
             </div>
@@ -45,6 +49,7 @@
           <google-ad :id="'3708587784'" classNames="right_ad"></google-ad>
           <home-pairing class="pairing"></home-pairing>
           <google-ad :id="'4830097762'" classNames="right_ad two"></google-ad>
+          <el-sign-new class="sign_new"></el-sign-new>
         </div>
       </div>
     </div>
@@ -160,6 +165,10 @@ export default {
         line-height: 28px;
         display: grid;
         gap: 16px;
+
+        .china_ad_lity {
+          display: none;
+        }
         .title_p {
           color: #fff;
           font-size: 22px;
@@ -181,6 +190,25 @@ export default {
             height: 8px;
             background: #9747ff;
             border-radius: 50%;
+          }
+        }
+        .personality {
+          :deep(table) {
+            border-collapse: separate;
+            border-spacing: 1px 1px;
+            margin: 16px 0;
+            tr {
+              th {
+                padding: 3px;
+                background: #9747ff;
+              }
+            }
+            tr {
+              td {
+                padding: 3px;
+                background: rgba(255, 255, 255, 0.08);
+              }
+            }
           }
         }
         .item_p {
@@ -216,6 +244,9 @@ export default {
               padding: 24px 16px;
             }
           }
+        }
+        .sign_new {
+          display: none;
         }
       }
     }
@@ -260,8 +291,8 @@ export default {
     .china_ad_top {
       display: flex;
       flex-direction: column;
-      width: 300 * $pr;
-      height: 67 * $pr;
+      width: 336 * $pr;
+      height: 297 * $pr;
       margin: 0 auto;
     }
     &_top {
@@ -303,6 +334,13 @@ export default {
           font-size: 14 * $pr;
           line-height: 24 * $pr;
           gap: 16 * $pr;
+          .china_ad_lity {
+            display: flex;
+            flex-direction: column;
+            width: 336 * $pr;
+            height: 297 * $pr;
+            margin: 0 auto;
+          }
           .title_p {
             color: #fff;
             font-size: 18 * $pr;
@@ -352,12 +390,16 @@ export default {
           }
 
           .pairing {
+            display: none;
             :deep(.pairing_two_main) {
               width: 100%;
               .select_main {
                 padding: 24 * $pr 16 * $pr;
               }
             }
+          }
+          .sign_new {
+            display: block;
           }
         }
       }

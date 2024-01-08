@@ -231,7 +231,7 @@ export default {
             // 创建动态组件实例
             const adComponent = new Vue({
               render: (h) =>
-                h('google-ad', {
+                h('google-auto-ad', {
                   props: {
                     classNames: 'leftAdText',
                     id: this.idAdArray,
@@ -429,7 +429,6 @@ export default {
             }
             :deep(.leftAdText) {
               .leftAdText {
-                height: 130px;
                 margin-top: 48px;
                 .title {
                   height: 25px;
@@ -631,8 +630,7 @@ export default {
               }
               :deep(.leftAdText) {
                 .leftAdText {
-                  width: 300 * $pr;
-                  height: 267 * $pr;
+                  width: 100%;
                   margin: 24 * $pr auto 0;
                   .title {
                     height: 17 * $pr;

@@ -1,25 +1,25 @@
 <template>
   <div class="china">
     <div class="china_zodiac">
-      <google-ad :id="'1860319499'" classNames="google_top"></google-ad>
+      <!-- <google-ad :id="'1860319499'" classNames="google_top"></google-ad> -->
       <div class="sage">
         <div class="sage_title">
           <p class="li">What is Chinese Zodiac?</p>
           <p class="tes">
-            he Chnese zodac, known as sheng &ao or shu ang, teatres 12 anima
-            signs n this order at, 0x, ior, Habbit, Dragon, snake, Morse, sheep,
-            Monkey, $ooster, Jog and igrioinated trom anrient zonlatvy and
-            boastino a history of more than 2 0 vears, it plavs an esential rol
-            in Chinese cuture. The 2 Chinese zodiac arimals n a cycle are not
-            onyed to eoresent vears n chima, but al beeved to mtuence oeooe s
-            nersona tes, carer, comoatb iy, marrade. and fortume, 'ou can use
-            the zodiac cacuator to searct for our Chinese zodiac animal sign.
+            Known as the "Chinese Zodiac" or "Book of Elephants", the Chinese
+            Zodiac has its origins in ancient zoology and has occupied a pivotal
+            position in Chinese culture for more than 2,000 years. In China, the
+            12 zodiac signs are not only used to represent the year, but are
+            also believed to influence a person's personality, career,
+            compatibility, marriage and wealth. You can use the Chinese Zodiac
+            Calculator to search for your zodiac sign.
           </p>
         </div>
         <div class="el_zod">
           <el-china-zodiac></el-china-zodiac>
         </div>
-        <el-sign-new :zodiac="chinaZodia"></el-sign-new>
+        <google-ad :id="'1860319499'" classNames="google_top"></google-ad>
+        <el-sign-new></el-sign-new>
         <div class="romantic">
           <p class="romantic_title">
             Personality and (romantic) compatibility between Chinese Zodiac
@@ -63,14 +63,14 @@ export default {
 @use 'sass:math';
 .china {
   width: 100%;
-  padding: 24px 0 56px;
+  padding: 48px 0 56px;
   &_zodiac {
     width: 1400px;
     margin: 0 auto;
     .google_top {
       width: 970px;
       height: 275px;
-      margin: 0 auto 24px;
+      margin: 24px auto;
     }
     .sage {
       &_title {
@@ -191,7 +191,7 @@ export default {
   $pr: math.div(1vw, 3.75);
   .china {
     width: 100%;
-    padding: 0 0 32 * $pr;
+    padding: 24 * $pr 0 32 * $pr;
     &_zodiac {
       width: 100%;
       margin: 0 auto;
@@ -199,7 +199,7 @@ export default {
       .google_top {
         width: 336 * $pr;
         height: 297 * $pr;
-        margin: 0 auto 32 * $pr;
+        margin: 32 * $pr auto;
       }
       .sage {
         &_title {
@@ -232,6 +232,7 @@ export default {
             line-height: 24 * $pr;
             padding-left: 16 * $pr;
             position: relative;
+            display: inherit;
             .start {
               color: #9747ff;
               padding-right: 8 * $pr;
@@ -243,6 +244,12 @@ export default {
               top: 8 * $pr;
               border-radius: 50%;
               transform: inherit;
+            }
+            .desc {
+              -webkit-line-clamp: unset;
+              display: inline;
+              overflow: visible;
+              white-space: normal;
             }
           }
         }

@@ -1,6 +1,5 @@
 <template>
   <div class="palmistry_type">
-    <google-ad :id="'1353887188'" classNames="google_palm_top"></google-ad>
     <div class="palmistry_type_main">
       <div class="content">
         <div class="title">
@@ -73,9 +72,6 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .palmistry_type {
-  .google_palm_top {
-    display: none;
-  }
   &_main {
     width: 1400px;
     margin: 0 auto;
@@ -179,21 +175,15 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .palmistry_type {
-    .google_palm_top {
-      display: flex;
-      flex-direction: column;
-      width: 336 * $pr;
-      height: 297 * $pr;
-      margin: 0 auto;
-    }
     &_main {
       width: 100%;
       margin: 0 auto;
-      padding: 16 * $pr 16 * $pr 32 * $pr;
+      padding: 0 16 * $pr 32 * $pr;
       display: grid;
       grid-template-columns: 1fr;
       gap: 32 * $pr;
       .content {
+        order: 2;
         .title {
           &_a {
             font-size: 22 * $pr;
@@ -228,6 +218,7 @@ export default {
         }
       }
       .ad_list {
+        order: 1;
         .google_ad_lis {
           width: 336 * $pr;
           height: 297 * $pr;

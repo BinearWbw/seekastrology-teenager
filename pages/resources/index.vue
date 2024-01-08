@@ -7,11 +7,11 @@
         <home-pop-articles></home-pop-articles>
       </section>
 
-      <google-ad
+      <!-- <google-ad
         classNames="google_ad"
         :id="'5741400662'"
         ref="gooleAd"
-      ></google-ad>
+      ></google-ad> -->
       <div class="resources_main_btm" ref="mainBtm">
         <div class="resources_main_btm_tabs">
           <div
@@ -107,7 +107,7 @@
           </button>
         </div>
       </div>
-      <google-ad classNames="google_ad_btm" :id="'1344643045'" />
+      <!-- <google-ad classNames="google_ad_btm" :id="'1344643045'" /> -->
     </div>
     <div class="foot_components" ref="foot_components">
       <transition name="fade">

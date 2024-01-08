@@ -58,7 +58,7 @@
               </div>
               <div class="news_right_text">
                 <p>{{ item.name }}</p>
-                <p v-if="item.kind == 0" v-html="item.text"></p>
+                <p v-html="item.text"></p>
               </div>
               <div class="news_right_time">
                 {{ $utils.formatMMDD(item.created_at) }}
@@ -129,6 +129,8 @@ export default {
           return 'ASTROLOGY'
         case '5':
           return 'LOVE'
+        case '9':
+          return 'ZODIACSIGNS'
         default:
           return ''
       }

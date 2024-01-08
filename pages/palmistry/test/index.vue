@@ -301,17 +301,17 @@ export default {
       margin: 0 auto;
       display: grid;
       gap: 32 * $pr;
-      padding: 0 16 * $pr 32 * $pr;
+      padding: 16 * $pr 16 * $pr 32 * $pr;
       .title_test {
         font-size: 22 * $pr;
         line-height: 30 * $pr;
-        order: 2;
+        // order: 2;
       }
       .google_ad_top {
-        width: 300 * $pr;
-        height: 67 * $pr;
+        width: 336 * $pr;
+        height: 297 * $pr;
         margin: 0 auto;
-        order: 1;
+        // order: 1;
       }
       .answer {
         order: 2;

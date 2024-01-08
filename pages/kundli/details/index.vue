@@ -1,6 +1,6 @@
 <template>
   <div class="kund">
-    <google-ad :id="'1440112129'" classNames="google_ad_top"></google-ad>
+    <!-- <google-ad :id="'1440112129'" classNames="google_ad_top"></google-ad> -->
     <div class="kund_main">
       <i class="logos"></i>
       <i class="bg"></i>
@@ -82,6 +82,7 @@
             </div>
           </div>
         </div>
+        <google-ad :id="'1440112129'" classNames="google_ad_top"></google-ad>
         <div class="tips">
           {{ kundliData?.conclusion }}
         </div>
@@ -191,7 +192,7 @@ export default {
   methods: {
     capFirstLetter(i) {
       if (i) {
-        return i.charAt(0).toUpperCase() + i.slice(1)
+        return i?.charAt(0).toUpperCase() + i.slice(1)
       }
     },
     timeDataList(i) {
@@ -481,6 +482,9 @@ export default {
 @media (max-width: 1470px) {
   .kund {
     padding: 48px 30px;
+    .google_ad_top {
+      width: 100%;
+    }
     &_main {
       width: 100%;
     }
@@ -524,21 +528,22 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .kund {
-    padding: 0 16 * $pr 32 * $pr;
+    padding: 0;
     .google_ad_top {
-      width: 300 * $pr;
-      height: 117 * $pr;
+      width: 336 * $pr;
+      height: 297 * $pr;
       margin: 0 auto 16 * $pr;
     }
     &_main {
       box-shadow: 0px 8 * $pr 26 * $pr 0px rgba(0, 0, 0, 0.25);
       position: relative;
-      padding: 60 * $pr 16 * $pr 32 * $pr;
+      padding: 24 * $pr 16 * $pr 32 * $pr;
       .logos {
         top: 16 * $pr;
         left: 16 * $pr;
         width: 112 * $pr;
         height: 20 * $pr;
+        display: none;
       }
       .bg {
         width: 329 * $pr;
@@ -556,7 +561,7 @@ export default {
       .content {
         width: 100%;
         display: grid;
-        gap: 24 * $pr;
+        gap: 16 * $pr;
         .title {
           font-size: 22 * $pr;
           line-height: 30 * $pr;
@@ -623,11 +628,10 @@ export default {
           padding: 16 * $pr 24 * $pr;
         }
         .sign_table {
-          .titles {
-            font-size: 18 * $pr;
-            line-height: 30 * $pr;
-          }
           .planet {
+            *::-webkit-scrollbar {
+              display: block !important;
+            }
             .table_main {
               width: 1030 * $pr;
               border-collapse: separate;

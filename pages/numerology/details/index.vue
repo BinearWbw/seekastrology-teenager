@@ -8,12 +8,10 @@
           <div class="tips">
             <p class="tips_title">Your Personality Number</p>
             <p class="tips_text">
-              Your personality number offers insight into how others see you.
-              Derived from the consonants in your name, this is the filter
-              through which people first perceive your personality. It may not
-              accurately reflect what's underneath. Understanding how you look
-              to others at your first introduction will help you overcome
-              erroneous perceptions and let your inner self shine through.
+              Your life path number is derived from your birthdate and tells you
+              a great deal about your strengths, weaknesses, and tendencies. It
+              can help you see your path more clearly so you can spot the most
+              advantageous opportunities for your life when they pop up.
             </p>
           </div>
           <div class="slide">
@@ -65,11 +63,11 @@
           </div>
           <div class="push_button">
             <button class="btn_left" @click="goBack">
-              <i></i><span>Your Personality Number</span>
+              <i></i><span>&nbsp;Your Personality Number</span>
             </button>
-            <!-- <button class="btn_right">
-              <span>Your </span> Personality Number<i></i>
-            </button> -->
+            <button class="btn_right" @click="reStart">
+              Start Over&nbsp;<i></i>
+            </button>
           </div>
         </div>
       </div>
@@ -174,6 +172,10 @@ export default {
     goBack() {
       window.changePageUrl = '/numerology/details/'
       window.location.href = '/numerology/details/'
+    },
+    reStart() {
+      window.changePageUrl = '/numerology/'
+      window.location.href = '/numerology/'
     },
   },
 }
@@ -458,17 +460,15 @@ export default {
       margin: 0 auto;
       display: grid;
       gap: 0;
-      padding: 0 16 * $pr 32 * $pr;
+      padding: 16 * $pr 16 * $pr 32 * $pr;
       .de_title {
         font-size: 22 * $pr;
         line-height: 30 * $pr;
-        order: 2;
       }
       .google_de_top {
-        width: 300 * $pr;
-        height: 67 * $pr;
-        margin: 0 auto 16 * $pr;
-        order: 1;
+        width: 336 * $pr;
+        height: 287 * $pr;
+        margin: 16 * $pr auto 0;
       }
       .process {
         padding: 16 * $pr 0;

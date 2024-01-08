@@ -118,7 +118,6 @@
       <home-pop-articles class="sign_pop"></home-pop-articles>
     </transition>
     <div class="sign_tarot">
-      <google-ad classNames="google_ad" :id="'6197461548'" />
       <tarot-all-tarot></tarot-all-tarot>
     </div>
     <!-- <transition name="fade">
@@ -397,9 +396,6 @@ export default {
   }
   .sign_tarot {
     margin-bottom: 56px;
-    .google_ad {
-      display: none;
-    }
   }
 }
 
@@ -582,13 +578,6 @@ export default {
       padding-bottom: 32 * $pr;
       :deep(.cards-box) {
         margin-top: 16 * $pr;
-      }
-      .google_ad {
-        display: flex;
-        flex-direction: column;
-        width: 336 * $pr;
-        height: 297 * $pr;
-        margin: 0 auto;
       }
     }
   }
