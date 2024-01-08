@@ -1,7 +1,8 @@
 <template>
   <div class="tarot-container">
     <Loading v-if="loading" />
-    <div class="title mt-48 mt-44-mobile">the major</div>
+    <google-ad classNames="ad-box_row" id="9736555803" />
+    <div class="title mt-44-mobile">the major</div>
     <div class="tarot-section">
       <!-- <div class="add-box-wrapper mt-48_minus">
         <google-ad classNames="ad-box" id="3171147457"></google-ad>
@@ -41,7 +42,7 @@
         <google-ad classNames="ad-box" id="6918820771"></google-ad>
       </div> -->
     </div>
-    <google-ad classNames="ad-box_row" id="9736555803" />
+    <!-- <google-ad classNames="ad-box_row" id="9736555803" /> -->
     <div class="title mt-24">minor arcana definitions</div>
     <div class="minor-tab" @click="toggleMinor">
       <button
@@ -99,7 +100,7 @@
         </a>
       </li>
     </ul>
-    <google-ad classNames="ad-box_row mb-24" id="6311466051" />
+    <!-- <google-ad classNames="ad-box_row mb-24" id="6311466051" /> -->
   </div>
 </template>
 
@@ -279,7 +280,7 @@ export default {
 .ad-box_row {
   width: 1200px;
   height: 305px;
-  margin: 0 auto;
+  margin: 24px auto 0;
 }
 .minor-tab {
   text-align: center;
@@ -325,6 +326,9 @@ export default {
 }
 .mt-48_minus {
   margin-top: -48px;
+}
+.mt-44-mobile {
+  margin-top: 24px;
 }
 .mt-24 {
   margin-top: 24px;
@@ -390,7 +394,7 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .tarot-container {
-    padding: 16 * $pr;
+    padding: 0 16 * $pr 16 * $pr;
   }
   .add-box-wrapper {
     display: none;
@@ -510,7 +514,7 @@ export default {
   }
 
   .mt-44-mobile {
-    margin-top: 44 * $pr;
+    margin-top: 16 * $pr;
   }
 }
 </style>

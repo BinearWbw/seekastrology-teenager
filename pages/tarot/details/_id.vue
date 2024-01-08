@@ -1,18 +1,16 @@
 <template>
   <div class="tarot-container">
-    <div class="title mt-48 mt-44-mobile">
-      {{ cardsInfo.name }} Card Meaning
-    </div>
+    <google-ad
+      classNames="ad-box_row"
+      style="width: 100%"
+      id="3247169078"
+    ></google-ad>
+    <div class="title mt-44-mobile">{{ cardsInfo.name }} Card Meaning</div>
     <div class="tarot-section">
       <!-- <div class="add-box-wrapper">
         <google-ad classNames="ad-box" id="2979575766"></google-ad>
       </div> -->
       <div class="main-content">
-        <google-ad
-          classNames="ad-box_row"
-          style="width: 100%"
-          id="3247169078"
-        ></google-ad>
         <ul class="content-list">
           <li class="content-list-item">
             <div class="card-wrapper">
@@ -111,7 +109,7 @@ export default {
   width: 100%;
   max-width: 1400px;
   height: 130px;
-  margin: 0 auto;
+  margin: 24px auto 0;
 }
 .bottom_ad {
   padding: 24px 0;
@@ -170,6 +168,9 @@ export default {
 .mt-48_minus {
   margin-top: -48px;
 }
+.mt-44-mobile {
+  margin-top: 24px;
+}
 .mt-32 {
   margin-top: 32px;
 }
@@ -212,7 +213,7 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .tarot-container {
-    padding: 16 * $pr;
+    padding: 0 16 * $pr 16 * $pr;
   }
   .main-content {
     margin: 0 !important;
@@ -222,9 +223,9 @@ export default {
     display: none;
   }
   .ad-box_row {
-    width: 100%;
-    height: 300 * $pr;
-    display: none;
+    width: 336 * $pr;
+    height: 297 * $pr;
+    margin: 0 auto;
   }
 
   .title {
@@ -237,9 +238,9 @@ export default {
   .content-list {
     .content-list-item {
       flex-direction: column;
-      margin-top: 26 * $pr;
+      margin-top: 8 * $pr;
       .card-wrapper {
-        margin: 0 auto 26 * $pr;
+        margin: 0 auto 24 * $pr;
         .card-img {
           width: 170 * $pr;
           height: 340 * $pr;
@@ -254,10 +255,12 @@ export default {
         ::v-deep p {
           margin-top: 16 * $pr;
         }
-        ::deep(h3),
-        ::deep(h2) {
+        :deep(h3),
+        :deep(h2) {
           font-size: 22 * $pr;
           line-height: 30 * $pr;
+          margin: 0 !important;
+          margin-top: 0;
         }
       }
     }
@@ -269,7 +272,7 @@ export default {
     margin-bottom: 24 * $pr;
   }
   .mt-44-mobile {
-    margin-top: 32 * $pr;
+    margin-top: 16 * $pr;
   }
 }
 </style>
