@@ -35,7 +35,7 @@ export default {
 @use 'sass:math';
 .tarot-container {
   color: #fff;
-  margin-top: 40px;
+  margin: 40px 0;
   .tarot_top_ad {
     margin: 0 auto;
     max-width: 1400px;
@@ -58,7 +58,7 @@ export default {
         line-height: 30px;
         text-align: center;
         padding: 0 260px;
-        margin-top: 24px;
+        margin-top: 16px;
       }
     }
     .h5_google {
@@ -156,8 +156,8 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .tarot-container {
-    // padding: 16 * $pr;
-    margin-top: 0;
+    padding: 0 0 48 * $pr;
+    margin: 0;
     .title {
       padding: 0;
     }

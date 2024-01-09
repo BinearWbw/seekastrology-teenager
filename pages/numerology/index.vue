@@ -319,6 +319,19 @@ export default {
             })
             .then((res) => {
               this.isLoading = false
+              if (res.code == 400) {
+                // 提示通知
+                this.$notification.open({
+                  message: 'Stop',
+                  description: res.msg,
+                  duration: 3,
+                  style: {
+                    color: '#f00',
+                  },
+                })
+                return
+              }
+
               localStorage.setItem('numerology', JSON.stringify(res))
               localStorage.setItem(
                 'numerUser',

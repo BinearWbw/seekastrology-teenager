@@ -402,6 +402,7 @@ export default {
               tzone: this.birthForm.place.timezoneOffset,
             })
             .then((res) => {
+              console.log('出生图', res)
               if (res.code) {
                 // 提示通知
                 this.$notification.open({

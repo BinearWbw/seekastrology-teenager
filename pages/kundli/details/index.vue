@@ -505,6 +505,7 @@ export default {
           .planet {
             overflow-x: scroll;
             &::-webkit-scrollbar {
+              display: block;
               height: 5px;
             }
             &::-webkit-scrollbar-thumb {

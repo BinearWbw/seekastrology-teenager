@@ -543,10 +543,9 @@ $spacing: 55px;
   }
   &_main {
     width: 1400px;
-    margin: 0 auto;
+    margin: 56px auto 48px;
     display: flex;
     justify-content: space-between;
-    margin-top: 56px;
     &_left {
       width: 1046px;
       display: flex;
@@ -999,7 +998,7 @@ $spacing: 55px;
     &_main {
       width: 100%;
       padding: 0 16 * $pr 32 * $pr;
-      margin-top: 0;
+      margin: 0;
 
       &_left {
         width: 100%;

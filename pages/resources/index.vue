@@ -571,6 +571,7 @@ $spacing: 16px;
       margin: 24px auto;
     }
     &_btm {
+      margin-top: 40px;
       scroll-margin-top: -50px;
       &_tabs {
         display: flex;
@@ -779,6 +780,7 @@ $spacing: 16px;
     }
   }
   .foot_components {
+    margin-top: 56px;
     .choice {
       margin-bottom: 56px;
     }
@@ -1063,6 +1065,7 @@ $spacing: 16px;
 
       &_btm {
         width: 100%;
+        margin-top: 32 * $pr;
         scroll-margin-top: 60 * $pr;
         &_tabs {
           width: 91%;
@@ -1185,6 +1188,7 @@ $spacing: 16px;
       }
     }
     .foot_components {
+      margin-top: 32 * $pr;
       .choice {
         margin-bottom: 32 * $pr;
       }

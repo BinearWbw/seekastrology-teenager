@@ -193,6 +193,7 @@ export default {
             m_detail: this.m_detail,
           })
           .then((res) => {
+            console.log('昆德里数据', res)
             this.isLoading = false
             localStorage.setItem(
               'kundli',
