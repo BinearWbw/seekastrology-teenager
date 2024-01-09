@@ -80,9 +80,9 @@
         <home-tarot></home-tarot>
       </section>
     </div>
-    <transition name="fade">
+    <!-- <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
-    </transition>
+    </transition> -->
   </article>
 </template>
 
@@ -157,16 +157,16 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
 
     //首页loading
-    let newUser = localStorage.getItem('newUser')
-    if (!newUser) {
-      localStorage.setItem('newUser', JSON.stringify(1))
-      window.addEventListener('message', this.handleMessage)
-      this.timer = setTimeout(() => {
-        this.isLoading = false
-      }, 3000)
-    } else {
-      this.isLoading = false
-    }
+    // let newUser = localStorage.getItem('newUser')
+    // if (!newUser) {
+    //   localStorage.setItem('newUser', JSON.stringify(1))
+    //   window.addEventListener('message', this.handleMessage)
+    //   this.timer = setTimeout(() => {
+    //     this.isLoading = false
+    //   }, 3000)
+    // } else {
+    //   this.isLoading = false
+    // }
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
@@ -205,18 +205,18 @@ export default {
       }
     },
     //首页loading
-    handleMessage(e) {
-      if (
-        typeof e.data === 'string' &&
-        e.data.includes('adReady') &&
-        e.origin == 'https://googleads.g.doubleclick.net'
-      ) {
-        console.log('ok')
-        this.show = false
-        this.timer && clearTimeout(this.timer)
-        this.timer = null
-      }
-    },
+    // handleMessage(e) {
+    //   if (
+    //     typeof e.data === 'string' &&
+    //     e.data.includes('adReady') &&
+    //     e.origin == 'https://googleads.g.doubleclick.net'
+    //   ) {
+    //     console.log('ok')
+    //     this.show = false
+    //     this.timer && clearTimeout(this.timer)
+    //     this.timer = null
+    //   }
+    // },
     handleTabSelected(index) {
       this.selectedTabIndex = index
     },

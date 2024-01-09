@@ -310,12 +310,6 @@ export default {
         }
       }
     }
-    .mexplore {
-      //   padding-top: 48px;
-    }
-  }
-  .joins {
-    // padding-top: 48px;
   }
   .google_line {
     padding: 24px 0;
