@@ -176,13 +176,15 @@ export default {
         top: 0,
         behavior: 'smooth',
       })
-      window.changePageUrl = `/petsign/${option.name
-        .replace(/[^a-zA-Z0-9\\s]/g, '-')
-        .toLowerCase()}-${option.id}/`
-      window.location.href = `/petsign/${option.name
-        .replace(/[^a-zA-Z0-9\\s]/g, '-')
-        .toLowerCase()}-${option.id}/`
       this.isLoading = true
+      // 创建a标签方便触发穿插广告
+      const signa = document.createElement('a')
+      signa.href = `/petsign/${option.name
+        .replace(/[^a-zA-Z0-9\\s]/g, '-')
+        .toLowerCase()}-${option.id}/`
+      document.body.appendChild(signa)
+      signa.click()
+      document.body.removeChild(signa)
     },
     toUpperBig(str) {
       return str?.charAt(0).toUpperCase() + str?.slice(1)

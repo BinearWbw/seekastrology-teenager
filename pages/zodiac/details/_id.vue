@@ -240,13 +240,15 @@ export default {
         top: 0,
         behavior: 'smooth',
       })
-      window.changePageUrl = `/zodiac/details/${option.name
-        .replace(/[^a-zA-Z0-9\\s]/g, '-')
-        .toLowerCase()}-${option.id}/`
-      window.location.href = `/zodiac/details/${option.name
-        .replace(/[^a-zA-Z0-9\\s]/g, '-')
-        .toLowerCase()}-${option.id}/`
       this.isLoading = true
+      // 创建a标签方便触发穿插广告
+      const signa = document.createElement('a')
+      signa.href = `/zodiac/details/${option.name
+        .replace(/[^a-zA-Z0-9\\s]/g, '-')
+        .toLowerCase()}-${option.id}/`
+      document.body.appendChild(signa)
+      signa.click()
+      document.body.removeChild(signa)
     },
     handlePageShow() {
       this.isLoading = false

@@ -274,13 +274,15 @@ export default {
         top: 0,
         behavior: 'smooth',
       })
-      window.changePageUrl = `/horroscope/${option.name
-        .replace(/[^a-zA-Z0-9\\s]/g, '-')
-        .toLowerCase()}-${option.id}/`
-      window.location.href = `/horroscope/${option.name
-        .replace(/[^a-zA-Z0-9\\s]/g, '-')
-        .toLowerCase()}-${option.id}/`
       this.isLoading = true
+      // 创建a标签方便触发穿插广告
+      const signa = document.createElement('a')
+      signa.href = `/horroscope/${option.name
+        .replace(/[^a-zA-Z0-9\\s]/g, '-')
+        .toLowerCase()}-${option.id}/`
+      document.body.appendChild(signa)
+      signa.click()
+      document.body.removeChild(signa)
     },
     setCorresponding(i) {
       // 点击其他运势

@@ -382,8 +382,12 @@ export default {
       })
       this.isLoading = true
       const pathNames = this.pathName.substring(0, this.pathName.indexOf('-'))
-      window.changePageUrl = `/zodiac/type/${pathNames}-${option.id}/`
-      window.location.href = `/zodiac/type/${pathNames}-${option.id}/`
+      // 创建a标签方便触发穿插广告
+      const signa = document.createElement('a')
+      signa.href = `/zodiac/type/${pathNames}-${option.id}/`
+      document.body.appendChild(signa)
+      signa.click()
+      document.body.removeChild(signa)
     },
     handlePageShow() {
       this.isLoading = false

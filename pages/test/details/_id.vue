@@ -236,7 +236,7 @@
         <!-- <google-ad classNames="google_ad" :id="'5404141708'" /> -->
       </div>
       <div class="details_main_right">
-        <!-- <google-ad classNames="google_ad" :id="'2626483862'"></google-ad> -->
+        <google-ad classNames="google_ad" :id="'2626483862'"></google-ad>
         <!-- <google-ad classNames="google_ad" :id="'3899488348'"></google-ad> -->
       </div>
     </div>
