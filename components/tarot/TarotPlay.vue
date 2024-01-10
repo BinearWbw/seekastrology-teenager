@@ -45,7 +45,7 @@
       <div
         class="question-box"
         :class="{ 'question-top': questionTop }"
-        v-if="type != 4"
+        v-if="type != 4 && type != 5"
       >
         <img
           class="icon-img"
@@ -75,7 +75,7 @@
         <div
           class="card-row"
           @mouseover="shuffleCards('topCard', $event)"
-          v-if="type != 4"
+          v-if="type != 4 && type != 5"
         >
           <div
             class="card-wrapper"
@@ -99,7 +99,7 @@
         </div>
         <div
           class="card-row"
-          :style="{ width: type != 4 ? '890px' : '550px' }"
+          :style="{ width: type != 4 && type != 5 ? '890px' : '550px' }"
           @mouseover="shuffleCards('bottomCard', $event)"
         >
           <div
@@ -108,7 +108,7 @@
             :key="'bottom-' + index"
             :ref="'bottomCard' + index"
             :style="{
-              top: type != 4 ? '404px' : '240px',
+              top: type != 4 && type != 5 ? '404px' : '240px',
               left: (index - 1) * 20 + 'px',
             }"
             @click.once="handleClike"
@@ -128,7 +128,9 @@
           <nuxt-img
             class="item-img"
             v-for="(item, index) in showList"
-            :class="{ 'img-rotate': item.desc_type == 2 }"
+            :class="{
+              'img-rotate': item.desc_type == 2 && item.meaning_type !== 5,
+            }"
             :key="index"
             :src="item.icon || '/'"
             :alt="item.name"
@@ -148,7 +150,7 @@
 
     <div class="mobile-wrapper">
       <div class="mobile-tarot-box" v-if="!inPlay">
-        <div class="card-list-wrapper" v-if="type == 4">
+        <div class="card-list-wrapper" v-if="type == 4 || type == 5">
           <ul class="card-list">
             <li
               class="card-list-item"
@@ -171,7 +173,7 @@
             Extract 1 Sheet
           </div>
         </div>
-        <div class="mobile-question" v-if="type != 4">
+        <div class="mobile-question" v-if="type != 4 && type != 5">
           <textarea
             v-model="question"
             maxlength="200"
@@ -258,7 +260,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: '1', //类型:1-爱情、2-事业、3-通用、4-日常
+      default: '1', //类型:1-爱情、2-事业、3-通用、4-日常、5-YesOrNo
     },
   },
   watch: {
@@ -319,6 +321,7 @@ export default {
         2: 'Reveal Your Career Tarot<br /> Reading by<br /> Clicking 5 Cards Below',
         3: "Reveal Your the problems<br /> you're facing by<br /> Clicking 3 Cards Below",
         4: 'The Tarot Card of the Day is...',
+        5: 'The Tarot Card of the Day is...',
       },
       clickCount: 0,
     }
@@ -385,6 +388,7 @@ export default {
         2: 5,
         3: 3,
         4: 1,
+        5: 1,
       }
       if (typeNum[this.type] === this.clickCount && this.$refs.list_mask) {
         this.$refs.list_mask.style.display = 'block' //阻止点击
@@ -407,6 +411,9 @@ export default {
         type: Number(this.type),
         question: this.question,
       })
+
+      console.log('卡片', res, this.question)
+      console.log('问题', this.question)
 
       if (res && res.length && this.cardsInfo.length == 0) {
         this.cardsInfo = res
@@ -437,6 +444,12 @@ export default {
           }
           break
         case '4':
+          if (this.showList.length == 0) {
+            this.isSelected = true
+            this.showList.push(this.cardsInfo[this.showList.length])
+          }
+          break
+        case '5':
           if (this.showList.length == 0) {
             this.isSelected = true
             this.showList.push(this.cardsInfo[this.showList.length])

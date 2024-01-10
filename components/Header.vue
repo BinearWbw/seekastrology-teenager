@@ -276,7 +276,7 @@ export default {
             {
               title: 'Yes or No tarot',
               path: '/developing/',
-              href: '/developing/',
+              href: '/tarot/type/5/',
             },
             {
               title: 'Universal Tarot',

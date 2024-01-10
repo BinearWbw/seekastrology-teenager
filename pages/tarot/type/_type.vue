@@ -20,7 +20,6 @@
       </div>
       <google-ad class="ad-box_row mt_80" id="6755169246" />
       <more-tarot class="el_more" :type="type"></more-tarot>
-      <!-- <google-ad class="ad-box_row mt_80" id="7545189503" /> -->
     </div>
     <home-your-choice class="el_choice"></home-your-choice>
     <div class="el_pop">
@@ -55,6 +54,7 @@ export default {
         2: 'Tarot Career Reading',
         3: 'Universal Tarot Reading',
         4: 'Choose 1 Cards From The Deck Below:',
+        5: 'Choose 1 Cards From The Deck Below:',
       },
       textObj: {
         1: {
@@ -207,7 +207,7 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .tarot-container {
-    padding: 0 16 * $pr 0;
+    padding: 16 * $pr 16 * $pr 0;
     .title {
       font-size: 22 * $pr;
       line-height: 30 * $pr;

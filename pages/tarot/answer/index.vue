@@ -19,7 +19,10 @@
             <div class="card-wrapper">
               <nuxt-img
                 class="card-img"
-                :class="{ 'card-img-rotate': item.desc_type == 2 }"
+                :class="{
+                  'card-img-rotate':
+                    item.desc_type == 2 && item.meaning_type !== 5,
+                }"
                 :src="item.icon || '/'"
                 fit="cover"
                 width="340"
@@ -34,14 +37,14 @@
               <div class="desc-title">
                 {{ subTitleText[type][index] || item.card_name }}
               </div>
-              <div class="desc-text">{{ item.desc }}</div>
+              <div class="answer" v-show="item.meaning_type == 5">
+                Answer: {{ item.desc_type == 1 ? 'Yes' : 'No' }}
+              </div>
+              <div class="desc-text" v-html="item.desc"></div>
             </div>
           </li>
         </ul>
       </div>
-      <!-- <div class="add-box-wrapper">
-        <google-ad classNames="ad-box" id="6372025868"></google-ad>
-      </div> -->
     </div>
     <google-ad classNames="google_ad" id="8937629395" />
     <tarot-more-tarot class="more"></tarot-more-tarot>
@@ -60,6 +63,7 @@ export default {
         2: 'Tarot Career Reading',
         3: 'Universal Tarot Reading',
         4: 'Choose 1 Cards From The Deck Below:',
+        5: 'Choose 1 Cards From The Deck Below:',
       },
       subTitleText: {
         //类型:1-爱情、2-事业、3-通用、4-日常
@@ -77,6 +81,7 @@ export default {
         ],
         3: ['Past', 'Present', 'Future'],
         4: ['card name'],
+        5: ['card name'],
       },
     }
   },
@@ -86,7 +91,7 @@ export default {
     if (cardsInfo) {
       this.cardsInfo = JSON.parse(cardsInfo)
     }
-    if (this.type == 4) {
+    if (this.type == 4 || this.type == 5) {
       this.subTitleText[this.type][0] = this.cardsInfo[0].card_name
     }
   },
@@ -97,7 +102,7 @@ export default {
 @use 'sass:math';
 .tarot-container {
   color: #fff;
-  padding: 40px 0 0;
+  padding: 40px 0;
   .title {
     font-family: 'Cinzel Decorative';
     font-style: normal;
@@ -160,13 +165,22 @@ export default {
         font-size: 36px;
         line-height: 48px;
       }
+      .answer {
+        font-family: 'Rubik';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+        margin-top: 8px;
+        color: #fff;
+      }
       .desc-text {
         font-family: 'Rubik';
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
         line-height: 28px;
-        margin-top: 40px;
+        margin-top: 24px;
         color: #d2d3d7;
       }
     }
@@ -298,6 +312,11 @@ export default {
             font-weight: 400;
             font-size: 22 * $pr;
             line-height: 30 * $pr;
+          }
+          .answer {
+            font-size: 18 * $pr;
+            line-height: 28 * $pr;
+            margin-top: 8 * $pr;
           }
           .desc-text {
             font-family: 'Rubik';
