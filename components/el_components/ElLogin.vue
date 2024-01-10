@@ -33,7 +33,7 @@
         </transition>
       </div>
       <transition name="unfold">
-        <el-login-form v-if="formOf" @choce="showunde"></el-login-form>
+        <el-login-form v-show="formOf" @choce="showunde"></el-login-form>
       </transition>
     </client-only>
   </div>
@@ -59,10 +59,13 @@ export default {
       return this.getUserInfo.user_name || 'MY profile'
     },
     userImgIcon() {
-      const imgUrl = this.getUserInfo.icon
-        ? `${this.$config.cdnUrl + this.getUserInfo.icon}`
-        : require('~/assets/img/login/user.svg')
-      return imgUrl
+      const imgUrls = this.getUserInfo.icon
+      if (!imgUrls) return require('~/assets/img/login/user.svg')
+      if (imgUrls.includes('http')) {
+        return imgUrls
+      } else {
+        return this.$config.cdnUrl + imgUrls
+      }
     },
   },
   mounted() {

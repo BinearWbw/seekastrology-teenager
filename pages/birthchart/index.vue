@@ -177,7 +177,7 @@
       </div>
     </div>
     <transition name="unfold">
-      <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+      <el-login-form v-show="perform" @choce="integerFormat"></el-login-form>
     </transition>
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>

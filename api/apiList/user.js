@@ -60,4 +60,9 @@ export default (axios) => ({
   getAiDegree(params) {
     return axios.get('api/openai/count', { params })
   },
+
+  /* 获取Google登录的用户数据 */
+  getGoogleUser(data) {
+    return axios.post('api/astro/login/google', data)
+  },
 })

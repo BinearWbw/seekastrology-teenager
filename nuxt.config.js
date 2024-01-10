@@ -5,7 +5,7 @@ module.exports = {
   target: 'static',
 
   generate: {
-    // crawler: false,
+    crawler: false,
     manifest: false,
     concurrency: 500,
     interval: 100,

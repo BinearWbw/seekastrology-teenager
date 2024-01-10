@@ -2,6 +2,10 @@
 <html {{ HTML_ATTRS }}>
   <head {{ HEAD_ATTRS }}>
     {{HEAD}}
+    <meta
+      name="google-signin-client_id"
+      content="557942159499-httiicel41q108da15eh982gs2ukk33s.apps.googleusercontent.com"
+    />
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6430486603399192"
@@ -69,6 +73,7 @@
         signalGooglefcPresent()
       })()
     </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body {{ BODY_ATTRS }}>
     <script type="text/javascript" charset="utf-8">
@@ -237,6 +242,9 @@
           }
         }
       })
+      function handleSeekResponses(response) {
+        localStorage.setItem('seekastrologyGoogle', JSON.stringify(response))
+      }
     </script>
   </body>
 </html>

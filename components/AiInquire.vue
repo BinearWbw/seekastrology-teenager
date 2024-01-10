@@ -99,7 +99,7 @@
       </div>
     </div>
     <transition name="unfold">
-      <el-login-form v-if="formOf" @choce="showLogin"></el-login-form>
+      <el-login-form v-show="formOf" @choce="showLogin"></el-login-form>
     </transition>
   </div>
 </template>

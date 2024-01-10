@@ -12,7 +12,9 @@
       </div>
     </div>
     <transition name="unfold">
-      <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+      <client-only>
+        <el-login-form v-show="perform" @choce="integerFormat"></el-login-form>
+      </client-only>
     </transition>
   </div>
 </template>

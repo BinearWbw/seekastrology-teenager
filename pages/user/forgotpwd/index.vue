@@ -37,7 +37,7 @@
       </div>
     </div>
     <transition name="unfold">
-      <el-login-form v-if="formOf" @choce="forgotSend"></el-login-form>
+      <el-login-form v-show="formOf" @choce="forgotSend"></el-login-form>
     </transition>
   </div>
 </template>

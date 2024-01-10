@@ -31,7 +31,7 @@
               alt="logo_bg"
             />
             <!-- 登录 -->
-            <div class="form_login" v-if="openif">
+            <div class="form_login" v-show="openif">
               <h2 class="login_h2">LogIn</h2>
               <client-only>
                 <a-form-model
@@ -94,22 +94,27 @@
                 No account?
                 <span class="up" @click="toggleSignUp">Sign Up</span>
               </div>
-              <div class="text_or" v-show="false"><span>or</span></div>
-              <div class="logo_google" v-show="false">
-                <i>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="40"
-                    height="40"
-                    viewBox="0 0 40 40"
-                    fill="none"
-                  >
-                    <path
-                      d="M5.10671 12.5166C6.49339 9.75532 8.62066 7.4341 11.2508 5.81237C13.8809 4.19063 16.9101 3.33228 20 3.33325C24.4917 3.33325 28.265 4.98325 31.15 7.67492L26.3717 12.4549C24.6434 10.8033 22.4467 9.96159 20 9.96159C15.6584 9.96159 11.9834 12.8949 10.675 16.8333C10.3417 17.8333 10.1517 18.8999 10.1517 19.9999C10.1517 21.0999 10.3417 22.1666 10.675 23.1666C11.985 27.1066 15.6584 30.0383 20 30.0383C22.2417 30.0383 24.15 29.4466 25.6434 28.4466C26.5091 27.8766 27.2503 27.137 27.822 26.2724C28.3938 25.4079 28.7844 24.4363 28.97 23.4166H20V16.9699H35.6967C35.8934 18.0599 36 19.1966 36 20.3783C36 25.4549 34.1834 29.7283 31.03 32.6283C28.2734 35.1749 24.5 36.6666 20 36.6666C17.8111 36.6675 15.6434 36.237 13.6209 35.3997C11.5985 34.5624 9.76079 33.3348 8.21298 31.787C6.66516 30.2392 5.43753 28.4015 4.60027 26.379C3.763 24.3565 3.3325 22.1889 3.33338 19.9999C3.33338 17.3099 3.97671 14.7666 5.10671 12.5166Z"
-                      fill="white"
-                    />
-                  </svg>
-                </i>
+              <div class="text_or"><span>or</span></div>
+              <div class="logo_google">
+                <div class="google_btn" @click="googleUserLogin">
+                  <div
+                    id="g_id_onload"
+                    data-client_id="557942159499-httiicel41q108da15eh982gs2ukk33s.apps.googleusercontent.com"
+                    data-context="signin"
+                    data-ux_mode="popup"
+                    data-callback="handleSeekResponses"
+                    data-auto_prompt="false"
+                  ></div>
+                  <div
+                    class="g_id_signin"
+                    data-type="standard"
+                    data-shape="pill"
+                    data-theme="outline"
+                    data-text="signin_with"
+                    data-size="large"
+                    data-logo_alignment="left"
+                  ></div>
+                </div>
               </div>
             </div>
             <!-- 注册 -->
@@ -228,23 +233,6 @@
                 Already have an account?
                 <span class="up" @click="toggleLogin">Login</span>
               </div>
-              <div class="text_or" v-if="false"><span>or</span></div>
-              <div class="logo_google" v-if="false">
-                <i>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="40"
-                    height="40"
-                    viewBox="0 0 40 40"
-                    fill="none"
-                  >
-                    <path
-                      d="M5.10671 12.5166C6.49339 9.75532 8.62066 7.4341 11.2508 5.81237C13.8809 4.19063 16.9101 3.33228 20 3.33325C24.4917 3.33325 28.265 4.98325 31.15 7.67492L26.3717 12.4549C24.6434 10.8033 22.4467 9.96159 20 9.96159C15.6584 9.96159 11.9834 12.8949 10.675 16.8333C10.3417 17.8333 10.1517 18.8999 10.1517 19.9999C10.1517 21.0999 10.3417 22.1666 10.675 23.1666C11.985 27.1066 15.6584 30.0383 20 30.0383C22.2417 30.0383 24.15 29.4466 25.6434 28.4466C26.5091 27.8766 27.2503 27.137 27.822 26.2724C28.3938 25.4079 28.7844 24.4363 28.97 23.4166H20V16.9699H35.6967C35.8934 18.0599 36 19.1966 36 20.3783C36 25.4549 34.1834 29.7283 31.03 32.6283C28.2734 35.1749 24.5 36.6666 20 36.6666C17.8111 36.6675 15.6434 36.237 13.6209 35.3997C11.5985 34.5624 9.76079 33.3348 8.21298 31.787C6.66516 30.2392 5.43753 28.4015 4.60027 26.379C3.763 24.3565 3.3325 22.1889 3.33338 19.9999C3.33338 17.3099 3.97671 14.7666 5.10671 12.5166Z"
-                      fill="white"
-                    />
-                  </svg>
-                </i>
-              </div>
             </div>
           </div>
         </div>
@@ -256,6 +244,7 @@
   </div>
 </template>
 
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 import CryptoJS from 'crypto-js'
 import { mapMutations } from 'vuex'
@@ -374,7 +363,13 @@ export default {
 
       openif: true,
       nextif: true,
+      googleIntervalId: null,
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.openif = true
+    })
   },
   methods: {
     ...mapMutations(['hideLoginBox']),
@@ -551,10 +546,41 @@ export default {
     },
     hideLoginContent() {
       //   this.hideLoginBox() //隐藏
+      clearInterval(this.googleIntervalId)
       this.$emit('choce', false)
     },
     backUp() {
       this.nextif = true
+    },
+    // google 登录
+    googleUserLogin() {
+      console.log('点击google登录')
+      this.googleIntervalId = setInterval(() => {
+        const usData = JSON.parse(localStorage.getItem('seekastrologyGoogle'))
+        console.log('google登录-usData', usData)
+        if (usData) {
+          this.$apiList.user
+            .getGoogleUser({
+              site_id: process.env.origin,
+              google_token: usData.credential,
+            })
+            .then((res) => {
+              //存储userInfo
+              console.log('google 登录', res)
+              //跳转到首页
+              this.$store.commit('UPDATE_USERINFO', res)
+              localStorage.setItem(
+                'userInfo',
+                JSON.stringify(this.$store.state)
+              )
+              // this.hideLoginBox() //隐藏
+              localStorage.setItem('seekastrologyGoogle', null)
+              sessionStorage.setItem('recom', 'one')
+              this.$emit('choce', false)
+              clearInterval(this.googleIntervalId)
+            })
+        }
+      }, 2000)
     },
   },
 }
@@ -787,7 +813,11 @@ export default {
             }
             .logo_google {
               height: 40px;
-              text-align: center;
+              display: flex;
+              justify-content: center;
+              .google_btn {
+                width: 40px;
+              }
             }
             .next_user {
               .btn {

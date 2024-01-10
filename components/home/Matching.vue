@@ -257,7 +257,7 @@
       <el-loading-mini v-if="isLoading"></el-loading-mini>
     </transition>
     <transition name="unfold">
-      <el-login-form v-if="perform" @choce="integerFormat"></el-login-form>
+      <el-login-form v-show="perform" @choce="integerFormat"></el-login-form>
     </transition>
   </div>
 </template>
