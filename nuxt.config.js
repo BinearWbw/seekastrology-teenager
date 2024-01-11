@@ -164,6 +164,11 @@ module.exports = {
     // htmlAttrs: {
     //   translate: 'no',
     // },
+    script: [
+      {
+        src: 'https://accounts.google.com/gsi/client',
+      },
+    ],
   },
 
   router: {

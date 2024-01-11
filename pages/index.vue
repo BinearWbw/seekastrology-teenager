@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   async asyncData({ error, $apiList, params }) {
@@ -151,6 +152,9 @@ export default {
       selectedTabIndex: 0,
     }
   },
+  computed: {
+    ...mapGetters(['getUserInfo']),
+  },
   mounted() {
     this.activeInit()
     this.isScrolled = window.scrollY < 600
@@ -167,6 +171,9 @@ export default {
     // } else {
     //   this.isLoading = false
     // }
+    if (this.getUserInfo?.email) {
+      this.initializeGoogleSignIn() // 初始化google
+    }
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
@@ -219,6 +226,31 @@ export default {
     // },
     handleTabSelected(index) {
       this.selectedTabIndex = index
+    },
+    // 继续上次Google账号登录提示
+    initializeGoogleSignIn() {
+      window.onload = () => {
+        google.accounts.id.initialize({
+          client_id:
+            '557942159499-httiicel41q108da15eh982gs2ukk33s.apps.googleusercontent.com',
+          callback: this.handleCredentialResponse,
+        })
+        google.accounts.id.prompt()
+      }
+    },
+    handleCredentialResponse(response) {
+      // 处理 Google Sign-In 的凭据响应
+      console.log('Google Sign-In response:', response)
+      this.$apiList.user
+        .getGoogleUser({
+          site_id: process.env.origin,
+          google_token: response.credential,
+        })
+        .then((res) => {
+          this.$store.commit('UPDATE_USERINFO', res)
+          localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
+          sessionStorage.setItem('recom', 'one')
+        })
     },
   },
 }
