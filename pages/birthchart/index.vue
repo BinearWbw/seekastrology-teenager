@@ -230,6 +230,10 @@ export default {
             message: 'Please enter name',
             trigger: 'change',
           },
+          {
+            validator: this.validateNumbers,
+            trigger: 'blur',
+          },
         ],
         gender: [
           {
@@ -456,6 +460,14 @@ export default {
     },
     minutesChange(value) {
       this.birthForm.min = value
+    },
+    validateNumbers(rule, value, callback) {
+      const regex = /^[^0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]+$/
+      if (regex.test(value)) {
+        callback()
+      } else {
+        callback(new Error('Please enter correct name'))
+      }
     },
   },
 }

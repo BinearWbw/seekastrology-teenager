@@ -405,15 +405,15 @@ export default {
               display: flex;
               flex-direction: column;
               align-items: center;
-              margin: 30 * $pr 0;
+              padding: 58.2 * $pr 0 40 * $pr;
               .imgs {
                 position: relative;
                 .gently_text {
                   width: 100%;
                   position: absolute;
-                  top: 30%;
+                  top: 20%;
                   left: 50%;
-                  transform: translate(-50%, -30%);
+                  transform: translate(-50%, -20%);
                   padding: 0 16 * $pr;
                   font-size: 22 * $pr;
                   line-height: 30 * $pr;

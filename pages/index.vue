@@ -171,7 +171,7 @@ export default {
     // } else {
     //   this.isLoading = false
     // }
-    if (this.getUserInfo?.email) {
+    if (!this.getUserInfo?.email) {
       this.initializeGoogleSignIn() // 初始化google
     }
   },

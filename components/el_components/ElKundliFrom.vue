@@ -160,6 +160,10 @@ export default {
             message: 'Please enter name',
             trigger: 'change',
           },
+          {
+            validator: this.validateNumbers,
+            trigger: 'blur',
+          },
         ],
         year: [
           {
@@ -233,6 +237,14 @@ export default {
       this.birthFormMini.place = option.data.attrs.channel
       //   this.cityData = [] // 清除搜索的城市内容
       this.fetching = false
+    },
+    validateNumbers(rule, value, callback) {
+      const regex = /^[^0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]+$/
+      if (regex.test(value)) {
+        callback()
+      } else {
+        callback(new Error('Please enter correct name'))
+      }
     },
     yearChange(value) {
       this.birthFormMini.year = value
