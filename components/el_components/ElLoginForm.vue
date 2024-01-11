@@ -96,23 +96,22 @@
               </div>
               <div class="text_or"><span>or</span></div>
               <div class="logo_google">
-                <div class="google_btn" @click="googleUserLogin">
+                <div class="google_btn">
                   <div
                     id="g_id_onload"
                     data-client_id="557942159499-httiicel41q108da15eh982gs2ukk33s.apps.googleusercontent.com"
                     data-context="signin"
                     data-ux_mode="popup"
-                    data-callback="handleSeekResponses"
+                    data-callback="handleSeekResponsesList"
                     data-auto_prompt="false"
                   ></div>
                   <div
                     class="g_id_signin"
-                    data-type="standard"
-                    data-shape="pill"
-                    data-theme="outline"
+                    data-type="icon"
+                    data-shape="circle"
+                    data-theme="filled_blue"
                     data-text="signin_with"
                     data-size="large"
-                    data-logo_alignment="left"
                   ></div>
                 </div>
               </div>
@@ -243,12 +242,20 @@
     </transition>
   </div>
 </template>
-
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 import CryptoJS from 'crypto-js'
 import { mapMutations } from 'vuex'
 export default {
+  head() {
+    return {
+      script: [
+        {
+          src: 'https://accounts.google.com/gsi/client',
+          defer: true,
+        },
+      ],
+    }
+  },
   data() {
     const validatePass2 = (rule, value, callback) => {
       if (!value) {
@@ -368,7 +375,28 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.openif = true
+      window.handleSeekResponsesList = (response) => {
+        console.log('login 登录组件内', response)
+        if (response) {
+          this.$apiList.user
+            .getGoogleUser({
+              site_id: process.env.origin,
+              google_token: response.credential,
+            })
+            .then((res) => {
+              //存储userInfo
+              console.log('google 登录', res)
+              //跳转到首页
+              this.$store.commit('UPDATE_USERINFO', res)
+              localStorage.setItem(
+                'userInfo',
+                JSON.stringify(this.$store.state)
+              )
+              sessionStorage.setItem('recom', 'one')
+              this.$emit('choce', false)
+            })
+        }
+      }
     })
   },
   methods: {
@@ -553,35 +581,35 @@ export default {
       this.nextif = true
     },
     // google 登录
-    googleUserLogin() {
-      console.log('点击google登录')
-      this.googleIntervalId = setInterval(() => {
-        const usData = JSON.parse(localStorage.getItem('seekastrologyGoogle'))
-        console.log('google登录-usData', usData)
-        if (usData) {
-          this.$apiList.user
-            .getGoogleUser({
-              site_id: process.env.origin,
-              google_token: usData.credential,
-            })
-            .then((res) => {
-              //存储userInfo
-              console.log('google 登录', res)
-              //跳转到首页
-              this.$store.commit('UPDATE_USERINFO', res)
-              localStorage.setItem(
-                'userInfo',
-                JSON.stringify(this.$store.state)
-              )
-              // this.hideLoginBox() //隐藏
-              localStorage.setItem('seekastrologyGoogle', null)
-              sessionStorage.setItem('recom', 'one')
-              this.$emit('choce', false)
-              clearInterval(this.googleIntervalId)
-            })
-        }
-      }, 2000)
-    },
+    // googleUserLogin() {
+    //   console.log('点击google登录')
+    //   this.googleIntervalId = setInterval(() => {
+    //     const usData = JSON.parse(localStorage.getItem('seekastrologyGoogle'))
+    //     console.log('google登录-usData', usData)
+    //     if (usData) {
+    //       this.$apiList.user
+    //         .getGoogleUser({
+    //           site_id: process.env.origin,
+    //           google_token: usData.credential,
+    //         })
+    //         .then((res) => {
+    //           //存储userInfo
+    //           console.log('google 登录', res)
+    //           //跳转到首页
+    //           this.$store.commit('UPDATE_USERINFO', res)
+    //           localStorage.setItem(
+    //             'userInfo',
+    //             JSON.stringify(this.$store.state)
+    //           )
+    //           // this.hideLoginBox() //隐藏
+    //           localStorage.setItem('seekastrologyGoogle', null)
+    //           sessionStorage.setItem('recom', 'one')
+    //           this.$emit('choce', false)
+    //           clearInterval(this.googleIntervalId)
+    //         })
+    //     }
+    //   }, 2000)
+    // },
   },
 }
 </script>
@@ -815,8 +843,10 @@ export default {
               height: 40px;
               display: flex;
               justify-content: center;
+              position: relative;
               .google_btn {
                 width: 40px;
+                z-index: 100;
               }
             }
             .next_user {

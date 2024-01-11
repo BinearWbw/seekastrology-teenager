@@ -182,8 +182,9 @@ export default {
           :deep(h3),
           :deep(h2),
           :deep(h4),
-          :deep(h5) {
-            color: rgba(255, 255, 255, 0.6);
+          :deep(h5),
+          :deep(*) {
+            color: rgba(255, 255, 255, 0.6) !important;
           }
         }
       }
@@ -279,6 +280,13 @@ export default {
           .text_p {
             font-size: 14 * $pr;
             line-height: 24 * $pr;
+            :deep(h3),
+            :deep(h2),
+            :deep(h4),
+            :deep(h5),
+            :deep(*) {
+              color: rgba(255, 255, 255, 0.6) !important;
+            }
           }
         }
       }

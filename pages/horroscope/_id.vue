@@ -7,8 +7,8 @@
         <div class="datails_list">
           <div class="list_top">
             <h3>
-              {{ toUpperBig(currentName) }}
-              <br />
+              <!-- {{ toUpperBig(currentName) }}
+              <br /> -->
               {{ moreData[comentIds].name }}
               Horoscopes
             </h3>

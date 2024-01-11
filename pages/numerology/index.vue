@@ -4,13 +4,10 @@
       <div class="calculator">
         <p class="calculator_title">Numerology Calculator</p>
         <p class="calculator_text">
-          Numerology calculator helps you decode your magical numbers, hidden
-          powers, personality traits, and life challenges using numerology
-          number and name. Numerology, the study of numbers is based on your
-          name and birth date. The sum of value, which then becomes your ruling
-          number, provides a correlation of energies exist in the cosmic plan.
-          So, unleash your hidden talent and discover what numbers hold for your
-          future using the tool, Numerology Calculator:
+          Numerology calculator helps you decode yourmagical numbers, hidden
+          powers, personality traitsand life challenges using umerology number
+          andname. The sum of value.which then becomes your ruling number,
+          provides acorrelation of energies exist in the cosmic plan.
         </p>
         <div class="calculator_from">
           <div class="froms">

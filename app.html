@@ -2,10 +2,7 @@
 <html {{ HTML_ATTRS }}>
   <head {{ HEAD_ATTRS }}>
     {{HEAD}}
-    <meta
-      name="google-signin-client_id"
-      content="557942159499-httiicel41q108da15eh982gs2ukk33s.apps.googleusercontent.com"
-    />
+    <script src="https://accounts.google.com/gsi/client" async></script>
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6430486603399192"
@@ -15,20 +12,6 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-98PTT13FKE"
     ></script>
-    <script
-      async="async"
-      src="https://www.google.com/adsense/search/ads.js"
-    ></script>
-    <script type="text/javascript" charset="utf-8">
-      ;(function (g, o) {
-        ;(g[o] =
-          g[o] ||
-          function () {
-            ;(g[o]['q'] = g[o]['q'] || []).push(arguments)
-          }),
-          (g[o]['t'] = 1 * new Date())
-      })(window, '_googCsa')
-    </script>
     <script>
       window.dataLayer = window.dataLayer || []
       function gtag() {
@@ -73,20 +56,8 @@
         signalGooglefcPresent()
       })()
     </script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body {{ BODY_ATTRS }}>
-    <script type="text/javascript" charset="utf-8">
-      var pageOptions = {
-        pubId: 'pub-9616389000213823',
-        styleId: '5290249905',
-        query: 'astro', // Make sure the correct query is placed here!
-      }
-      var adblock1 = {
-        container: 'afscontainer1',
-      }
-      _googCsa('ads', pageOptions, adblock1)
-    </script>
     <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-PPR73G6"
@@ -96,7 +67,6 @@
       ></iframe
     ></noscript>
     {{ APP }}
-    <div id="afscontainer1"></div>
     <script>
       window.onlyOne = false
       window.addEventListener('beforeunload', () => {
@@ -242,9 +212,6 @@
           }
         }
       })
-      function handleSeekResponses(response) {
-        localStorage.setItem('seekastrologyGoogle', JSON.stringify(response))
-      }
     </script>
   </body>
 </html>

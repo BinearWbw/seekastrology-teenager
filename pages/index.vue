@@ -589,8 +589,8 @@ export default {
       }
     }
     .google_ad_h5 {
-      width: 320 * $pr !important;
-      height: 117 * $pr !important;
+      width: 320 * $pr;
+      max-height: 117 * $pr;
       margin: 0 auto 16 * $pr;
       padding: 0;
       display: flex;
