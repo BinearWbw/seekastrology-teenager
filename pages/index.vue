@@ -28,7 +28,7 @@
           :id="'6197461548'"
           classNames="google_ad_h5_report"
         ></google-ad>
-        <div class="collection">
+        <div class="collection" id="MORESERVICES">
           <home-report class="report"></home-report>
           <home-matching class="matching"></home-matching>
           <home-pairing class="pairing"></home-pairing>

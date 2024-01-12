@@ -379,6 +379,9 @@ export default {
       bodyStyle.overflow = ''
     },
     submintForm() {
+      dataLayer.push({
+        event: 'getResultButton',
+      })
       if (!this.getUserInfo?.email) {
         this.formTouched()
         return

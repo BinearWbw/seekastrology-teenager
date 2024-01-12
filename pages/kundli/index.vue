@@ -174,6 +174,9 @@ export default {
 
     // 提交信息-获取子组件填写内容
     submitKundli() {
+      dataLayer.push({
+        event: 'getResultButton',
+      })
       if (!this.getUserInfo?.email) {
         this.formTouched()
         return

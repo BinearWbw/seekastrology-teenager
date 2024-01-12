@@ -150,6 +150,9 @@ export default {
       bodyStyle.overflow = ''
     },
     submitZodiac() {
+      dataLayer.push({
+        event: 'getResultButton',
+      })
       if (!this.getUserInfo?.email) {
         this.formTouched()
         return

@@ -1,7 +1,7 @@
 <template>
   <div class="free">
     <div class="free_title">More Free Astrology Services</div>
-    <div class="free_main">
+    <div class="free_main" id="MORESERVICES">
       <a
         :href="`${item.url}${getCurrentRoute}`"
         class="sign"

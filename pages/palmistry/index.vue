@@ -168,6 +168,9 @@ export default {
 
     // 点击提交
     submitUser() {
+      dataLayer.push({
+        event: 'getResultButton',
+      })
       if (!this.getUserInfo?.email) {
         this.formTouched()
         return

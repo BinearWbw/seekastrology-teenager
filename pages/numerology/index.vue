@@ -301,6 +301,9 @@ export default {
       bodyStyle.overflow = ''
     },
     numerologySubmit() {
+      dataLayer.push({
+        event: 'getResultButton',
+      })
       if (!this.getUserInfo?.email) {
         this.formTouched()
         return

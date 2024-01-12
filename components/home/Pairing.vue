@@ -110,6 +110,9 @@ export default {
       this.genderList.femalesId = option.id
     },
     getStartPairingEl() {
+      dataLayer.push({
+        event: 'getResultButton',
+      })
       if (this.genderList.males && this.genderList.females) {
         sessionStorage.setItem('genderList', JSON.stringify(this.genderList))
         if (sessionStorage.getItem('genderList'))

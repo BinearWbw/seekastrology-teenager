@@ -494,6 +494,9 @@ export default {
       })
     },
     retrieveData() {
+      dataLayer.push({
+        event: 'getResultButton',
+      })
       this.$refs.femaleFormMini.validate((valid) => {
         if (valid) {
           const m_detail = {
