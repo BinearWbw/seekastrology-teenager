@@ -25,9 +25,9 @@
             Personality and (romantic) compatibility between Chinese Zodiac
             signs
           </p>
-          <div class="romantic_text" v-for="i in chinaZodia" :key="i.id">
-            <span class="start">The {{ i.name }} </span>
-            <span class="desc" v-html="i.desc"></span>
+          <div class="romantic_text" v-for="i in localityData" :key="i.id">
+            <span class="start">{{ i.name }}</span>
+            <span class="desc">{{ i.desc }}</span>
           </div>
         </div>
         <div class="more">
@@ -54,7 +54,58 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      localityData: [
+        {
+          name: 'The Mouse',
+          desc: 'is compatible with the Dragon, the Monkey and the Buffalo; it is incompatible with the Goat, the Horse and the Rabbit. The Mouse is wise, ambitious and persuasive.',
+        },
+        {
+          name: 'The Buffalo',
+          desc: 'is compatible with the Mouse, the Snake and the Rooster; it is incompatible with the Horse, the Dog and the Goat. The Buffalo is loyal, trustworthy and determined.',
+        },
+        {
+          name: 'The Tiger',
+          desc: 'is compatible with the Horse and the Dog; it is incompatible with the Snake and the Monkey. The tiger is courageous and charismatic. In other words, a leader.',
+        },
+        {
+          name: 'The Rabbit',
+          desc: 'is compatible with the Goat, the Pig and the Dog; it is destined to divorce with the Mouse and the Dragon. The Rabbit is modest, sincere and sociable.',
+        },
+        {
+          name: 'The Dragon',
+          desc: 'is compatible with the Mouse, the Monkey and the Rooster; it is incompatible with the Buffalo, the Rabbit and the Dog. The Dragon is eccentric and spiritual. An artist.',
+        },
+        {
+          name: 'The Snake',
+          desc: 'is compatible with the Buffalo and the Rooster; it is destined to divorce with the Tiger and the Pig. The Snake is intelligent, intuitive and elegant.',
+        },
+        {
+          name: 'The Horse',
+          desc: 'is compatible with the Tiger, the Goat and the Dog; it is incompatible with the Mouse, the Buffalo and the Rabbit. The Horse is loyal, ambitious and strong.',
+        },
+        {
+          name: 'The Goat',
+          desc: 'is compatible with the Rabbit, Horse and Pig; it is incompatible with the Buffalo and the Dog. The Goat is sensible, calm and given to certain tastes.',
+        },
+        {
+          name: 'The Monkey',
+          desc: 'is compatible with the Mouse, the Dragon and the Snake; it is incompatible with the Tiger and the Pig. The Monkey is lucky, versatile and clever.',
+        },
+        {
+          name: 'The Rooster',
+          desc: 'is compatible with the Buffalo, the Dragon and the Snake; it is incompatible with the Mouse, the Rabbit and the Horse. The Rooster is energetic, honest and flexible.',
+        },
+        {
+          name: 'The Dog',
+          desc: 'is compatible with the Tiger, Rabbit and Horse; it is incompatible with the Buffalo, Dragon, Goat and Rooster. The dog is loyal. courageous and adaptable.',
+        },
+        {
+          name: 'The Pig',
+          desc: 'is compatible with the Goat and the Rooster; it is incompatible with the Snake, the Monkey and... the Pig. The Pig is determined, optimistic and sincere.',
+        },
+      ],
+    }
   },
 }
 </script>
@@ -232,10 +283,10 @@ export default {
             line-height: 24 * $pr;
             padding-left: 16 * $pr;
             position: relative;
-            display: inherit;
+            display: inline-block;
             .start {
               color: #9747ff;
-              padding-right: 8 * $pr;
+              padding-right: 4 * $pr;
             }
             &::before {
               width: 8 * $pr;

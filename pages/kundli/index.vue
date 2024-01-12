@@ -207,7 +207,18 @@ export default {
             )
             this.m_detail = null
             this.f_detail = null
-            window.location.href = '/kundli/details/'
+            if (res?.conclusion) {
+              window.location.href = '/kundli/details/'
+            } else {
+              this.$notification.open({
+                message: 'Stop',
+                description: 'Please enter the correct time',
+                duration: 3,
+                style: {
+                  color: '#f00',
+                },
+              })
+            }
           })
       }
     },

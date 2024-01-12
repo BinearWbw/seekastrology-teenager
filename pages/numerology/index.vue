@@ -65,7 +65,7 @@
             </client-only>
           </div>
           <div class="button_i">
-            <button @click="numerologySubmit">Match Your Kundli</button>
+            <button @click="numerologySubmit">Calculate</button>
           </div>
         </div>
         <google-ad :id="'1771284612'" classNames="google_ad_top"></google-ad>

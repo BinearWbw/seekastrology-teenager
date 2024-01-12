@@ -6,12 +6,9 @@
       <div class="process">
         <div class="course" v-if="ifCourse">
           <div class="tips">
-            <p class="tips_title">Your Personality Number</p>
+            <p class="tips_title">{{ titleContent.name }}</p>
             <p class="tips_text">
-              Your life path number is derived from your birthdate and tells you
-              a great deal about your strengths, weaknesses, and tendencies. It
-              can help you see your path more clearly so you can spot the most
-              advantageous opportunities for your life when they pop up.
+              {{ titleContent.desc }}
             </p>
           </div>
           <div class="slide">
@@ -149,6 +146,30 @@ export default {
           return 'Summary'
       }
     },
+    titleContent() {
+      switch (this.marke) {
+        case 0:
+          return {
+            name: 'Your Life Path Number',
+            desc: 'Your life path number is derived from your birthdate and tells you a great deal about your strengths, weaknesses, and tendencies. It can help you see your path more clearly so you can spot the most advantageous opportunities for your life when they pop up.',
+          }
+        case 1:
+          return {
+            name: 'Your Destiny Number',
+            desc: 'Your destiny number takes every letter of your name into account. This number gives vou a peek into your greater purpose in this life.Your destiny number takes every letter of vour name into account. This number aives vou a peek into vour qreater purpose in this life.',
+          }
+        case 2:
+          return {
+            name: 'Your Personality Number',
+            desc: "Your personality number offers insight into how others see you. Derived from the consonants in your name, this is the filter through which people first perceive your personality. It may not accurately reflect what's underneath. Understanding how you look to others at your frst introduction will help you overcome erroneous perceptions and let your inner self shine through.",
+          }
+        case 3:
+          return {
+            name: 'Your Soul Urge Number',
+            desc: 'Your soul urge number is calculated using the vowels in your name. This number will give you insight into your deepest desires. These are not always reflected on the surface, but reside deep within your soul.',
+          }
+      }
+    },
   },
   methods: {
     scrollToNext() {
@@ -259,12 +280,12 @@ export default {
         }
         .slide {
           width: 1400px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.08);
           .line_up {
             padding: 24px;
             display: flex;
             align-items: center;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.08);
             //   transition: transform 0.5s ease;
             .numbers {
               width: 215px;

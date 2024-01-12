@@ -354,6 +354,7 @@ export default {
       openif: true,
       nextif: true,
       googleIntervalId: null,
+      routerData: ['/tarot/'],
     }
   },
   mounted() {
@@ -379,6 +380,7 @@ export default {
     ...mapMutations(['hideLoginBox']),
     // 登录
     inputSubmit() {
+      console.log('当前路由', this.$route.path)
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.isLoading = true
@@ -399,6 +401,13 @@ export default {
                 // this.hideLoginBox() //隐藏
                 this.$emit('choce', false)
                 sessionStorage.setItem('recom', 'one')
+
+                const isRouter = this.routerData.some(
+                  (irou) => this.$route.path == irou
+                )
+                if (isRouter) {
+                  window.location.reload()
+                }
                 // window.changePageUrl = '/userto/2/'
                 // window.location.href = '/userto/2/'
               } else if (res.code === 400) {
@@ -488,6 +497,12 @@ export default {
                 sessionStorage.setItem('recom', 'one')
                 // window.changePageUrl = '/userto/2/'
                 // window.location.href = '/userto/2/'
+                const isRouter = this.routerData.some(
+                  (irou) => this.$route.path == irou
+                )
+                if (isRouter) {
+                  window.location.reload()
+                }
               }
               this.isLoading = false
             })
@@ -569,6 +584,12 @@ export default {
             localStorage.setItem('userInfo', JSON.stringify(this.$store.state))
             sessionStorage.setItem('recom', 'one')
             this.$emit('choce', false)
+            const isRouter = this.routerData.some(
+              (irou) => this.$route.path == irou
+            )
+            if (isRouter) {
+              window.location.reload()
+            }
           })
       }
     },

@@ -141,7 +141,11 @@
           ></nuxt-img>
         </div>
         <div class="handle-btn" id="HANDLEANSWER" @click="handleAnswer">
-          <a :href="`/tarot/answer/?type=${this.type}`" class="a_type">
+          <a
+            :href="`/tarot/answer/?type=${this.type}`"
+            class="a_type"
+            :class="{ a_disabol: !isSelected }"
+          >
             <img class="btn-img" src="~/assets/img/tarot/btn.png" alt="btn" />
           </a>
         </div>
@@ -230,7 +234,11 @@
               </div>
             </div>
             <div class="handle-btn" id="HANDLEANSWER" @click="handleAnswer">
-              <a :href="`/tarot/answer/?type=${this.type}`" class="a_type">
+              <a
+                :href="`/tarot/answer/?type=${this.type}`"
+                class="a_type"
+                :class="{ a_disabol: !isSelected }"
+              >
                 <img
                   v-if="!isSelected"
                   class="btn-img"
@@ -510,7 +518,7 @@ export default {
     },
     handleAnswer() {
       if (this.isSelected) {
-        this.bodyHidden('auto')
+        this.bodyHidden('hidden')
         sessionStorage.setItem('cardsInfo', JSON.stringify(this.showList))
         // window.changePageUrl = `/tarot/answer/?type=${this.type}`
         // window.location = `/tarot/answer/?type=${this.type}`
@@ -579,6 +587,9 @@ export default {
   .handle-btn {
     .a_type {
       display: inline-block;
+    }
+    .a_disabol {
+      pointer-events: none;
     }
   }
   .tarot-wrapper {

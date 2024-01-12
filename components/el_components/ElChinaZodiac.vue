@@ -165,8 +165,19 @@ export default {
             })
             .then((res) => {
               this.isLoading = false
-              window.changePageUrl = `/chinazodiac/details/${res.id}/`
-              window.location = `/chinazodiac/details/${res.id}/`
+              if (res) {
+                window.changePageUrl = `/chinazodiac/details/${res.id}/`
+                window.location = `/chinazodiac/details/${res.id}/`
+              } else {
+                this.$notification.open({
+                  message: 'Stop',
+                  description: 'Please enter the correct time',
+                  duration: 3,
+                  style: {
+                    color: '#f00',
+                  },
+                })
+              }
             })
         }
       })

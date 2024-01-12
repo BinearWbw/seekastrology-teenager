@@ -406,7 +406,6 @@ export default {
               tzone: this.birthForm.place.timezoneOffset,
             })
             .then((res) => {
-              console.log('出生图', res)
               if (res.code) {
                 // 提示通知
                 this.$notification.open({
@@ -423,8 +422,19 @@ export default {
                   JSON.stringify(res) // 更新用户存储信息
                 )
                 this.isLoading = false
-                window.changePageUrl = '/birthchart/details/'
-                window.location.href = '/birthchart/details/'
+                if (res?.general?.planet_ext_dtls) {
+                  window.changePageUrl = '/birthchart/details/'
+                  window.location.href = '/birthchart/details/'
+                } else {
+                  this.$notification.open({
+                    message: 'Stop',
+                    description: 'Please enter the correct time',
+                    duration: 3,
+                    style: {
+                      color: '#f00',
+                    },
+                  })
+                }
               }
             })
         }
