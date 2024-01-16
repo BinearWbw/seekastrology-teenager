@@ -13,11 +13,6 @@
       <span></span>
     </div>
     <div class="tip_down" v-show="isScrolled"></div>
-    <!-- <google-ad
-      :id="'1087831010'"
-      dataFullWidth="true"
-      classNames="google_ad_h5"
-    /> -->
     <div class="home__main">
       <section class="module choice">
         <google-auto-ad :id="'1087831010'" classNames="google_ad_pc" />
@@ -51,7 +46,7 @@
         </div>
 
         <div class="list_tabs">
-          <home-tabs :tabs="horroData" @click-selected="handleTabSelected">
+          <!-- <home-tabs :tabs="horroData" @click-selected="handleTabSelected">
             <template>
               <home-infor-module
                 v-if="selectedTabIndex === 0"
@@ -69,7 +64,8 @@
                 :inforData="quizData"
               ></home-infor-module>
             </template>
-          </home-tabs>
+          </home-tabs> -->
+          <el-widget></el-widget>
         </div>
 
         <google-ad

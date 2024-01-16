@@ -77,6 +77,20 @@ export default {
               link: 'Compatibility',
               path: '/astrology/',
             },
+            {
+              link: 'Birth Chart',
+              path: '/birthchart/',
+            },
+            { link: 'Kundli Matching', path: '/kundli/' },
+            { link: 'Palm Reading', path: '/palmistry/' },
+            {
+              link: 'Chinese Signs',
+              path: '/chinazodiac/',
+            },
+            {
+              link: 'Numerology',
+              path: '/numerology/',
+            },
           ],
         },
         {
