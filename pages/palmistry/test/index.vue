@@ -2,7 +2,7 @@
   <div class="palm_test">
     <div class="palm_test_main">
       <div class="title_test">Palm Reading: Online Palmistry Guide</div>
-      <google-ad :id="'5513404296'" classNames="google_ad_top"></google-ad>
+      <google-ad :id="'5954072207'" classNames="google_ad_top"></google-ad>
       <div class="answer">
         <p class="answer_title">{{ readingTest[choseIndex].title }}</p>
         <div class="topic">

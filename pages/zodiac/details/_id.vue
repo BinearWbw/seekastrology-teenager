@@ -1,7 +1,7 @@
 <template>
   <div class="zodiac_details">
     <google-ad
-      :id="'7918863055'"
+      :id="'5954072207'"
       :dataFullWidth="'true'"
       classNames="google_ad_h5"
     />

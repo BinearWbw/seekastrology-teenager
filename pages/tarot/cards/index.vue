@@ -1,7 +1,7 @@
 <template>
   <div class="tarot-container">
     <Loading v-if="loading" />
-    <google-ad classNames="ad-box_row" id="9736555803" />
+    <google-ad classNames="ad-box_row" id="5954072207" />
     <div class="title mt-44-mobile">the major</div>
     <div class="tarot-section">
       <!-- <div class="add-box-wrapper mt-48_minus">

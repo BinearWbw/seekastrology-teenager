@@ -63,7 +63,7 @@
           <google-ad
             classNames="google_ad rightAd"
             ref="rightAd"
-            :id="'4665775103'"
+            :id="'9971744541'"
           />
         </div>
       </div>

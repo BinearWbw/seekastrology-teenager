@@ -1,7 +1,7 @@
 <template>
   <div class="details_content">
     <google-ad
-      :id="'8657229656'"
+      :id="'5954072207'"
       :dataFullWidth="'true'"
       classNames="google_ad_h5"
     ></google-ad>

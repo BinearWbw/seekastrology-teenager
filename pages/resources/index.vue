@@ -1,7 +1,7 @@
 <template>
   <div class="resources">
     <div class="resources_main">
-      <google-ad classNames="google_ad_top" :id="'9680645670'" />
+      <google-ad classNames="google_ad_top" :id="'5954072207'" />
       <div class="resources_main_title">HOT Content</div>
       <section class="pop_article">
         <home-pop-articles></home-pop-articles>

@@ -618,7 +618,7 @@ export default {
             flex-direction: column;
             width: 336 * $pr;
             height: 297 * $pr;
-            margin: 32 * $pr auto 0;
+            margin: 24 * $pr auto 0;
           }
 
           .collection {

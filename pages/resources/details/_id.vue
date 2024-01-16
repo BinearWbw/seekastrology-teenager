@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <google-ad classNames="google_top" :id="'4405062797'" />
+    <google-ad classNames="google_top" :id="'5954072207'" />
     <div class="details_main">
       <div class="details_main_left">
         <div class="details_main_left_top">
@@ -72,7 +72,7 @@
         <!-- <google-ad classNames="leftAd" :id="'9575035598'" /> -->
       </div>
       <div class="details_main_right">
-        <google-ad classNames="rightAd" :id="'8812069528'"></google-ad>
+        <google-ad classNames="rightAd" :id="'9971744541'"></google-ad>
       </div>
     </div>
     <div class="details_footer">
@@ -708,16 +708,20 @@ $spacing: 16px;
   $pr: math.div(1vw, 3.75);
   .details {
     .google_top {
+      position: fixed;
+      top: 46 * $pr;
+      left: 0;
       display: flex;
-      width: 336 * $pr;
-      height: 297 * $pr;
-      margin: 0 auto;
+      width: 100%;
+      height: 171 * $pr;
+      z-index: 10;
     }
     &_main {
       width: 100%;
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 16 * $pr;
+      padding-top: 171 * $pr;
       &_left {
         width: 343 * $pr;
         margin-left: 0;

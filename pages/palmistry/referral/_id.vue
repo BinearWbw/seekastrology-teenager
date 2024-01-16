@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="ad_list">
-        <google-ad :id="'4171622210'" classNames="google_ad_list"></google-ad>
+        <google-ad :id="'9971744541'" classNames="google_ad_list"></google-ad>
       </div>
     </div>
   </div>

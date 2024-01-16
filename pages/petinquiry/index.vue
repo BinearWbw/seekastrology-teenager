@@ -1,7 +1,7 @@
 <template>
   <div class="inquiry">
     <div class="inquiry_pet">
-      <google-ad classNames="google_ad_top" :id="'9680645670'" />
+      <google-ad classNames="google_ad_top" :id="'5954072207'" />
       <div class="pairing">
         <div class="pairing_petmain">
           <div class="peter">

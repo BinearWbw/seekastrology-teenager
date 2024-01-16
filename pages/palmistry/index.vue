@@ -1,6 +1,6 @@
 <template>
   <div class="palmistry">
-    <google-ad :id="'7276297709'" classNames="google_ad_top"></google-ad>
+    <google-ad :id="'5954072207'" classNames="google_ad_top"></google-ad>
     <div class="palmistry_main">
       <div class="palm">
         <p class="palm_title">Palm Reading: Online Palmistry Guide</p>

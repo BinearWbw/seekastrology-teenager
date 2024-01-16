@@ -184,7 +184,7 @@
         </div>
       </div>
       <div class="cal_cent">
-        <google-ad :id="'1248540435'" classNames="google_ad_cat"></google-ad>
+        <google-ad :id="'9971744541'" classNames="google_ad_cat"></google-ad>
         <el-widget class="widget"></el-widget>
       </div>
     </div>

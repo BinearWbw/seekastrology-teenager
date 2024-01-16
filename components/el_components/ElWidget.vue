@@ -189,8 +189,7 @@ export default {
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .integrated {
-    width: 343 * $pr;
-
+    width: 344 * $pr;
     .tabs_btn {
       width: 343 * $pr;
       padding-bottom: 15 * $pr;

@@ -3,7 +3,7 @@
     <google-ad
       classNames="ad-box_row"
       style="width: 100%"
-      id="3247169078"
+      id="5954072207"
     ></google-ad>
     <div class="title mt-44-mobile">{{ cardsInfo.name }} Card Meaning</div>
     <div class="tarot-section">

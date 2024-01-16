@@ -3,7 +3,7 @@
     <div class="title">What the Tarot Cards Mean in This Reading</div>
     <div class="title h5_title">Tarot Cards Reading</div>
     <div class="li_top_ad">
-      <google-ad classNames="title_ad" id="3725681222" />
+      <google-ad classNames="title_ad" id="5954072207" />
     </div>
     <div class="tarot-section">
       <!-- <div class="add-box-wrapper">

@@ -1,6 +1,6 @@
 <template>
   <div class="china_details">
-    <!-- <google-ad :id="'4486482830'" classNames="china_ad_top"></google-ad> -->
+    <!-- <google-ad :id="'5954072207'" classNames="china_ad_top"></google-ad> -->
     <div class="china_details_top">
       <div class="item">
         <div class="imgs">
@@ -46,7 +46,7 @@
       <div class="animal_right">
         <div class="animal_right_list">
           <el-china-lity class="lity"></el-china-lity>
-          <google-ad :id="'3708587784'" classNames="right_ad"></google-ad>
+          <google-ad :id="'9971744541'" classNames="right_ad"></google-ad>
           <home-pairing class="pairing"></home-pairing>
           <google-ad :id="'4830097762'" classNames="right_ad two"></google-ad>
           <el-sign-new class="sign_new"></el-sign-new>
