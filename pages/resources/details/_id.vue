@@ -814,6 +814,9 @@ $spacing: 16px;
                   }
                 }
               }
+              :deep(img) {
+                height: auto !important;
+              }
             }
           }
         }
