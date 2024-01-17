@@ -165,7 +165,7 @@
               <template v-if="showResult">
                 <div
                   class="details_main_left_top_result"
-                  v-if="dataInfo.quest_type == 1"
+                  v-if="dataInfo.quest_type == 1 || 3"
                 >
                   <div class="details_main_left_top_result_score">
                     Result:<span> {{ result.score }}</span>
@@ -189,6 +189,9 @@
                       format="auto"
                     ></nuxt-img>
                   </div>
+                </div>
+                <div class="result_desc" v-if="dataInfo.quest_type == 3">
+                  {{ result.desc }}
                 </div>
                 <div
                   id="RETAKE"
@@ -796,6 +799,15 @@ $spacing: 55px;
             border: 1px solid #45454d;
             background: rgba(217, 217, 217, 0);
           }
+        }
+        .result_desc {
+          font-family: 'Rubik';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 18px;
+          color: #fff;
+          margin-top: 16px;
         }
       }
       &_btm {
