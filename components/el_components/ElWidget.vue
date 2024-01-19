@@ -38,16 +38,16 @@
         :afterChange="tabsPanelCallback"
       >
         <home-infor-module
+          title="Quiz"
+          :inforData="quizData"
+        ></home-infor-module>
+        <home-infor-module
           title="Article"
           :inforData="articleData"
         ></home-infor-module>
         <home-infor-module
           title="Video"
           :inforData="videoData"
-        ></home-infor-module>
-        <home-infor-module
-          title="Quiz"
-          :inforData="quizData"
         ></home-infor-module>
       </a-carousel>
     </client-only>
@@ -60,13 +60,13 @@ export default {
     return {
       horroData: [
         {
+          tabs: 'Quiz',
+        },
+        {
           tabs: 'Article',
         },
         {
           tabs: 'Video',
-        },
-        {
-          tabs: 'Quiz',
         },
       ],
       selectedTabIndex: 0,
@@ -76,7 +76,7 @@ export default {
     }
   },
   async fetch() {
-    let [articleData, videoData, quizData] = await Promise.all([
+    let [articleData, videoData] = await Promise.all([
       this.$apiList.articles
         .getNewsList({
           origin: process.env.origin,
@@ -97,20 +97,23 @@ export default {
         .then((res) => {
           return res.list || []
         }),
-
-      this.$apiList.test
-        .getTestList({
-          origin: process.env.origin,
-          page: 18,
-          size: 3,
-        })
-        .then((res) => {
-          return res.list || []
-        }),
     ])
     this.articleData = articleData
     this.videoData = videoData
-    this.quizData = quizData
+  },
+  mounted() {
+    // 随机获取测验数据,刷新更换数据
+    this.$nextTick(() => {
+      this.$apiList.test
+        .getRecList({
+          origin: process.env.origin,
+          size: 20,
+        })
+        .then((res) => {
+          const list = res.list.sort(() => Math.random() - 0.5)
+          this.quizData = list.slice(0, 3) || []
+        })
+    })
   },
   methods: {
     handleTabSelected(index) {

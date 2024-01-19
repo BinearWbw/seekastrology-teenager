@@ -715,6 +715,7 @@ $spacing: 16px;
       width: 100%;
       height: 171 * $pr;
       z-index: 10;
+      background: #1e1233;
     }
     &_main {
       width: 100%;

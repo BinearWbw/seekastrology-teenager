@@ -29,7 +29,7 @@
               <div class="text" v-if="title !== 'Quiz'">
                 {{ item.text || item.name }}
               </div>
-              <div class="text" v-else>{{ item.desc }}</div>
+              <div class="text" v-else v-html="item.desc"></div>
               <span class="more">Read More</span>
             </div>
           </div>

@@ -32,16 +32,16 @@
       <section class="module article">
         <div class="infor_module">
           <home-infor-module
+            title="Quiz"
+            :inforData="quizData"
+          ></home-infor-module>
+          <home-infor-module
             title="Article"
             :inforData="articleData"
           ></home-infor-module>
           <home-infor-module
             title="Video"
             :inforData="videoData"
-          ></home-infor-module>
-          <home-infor-module
-            title="Quiz"
-            :inforData="quizData"
           ></home-infor-module>
         </div>
 
@@ -91,7 +91,7 @@ export default {
   name: 'Home',
   async asyncData({ error, $apiList, params }) {
     try {
-      let [articleData, videoData, quizData] = await Promise.all([
+      let [articleData, videoData] = await Promise.all([
         $apiList.articles
           .getNewsList({
             origin: process.env.origin,
@@ -112,21 +112,10 @@ export default {
           .then((res) => {
             return res.list || []
           }),
-
-        $apiList.test
-          .getTestList({
-            origin: process.env.origin,
-            page: 18,
-            size: 3,
-          })
-          .then((res) => {
-            return res.list || []
-          }),
       ])
       return {
         articleData,
         videoData,
-        quizData,
       }
     } catch (e) {
       error({ statusCode: e.code, message: e.message })
@@ -149,6 +138,7 @@ export default {
         },
       ],
       selectedTabIndex: 0,
+      quizData: [],
     }
   },
   mounted() {
@@ -167,6 +157,19 @@ export default {
     // } else {
     //   this.isLoading = false
     // }
+
+    // 随机获取测验数据,刷新更换数据
+    this.$nextTick(() => {
+      this.$apiList.test
+        .getRecList({
+          origin: process.env.origin,
+          size: 20,
+        })
+        .then((res) => {
+          const list = res.list.sort(() => Math.random() - 0.5)
+          this.quizData = list.slice(0, 3) || []
+        })
+    })
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)

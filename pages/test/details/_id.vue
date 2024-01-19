@@ -1,6 +1,8 @@
 <template>
   <div class="details">
-    <google-ad classNames="google_top" :id="'5954072207'" />
+    <div class="top_ad" v-if="showQuestions">
+      <google-ad classNames="google_top" :id="'5954072207'" />
+    </div>
     <div class="details_main">
       <div class="details_main_left">
         <div class="details_main_left_top">
@@ -165,7 +167,7 @@
               <template v-if="showResult">
                 <div
                   class="details_main_left_top_result"
-                  v-if="dataInfo.quest_type == 1 || 3"
+                  v-if="dataInfo.quest_type == 1"
                 >
                   <div class="details_main_left_top_result_score">
                     Result:<span> {{ result.score }}</span>
@@ -189,9 +191,6 @@
                       format="auto"
                     ></nuxt-img>
                   </div>
-                </div>
-                <div class="result_desc" v-if="dataInfo.quest_type == 3">
-                  {{ result.desc }}
                 </div>
                 <div
                   id="RETAKE"
@@ -541,8 +540,10 @@ $spacing: 55px;
 }
 .details {
   width: 100%;
-  .google_top {
-    display: none;
+  .top_ad {
+    .google_top {
+      display: none;
+    }
   }
   &_main {
     width: 1400px;
@@ -772,7 +773,7 @@ $spacing: 55px;
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
-            color: #fff;
+            color: rgba(255, 255, 255, 0.6);
             margin-top: 16px;
           }
           .img_desc {
@@ -799,15 +800,6 @@ $spacing: 55px;
             border: 1px solid #45454d;
             background: rgba(217, 217, 217, 0);
           }
-        }
-        .result_desc {
-          font-family: 'Rubik';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 18px;
-          color: #fff;
-          margin-top: 16px;
         }
       }
       &_btm {
@@ -1000,19 +992,23 @@ $spacing: 55px;
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .details {
-    .google_top {
-      position: fixed;
-      top: 46 * $pr;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
+    .top_ad {
       height: 171 * $pr;
-      z-index: 10;
+      .google_top {
+        position: fixed;
+        top: 46 * $pr;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 171 * $pr;
+        z-index: 10;
+        background: #1e1233;
+      }
     }
     &_main {
       width: 100%;
-      padding: 171 * $pr 16 * $pr 32 * $pr;
+      padding: 0 16 * $pr 32 * $pr;
       margin: 0;
 
       &_left {
