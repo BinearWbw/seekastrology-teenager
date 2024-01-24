@@ -185,14 +185,21 @@
           src &&
           src.indexOf('googleads.g.doubleclick.net/pagead/ads?') !== -1
         ) {
-          dataLayer.push({
-            event: 'sitePageAD',
-          })
-          if (unloadNum && Number(unloadNum) > 1) {
+          const parentIns = activeElement.closest('ins')
+          let adStatus = 'unfilled'
+          if (parentIns) {
+            adStatus = parentIns.getAttribute('data-ad-status')
+          }
+          if (adStatus == 'filled') {
             dataLayer.push({
-              event: 'sitePageADUnloadNum',
+              event: 'sitePageAD',
             })
-            localStorage.setItem('unloadNum', JSON.stringify(0))
+            if (unloadNum && Number(unloadNum) > 1) {
+              dataLayer.push({
+                event: 'sitePageADUnloadNum',
+              })
+              localStorage.setItem('unloadNum', JSON.stringify(0))
+            }
           }
         } else if (
           src &&
