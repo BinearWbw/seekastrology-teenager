@@ -518,7 +518,7 @@ $spacing: 16px;
           width: 100%;
           &_list {
             grid-template-columns: repeat(2, 169 * $pr);
-            grid-gap: 24 * $pr 5 * $pr;
+            grid-gap: 16 * $pr 5 * $pr;
             &_item {
               width: 169 * $pr;
               &_img {
@@ -540,7 +540,7 @@ $spacing: 16px;
               grid-row-start: span 2;
               width: 336 * $pr;
               height: 297 * $pr;
-              margin: 24 * $pr auto;
+              margin: 0 auto;
             }
             .top {
               grid-row-end: 5;

@@ -15,10 +15,10 @@
             Calculator to search for your zodiac sign.
           </p>
         </div>
+        <google-ad :id="'1860319499'" classNames="google_top"></google-ad>
         <div class="el_zod">
           <el-china-zodiac></el-china-zodiac>
         </div>
-        <google-ad :id="'1860319499'" classNames="google_top"></google-ad>
         <el-sign-new></el-sign-new>
         <div class="romantic">
           <p class="romantic_title">

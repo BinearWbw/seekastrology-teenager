@@ -24,6 +24,7 @@
                 format="auto"
               ></nuxt-img>
               <i class="icon" v-if="item.kind"></i>
+              <i class="icon_i"></i>
             </div>
             <div class="textitem">
               <div class="text" v-if="title !== 'Quiz'">
@@ -110,6 +111,13 @@ export default {
               width: 100%;
               height: 100%;
               object-fit: cover;
+            }
+            .icon_i {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
             }
             .icon {
               position: absolute;

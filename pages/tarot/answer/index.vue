@@ -1,7 +1,7 @@
 <template>
   <div class="tarot-container">
-    <div class="title">What the Tarot Cards Mean in This Reading</div>
-    <div class="title h5_title">Tarot Cards Reading</div>
+    <!-- <div class="title">What the Tarot Cards Mean in This Reading</div>
+    <div class="title h5_title">Tarot Cards Reading</div> -->
     <div class="li_top_ad">
       <google-ad classNames="title_ad" id="5954072207" />
     </div>
@@ -31,7 +31,7 @@
                 loading="lazy"
                 format="auto"
               ></nuxt-img>
-              <div class="card-text">{{ item.card_name }}</div>
+              <!-- <div class="card-text">{{ item.card_name }}</div> -->
             </div>
             <div class="desc">
               <div class="desc-title">
@@ -40,7 +40,14 @@
               <div class="answer" v-show="item.meaning_type == 5">
                 Answer: {{ item.desc_type == 1 ? 'Yes' : 'No' }}
               </div>
-              <div class="desc-text" v-html="item.desc"></div>
+              <div
+                class="desc-text"
+                :class="{ texts_more: openExpand }"
+                v-html="item.desc"
+              ></div>
+              <div class="more_btn" @click="setOpenExpand">
+                {{ openExpand ? 'Show Less' : 'Show More' }}
+              </div>
             </div>
           </li>
         </ul>
@@ -83,6 +90,7 @@ export default {
         4: ['card name'],
         5: ['card name'],
       },
+      openExpand: false,
     }
   },
   mounted() {
@@ -94,6 +102,11 @@ export default {
     if (this.type == 4 || this.type == 5) {
       this.subTitleText[this.type][0] = this.cardsInfo[0].card_name
     }
+  },
+  methods: {
+    setOpenExpand() {
+      this.openExpand = !this.openExpand
+    },
   },
 }
 </script>
@@ -183,6 +196,9 @@ export default {
         margin-top: 24px;
         color: #d2d3d7;
       }
+      .more_btn {
+        display: none;
+      }
     }
   }
   .mt-200 {
@@ -264,8 +280,8 @@ export default {
       font-family: 'Cinzel Decorative';
       font-style: normal;
       font-weight: 700;
-      font-size: 36 * $pr;
-      line-height: 48 * $pr;
+      font-size: 22 * $pr;
+      line-height: 30 * $pr;
       order: 2;
       display: none;
       &.h5_title {
@@ -288,15 +304,16 @@ export default {
       .content-list {
         .content-list-item {
           flex-direction: column;
-          margin-top: 8 * $pr;
+          align-items: flex-start;
+          margin-top: 0;
           background-image: url('~assets/img/tarot/explain-bg.png');
           background-repeat: no-repeat;
           background-size: 100%;
           .card-wrapper {
             margin: 0 auto 26 * $pr;
             .card-img {
-              width: 170 * $pr;
-              height: 340 * $pr;
+              width: 100 * $pr;
+              height: 200 * $pr;
             }
           }
           .card-text {
@@ -316,7 +333,7 @@ export default {
           .answer {
             font-size: 18 * $pr;
             line-height: 28 * $pr;
-            margin-top: 8 * $pr;
+            margin-top: 0;
           }
           .desc-text {
             font-family: 'Rubik';
@@ -325,7 +342,26 @@ export default {
             font-size: 14 * $pr;
             line-height: 24 * $pr;
             color: rgba(255, 255, 255, 0.6);
-            margin-top: 8 * $pr;
+            margin-top: 0;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+          }
+          .texts_more {
+            -webkit-line-clamp: unset !important;
+            height: auto !important;
+          }
+          .more_btn {
+            display: block;
+            font-family: 'Rubik';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16 * $pr;
+            line-height: 28 * $pr;
+            color: #9747ff;
+            cursor: pointer;
           }
         }
       }

@@ -153,6 +153,7 @@ export default {
       font-weight: 400;
       font-size: 16px;
       line-height: 28px;
+      color: rgba(255, 255, 255, 0.6);
       ::v-deep p {
         margin-top: 30px;
       }
@@ -232,8 +233,8 @@ export default {
     font-family: 'Cinzel Decorative';
     font-style: normal;
     font-weight: 700;
-    font-size: 26 * $pr;
-    line-height: 36 * $pr;
+    font-size: 22 * $pr;
+    line-height: 30 * $pr;
   }
   .content-list {
     .content-list-item {
@@ -245,6 +246,11 @@ export default {
           width: 170 * $pr;
           height: 340 * $pr;
         }
+      }
+      .desc-title {
+        font-size: 20 * $pr;
+        line-height: 30 * $pr;
+        margin-top: 8 * $pr;
       }
       .desc-text {
         font-family: 'Rubik';
@@ -259,8 +265,7 @@ export default {
         :deep(h2) {
           font-size: 22 * $pr;
           line-height: 30 * $pr;
-          margin: 0 !important;
-          margin-top: 0;
+          margin-top: 8 * $pr;
         }
       }
     }

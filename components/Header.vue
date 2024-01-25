@@ -249,8 +249,8 @@ export default {
         },
         {
           title: 'Tarot',
-          path: '/tarot/',
-          href: '/tarot/',
+          path: '/tarot/type/5/',
+          href: '/tarot/type/5/',
           childrenShow: true,
           children: [
             {
@@ -275,7 +275,7 @@ export default {
             },
             {
               title: 'Yes or No tarot',
-              path: '/developing/',
+              path: '/tarot/type/5/',
               href: '/tarot/type/5/',
             },
             {

@@ -643,9 +643,10 @@ export default {
       padding: 16 * $pr 16 * $pr 32 * $pr;
       .calculator {
         .calculator_title {
-          font-size: 22 * $pr;
+          font-size: 21 * $pr;
           line-height: 30 * $pr;
           margin-bottom: 8 * $pr;
+          text-align: center;
         }
         .calculator_text {
           font-size: 14 * $pr;

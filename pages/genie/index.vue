@@ -23,7 +23,7 @@
                 <div class="gently_text">“ {{ oneOfThese }} “</div>
                 <img class="gently" src="~/assets/img/kundli/book_open.png" />
               </div>
-              <button class="button" @click="resetSprite">Ask again</button>
+              <a class="button" href="/genie/">Ask again</a>
             </div>
             <transition name="fade">
               <el-loading-mini v-if="isLoading"></el-loading-mini>
@@ -162,9 +162,6 @@ export default {
         this.genieStatus = false
       }, 500)
     },
-    resetSprite() {
-      this.genieStatus = true
-    },
   },
 }
 </script>
@@ -216,6 +213,7 @@ export default {
         );
         .item {
           width: 100%;
+          min-height: 544px;
           padding: 40px 0 31px;
           border-radius: 21px;
           border: 1px solid rgba(255, 255, 255, 0.4);
@@ -305,6 +303,9 @@ export default {
               }
             }
             .button {
+              display: flex;
+              justify-content: center;
+              align-items: center;
               margin-top: 16px;
               width: 220px;
               height: 56px;
@@ -435,12 +436,14 @@ export default {
           border: 1 * $pr solid rgba(255, 255, 255, 0.4);
           .item {
             width: 100%;
+            min-height: auto;
             padding: 67 * $pr 0 45 * $pr;
             border-radius: 21 * $pr;
             border: 1 * $pr solid rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(8 * $pr);
             .book {
               margin: 0;
+              min-height: 379 * $pr;
               .tips {
                 width: 283 * $pr;
                 padding: 8 * $pr 16 * $pr;
@@ -477,6 +480,7 @@ export default {
               flex-direction: column;
               align-items: center;
               padding: 58.2 * $pr 0 40 * $pr;
+              min-height: 379 * $pr;
               .imgs {
                 position: relative;
                 .gently_text {

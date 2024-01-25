@@ -64,9 +64,9 @@ export default {
           url: '/genie/',
         },
         {
-          name: 'Ai Tarot',
+          name: 'Yes or No tarot',
           imgs: require('~/assets/img/home/more/more7.svg'),
-          url: '/tarot/',
+          url: '/tarot/type/5/',
         },
         {
           name: 'Love Compatibility',

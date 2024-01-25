@@ -542,8 +542,8 @@ export default {
       .pairing {
         padding: 0 16 * $pr;
         > h3 {
-          font-size: 36 * $pr;
-          line-height: 48 * $pr;
+          font-size: 22 * $pr;
+          line-height: 30 * $pr;
           padding-top: 24 * $pr;
         }
         .pairing_main {
