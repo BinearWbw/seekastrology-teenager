@@ -238,23 +238,6 @@
 <script>
 import domToImage from 'dom-to-image'
 export default {
-  // 获取价格
-  async asyncData({ error, $apiList, params }) {
-    try {
-      let [isPrice] = await Promise.all([
-        $apiList.user
-          .getUserPrice({
-            id: '1',
-          })
-          .then((res) => {
-            return res?.price / 100 || null
-          }),
-      ])
-      return { isPrice }
-    } catch (e) {
-      error({ statusCode: e.code, message: e.msg })
-    }
-  },
   data() {
     return {
       astroPanChang: ['Tithi', 'Karan', 'Yog'],
@@ -330,9 +313,20 @@ export default {
       payStatusSet: false,
       payTips: false,
       timerFun: null,
+      isPrice: '',
     }
   },
   mounted() {
+    // 获取价格
+    this.$nextTick(() => {
+      this.$apiList.user
+        .getUserPrice({
+          id: '1',
+        })
+        .then((res) => {
+          this.isPrice = res?.price / 100 || null
+        })
+    })
     let order_no = this.$route.query.order_no
     if (process.client && !order_no) {
       // 获取本地的

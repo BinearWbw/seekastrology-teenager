@@ -92,20 +92,9 @@
 
 <script>
 export default {
-  // 获取价格
   async asyncData({ error, $apiList, params, query }) {
     try {
       console.log('query', query.order_no)
-      let [isPrice] = await Promise.all([
-        $apiList.user
-          .getUserPrice({
-            id: '2',
-          })
-          .then((res) => {
-            return res?.price / 100 || null
-          }),
-      ])
-      return { isPrice }
     } catch (e) {
       error({ statusCode: e.code, message: e.msg })
     }
@@ -133,6 +122,7 @@ export default {
         { name: 'Dec', li: '12' },
       ],
       payStatusSet: false,
+      isPrice: '',
     }
   },
   mounted() {
@@ -142,6 +132,14 @@ export default {
       this.numerologyData = JSON.parse(localStorage.getItem('numerology'))
       this.numerUser = JSON.parse(localStorage.getItem('numerUser'))
       this.carouselDom = this.$refs.carousels
+      //获取价格
+      this.$apiList.user
+        .getUserPrice({
+          id: '2',
+        })
+        .then((res) => {
+          this.isPrice = res?.price / 100 || null
+        })
     })
     if (process.client && order_no) {
       //   获取支付成功数据

@@ -14,7 +14,9 @@
                 <div class="teat">
                   <div class="teat_title">
                     Guide to Your Astrology Birth Chart
-                    <span class="title_money">${{ isPrice.old_price }}</span>
+                    <span class="title_money"
+                      >${{ isPrice.old_price / 100 || '' }}</span
+                    >
                   </div>
                   <p class="teat_desc">
                     lt's easy to find out your birth horoscope with a birthchart
@@ -157,8 +159,11 @@
             </div>
             <div class="pay_ment_money">
               <div class="price">
-                Total (USD): <span class="truth">${{ isPrice.price }}</span
-                ><span class="first">( ${{ isPrice.old_price }} )</span>
+                Total (USD):
+                <span class="truth">${{ isPrice.price / 100 || '' }}</span
+                ><span class="first"
+                  >( ${{ isPrice.old_price / 100 || '' }} )</span
+                >
               </div>
               <div class="failure" v-if="payStatusFailed">
                 <div class="so">
@@ -281,16 +286,7 @@ export default {
   async asyncData({ error, $apiList, params }) {
     try {
       let routeId = parseInt(params.id)
-      let [isPrice] = await Promise.all([
-        $apiList.user
-          .getUserPrice({
-            id: params.id,
-          })
-          .then((res) => {
-            return res || null
-          }),
-      ])
-      return { routeId, isPrice }
+      return { routeId }
     } catch (e) {
       error({ statusCode: e.code, message: e.message })
     }
@@ -379,9 +375,20 @@ export default {
       payStatusFailed: false,
       payRouter: '',
       isDisable: false,
+      isPrice: '',
     }
   },
   mounted() {
+    // 获取价格
+    this.$nextTick(() => {
+      this.$apiList.user
+        .getUserPrice({
+          id: this.routeId,
+        })
+        .then((res) => {
+          this.isPrice = res || null
+        })
+    })
     if (process.client) {
       this.payDataStr = localStorage.getItem('payData')
       this.payRouter = localStorage.getItem('payRouter')

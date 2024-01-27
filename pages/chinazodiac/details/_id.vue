@@ -130,7 +130,7 @@ export default {
   async asyncData({ error, $apiList, params }) {
     try {
       let imgId = ''
-      let [zodiacData, isPrice] = await Promise.all([
+      let [zodiacData] = await Promise.all([
         /**详情 */
         $apiList.test
           .getAnimalsDetail({
@@ -143,16 +143,8 @@ export default {
             imgId = require(`~/assets/img/zodiac/chin/chins_${res.id}.svg`)
             return res || null
           }),
-
-        $apiList.user
-          .getUserPrice({
-            id: '4',
-          })
-          .then((res) => {
-            return res?.price / 100 || null
-          }),
       ])
-      return { zodiacData, imgId, isPrice }
+      return { zodiacData, imgId }
     } catch (e) {
       error({ statusCode: e.code, message: e.msg })
     }
@@ -162,9 +154,19 @@ export default {
       payStatusSet: false,
       payTips: false,
       timerFun: null,
+      isPrice: '',
     }
   },
   mounted() {
+    this.$nextTick(() => {
+      this.$apiList.user
+        .getUserPrice({
+          id: '4',
+        })
+        .then((res) => {
+          this.isPrice = res?.price / 100 || null
+        })
+    })
     let order_no = this.$route.query.order_no
     if (process.client && order_no) {
       //   获取支付成功数据
