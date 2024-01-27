@@ -142,6 +142,32 @@
                 </div>
               </div>
             </div>
+            <div class="tab_details_report" v-if="idsType == 2">
+              <div class="no_payment" v-if="payOderData.length == 0">
+                No order information generated
+              </div>
+              <div class="pay_order" v-else>
+                <a
+                  :href="`${payPagePath[item.price_id]}?order_no=${item.id}`"
+                  class="report_a"
+                  v-for="(item, index) in payOderData"
+                  :key="index"
+                >
+                  <div class="item_link">
+                    <div class="imgs">
+                      <img :src="imgType[item.price_id]" alt="#" />
+                    </div>
+                    <div class="centet">
+                      <div class="name_i">{{ projectType[item.price_id] }}</div>
+                      <div class="way">{{ paymentMethod[item.pay_type] }}</div>
+                      <div class="name_i">
+                        {{ $utils.formatYYYYMMDDHHMM(item.created_at) }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -160,7 +186,11 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      userDetails: [{ tabs: 'Tarot Record' }, { tabs: 'Subscribe' }],
+      userDetails: [
+        { tabs: 'Tarot Record' },
+        { tabs: 'Subscribe' },
+        { tabs: 'Report' },
+      ],
       selectData: [
         {
           type: 'daily_astro',
@@ -207,6 +237,39 @@ export default {
       isLoading: false,
       isSubscribe: true,
       isRecomment: false,
+      imgType: [
+        '',
+        require('~/assets/img/payment/birth_chart.jpg'),
+        require('~/assets/img/payment/numerology.jpg'),
+        require('~/assets/img/payment/kundli.jpg'),
+        require('~/assets/img/payment/china_zodiac.jpg'),
+      ],
+      payOderData: [],
+      projectType: [
+        '',
+        'Birth Chart',
+        'Numerology',
+        'Kundli Matching',
+        'Chinese Signs',
+      ],
+      paymentMethod: [
+        '',
+        'Credit Card',
+        'PIX',
+        'OVO',
+        'DANA',
+        'QRIS',
+        'LinkAjaApplink',
+        'IndonesiaBankTransfer',
+        'ShopeepayJumpApp',
+      ],
+      payPagePath: [
+        '',
+        '/birthchart/details/',
+        '/numerology/details/',
+        '/kundli/details/',
+        '/chinazodiac/details/',
+      ],
     }
   },
   async asyncData({ error, $apiList, params }) {
@@ -238,6 +301,21 @@ export default {
       this.$nextTick(() => {
         if (!newVal) return
         this.selectItem = this.getUserSub //选中的订阅
+      })
+    },
+    // 获取用户支付订单
+    getUserInfo(newVal, old) {
+      this.$nextTick(() => {
+        if (newVal.email) {
+          this.$apiList.user
+            .setUserOrderList({
+              email: newVal.email,
+              origin: process.env.origin,
+            })
+            .then((res) => {
+              this.payOderData = res
+            })
+        }
       })
     },
   },
@@ -373,6 +451,12 @@ export default {
     },
     selectTab(index) {
       this.idsType = index
+      // 创建a标签方便触发穿插广告
+      //   const signa = document.createElement('a')
+      //   signa.href = `/userto/${index + 1}/`
+      //   document.body.appendChild(signa)
+      //   signa.click()
+      //   document.body.removeChild(signa)
     },
     // 保存当前选择的订阅
     subscribeCurrent() {
@@ -825,6 +909,68 @@ export default {
           }
         }
       }
+      .tab_details_report {
+        padding: 24px 0 68px;
+        .pay_order {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 16px;
+          .report_a {
+            display: block;
+            transition: transform 0.3s ease-in-out;
+            &:hover {
+              transform: scale(1.03);
+            }
+
+            .item_link {
+              padding: 18px;
+              border-radius: 16px;
+              background: rgba(255, 255, 255, 0.08);
+              .imgs {
+                width: 100%;
+                height: 100%;
+                margin-bottom: 8px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 8px;
+                }
+              }
+              .centet {
+                .name_i {
+                  color: rgba(255, 255, 255, 0.6);
+                  font-family: Rubik;
+                  font-size: 14px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 18px;
+                }
+                .way {
+                  color: #fff;
+                  font-family: Rubik;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 22px;
+                }
+              }
+            }
+          }
+        }
+        .no_payment {
+          height: 256px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: rgba(255, 255, 255, 0.6);
+          font-family: Rubik;
+          font-size: 22px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 30px;
+        }
+      }
     }
   }
 }
@@ -840,6 +986,11 @@ export default {
             .list {
               flex-wrap: wrap;
             }
+          }
+        }
+        .tab_details_report {
+          .pay_order {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
           }
         }
       }
@@ -950,7 +1101,7 @@ export default {
                 font-size: 14 * $pr;
                 line-height: 18 * $pr;
                 border-radius: 42 * $pr;
-                margin-right: 24 * $pr;
+                margin-right: 0;
               }
               & > :last-child {
                 margin-right: 0;
@@ -1126,6 +1277,50 @@ export default {
                 }
               }
             }
+          }
+        }
+        .tab_details_report {
+          padding: 16 * $pr 0 48 * $pr;
+          .pay_order {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5 * $pr;
+            .report_a {
+              display: block;
+              .item_link {
+                padding: 8 * $pr;
+                border-radius: 16 * $pr;
+                .imgs {
+                  width: 100%;
+                  height: 100%;
+                  margin-bottom: 8 * $pr;
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 8 * $pr;
+                  }
+                }
+                .centet {
+                  display: flex;
+                  flex-direction: column;
+                  .name_i {
+                    font-size: 12 * $pr;
+                    line-height: 16 * $pr;
+                    order: 1;
+                  }
+                  .way {
+                    font-size: 14 * $pr;
+                    line-height: 18 * $pr;
+                  }
+                }
+              }
+            }
+          }
+          .no_payment {
+            height: 172 * $pr;
+            font-size: 22 * $pr;
+            line-height: 30 * $pr;
           }
         }
       }

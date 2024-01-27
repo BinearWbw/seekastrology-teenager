@@ -8,6 +8,7 @@
           <div class="icon_bg">
             <i></i>
           </div>
+
           <div class="feature_icon">
             <!-- <div class="share"><i></i></div> -->
             <div class="down" @click="downBirth"><i></i></div>
@@ -180,7 +181,7 @@
               </table>
             </div>
           </div>
-          <div class="message">
+          <div class="message" v-if="payStatusSet">
             <p class="titles">General</p>
             <div
               class="message_item"
@@ -193,7 +194,7 @@
               </p>
             </div>
           </div>
-          <div class="message">
+          <div class="message" v-if="payStatusSet">
             <p class="titles">Planetary</p>
             <div
               class="message_item"
@@ -204,6 +205,16 @@
               <p class="texts">
                 {{ item_i.Result }}
               </p>
+            </div>
+          </div>
+          <div class="pay_ornot" v-if="!payStatusSet">
+            <div class="get_pay">
+              <div class="btn">
+                <p class="btn_title">Get your detailed Birth Chart</p>
+                <a href="/payment/1/" class="money" @click="currentRouter"
+                  >${{ isPrice }} Pay Now</a
+                >
+              </div>
             </div>
           </div>
         </div>
@@ -218,13 +229,32 @@
       ref="downloadLink"
       style="display: none"
     ></a>
+    <transition name="unfold">
+      <el-tips-pay v-if="payTips"></el-tips-pay>
+    </transition>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import domToImage from 'dom-to-image'
 export default {
+  // 获取价格
+  async asyncData({ error, $apiList, params }) {
+    try {
+      let [isPrice] = await Promise.all([
+        $apiList.user
+          .getUserPrice({
+            id: '1',
+          })
+          .then((res) => {
+            return res?.price || null
+          }),
+      ])
+      return { isPrice }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.msg })
+    }
+  },
   data() {
     return {
       astroPanChang: ['Tithi', 'Karan', 'Yog'],
@@ -297,11 +327,15 @@ export default {
       planetary: [],
       isLoading: true,
       downloadUrl: '',
+      payStatusSet: false,
+      payTips: false,
+      timerFun: null,
     }
   },
-  computed: {},
   mounted() {
-    if (process.client) {
+    let order_no = this.$route.query.order_no
+    if (process.client && !order_no) {
+      // 获取本地的
       const births = JSON.parse(localStorage.getItem('births'))
       if (!births) return
       this.birth_dtls = births.general?.birth_dtls
@@ -310,6 +344,41 @@ export default {
       this.general = births.report?.Ascendant?.Result
       this.planetary = births.report?.planet_report
       this.isLoading = false
+    }
+    if (process.client && order_no) {
+      //   获取在线的
+      this.$apiList.user
+        .setUserOrderData({
+          order_id: order_no,
+        })
+        .then((res) => {
+          console.log(order_no)
+          if (res?.code) {
+            console.log('没有数据数,支付失败')
+            // 提示通知
+            this.$notification.open({
+              message: 'Error',
+              description: 'No payment successful',
+              duration: 2,
+              style: {
+                color: '#f00',
+              },
+            })
+            return
+          }
+          this.payTips = true
+          //   this.$message.success('Payment successful! unlocked report')
+          this.birth_dtls = res.general?.birth_dtls
+          this.astro_dtls = res.general?.astro_dtls
+          this.planet_ext_dtls = res.general?.planet_ext_dtls
+          this.general = res.report?.Ascendant?.Result
+          this.planetary = res.report?.planet_report
+          this.isLoading = false
+          this.payStatusSet = true // 显示所有数据
+          this.timerFun = setTimeout(() => {
+            this.payTips = false
+          }, 2000)
+        })
     }
   },
   methods: {
@@ -357,6 +426,13 @@ export default {
         }
       }
     },
+    // 保存当前路由给支付
+    currentRouter() {
+      localStorage.setItem('payRouter', this.$route.path)
+    },
+  },
+  beforeDestroy() {
+    if (this.timerFun) clearTimeout(this.timerFun)
   },
 }
 </script>
@@ -395,6 +471,55 @@ export default {
           background: url('~assets/img/home/logo.svg');
           background-size: cover;
         }
+        .pay_ornot {
+          position: absolute;
+          width: 100%;
+          height: 520px;
+          bottom: 0;
+          left: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(33, 30, 45, 0.025) 0%,
+            #29213a 80.81%
+          );
+          .get_pay {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            .btn {
+              position: absolute;
+              bottom: 48px;
+              left: 50%;
+              transform: translateX(-50%);
+              .btn_title {
+                color: #ffda8b;
+                font-family: Rubik;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 22px;
+                text-align: center;
+                margin-bottom: 8px;
+              }
+              .money {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 295px;
+                height: 44px;
+                border-radius: 42px;
+                background: #ffda8b;
+                color: #000;
+                font-family: Rubik;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 22px;
+              }
+            }
+          }
+        }
+
         .icon_bg {
           position: absolute;
           width: 100%;
@@ -754,6 +879,28 @@ export default {
               width: 404 * $pr;
               height: 500 * $pr;
               filter: blur(220 * $pr);
+            }
+          }
+          .pay_ornot {
+            position: absolute;
+            width: 100%;
+            height: 400 * $pr;
+            .get_pay {
+              .btn {
+                bottom: 26 * $pr;
+                .btn_title {
+                  font-size: 16 * $pr;
+                  line-height: 22 * $pr;
+                  margin-bottom: 8 * $pr;
+                }
+                .money {
+                  width: 295 * $pr;
+                  height: 44 * $pr;
+                  border-radius: 42 * $pr;
+                  font-size: 16 * $pr;
+                  line-height: 22 * $pr;
+                }
+              }
             }
           }
           .feature_icon {

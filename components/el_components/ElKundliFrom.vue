@@ -233,7 +233,6 @@ export default {
       })
     },
     cityChange(value, option) {
-      console.log('cityChange', option)
       this.birthFormMini.place = option.data.attrs.channel
       //   this.cityData = [] // 清除搜索的城市内容
       this.fetching = false

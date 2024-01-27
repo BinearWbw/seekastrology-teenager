@@ -16,13 +16,31 @@
       <div class="animal_left">
         <div class="details">
           <div class="text_p" v-html="zodiacData.desc"></div>
-          <google-ad :id="'4486482830'" classNames="china_ad_lity"></google-ad>
+          <google-ad
+            :id="'4486482830'"
+            classNames="china_ad_lity"
+            v-if="payStatusSet"
+          ></google-ad>
+
           <div class="item_p">
             <p class="title_p">Personality:</p>
-            <div
-              class="text_fe personality"
-              v-html="zodiacData.personality"
-            ></div>
+            <div class="pay_off">
+              <div
+                class="text_fe personality"
+                :class="{ blurs: !payStatusSet }"
+                v-html="zodiacData.personality"
+              ></div>
+              <div class="pay_ornot" v-if="!payStatusSet">
+                <div class="get_pay">
+                  <div class="btn">
+                    <p class="btn_title">Get your detailed Birth Chart</p>
+                    <a href="/payment/4/" class="money" @click="currentRouter"
+                      >${{ isPrice }} Pay Now</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="google_ads">
               <google-ad :id="'7484181264'" classNames="text_ad"></google-ad>
             </div>
@@ -30,15 +48,63 @@
               Love Compatibility Of The {{ zodiacData.name }}
             </p>
             <client-only>
-              <div class="text_p" v-html="zodiacData.love_comp"></div>
+              <div class="pay_off">
+                <div
+                  class="text_p"
+                  :class="{ blurs: !payStatusSet }"
+                  v-html="zodiacData.love_comp"
+                ></div>
+                <div class="pay_ornot" v-if="!payStatusSet">
+                  <div class="get_pay">
+                    <div class="btn">
+                      <p class="btn_title">Get your detailed Birth Chart</p>
+                      <a href="/payment/4/" class="money" @click="currentRouter"
+                        >${{ isPrice }} Pay Now</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
             </client-only>
             <p class="title_p">Jobs Careers The {{ zodiacData.name }}</p>
             <client-only>
-              <div class="text_p" v-html="zodiacData.jobs_careers || ''"></div>
+              <div class="pay_off">
+                <div
+                  class="text_p"
+                  :class="{ blurs: !payStatusSet }"
+                  v-html="zodiacData.jobs_careers || ''"
+                ></div>
+                <div class="pay_ornot" v-if="!payStatusSet">
+                  <div class="get_pay">
+                    <div class="btn">
+                      <p class="btn_title">Get your detailed Birth Chart</p>
+                      <a href="/payment/4/" class="money" @click="currentRouter"
+                        >${{ isPrice }} Pay Now</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
             </client-only>
             <p class="title_p">Fortune :</p>
             <client-only>
-              <div class="text_fe" v-html="zodiacData.fortune || ''"></div>
+              <div class="pay_off">
+                <div
+                  class="text_fe"
+                  :class="{ blurs: !payStatusSet }"
+                  v-html="zodiacData.fortune || ''"
+                ></div>
+                <div class="pay_ornot" v-if="!payStatusSet">
+                  <div class="get_pay">
+                    <div class="btn">
+                      <p class="btn_title">Get your detailed Birth Chart</p>
+                      <a href="/payment/4/" class="money" @click="currentRouter"
+                        >${{ isPrice }} Pay Now</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
             </client-only>
           </div>
         </div>
@@ -53,6 +119,9 @@
         </div>
       </div>
     </div>
+    <transition name="unfold">
+      <el-tips-pay v-if="payTips"></el-tips-pay>
+    </transition>
   </div>
 </template>
 
@@ -61,7 +130,7 @@ export default {
   async asyncData({ error, $apiList, params }) {
     try {
       let imgId = ''
-      let [zodiacData] = await Promise.all([
+      let [zodiacData, isPrice] = await Promise.all([
         /**详情 */
         $apiList.test
           .getAnimalsDetail({
@@ -74,11 +143,64 @@ export default {
             imgId = require(`~/assets/img/zodiac/chin/chins_${res.id}.svg`)
             return res || null
           }),
+
+        $apiList.user
+          .getUserPrice({
+            id: '4',
+          })
+          .then((res) => {
+            return res?.price || null
+          }),
       ])
-      return { zodiacData, imgId }
+      return { zodiacData, imgId, isPrice }
     } catch (e) {
       error({ statusCode: e.code, message: e.msg })
     }
+  },
+  data() {
+    return {
+      payStatusSet: false,
+      payTips: false,
+      timerFun: null,
+    }
+  },
+  mounted() {
+    let order_no = this.$route.query.order_no
+    if (process.client && order_no) {
+      //   获取支付成功数据
+      this.$apiList.user
+        .setUserOrderData({
+          order_id: order_no,
+        })
+        .then((res) => {
+          if (res?.code) {
+            // 提示通知
+            this.$notification.open({
+              message: 'Error',
+              description: 'No payment successful',
+              duration: 2,
+              style: {
+                color: '#f00',
+              },
+            })
+            window.location.href = '/chinazodiac/'
+            return
+          }
+          this.payTips = true
+          this.payStatusSet = true // 显示所有数据
+          this.timerFun = setTimeout(() => {
+            this.payTips = false
+          }, 2000)
+        })
+    }
+  },
+  methods: {
+    currentRouter() {
+      localStorage.setItem('payRouter', this.$route.path)
+    },
+  },
+  beforeDestroy() {
+    if (this.timerFun) clearTimeout(this.timerFun)
   },
 }
 </script>
@@ -214,6 +336,48 @@ export default {
         .item_p {
           display: grid;
           gap: 8px;
+          .blurs {
+            filter: blur(3px);
+            user-select: none;
+          }
+          .pay_off {
+            position: relative;
+            .pay_ornot {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              .get_pay {
+                .btn {
+                  .btn_title {
+                    color: #ffda8b;
+                    font-family: Rubik;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 22px;
+                    text-align: center;
+                    margin-bottom: 8px;
+                  }
+                  .money {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 295px;
+                    height: 44px;
+                    border-radius: 42px;
+                    background: #ffda8b;
+                    color: #000;
+                    font-family: Rubik;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 22px;
+                  }
+                }
+              }
+            }
+          }
         }
         .google_ads {
           width: 100%;
@@ -359,6 +523,30 @@ export default {
           .item_p {
             display: grid;
             gap: 8 * $pr;
+            .blurs {
+              filter: blur(3 * $pr);
+            }
+            .pay_off {
+              .pay_ornot {
+                top: 20%;
+                .get_pay {
+                  .btn {
+                    .btn_title {
+                      font-size: 16 * $pr;
+                      line-height: 22 * $pr;
+                      margin-bottom: 8 * $pr;
+                    }
+                    .money {
+                      width: 295 * $pr;
+                      height: 44 * $pr;
+                      border-radius: 42 * $pr;
+                      font-size: 16 * $pr;
+                      line-height: 22 * $pr;
+                    }
+                  }
+                }
+              }
+            }
           }
           .google_ads {
             width: 100%;

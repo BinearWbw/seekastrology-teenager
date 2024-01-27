@@ -25,11 +25,25 @@
                       <p class="lis">{{ numerUser.name }}</p>
                       <p class="lis">{{ numerUserFun }}</p>
                     </div>
-                    <div class="letter" v-html="item.desc"></div>
+                    <div
+                      class="letter"
+                      :class="{ blurs: payStatusSet }"
+                      v-html="item.desc"
+                    ></div>
                   </div>
                 </div>
               </a-carousel>
             </client-only>
+            <div class="pay_ornot" v-if="payStatusSet">
+              <div class="get_pay">
+                <div class="btn">
+                  <p class="btn_title">Get your detailed Birth Chart</p>
+                  <a href="/payment/2/" class="money" @click="currentRouter"
+                    >${{ isPrice }} Pay Now</a
+                  >
+                </div>
+              </div>
+            </div>
           </div>
           <div class="push_button">
             <div>
@@ -78,6 +92,24 @@
 
 <script>
 export default {
+  // 获取价格
+  async asyncData({ error, $apiList, params, query }) {
+    try {
+      console.log('query', query.order_no)
+      let [isPrice] = await Promise.all([
+        $apiList.user
+          .getUserPrice({
+            id: '2',
+          })
+          .then((res) => {
+            return res?.price || null
+          }),
+      ])
+      return { isPrice }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.msg })
+    }
+  },
   data() {
     return {
       numerologyData: [],
@@ -100,14 +132,41 @@ export default {
         { name: 'Nov', li: '11' },
         { name: 'Dec', li: '12' },
       ],
+      payStatusSet: false,
     }
   },
   mounted() {
+    let order_no = this.$route.query.order_no
+    this.payStatusSet = true
     this.$nextTick(() => {
       this.numerologyData = JSON.parse(localStorage.getItem('numerology'))
       this.numerUser = JSON.parse(localStorage.getItem('numerUser'))
       this.carouselDom = this.$refs.carousels
     })
+    if (process.client && order_no) {
+      //   获取支付成功数据
+      this.$apiList.user
+        .setUserOrderData({
+          order_id: order_no,
+        })
+        .then((res) => {
+          if (res?.code) {
+            // 提示通知
+            this.$notification.open({
+              message: 'Error',
+              description: 'No payment successful',
+              duration: 2,
+              style: {
+                color: '#f00',
+              },
+            })
+            window.location.href = '/numerology/'
+            return
+          }
+          this.payStatusSet = false // 显示所有数据
+          this.numerologyData = res.res
+        })
+    }
   },
   computed: {
     // 用户填写的日期
@@ -177,7 +236,9 @@ export default {
       if (this.marke !== 3) {
         carouselDom.next()
       } else {
-        this.ifCourse = false
+        if (!this.payStatusSet) {
+          this.ifCourse = false // 支付成功时才可进入
+        }
       }
     },
     scrollToPrev() {
@@ -191,12 +252,15 @@ export default {
       this.marke = to
     },
     goBack() {
-      window.changePageUrl = '/numerology/details/'
-      window.location.href = '/numerology/details/'
+      window.location.reload()
     },
     reStart() {
       window.changePageUrl = '/numerology/'
       window.location.href = '/numerology/'
+    },
+    // 保存当前路由给支付
+    currentRouter() {
+      localStorage.setItem('payRouter', this.$route.path)
     },
   },
 }
@@ -282,6 +346,51 @@ export default {
           width: 1400px;
           border-radius: 16px;
           background: rgba(255, 255, 255, 0.08);
+          position: relative;
+          .pay_ornot {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            bottom: 0;
+            left: 0;
+            padding-left: 240px;
+            .get_pay {
+              width: 100%;
+              height: 100%;
+              position: relative;
+              .btn {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                .btn_title {
+                  color: #ffda8b;
+                  font-family: Rubik;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 22px;
+                  text-align: center;
+                  margin-bottom: 8px;
+                }
+                .money {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: 295px;
+                  height: 44px;
+                  border-radius: 42px;
+                  background: #ffda8b;
+                  color: #000;
+                  font-family: Rubik;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 22px;
+                }
+              }
+            }
+          }
           .line_up {
             padding: 24px;
             display: flex;
@@ -335,6 +444,9 @@ export default {
               font-style: normal;
               font-weight: 400;
               line-height: 28px;
+            }
+            .blurs {
+              filter: blur(3px);
             }
           }
         }
@@ -519,6 +631,26 @@ export default {
           }
           .slide {
             width: 343 * $pr;
+            .pay_ornot {
+              padding-left: 0;
+              padding-top: 185 * $pr;
+              .get_pay {
+                .btn {
+                  .btn_title {
+                    font-size: 16 * $pr;
+                    line-height: 22 * $pr;
+                    margin-bottom: 8 * $pr;
+                  }
+                  .money {
+                    width: 295 * $pr;
+                    height: 44 * $pr;
+                    border-radius: 42 * $pr;
+                    font-size: 16 * $pr;
+                    line-height: 22 * $pr;
+                  }
+                }
+              }
+            }
             .line_up {
               padding: 24 * $pr;
               flex-direction: column;
@@ -556,6 +688,9 @@ export default {
                 padding-top: 16 * $pr;
                 font-size: 14 * $pr;
                 line-height: 24 * $pr;
+              }
+              .blurs {
+                filter: blur(3 * $pr);
               }
             }
           }

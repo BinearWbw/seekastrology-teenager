@@ -86,7 +86,7 @@
         <div class="tips">
           {{ kundliData?.conclusion }}
         </div>
-        <div class="sign_table">
+        <div class="sign_table" v-if="payStatusSet">
           <p class="titles">Match Ashtakoot Points</p>
           <div class="planet">
             <table class="table_main">
@@ -137,20 +137,50 @@
             </table>
           </div>
         </div>
-        <div class="more">
+        <div class="more" v-if="payStatusSet">
           <p class="title">Horoscopes</p>
           <el-explore-more />
+        </div>
+      </div>
+      <div class="pay_ornot" v-if="!payStatusSet">
+        <div class="get_pay">
+          <div class="btn">
+            <p class="btn_title">Get your detailed Birth Chart</p>
+            <a href="/payment/3/" class="money" @click="currentRouter"
+              >${{ isPrice }} Pay Now</a
+            >
+          </div>
         </div>
       </div>
     </div>
     <transition name="fade">
       <el-loading v-if="!kundliBoth"></el-loading>
     </transition>
+    <transition name="unfold">
+      <el-tips-pay v-if="payTips"></el-tips-pay>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
+  // 获取价格
+  async asyncData({ error, $apiList, params }) {
+    try {
+      let [isPrice] = await Promise.all([
+        $apiList.user
+          .getUserPrice({
+            id: '3',
+          })
+          .then((res) => {
+            return res?.price || null
+          }),
+      ])
+      return { isPrice }
+    } catch (e) {
+      error({ statusCode: e.code, message: e.msg })
+    }
+  },
   data() {
     return {
       boys: [
@@ -180,13 +210,44 @@ export default {
       ],
       kundliBoth: null,
       kundliData: null,
+      payStatusSet: false,
+      payTips: false,
+      timerFun: null,
     }
   },
   mounted() {
+    let order_no = this.$route.query.order_no
     if (process.client) {
       this.kundliBoth = JSON.parse(localStorage.getItem('kundliBoth'))
       this.kundliData = JSON.parse(localStorage.getItem('kundli'))
-      console.log(this.kundliBoth, this.kundliData)
+    }
+    if (process.client && order_no) {
+      //   获取支付成功数据
+      this.$apiList.user
+        .setUserOrderData({
+          order_id: order_no,
+        })
+        .then((res) => {
+          if (res?.code) {
+            // 提示通知
+            this.$notification.open({
+              message: 'Error',
+              description: 'No payment successful',
+              duration: 2,
+              style: {
+                color: '#f00',
+              },
+            })
+            window.location.href = '/kundli/'
+            return
+          }
+          this.payTips = true
+          this.payStatusSet = true // 显示所有数据
+          this.kundliData = res.res
+          this.timerFun = setTimeout(() => {
+            this.payTips = false
+          }, 2000)
+        })
     }
   },
   methods: {
@@ -223,6 +284,13 @@ export default {
           female?.hour
         } : ${female?.min}`
       }
+    },
+    // 保存当前路由给支付
+    currentRouter() {
+      localStorage.setItem('payRouter', this.$route.path)
+    },
+    beforeDestroy() {
+      if (this.timerFun) clearTimeout(this.timerFun)
     },
   },
 }
@@ -290,6 +358,54 @@ export default {
         border-radius: 50%;
         background: rgba(151, 71, 255, 8.8);
         filter: blur(241px);
+      }
+    }
+    .pay_ornot {
+      position: absolute;
+      width: 100%;
+      height: 520px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(33, 30, 45, 0.025) 0%,
+        #29213a 80.81%
+      );
+      .get_pay {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        .btn {
+          position: absolute;
+          bottom: 48px;
+          left: 50%;
+          transform: translateX(-50%);
+          .btn_title {
+            color: #ffda8b;
+            font-family: Rubik;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 22px;
+            text-align: center;
+            margin-bottom: 8px;
+          }
+          .money {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 295px;
+            height: 44px;
+            border-radius: 42px;
+            background: #ffda8b;
+            color: #000;
+            font-family: Rubik;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 22px;
+          }
+        }
       }
     }
     .content {
@@ -557,6 +673,28 @@ export default {
           width: 343 * $pr;
           height: 658 * $pr;
           filter: blur(241 * $pr);
+        }
+      }
+      .pay_ornot {
+        position: absolute;
+        width: 100%;
+        height: 400 * $pr;
+        .get_pay {
+          .btn {
+            bottom: 48 * $pr;
+            .btn_title {
+              font-size: 16 * $pr;
+              line-height: 22 * $pr;
+              margin-bottom: 8 * $pr;
+            }
+            .money {
+              width: 295 * $pr;
+              height: 44 * $pr;
+              border-radius: 42 * $pr;
+              font-size: 16 * $pr;
+              line-height: 22 * $pr;
+            }
+          }
         }
       }
       .content {

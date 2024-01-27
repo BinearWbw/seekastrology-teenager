@@ -138,9 +138,6 @@
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
-    <transition name="unfold">
-      <el-login-form v-show="perform" @choce="integerFormat"></el-login-form>
-    </transition>
   </div>
 </template>
 
@@ -152,35 +149,17 @@ export default {
       m_detail: null,
       f_detail: null,
       isLoading: false,
-      perform: false,
     }
   },
   computed: {
     ...mapGetters(['getUserInfo']),
   },
   methods: {
-    // 登录显示
-    formTouched() {
-      this.perform = true
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = 'hidden'
-    },
-    // 登录隐藏
-    integerFormat() {
-      this.perform = false
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = ''
-    },
-
     // 提交信息-获取子组件填写内容
     submitKundli() {
       dataLayer.push({
         event: 'getResultButton',
       })
-      if (!this.getUserInfo?.email) {
-        this.formTouched()
-        return
-      }
       const kundliForm = this.$refs.kundliFormRefMale
       const kundliFormFemale = this.$refs.kundliFormRefFemale
 
@@ -190,39 +169,39 @@ export default {
       }
       if (this.f_detail && this.m_detail) {
         this.isLoading = true
-        this.$apiList.home
-          .getKundliMaking({
-            f_detail: this.f_detail,
-            m_detail: this.m_detail,
-          })
-          .then((res) => {
-            this.isLoading = false
-            localStorage.setItem(
-              'kundli',
-              JSON.stringify(res) // 更新用户匹配数据
-            )
-            localStorage.setItem(
-              'kundliBoth',
-              JSON.stringify({
-                f_detail: this.f_detail,
-                m_detail: this.m_detail,
-              }) // 更新用户存储信息
-            )
-            this.m_detail = null
-            this.f_detail = null
-            if (res?.conclusion) {
-              window.location.href = '/kundli/details/'
-            } else {
-              this.$notification.open({
-                message: 'Stop',
-                description: 'Please enter the correct time',
-                duration: 3,
-                style: {
-                  color: '#f00',
-                },
-              })
-            }
-          })
+        let payData = {
+          f_detail: this.f_detail,
+          m_detail: this.m_detail,
+        }
+        this.$apiList.home.getKundliMaking(payData).then((res) => {
+          this.isLoading = false
+          localStorage.setItem(
+            'kundli',
+            JSON.stringify(res) // 更新用户匹配数据
+          )
+          localStorage.setItem(
+            'kundliBoth',
+            JSON.stringify(payData) // 更新用户存储信息
+          )
+          localStorage.setItem(
+            'payData',
+            JSON.stringify(payData) // 更新支付Data
+          )
+          this.m_detail = null
+          this.f_detail = null
+          if (res?.conclusion) {
+            window.location.href = '/kundli/details/'
+          } else {
+            this.$notification.open({
+              message: 'Stop',
+              description: 'Please enter the correct time',
+              duration: 3,
+              style: {
+                color: '#f00',
+              },
+            })
+          }
+        })
       }
     },
     getMaleData(value) {

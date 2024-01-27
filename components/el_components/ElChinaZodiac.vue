@@ -60,9 +60,6 @@
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
-    <transition name="unfold">
-      <el-login-form v-show="perform" @choce="integerFormat"></el-login-form>
-    </transition>
   </div>
 </template>
 
@@ -121,7 +118,6 @@ export default {
         ],
       },
       isLoading: false,
-      perform: false,
     }
   },
   computed: {
@@ -137,51 +133,38 @@ export default {
     chinaYearChange(value) {
       this.chinaZodiac.year = value
     },
-    // 登录显示
-    formTouched() {
-      this.perform = true
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = 'hidden'
-    },
-    // 登录隐藏
-    integerFormat() {
-      this.perform = false
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = ''
-    },
     submitZodiac() {
       dataLayer.push({
         event: 'getResultButton',
       })
-      if (!this.getUserInfo?.email) {
-        this.formTouched()
-        return
-      }
       this.$refs.chinaFormMini.validate((valid) => {
         if (valid) {
           this.isLoading = true
-          this.$apiList.test
-            .getAnimalsJudge({
-              year: this.chinaZodiac.year,
-              month: this.chinaZodiac.month,
-              day: this.chinaZodiac.day,
-            })
-            .then((res) => {
-              this.isLoading = false
-              if (res) {
-                window.changePageUrl = `/chinazodiac/details/${res.id}/`
-                window.location = `/chinazodiac/details/${res.id}/`
-              } else {
-                this.$notification.open({
-                  message: 'Stop',
-                  description: 'Please enter the correct time',
-                  duration: 3,
-                  style: {
-                    color: '#f00',
-                  },
-                })
-              }
-            })
+          let payData = {
+            year: this.chinaZodiac.year,
+            month: this.chinaZodiac.month,
+            day: this.chinaZodiac.day,
+          }
+          this.$apiList.test.getAnimalsJudge(payData).then((res) => {
+            this.isLoading = false
+            if (res) {
+              window.changePageUrl = `/chinazodiac/details/${res.id}/`
+              window.location.href = `/chinazodiac/details/${res.id}/`
+              localStorage.setItem(
+                'payData',
+                JSON.stringify(payData) // 更新支付Data
+              )
+            } else {
+              this.$notification.open({
+                message: 'Stop',
+                description: 'Please enter the correct time',
+                duration: 3,
+                style: {
+                  color: '#f00',
+                },
+              })
+            }
+          })
         }
       })
     },

@@ -176,9 +176,6 @@
         </div>
       </div>
     </div>
-    <transition name="unfold">
-      <el-login-form v-show="perform" @choce="integerFormat"></el-login-form>
-    </transition>
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
@@ -357,7 +354,6 @@ export default {
       birthChart: '',
       fetching: false,
       cityData: [],
-      perform: false,
       isLoading: false,
     }
   },
@@ -366,26 +362,10 @@ export default {
   },
   mounted() {},
   methods: {
-    // 登录弹出
-    formTouched() {
-      this.perform = true
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = 'hidden'
-    },
-    // 登录隐藏
-    integerFormat() {
-      this.perform = false
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = ''
-    },
     submintForm() {
       dataLayer.push({
         event: 'getResultButton',
       })
-      if (!this.getUserInfo?.email) {
-        this.formTouched()
-        return
-      }
       this.$refs.birthForm.validate((valid) => {
         if (valid) {
           const birthLocalTime = this.$utils.formatDateNatal(
@@ -393,53 +373,56 @@ export default {
             this.birthForm.mol
           )
           this.isLoading = true
-          this.$apiList.home
-            .getNatal({
-              year: this.birthForm.year,
-              month: this.birthForm.month,
-              day: this.birthForm.day,
-              hour: birthLocalTime,
-              min: this.birthForm.min,
-              sec: 1,
-              name: this.birthForm.name,
-              gender: this.birthForm.gender,
-              lat: this.birthForm.place.latitude,
-              lon: this.birthForm.place.longitude,
-              place: this.birthForm.place.name,
-              tzone: this.birthForm.place.timezoneOffset,
-            })
-            .then((res) => {
-              if (res.code) {
-                // 提示通知
+          let payData = {
+            year: this.birthForm.year,
+            month: this.birthForm.month,
+            day: this.birthForm.day,
+            hour: birthLocalTime,
+            min: this.birthForm.min,
+            sec: 1,
+            name: this.birthForm.name,
+            gender: this.birthForm.gender,
+            lat: this.birthForm.place.latitude,
+            lon: this.birthForm.place.longitude,
+            place: this.birthForm.place.name,
+            tzone: this.birthForm.place.timezoneOffset,
+          }
+          this.$apiList.home.getNatal(payData).then((res) => {
+            if (res.code) {
+              // 提示通知
+              this.$notification.open({
+                message: 'Errors',
+                description: res.msg,
+                duration: 4,
+                style: {
+                  color: '#f00',
+                },
+              })
+            } else {
+              localStorage.setItem(
+                'births',
+                JSON.stringify(res) // 更新用户存储信息
+              )
+              localStorage.setItem(
+                'payData',
+                JSON.stringify(payData) // 更新支付Data
+              )
+              this.isLoading = false
+              if (res?.general?.planet_ext_dtls) {
+                window.changePageUrl = '/birthchart/details/'
+                window.location.href = '/birthchart/details/'
+              } else {
                 this.$notification.open({
-                  message: 'Errors',
-                  description: res.msg,
-                  duration: 4,
+                  message: 'Stop',
+                  description: 'Please enter the correct time',
+                  duration: 3,
                   style: {
                     color: '#f00',
                   },
                 })
-              } else {
-                localStorage.setItem(
-                  'births',
-                  JSON.stringify(res) // 更新用户存储信息
-                )
-                this.isLoading = false
-                if (res?.general?.planet_ext_dtls) {
-                  window.changePageUrl = '/birthchart/details/'
-                  window.location.href = '/birthchart/details/'
-                } else {
-                  this.$notification.open({
-                    message: 'Stop',
-                    description: 'Please enter the correct time',
-                    duration: 3,
-                    style: {
-                      color: '#f00',
-                    },
-                  })
-                }
               }
-            })
+            }
+          })
         }
       })
     },
@@ -448,7 +431,6 @@ export default {
       this.fetching = true
       this.cityData = []
       this.$apiList.home.getKundliCity({ name: value }).then((res) => {
-        console.log('res', res)
         this.cityData = res.data
         this.fetching = false
       })
@@ -457,7 +439,6 @@ export default {
       this.birthForm.place = option.data.attrs.channel
       //   this.cityData = [] // 清除搜索的城市内容
       this.fetching = false
-      console.log('地图数据', value, this.birthForm)
     },
     yearChange(value) {
       this.birthForm.year = value

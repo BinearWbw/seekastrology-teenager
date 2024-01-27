@@ -65,4 +65,21 @@ export default (axios) => ({
   getGoogleUser(data) {
     return axios.post('api/astro/login/google', data)
   },
+
+  //   支付接口
+  setUserPayMent(data) {
+    return axios.post('api/enjoypay', data)
+  },
+  //  订单ID获取结果
+  setUserOrderData(params) {
+    return axios.get('api/order/data', { params })
+  },
+  //  已支付订单
+  setUserOrderList(params) {
+    return axios.get('api/order/list', { params })
+  },
+  //  获取价格ID
+  getUserPrice(params) {
+    return axios.get('api/price/astro', { params })
+  },
 })

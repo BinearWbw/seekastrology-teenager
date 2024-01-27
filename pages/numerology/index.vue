@@ -191,9 +191,6 @@
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
     </transition>
-    <transition name="unfold">
-      <el-login-form v-show="perform" @choce="integerFormat"></el-login-form>
-    </transition>
   </div>
 </template>
 
@@ -264,7 +261,6 @@ export default {
         ],
       },
       isLoading: false,
-      perform: false,
     }
   },
   computed: {
@@ -288,58 +284,46 @@ export default {
     daysChange(value) {
       this.numerologyData.day = value
     },
-    // 登录显示
-    formTouched() {
-      this.perform = true
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = 'hidden'
-    },
-    // 登录隐藏
-    integerFormat() {
-      this.perform = false
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = ''
-    },
     numerologySubmit() {
       dataLayer.push({
         event: 'getResultButton',
       })
-      if (!this.getUserInfo?.email) {
-        this.formTouched()
-        return
-      }
       this.$refs.numerologyFrom.validate((valid) => {
         if (valid) {
           this.isLoading = true
           let dayNumber = this.numerologyData.day.toString().padStart(2, '0') //处理小于10的数字,拼0
-          this.$apiList.test
-            .getNumerology({
-              name: this.numerologyData.name,
-              date: `${this.numerologyData.year}${this.numerologyData.month}${dayNumber}`,
-            })
-            .then((res) => {
-              this.isLoading = false
-              if (res.code == 400) {
-                // 提示通知
-                this.$notification.open({
-                  message: 'Stop',
-                  description: res.msg,
-                  duration: 3,
-                  style: {
-                    color: '#f00',
-                  },
-                })
-                return
-              }
+          let payData = {
+            name: this.numerologyData.name,
+            date: `${this.numerologyData.year}${this.numerologyData.month}${dayNumber}`,
+          }
+          this.$apiList.test.getNumerology(payData).then((res) => {
+            this.isLoading = false
+            if (res.code == 400) {
+              // 提示通知
+              this.$notification.open({
+                message: 'Stop',
+                description: res.msg,
+                duration: 3,
+                style: {
+                  color: '#f00',
+                },
+              })
+              return
+            }
 
-              localStorage.setItem('numerology', JSON.stringify(res))
-              localStorage.setItem(
-                'numerUser',
-                JSON.stringify(this.numerologyData)
-              )
-              window.changePageUrl = '/numerology/details/'
-              window.location.href = '/numerology/details/'
-            })
+            localStorage.setItem(
+              'payData',
+              JSON.stringify(payData) // 更新支付Data
+            )
+
+            localStorage.setItem('numerology', JSON.stringify(res))
+            localStorage.setItem(
+              'numerUser',
+              JSON.stringify(this.numerologyData)
+            )
+            window.changePageUrl = '/numerology/details/'
+            window.location.href = '/numerology/details/'
+          })
         }
       })
     },

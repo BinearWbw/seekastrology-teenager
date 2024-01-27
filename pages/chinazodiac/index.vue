@@ -41,18 +41,6 @@
 
 <script>
 export default {
-  async asyncData({ error, $apiList, params }) {
-    try {
-      let chinaZodia = await $apiList.test.getAnimals().then((res) => {
-        return res
-      })
-      return {
-        chinaZodia,
-      }
-    } catch (e) {
-      error({ statusCode: e.code, message: e.message })
-    }
-  },
   data() {
     return {
       localityData: [

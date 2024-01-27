@@ -380,7 +380,6 @@ export default {
     ...mapMutations(['hideLoginBox']),
     // 登录
     inputSubmit() {
-      console.log('当前路由', this.$route.path)
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.isLoading = true

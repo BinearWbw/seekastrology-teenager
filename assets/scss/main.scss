@@ -623,6 +623,17 @@ body::-webkit-scrollbar {
   opacity: 0;
   transform: translateY(-20px);
 }
+
+.unfolds-enter-active,
+.unfolds-leave-active {
+  transition: all 0.5s;
+}
+
+.unfolds-enter,
+.unfolds-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
 ins.adsbygoogle[data-ad-status='unfilled'] {
   display: none !important;
 }
