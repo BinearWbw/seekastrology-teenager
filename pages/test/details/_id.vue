@@ -24,6 +24,7 @@
                 <!-- 描述 -->
                 <div
                   class="details_main_left_top_content_main_pc_desc"
+                  v-if="currentQuestionIndex == 0"
                   v-html="dataInfo.desc"
                 ></div>
               </div>
