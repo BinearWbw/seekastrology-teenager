@@ -102,7 +102,7 @@ export default {
             id: '2',
           })
           .then((res) => {
-            return res?.price || null
+            return res?.price / 100 || null
           }),
       ])
       return { isPrice }

@@ -149,7 +149,7 @@ export default {
             id: '4',
           })
           .then((res) => {
-            return res?.price || null
+            return res?.price / 100 || null
           }),
       ])
       return { zodiacData, imgId, isPrice }
