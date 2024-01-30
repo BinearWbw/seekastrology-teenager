@@ -75,7 +75,6 @@
                   :alt="dataInfo.questions[currentQuestionIndex].question"
                   class="details_main_left_top_content_main_questionImage"
                   width="700"
-                  height="338"
                   loading="lazy"
                   format="auto"
                 ></nuxt-img>
@@ -620,6 +619,7 @@ $spacing: 55px;
             }
             &_questionImage {
               width: 100%;
+              height: 100%;
             }
             &_answer {
               display: grid;
