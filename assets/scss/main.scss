@@ -623,6 +623,21 @@ body::-webkit-scrollbar {
   opacity: 0;
   transform: translateY(-20px);
 }
+
+.makeup-enter-active {
+  transition: all 0.3s;
+}
+
+.makeup-leave-active {
+  transition: all 0.3s;
+}
+
+.makeup-enter,
+.makeup-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
 ins.adsbygoogle[data-ad-status='unfilled'] {
   display: none !important;
 }
