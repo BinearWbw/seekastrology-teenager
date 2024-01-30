@@ -413,7 +413,6 @@ export default {
       //     answers: this.answers,
       //   }
       //localStorage.setItem('quiz_results', JSON.stringify(datalis)) //存入值跳转页面时拿取
-      showAdBreak(this.adComplete)
       this.isLoading = true
       this.$apiList.test
         .getQuizResult({
@@ -422,6 +421,10 @@ export default {
           answers: this.answers,
         })
         .then((res) => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
           this.isLoading = false
           this.result = res
           //隐藏详情，展示问题和回答列表
@@ -430,10 +433,7 @@ export default {
           this.$refs.nameAndDesc.style.display = 'block'
           //展示结果
           this.showResult = true
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
+          showAdBreak(this.adComplete)
         })
     },
     /**选择答案 */
@@ -597,6 +597,11 @@ $spacing: 55px;
                 line-height: 18px;
                 color: rgba(255, 255, 255, 0.6);
                 margin-top: 16px;
+                :deep(*) {
+                  color: rgba(255, 255, 255, 0.6);
+                  pointer-events: none;
+                  cursor: default;
+                }
               }
             }
             &_h5 {
@@ -615,7 +620,6 @@ $spacing: 55px;
             }
             &_questionImage {
               width: 100%;
-              height: 100%;
             }
             &_answer {
               display: grid;
@@ -1048,6 +1052,10 @@ $spacing: 55px;
                   margin-top: 16 * $pr;
                 }
               }
+              &_questionImage {
+                width: 100%;
+                height: 100%;
+              }
               &_h5 {
                 display: block;
                 &_img {
@@ -1076,6 +1084,11 @@ $spacing: 55px;
                   font-size: 14 * $pr;
                   line-height: 18 * $pr;
                   color: rgba(255, 255, 255, 0.6);
+                  :deep(*) {
+                    color: rgba(255, 255, 255, 0.6);
+                    pointer-events: none;
+                    cursor: default;
+                  }
                 }
                 &_btn {
                   width: 136 * $pr;
