@@ -75,32 +75,6 @@ export default {
       quizData: [],
     }
   },
-  async fetch() {
-    let [articleData, videoData] = await Promise.all([
-      this.$apiList.articles
-        .getNewsList({
-          origin: process.env.origin,
-          page: 1,
-          size: 3,
-          kind: 1,
-        })
-        .then((res) => {
-          return res.list || []
-        }),
-      this.$apiList.articles
-        .getNewsList({
-          origin: process.env.origin,
-          page: 1,
-          size: 3,
-          kind: 2,
-        })
-        .then((res) => {
-          return res.list || []
-        }),
-    ])
-    this.articleData = articleData
-    this.videoData = videoData
-  },
   mounted() {
     // 随机获取测验数据,刷新更换数据
     this.$nextTick(() => {
@@ -112,6 +86,27 @@ export default {
         .then((res) => {
           const list = res.list.sort(() => Math.random() - 0.5)
           this.quizData = list.slice(0, 3) || []
+        })
+      this.$apiList.articles
+        .getNewsList({
+          origin: process.env.origin,
+          page: 1,
+          size: 3,
+          kind: 1,
+        })
+        .then((res) => {
+          this.articleData = res.list || []
+        })
+
+      this.$apiList.articles
+        .getNewsList({
+          origin: process.env.origin,
+          page: 1,
+          size: 3,
+          kind: 2,
+        })
+        .then((res) => {
+          this.videoData = res.list || []
         })
     })
   },

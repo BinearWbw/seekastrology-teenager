@@ -3,9 +3,13 @@
     <button
       class="desktop common__btn"
       id="PWACLICKTO"
-      v-if="prompt"
+      v-if="prompt || screenWidth"
       @click="download"
     ></button>
+
+    <transition name="makeup">
+      <el-down-tips v-if="downTips" @closePro="closeProFat"></el-down-tips>
+    </transition>
   </div>
 </template>
 <script>
@@ -14,10 +18,16 @@ export default {
   data() {
     return {
       prompt: null,
+      screenWidth: false,
+      downTips: false,
     }
   },
   mounted() {
     window.addEventListener('beforeinstallprompt', this.beforeinstallprompt)
+    console.log(window.innerWidth)
+    if (window.innerWidth <= 750) {
+      this.screenWidth = true
+    }
   },
   methods: {
     beforeinstallprompt(e) {
@@ -37,7 +47,12 @@ export default {
           .catch((err) => {
             console.log(err)
           })
+      } else {
+        this.downTips = true
       }
+    },
+    closeProFat(value) {
+      this.downTips = value
     },
   },
 }

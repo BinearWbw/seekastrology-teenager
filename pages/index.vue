@@ -46,25 +46,6 @@
         </div>
 
         <div class="list_tabs">
-          <!-- <home-tabs :tabs="horroData" @click-selected="handleTabSelected">
-            <template>
-              <home-infor-module
-                v-if="selectedTabIndex === 0"
-                title="Article"
-                :inforData="articleData"
-              ></home-infor-module>
-              <home-infor-module
-                v-if="selectedTabIndex === 1"
-                title="Video"
-                :inforData="videoData"
-              ></home-infor-module>
-              <home-infor-module
-                v-if="selectedTabIndex === 2"
-                title="Quiz"
-                :inforData="quizData"
-              ></home-infor-module>
-            </template>
-          </home-tabs> -->
           <el-widget></el-widget>
         </div>
 
@@ -89,38 +70,7 @@
 <script>
 export default {
   name: 'Home',
-  async asyncData({ error, $apiList, params }) {
-    try {
-      let [articleData, videoData] = await Promise.all([
-        $apiList.articles
-          .getNewsList({
-            origin: process.env.origin,
-            page: 1,
-            size: 3,
-            kind: 1,
-          })
-          .then((res) => {
-            return res.list || []
-          }),
-        $apiList.articles
-          .getNewsList({
-            origin: process.env.origin,
-            page: 1,
-            size: 3,
-            kind: 2,
-          })
-          .then((res) => {
-            return res.list || []
-          }),
-      ])
-      return {
-        articleData,
-        videoData,
-      }
-    } catch (e) {
-      error({ statusCode: e.code, message: e.message })
-    }
-  },
+
   data() {
     return {
       isScrolled: false,
@@ -139,6 +89,8 @@ export default {
       ],
       selectedTabIndex: 0,
       quizData: [],
+      articleData: [],
+      videoData: [],
     }
   },
   mounted() {
@@ -168,6 +120,27 @@ export default {
         .then((res) => {
           const list = res.list.sort(() => Math.random() - 0.5)
           this.quizData = list.slice(0, 3) || []
+        })
+      this.$apiList.articles
+        .getNewsList({
+          origin: process.env.origin,
+          page: 1,
+          size: 3,
+          kind: 1,
+        })
+        .then((res) => {
+          this.articleData = res.list || []
+        })
+
+      this.$apiList.articles
+        .getNewsList({
+          origin: process.env.origin,
+          page: 1,
+          size: 3,
+          kind: 2,
+        })
+        .then((res) => {
+          this.videoData = res.list || []
         })
     })
   },

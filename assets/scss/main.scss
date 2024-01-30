@@ -624,16 +624,20 @@ body::-webkit-scrollbar {
   transform: translateY(-20px);
 }
 
-.unfolds-enter-active,
-.unfolds-leave-active {
-  transition: all 0.5s;
+.makeup-enter-active {
+  transition: all 0.3s;
 }
 
-.unfolds-enter,
-.unfolds-leave-to {
-  opacity: 0;
-  transform: translateY(-30px);
+.makeup-leave-active {
+  transition: all 0.3s;
 }
+
+.makeup-enter,
+.makeup-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
 ins.adsbygoogle[data-ad-status='unfilled'] {
   display: none !important;
 }

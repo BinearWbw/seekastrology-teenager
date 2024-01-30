@@ -178,9 +178,10 @@
                   <div class="details_main_left_top_result_title">
                     {{ result.title }}
                   </div>
-                  <div class="details_main_left_top_result_desc">
-                    {{ result.desc }}
-                  </div>
+                  <div
+                    class="details_main_left_top_result_desc"
+                    v-html="result.desc"
+                  ></div>
                   <div class="img_desc" v-if="result.icon">
                     <nuxt-img
                       :src="result.icon || '/'"
