@@ -5,22 +5,30 @@
       <div class="palm">
         <p class="palm_title">Palm Reading: Online Palmistry Guide</p>
         <!-- <p class="palm_title h5_p">Answer Genie</p> -->
-        <p class="palm_text">
-          Palmistry is an important science which tells us about the future very
-          genuinely. Of, course there are the various branches of Astrology
-          which predict the future course of an individual, but palmistry also
-          give very clear and accurate results. In the other branches of
-          Astrology, the moment of birth is very important (which at times is
-          not available to the individual concerned) but in Palmistry, it is the
-          lines and mounts on one's hand that hold the key to his future The
-          small, thick, thin and oblique lines, mounts and markings in the palm
-          of a person have the whole future imprinted therein. Here with a
-          simple test, you can come to know about you and some general things
-          what your hand and lines are predicting for you. The left hand is the
-          hand we born with, the right hand is the hand we make. So it is
-          suggested that you analyze your Right hand FIRST and then your Left
-          Hand.
-        </p>
+        <div class="oliy">
+          <span
+            class="palm_text texts_more_show"
+            :class="{ texts_more: openExpand }"
+          >
+            Palmistry is an important science which tells us about the future
+            very genuinely. Of, course there are the various branches of
+            Astrology which predict the future course of an individual, but
+            palmistry also give very clear and accurate results. In the other
+            branches of Astrology, the moment of birth is very important (which
+            at times is not available to the individual concerned) but in
+            Palmistry, it is the lines and mounts on one's hand that hold the
+            key to his future The small, thick, thin and oblique lines, mounts
+            and markings in the palm of a person have the whole future imprinted
+            therein. Here with a simple test, you can come to know about you and
+            some general things what your hand and lines are predicting for you.
+            The left hand is the hand we born with, the right hand is the hand
+            we make. So it is suggested that you analyze your Right hand FIRST
+            and then your Left Hand.
+          </span>
+          <span class="more_btn" @click="setOpenExpand">
+            {{ openExpand ? 'Show Less' : 'Show More' }}
+          </span>
+        </div>
         <div class="palm_from">
           <div class="main_from">
             <client-only>
@@ -137,6 +145,7 @@ export default {
         ],
       },
       perform: false,
+      openExpand: false,
     }
   },
   computed: {
@@ -183,6 +192,9 @@ export default {
         }
       })
     },
+    setOpenExpand() {
+      this.openExpand = !this.openExpand
+    },
   },
 }
 </script>
@@ -213,6 +225,15 @@ export default {
         font-weight: 700;
         line-height: 48px;
         margin-bottom: 8px;
+      }
+      .texts_more {
+        -webkit-line-clamp: unset !important;
+        height: auto !important;
+      }
+      .oliy {
+        .more_btn {
+          display: none;
+        }
       }
       .palm_text {
         color: rgba(255, 255, 255, 0.6);
@@ -506,6 +527,26 @@ export default {
           line-height: 30 * $pr;
           margin-bottom: 8 * $pr;
           text-align: center;
+        }
+        .texts_more_show {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+        }
+        .oliy {
+          .more_btn {
+            display: block;
+            font-family: 'Rubik';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14 * $pr;
+            line-height: 24 * $pr;
+            color: #9747ff;
+            cursor: pointer;
+            text-align: right;
+          }
         }
         .palm_text {
           font-size: 14 * $pr;

@@ -55,8 +55,12 @@
                   </div>
                   <div
                     class="details_main_left_top_content_main_h5_desc"
+                    :class="{ texts_more: openExpand }"
                     v-html="dataInfo.desc"
                   ></div>
+                  <div class="more_btn" @click="setOpenExpand">
+                    {{ openExpand ? 'Show Less' : 'Show More' }}
+                  </div>
                 </template>
               </div>
               <!-- 问题和答案选项 -->
@@ -205,6 +209,9 @@
           </div>
         </div>
         <google-ad classNames="google_ad" :id="'5595713395'" />
+        <div class="lmore">
+          <el-explore-more />
+        </div>
         <div class="details_main_left_btm">
           <div class="details_main_left_btm_title">MOST POPULAR QUIZZES</div>
           <div class="details_main_left_btm_list">
@@ -222,8 +229,8 @@
                   :src="item.icon || '/'"
                   fit="cover"
                   :alt="item.name"
-                  width="220"
-                  height="220"
+                  width="400"
+                  height="250"
                   loading="lazy"
                   format="auto"
                 ></nuxt-img>
@@ -273,6 +280,7 @@ export default {
       screenWidth: 0, //屏幕宽度
       //currentRoute: '#', //当前路由
       isLoading: false,
+      openExpand: false,
     }
   },
   async asyncData({ error, route, $apiList, params, $utils }) {
@@ -508,6 +516,9 @@ export default {
     },
     adComplete(data) {
       console.log(data)
+    },
+    setOpenExpand() {
+      this.openExpand = !this.openExpand
     },
   },
 }
@@ -864,6 +875,9 @@ $spacing: 55px;
         height: 305px;
         margin-top: 24px;
       }
+      .lmore {
+        display: none;
+      }
     }
     &_right {
       flex: 1;
@@ -1089,6 +1103,11 @@ $spacing: 55px;
                     pointer-events: none;
                     cursor: default;
                   }
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 5;
+                  -webkit-box-orient: vertical;
                 }
                 &_btn {
                   width: 136 * $pr;
@@ -1104,6 +1123,20 @@ $spacing: 55px;
                   display: flex;
                   align-items: center;
                   justify-content: center;
+                }
+                .texts_more {
+                  -webkit-line-clamp: unset !important;
+                  height: auto !important;
+                }
+                .more_btn {
+                  font-family: 'Rubik';
+                  font-style: normal;
+                  font-weight: 400;
+                  text-align: right;
+                  font-size: 16 * $pr;
+                  line-height: 28 * $pr;
+                  color: #9747ff;
+                  cursor: pointer;
                 }
               }
               &_questions {
@@ -1213,24 +1246,31 @@ $spacing: 55px;
           height: 297 * $pr;
           margin-top: 16 * $pr;
         }
+        .lmore {
+          display: block;
+          margin-top: 24 * $pr;
+        }
         &_btm {
           margin-top: 16 * $pr;
           &_title {
-            font-size: 22 * $pr;
-            line-height: 30 * $pr;
-            text-align: center;
-            padding: 0 30 * $pr;
+            display: none;
           }
           &_list {
-            grid-gap: 5 * $pr;
-            grid-template-columns: repeat(2, 169 * $pr);
+            gap: 32 * $pr;
+            grid-template-columns: 1fr;
             margin-top: 22 * $pr;
             &_item {
-              width: 169 * $pr;
+              width: 100%;
               &_img {
-                width: 169 * $pr;
-                height: 169 * $pr;
-                object-fit: cover;
+                width: 100%;
+                height: 171 * $pr;
+                border-radius: 6 * $pr;
+                overflow: hidden;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
               }
               &_text {
                 margin-top: 8 * $pr;

@@ -60,7 +60,6 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .install {
-  margin-left: 16px;
   -webkit-flex-shrink: 0;
   flex-shrink: 0;
   width: 24px;

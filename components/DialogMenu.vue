@@ -1,12 +1,24 @@
 <template>
   <transition name="unfold">
-    <aside class="dialog" v-if="visible">
+    <aside class="dialog" v-show="visible">
       <div class="dialog__main">
         <div class="dialog__main__top">
+          <div class="user_btn">
+            <div class="there" @click="setLogin" v-if="!getUserInfo.email">
+              <img src="~/assets/img/login/user_avatar.svg" alt="avatar" />
+              <div class="log_sign">Log in / Sign up</div>
+            </div>
+            <a href="/userto/1/" class="have" v-else>
+              <img :src="userImgIcon" alt="#" />
+              <div class="testx">
+                <div class="testx_i">
+                  <div class="is">{{ updateName }}</div>
+                </div>
+                <div class="testx_s">My Account</div>
+              </div>
+            </a>
+          </div>
           <button class="close common__btn" @click="close"></button>
-        </div>
-        <div class="search_menu">
-          <el-search-two></el-search-two>
         </div>
         <div class="menu">
           <div class="href" v-for="(item, index) in menu" :key="index">
@@ -61,6 +73,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'DialogMenu',
   props: ['menu', 'visible'],
@@ -82,6 +95,28 @@ export default {
       }
     },
   },
+  computed: {
+    ...mapGetters(['getUserInfo']),
+    updateName() {
+      return this.getUserInfo.user_name || 'MY profile'
+    },
+    userImgIcon() {
+      const imgUrls = this.getUserInfo.icon
+      if (!imgUrls) return require('~/assets/img/login/user.svg')
+      if (imgUrls.includes('http')) {
+        return imgUrls
+      } else {
+        return this.$config.cdnUrl + imgUrls
+      }
+    },
+  },
+
+  //   mounted() {
+  //     this.$eventBus.$on('loginForms', (receivedData) => {
+  //       console.log('receivedData', receivedData)
+  //       this.close()
+  //     })
+  //   },
   methods: {
     close() {
       this.$emit('close')
@@ -101,6 +136,9 @@ export default {
       if (items) {
         return items.some((it) => this.$route.path.includes(it.path))
       }
+    },
+    setLogin() {
+      this.$eventBus.$emit('loginForms', true)
     },
   },
 }
@@ -138,18 +176,21 @@ export default {
       -webkit-justify-content: flex-end;
       -ms-flex-pack: end;
       justify-content: flex-end;
+      background: linear-gradient(
+          180deg,
+          rgba(151, 71, 255, 0.75) 0%,
+          rgba(0, 0, 0, 0) 100%
+        ),
+        #000;
+      .user_btn {
+        display: none;
+      }
       .close {
         width: 27px;
         height: 27px;
         background: url('~assets/img/header/close.png') no-repeat center center;
         background-size: contain;
       }
-    }
-    .search_menu {
-      width: 100%;
-      height: 50px;
-      background-color: #000;
-      padding: 0 30px;
     }
     .menu {
       width: 100%;
@@ -328,17 +369,83 @@ export default {
     &__main {
       &__top {
         width: 100%;
-        height: 90 * $pr;
+        height: 96 * $pr;
         padding: 0 30 * $pr;
+        justify-content: space-between;
+        .user_btn {
+          display: block;
+          .there {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            img {
+              width: 48 * $pr;
+              height: 48 * $pr;
+              object-fit: cover;
+            }
+            .log_sign {
+              color: rgba(255, 255, 255, 0.6);
+              font-family: Rubik;
+              font-size: 14 * $pr;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 18 * $pr;
+              padding-left: 16 * $pr;
+            }
+          }
+          .have {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            img {
+              width: 48 * $pr;
+              height: 48 * $pr;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+            .testx {
+              font-family: Rubik;
+              font-style: normal;
+              font-weight: 400;
+              max-width: 160 * $pr;
+              padding-left: 16 * $pr;
+              .testx_i {
+                display: block;
+                color: #fff;
+                font-size: 22 * $pr;
+                line-height: 30 * $pr;
+                .is {
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  -webkit-line-clamp: 1;
+                  -webkit-box-orient: vertical;
+                }
+              }
+              .testx_s {
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 14 * $pr;
+                line-height: 18 * $pr;
+                display: inline-block;
+                position: relative;
+                &::after {
+                  position: absolute;
+                  content: '';
+                  top: 5 * $pr;
+                  right: -17 * $pr;
+                  width: 10 * $pr;
+                  height: 12 * $pr;
+                  background: url('~/assets/img/login/down_arrow.svg') no-repeat;
+                  background-size: cover;
+                  transform: rotate(-90deg);
+                }
+              }
+            }
+          }
+        }
         .close {
           width: 20 * $pr;
           height: 20 * $pr;
         }
-      }
-      .search_menu {
-        width: 100%;
-        height: 50 * $pr;
-        padding: 0 16 * $pr;
       }
       .menu {
         width: 100%;

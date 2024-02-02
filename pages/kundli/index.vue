@@ -5,7 +5,7 @@
       <div class="fromor">
         <div class="title_top">
           <p class="title">Kundli Matching</p>
-          <p class="introduce">
+          <p class="introduce" :class="{ texts_more: openExpand }">
             Kundali matching plays a prominent role in finding an ideal life
             partner. Since marriage is one of the important events of an
             individual's life, it is vital to take each step carefully. After
@@ -14,6 +14,11 @@
             first step in matrimonial discussions to ensure a harmonious bond
             among the duo.
           </p>
+          <div class="more_btn_lo">
+            <span class="more_btn" @click="setOpenExpand">
+              {{ openExpand ? 'Show Less' : 'Show More' }}
+            </span>
+          </div>
         </div>
         <google-ad :id="'9547237827'" classNames="google_h5_top"></google-ad>
         <div class="fromor_lis">
@@ -153,6 +158,7 @@ export default {
       f_detail: null,
       isLoading: false,
       perform: false,
+      openExpand: false,
     }
   },
   computed: {
@@ -231,6 +237,9 @@ export default {
     getFemaleData(value) {
       this.f_detail = value
     },
+    setOpenExpand() {
+      this.openExpand = !this.openExpand
+    },
   },
 }
 </script>
@@ -267,6 +276,13 @@ export default {
           font-style: normal;
           font-weight: 400;
           line-height: 28px;
+        }
+        .texts_more {
+          -webkit-line-clamp: unset !important;
+          height: auto !important;
+        }
+        .more_btn_lo {
+          display: none;
         }
       }
       &_lis {
@@ -492,6 +508,25 @@ export default {
           .introduce {
             font-size: 14 * $pr;
             line-height: 24 * $pr;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+          }
+          .more_btn_lo {
+            display: block;
+            text-align: right;
+            .more_btn {
+              font-family: 'Rubik';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14 * $pr;
+              line-height: 24 * $pr;
+              color: #9747ff;
+              cursor: pointer;
+              text-align: right;
+            }
           }
         }
         &_lis {

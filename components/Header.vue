@@ -1,93 +1,101 @@
 <template>
   <header class="header" id="headerNav">
-    <div class="header__main" :class="{ header_black: isScrolled }">
-      <div>
-        <a href="/" class="logo">
-          <img
-            class="img"
-            src="~/assets/img/header/logoImg.svg"
-            alt="logoImg"
-          />
-        </a>
-        <nav class="nav">
-          <a
-            class="nav__item"
-            :href="`${item.href}`"
-            :class="{
-              active:
-                item.path == $route.path ||
-                (item.path !== '/' && $route.path.includes(item.path)) ||
-                verificationChild(item.children),
-            }"
-            :title="item.title"
-            v-for="(item, index) in menu"
-            :key="index"
-            @mouseenter="showDropdown(index)"
-            @mouseleave="hideDropdown"
-          >
-            <span> {{ item.title }}</span>
-            <transition name="fade">
-              <div
-                class="nav__item_children"
-                v-if="isDropdownVisible === index && item.children"
-              >
-                <a
-                  class="nav_children"
-                  :title="item_i.title"
-                  v-for="(item_i, index_i) in item.children"
-                  :href="`${item_i.href}`"
-                  :key="index_i"
-                  @mouseenter="showChildren(index_i)"
-                  @mouseleave="hideChildren"
-                >
-                  {{ item_i.title }}
-                  <img
-                    class="arrow"
-                    src="~/assets/img/login/down_arrow.svg"
-                    alt="down arrow"
-                    v-if="item_i.childrenMini"
-                  />
-                  <transition name="fade">
-                    <div
-                      class="children_mini"
-                      v-if="
-                        isDropdownChildren === index_i && item_i.childrenMini
-                      "
-                    >
-                      <a
-                        class="children_mini_a"
-                        v-for="(item_s, index_s) in item_i.childrenMini"
-                        :key="index_s"
-                        :href="`${item_s.href}`"
-                        >{{ item_s.title }}</a
-                      >
-                    </div>
-                  </transition>
-                </a>
-              </div>
-            </transition>
+    <client-only>
+      <div class="header__main" :class="{ header_black: isScrolled }">
+        <div>
+          <a href="/" class="logo">
+            <img
+              class="img"
+              src="~/assets/img/header/logoImg.svg"
+              alt="logoImg"
+            />
           </a>
-        </nav>
-        <div class="search_icon">
-          <div class="icon" @click="openSearch"></div>
-        </div>
-        <Desktop></Desktop>
-        <div class="menu common__btn" @click="visibleMenu = true"></div>
-        <!-- 登录暂时隐藏 -->
-        <transition name="fade">
-          <el-login></el-login>
-        </transition>
-        <lazy-dialog-menu
-          :menu="menu"
-          :visible="visibleMenu"
-          @close="visibleMenu = false"
-        >
-        </lazy-dialog-menu>
-        <div class="search_top">
-          <el-search :hidden="isSearch" @toggleHidden="openSearch"></el-search>
+          <nav class="nav">
+            <a
+              class="nav__item"
+              :href="`${item.href}`"
+              :class="{
+                active:
+                  item.path == $route.path ||
+                  (item.path !== '/' && $route.path.includes(item.path)) ||
+                  verificationChild(item.children),
+              }"
+              :title="item.title"
+              v-for="(item, index) in menu"
+              :key="index"
+              @mouseenter="showDropdown(index)"
+              @mouseleave="hideDropdown"
+            >
+              <span> {{ item.title }}</span>
+              <transition name="fade">
+                <div
+                  class="nav__item_children"
+                  v-if="isDropdownVisible === index && item.children"
+                >
+                  <a
+                    class="nav_children"
+                    :title="item_i.title"
+                    v-for="(item_i, index_i) in item.children"
+                    :href="`${item_i.href}`"
+                    :key="index_i"
+                    @mouseenter="showChildren(index_i)"
+                    @mouseleave="hideChildren"
+                  >
+                    {{ item_i.title }}
+                    <img
+                      class="arrow"
+                      src="~/assets/img/login/down_arrow.svg"
+                      alt="down arrow"
+                      v-if="item_i.childrenMini"
+                    />
+                    <transition name="fade">
+                      <div
+                        class="children_mini"
+                        v-if="
+                          isDropdownChildren === index_i && item_i.childrenMini
+                        "
+                      >
+                        <a
+                          class="children_mini_a"
+                          v-for="(item_s, index_s) in item_i.childrenMini"
+                          :key="index_s"
+                          :href="`${item_s.href}`"
+                          >{{ item_s.title }}</a
+                        >
+                      </div>
+                    </transition>
+                  </a>
+                </div>
+              </transition>
+            </a>
+          </nav>
+          <Desktop></Desktop>
+          <div class="search_icon">
+            <div class="icon" @click="openSearch"></div>
+          </div>
+          <div class="menu common__btn" @click="visibleMenu = true"></div>
+          <!-- 登录暂时隐藏 -->
+          <transition name="fade">
+            <el-login class="el_login"></el-login>
+          </transition>
+          <lazy-dialog-menu
+            :menu="menu"
+            :visible="visibleMenu"
+            @close="visibleMenu = false"
+          >
+          </lazy-dialog-menu>
+          <div class="search_top">
+            <el-search
+              :hidden="isSearch"
+              @toggleHidden="openSearch"
+            ></el-search>
+          </div>
         </div>
       </div>
-    </div>
+      <transition name="unfold">
+        <el-login-form v-show="formOf" @choce="showundes"></el-login-form>
+      </transition>
+    </client-only>
   </header>
 </template>
 
@@ -102,6 +110,7 @@ export default {
       isDropdownChildren: -1,
       isScrolled: false,
       isSearch: false,
+      formOf: false,
       menu: [
         {
           title: 'Home',
@@ -323,6 +332,13 @@ export default {
   mounted() {
     if (window.scrollY) this.isScrolled = window.scrollY > 10
     window.addEventListener('scroll', this.handleScroll)
+
+    this.$eventBus.$on('loginForms', (receivedData) => {
+      console.log('receivedData', receivedData)
+      this.formOf = true
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = 'hidden'
+    })
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
@@ -353,6 +369,7 @@ export default {
     },
     openSearch() {
       this.isSearch = !this.isSearch
+      console.log('点击搜索按钮')
     },
     showDropdown(item) {
       this.isDropdownVisible = item
@@ -375,6 +392,11 @@ export default {
       if (items) {
         return items.some((it) => this.$route.path.includes(it.path))
       }
+    },
+    showundes() {
+      this.formOf = false
+      let bodyStyle = document.body.style
+      bodyStyle.overflow = ''
     },
   },
 }
@@ -412,14 +434,15 @@ export default {
       .search_icon {
         display: flex;
         align-items: center;
+        margin-left: 16px;
         .icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.24);
-          background: url('../assets/img/header/search.svg') no-repeat;
+          width: 30px;
+          height: 30px;
+          //   border-radius: 50%;
+          //   border: 1px solid rgba(255, 255, 255, 0.24);
+          background: url('~assets/img/header/search_h5.svg') no-repeat;
           background-position: center;
-          background-size: 24px;
+          background-size: cover;
           cursor: pointer;
         }
       }
@@ -691,9 +714,17 @@ export default {
           }
         }
         .search_icon {
-          display: none;
+          margin-left: 16 * $pr;
+          .icon {
+            width: 24 * $pr;
+            height: 24 * $pr;
+            background-size: cover;
+          }
         }
         .search_top {
+          top: 46 * $pr;
+        }
+        .el_login {
           display: none;
         }
         .menu {

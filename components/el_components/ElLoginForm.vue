@@ -357,6 +357,7 @@ export default {
       routerData: ['/tarot/'],
     }
   },
+
   mounted() {
     // 初始化 Google 登录
     google.accounts.id.initialize({

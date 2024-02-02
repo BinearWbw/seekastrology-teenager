@@ -35,6 +35,14 @@
             </a>
           </div>
         </div>
+        <div class="edit_news">
+          <span :href="`/userrevise/1/`" @click="setLogOut"
+            ><img src="~/assets/img/login/quit.svg" alt="quit"
+          /></span>
+          <a :href="`/userrevise/1/`">
+            <img src="~/assets/img/login/edit.svg" alt="edit" />
+          </a>
+        </div>
       </div>
 
       <div class="details">
@@ -411,6 +419,14 @@ export default {
       let bodyStyle = document.body.style
       bodyStyle.overflow = ''
     },
+
+    setLogOut() {
+      // 退出登录-清楚用户信息
+      this.$store.commit('UPDATE_USERINFO', {})
+      localStorage.setItem('userInfo', JSON.stringify({}))
+      window.changePageUrl = '/'
+      window.location.href = '/'
+    },
   },
 }
 </script>
@@ -427,6 +443,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
       .imgs {
         width: 172px;
         height: 172px;
@@ -486,6 +503,7 @@ export default {
         display: flex;
         align-items: center;
         padding: 16px 0 48px 0;
+        position: relative;
         .account {
           padding-left: 50px;
           .names {
@@ -514,6 +532,9 @@ export default {
             display: block;
           }
         }
+      }
+      .edit_news {
+        display: none;
       }
     }
     .details {
@@ -887,6 +908,7 @@ export default {
           padding: 16 * $pr 0 48 * $pr;
           position: relative;
           .account {
+            position: relative;
             padding-left: 0;
             .names {
               font-size: 22 * $pr;
@@ -899,15 +921,26 @@ export default {
             }
           }
           .edit {
-            position: absolute;
-            top: -110 * $pr;
-            right: -70 * $pr;
-            padding-left: 0;
-            > a {
-              display: block;
-              > img {
-                width: 20 * $pr;
-              }
+            display: none;
+          }
+        }
+        .edit_news {
+          display: block;
+          position: absolute;
+          top: 0;
+          right: 20 * $pr;
+          > span {
+            display: inline-block;
+            margin: 0 5 * $pr;
+            > img {
+              width: 20 * $pr;
+            }
+          }
+          > a {
+            display: inline-block;
+            margin: 0 5 * $pr;
+            > img {
+              width: 20 * $pr;
             }
           }
         }

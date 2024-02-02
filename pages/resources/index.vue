@@ -6,12 +6,6 @@
       <section class="pop_article">
         <home-pop-articles></home-pop-articles>
       </section>
-
-      <!-- <google-ad
-        classNames="google_ad"
-        :id="'5741400662'"
-        ref="gooleAd"
-      ></google-ad> -->
       <div class="resources_main_btm" ref="mainBtm">
         <div class="resources_main_btm_tabs">
           <div
@@ -31,67 +25,75 @@
             class="resources_main_btm_main"
             v-if="newsData?.list?.length > 0"
           >
-            <a
-              v-for="item in newsData?.list"
-              :key="item.id"
-              class="resources_main_btm_main_item"
-              :href="`/resources/details/${item.name
-                .trim()
-                .replace(/[^\w\d]/g, '-')
-                .toLowerCase()}-${item.id}/`"
-            >
-              <!-- type0为文本 type1为视频， -->
-              <template v-if="item.kind == 0">
-                <div class="resources_main_btm_main_item_img">
-                  <nuxt-img
-                    :src="item.icon || '/'"
-                    fit="cover"
-                    width="338"
-                    height="225"
-                    :alt="item.name"
-                    class="resources_main_btm_main_item_img_pic"
-                    loading="lazy"
-                    format="auto"
-                  ></nuxt-img>
-                </div>
-                <div class="resources_main_btm_main_item_text">
-                  <div class="resources_main_btm_main_item_text_title">
+            <div v-for="(item, index) in newsData?.list" :key="index">
+              <a
+                class="resources_main_btm_main_item"
+                :href="`/resources/details/${item.name
+                  .trim()
+                  .replace(/[^\w\d]/g, '-')
+                  .toLowerCase()}-${item.id}/`"
+              >
+                <!-- type0为文本 type1为视频， -->
+                <template v-if="item.kind == 0">
+                  <div class="resources_main_btm_main_item_img">
+                    <nuxt-img
+                      :src="item.icon || '/'"
+                      fit="cover"
+                      width="338"
+                      :alt="item.name"
+                      class="resources_main_btm_main_item_img_pic"
+                      loading="lazy"
+                      format="auto"
+                    ></nuxt-img>
+                  </div>
+                  <div class="resources_main_btm_main_item_text">
+                    <div class="resources_main_btm_main_item_text_title">
+                      {{ item.name }}
+                    </div>
+                    <div class="resources_main_btm_main_item_text_subscribe">
+                      {{ item.text }}
+                    </div>
+                  </div>
+                </template>
+                <template v-else>
+                  <div
+                    class="resources_main_btm_main_item_img"
+                    id="RESOURCESVIDEO"
+                  >
+                    <nuxt-img
+                      :src="item.icon || '/'"
+                      fit="cover"
+                      width="338"
+                      :alt="item.name"
+                      class="resources_main_btm_main_item_img_video"
+                      loading="lazy"
+                      format="auto"
+                    ></nuxt-img>
+                    <img
+                      src="../../assets/img/resources/play_icon.png"
+                      alt="play icon"
+                      class="resources_main_btm_main_item_img_play"
+                    />
+                    <div class="resources_main_btm_main_item_img_time">
+                      {{ $utils.formatMMSS(item.sec) }}
+                    </div>
+                  </div>
+                  <div class="resources_main_btm_main_item_vtitle">
                     {{ item.name }}
                   </div>
-                  <div class="resources_main_btm_main_item_text_subscribe">
-                    {{ item.text }}
-                  </div>
-                </div>
-              </template>
-              <template v-else>
-                <div
-                  class="resources_main_btm_main_item_img"
-                  id="RESOURCESVIDEO"
-                >
-                  <nuxt-img
-                    :src="item.icon || '/'"
-                    fit="cover"
-                    width="338"
-                    height="225"
-                    :alt="item.name"
-                    class="resources_main_btm_main_item_img_video"
-                    loading="lazy"
-                    format="auto"
-                  ></nuxt-img>
-                  <img
-                    src="../../assets/img/resources/play_icon.png"
-                    alt="play icon"
-                    class="resources_main_btm_main_item_img_play"
-                  />
-                  <div class="resources_main_btm_main_item_img_time">
-                    {{ $utils.formatMMSS(item.sec) }}
-                  </div>
-                </div>
-                <div class="resources_main_btm_main_item_vtitle">
-                  {{ item.name }}
-                </div>
-              </template>
-            </a>
+                </template>
+              </a>
+              <google-ad
+                v-if="(index + 1) % 5 === 0"
+                :id="googleAdIds[index % googleAdIds.length]"
+                classNames="google_ad_loading"
+              ></google-ad>
+            </div>
+            <google-ad
+              classNames="google_ad_length"
+              v-if="newsData?.list.length >= 2"
+              :id="'6715555076'"
+            />
           </div>
         </transition>
         <div class="resources_main_btm_loading" v-if="loading">
@@ -102,12 +104,11 @@
           />
         </div>
         <div class="resources_main_btm_btn" v-if="search.page < totalPage">
-          <button class="resources_main_btm_btn_moreBtn" @click="getNews">
+          <button class="resources_main_btm_btn_moreBtn" @click="getNews(item)">
             Load More
           </button>
         </div>
       </div>
-      <!-- <google-ad classNames="google_ad_btm" :id="'1344643045'" /> -->
     </div>
     <div class="foot_components" ref="foot_components">
       <transition name="fade">
@@ -124,23 +125,34 @@ export default {
   data() {
     return {
       loading: false,
-      refreshFlag: false,
       newsData: {},
       isFrist: true,
+      tabs: [
+        { name: 'All' },
+        { name: 'Video', kind: 2 },
+        { name: 'Artlcle', kind: 1 },
+      ],
+      search: {
+        page: 1,
+        size: 20,
+      },
+      item: {}, // 当前的资讯类型
+      googleAdIds: [
+        '5568464365',
+        '4830097762',
+        '7484181264',
+        '9971744541',
+        '4486482830',
+        '3465756968',
+      ],
     }
   },
   async asyncData({ error, $apiList }) {
     try {
-      //获取是否从其他页面跳转进来，如果是就给item赋值，item为当前中间导航tabs选中的值
-      let item = null,
-        currentTabIndex = 0,
+      let currentTabIndex = 0,
         totalNum = 0,
-        totalPage = 1,
-        search = {
-          page: 1,
-          size: 41,
-        }
-      let [list, tabs] = await Promise.all([
+        totalPage = 1
+      let [list] = await Promise.all([
         /**顶部推荐 */
         $apiList.articles
           .getNewsRec({
@@ -150,111 +162,36 @@ export default {
             res = res?.length > 0 ? res.slice(0, 5) : null
             return res || null
           }),
-        /**中间tabs */
-        $apiList.articles
-          .getCate({
-            origin: process.env.origin,
-            type: 4,
-          })
-          .then((res) => {
-            //首位增加一个all
-            res.unshift({ name: 'All' })
-            return res || null
-          }),
       ])
-      let allData = await $apiList.articles
-        .getNews({
-          origin: process.env.origin,
-          ...search,
-        })
-        .then((res) => {
-          res.list.splice(0, 5)
-          return res
-        })
-      let tarotData = await $apiList.articles.getNews({
-        origin: process.env.origin,
-        cate: 3,
-        ...search,
-      })
-      let astrologyData = await $apiList.articles.getNews({
-        origin: process.env.origin,
-        cate: 4,
-        ...search,
-      })
-      let loveData = await $apiList.articles.getNews({
-        origin: process.env.origin,
-        cate: 5,
-        ...search,
-      })
       return {
-        item,
         list,
-        tabs,
         totalNum,
         totalPage,
-        search,
         currentTabIndex,
-        allData,
-        tarotData,
-        astrologyData,
-        loveData,
       }
     } catch (e) {
       error({ statusCode: e.code, message: e.msg })
     }
   },
   mounted() {
-    //获取query
-    this.changeList({ id: this.$route.query.id })
+    this.getQuestionData()
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
-    changeList(item) {
-      if (item.id == undefined) {
-        this.newsData = this.allData
-        this.totalNum = this.newsData.count
-        this.currentTabIndex = 0
-      } else {
-        this.newsData =
-          item.id == '3'
-            ? this.tarotData
-            : item.id == '4'
-            ? this.astrologyData
-            : item.id == '5'
-            ? this.loveData
-            : this.allData
-        this.totalNum = this.newsData.count
-        if (this.isFrist && this.$route.query.id) {
-          //滚动到广告位
-          this.$nextTick(() => {
-            const mainBtm = this.$refs.mainBtm
-            mainBtm.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-            })
-          })
-        }
-        this.isFrist = false
-        //当前tab高亮
-        this.currentTabIndex = this.tabs.findIndex((tab) => tab.id == item.id)
-      }
-      this.item = item
-      this.totalPage =
-        Math.ceil(this.totalNum / this.search.size) === 0
-          ? 1
-          : Math.ceil(this.totalNum / this.search.size)
-    },
-    getNews() {
-      this.refreshFlag = true
+    getNews(ites) {
       this.loading = true
       this.search.page += 1
       let getNewsParams = {
         origin: process.env.origin,
-        cate: this.item.hasOwnProperty('id') ? this.item.id : undefined,
+        kind: ites.kind || '',
         ...this.search,
       }
       if (this.currentTabIndex == 0) delete getNewsParams.cate
       this.$apiList.articles
-        .getNews(getNewsParams)
+        .getNewsList(getNewsParams)
         .then((res) => {
           res.list &&
             res.list.map((item) => {
@@ -273,16 +210,50 @@ export default {
         })
     },
 
+    // 获取资讯数据
+    getQuestionData() {
+      this.loading = true
+      let search = {
+        page: 1,
+        size: 20,
+      }
+      this.$apiList.articles
+        .getNewsList({
+          origin: process.env.origin,
+          ...search,
+        })
+        .then((res) => {
+          this.newsData = res
+          this.currentTabIndex = 0
+          this.totalNum = this.newsData.count
+          this.totalPage =
+            Math.ceil(this.totalNum / search.size) === 0
+              ? 1
+              : Math.ceil(this.totalNum / search.size)
+          this.loading = false
+        })
+    },
+
     /** 点击切换tabs*/
     changeTab(item, index) {
       this.item = item
       this.currentTabIndex = index
-      if (this.refreshFlag) {
-        this.search.page = 0
-        this.newsData.list = []
-        this.getNews()
-      } else {
-        this.changeList(item)
+      this.search.page = 0
+      this.newsData.list = []
+      this.getNews(item)
+    },
+    // 滚动懒加载请求数据
+    handleScroll() {
+      const screenWidth =
+        window.innerWidth || document.documentElement.clientWidth
+      if (screenWidth <= 750) {
+        const docScroHei = document.documentElement.scrollHeight
+        const inHeight = window.innerHeight
+        let scrolls = docScroHei - inHeight
+        if (scrolls == window.scrollY) {
+          this.getNews(this.item)
+          return
+        }
       }
     },
   },
@@ -643,6 +614,12 @@ $spacing: 16px;
         display: grid;
         grid-template-columns: repeat(4, 338px);
         gap: 32px 16px;
+        .google_ad_loading {
+          display: none;
+        }
+        .google_ad_length {
+          display: none;
+        }
         &_item {
           &_img {
             width: 100%;
@@ -883,9 +860,13 @@ $spacing: 16px;
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .resources {
+    .pop_article {
+      display: none;
+    }
     &_main {
       width: 100%;
       &_title {
+        display: none;
         margin-top: 16 * $pr;
         font-size: 22 * $pr;
         line-height: 30 * $pr;
@@ -1056,6 +1037,7 @@ $spacing: 16px;
         width: 320 * $pr;
         height: 117 * $pr;
         margin: 0 auto;
+        display: none;
       }
       .google_ad_btm {
         width: 336 * $pr;
@@ -1065,7 +1047,7 @@ $spacing: 16px;
 
       &_btm {
         width: 100%;
-        margin-top: 32 * $pr;
+        margin: 16 * $pr 0 32 * $pr;
         scroll-margin-top: 60 * $pr;
         &_tabs {
           width: 91%;
@@ -1085,6 +1067,7 @@ $spacing: 16px;
           }
         }
         &_btn {
+          display: none;
           margin-top: 24 * $pr;
           &_moreBtn {
             width: 295 * $pr;
@@ -1104,20 +1087,35 @@ $spacing: 16px;
           }
         }
         &_main {
-          grid-template-columns: repeat(2, 169 * $pr);
-          grid-gap: 0 5 * $pr;
+          grid-template-columns: 1fr;
+          gap: 16 * $pr;
           width: 100%;
           margin: 0 16 * $pr auto;
           margin-left: 0;
+          .google_ad_loading {
+            display: flex;
+            flex-direction: column;
+            width: 336 * $pr;
+            height: 297 * $pr;
+            margin: 16 * $pr auto 0;
+          }
+          .google_ad_length {
+            grid-row-end: 3;
+            display: flex;
+            flex-direction: column;
+            width: 336 * $pr;
+            height: 297 * $pr;
+            margin: 16 * $pr auto 0;
+          }
           &_item {
-            width: 169 * $pr;
+            width: 100%;
             &_img {
-              width: 169 * $pr;
-              height: 95 * $pr;
+              width: 100%;
+              height: 211 * $pr;
               &_video,
               &_pic {
-                width: 169 * $pr;
-                height: 95 * $pr;
+                width: 100%;
+                height: 211 * $pr;
               }
               &_play {
                 width: 38 * $pr;
@@ -1157,7 +1155,6 @@ $spacing: 16px;
               font-size: 14 * $pr;
               line-height: 18 * $pr;
               color: rgba(255, 255, 255, 0.6);
-              width: 169 * $pr;
               margin-top: 12 * $pr;
             }
             &_text {
@@ -1188,6 +1185,7 @@ $spacing: 16px;
       }
     }
     .foot_components {
+      display: none;
       margin-top: 32 * $pr;
       .choice {
         margin-bottom: 32 * $pr;

@@ -75,6 +75,9 @@
         <google-ad classNames="rightAd" :id="'9971744541'"></google-ad>
       </div>
     </div>
+    <div class="lmore">
+      <el-explore-more />
+    </div>
     <div class="details_footer">
       <div class="details_footer_title">Trending Articles</div>
       <div class="details_footer_list">
@@ -500,6 +503,9 @@ $spacing: 16px;
       }
     }
   }
+  .lmore {
+    display: none;
+  }
   &_footer {
     width: 1400px;
     margin: 0 auto;
@@ -854,30 +860,38 @@ $spacing: 16px;
           }
         }
         .rightAd {
-          display: none;
+          width: 336 * $pr;
+          height: 297 * $pr;
+          margin: 16 * $pr auto 0;
         }
       }
     }
+    .lmore {
+      display: block;
+      padding: 0 16 * $pr;
+      margin: 32 * $pr 0;
+    }
     &_footer {
       width: 100%;
-      padding: 0 16 * $pr;
+      padding: 0;
       margin-top: 16 * $pr;
       &_title {
         text-align: center;
         font-size: 22 * $pr;
         line-height: 30 * $pr;
+        display: none;
       }
       &_list {
         width: 100%;
-        grid-gap: 16 * $pr 5 * $pr;
-        grid-template-columns: repeat(2, 1fr);
-        margin-bottom: 16 * $pr;
+        gap: 16 * $pr;
+        grid-template-columns: 1fr;
+        margin-bottom: 32 * $pr;
         &_item {
           width: auto;
           object-fit: contain;
           &_img {
             width: 100%;
-            height: 95 * $pr;
+            height: 211 * $pr;
             border-radius: 6 * $pr;
             &_pic,
             &_video {

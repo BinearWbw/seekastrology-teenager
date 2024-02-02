@@ -1,9 +1,11 @@
 <template>
-  <div class="search">
-    <div class="search_mian">
-      <a-input-search placeholder="Search" allow-clear @search="onSearch" />
+  <transition name="unfold">
+    <div class="search">
+      <div class="search_mian">
+        <a-input-search placeholder="Search" allow-clear @search="onSearch" />
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -11,8 +13,8 @@ export default {
   methods: {
     onSearch(i) {
       if (i) {
-        window.changePageUrl = `/search/?input=${i}`
-        window.location.href = `/search/?input=${i}`
+        window.changePageUrl = `/search/?query=${i}`
+        window.location.href = `/search/?query=${i}`
       }
     },
   },

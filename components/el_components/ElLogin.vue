@@ -5,16 +5,18 @@
         Log in
       </button>
       <div class="user_login" v-else @click="myProfile">
-        <div class="user_img">
-          <img :src="userImgIcon" alt="" />
+        <div class="user_login_ds">
+          <div class="user_img">
+            <img :src="userImgIcon" alt="" />
+          </div>
+          <p class="names">{{ updateName }}</p>
+          <img
+            class="arrow"
+            :class="{ arrowto: opens }"
+            src="~/assets/img/login/down_arrow.svg"
+            alt="down arrow"
+          />
         </div>
-        <p class="names">{{ updateName }}</p>
-        <img
-          class="arrow"
-          :class="{ arrowto: opens }"
-          src="~/assets/img/login/down_arrow.svg"
-          alt="down arrow"
-        />
         <transition name="fade">
           <div
             class="drop_down"
@@ -32,10 +34,21 @@
           </div>
         </transition>
       </div>
-      <transition name="unfold">
+      <!-- <transition name="unfold">
         <el-login-form v-show="formOf" @choce="showunde"></el-login-form>
-      </transition>
+      </transition> -->
     </client-only>
+    <transition name="unfold">
+      <div class="opens_h5" v-if="opens">
+        <a
+          v-for="(item, index) in dropData"
+          :key="index"
+          :href="`${item.path}`"
+          >{{ item.name }}</a
+        >
+        <div class="log_out" @click="logOutTo">Log out</div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -75,15 +88,16 @@ export default {
   methods: {
     ...mapMutations(['showLoginBox']),
     loginTo() {
-      this.formOf = true
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = 'hidden'
+      this.$eventBus.$emit('loginForms', true)
+      //   this.formOf = true
+      //   let bodyStyle = document.body.style
+      //   bodyStyle.overflow = 'hidden'
     },
-    showunde(val) {
-      this.formOf = false
-      let bodyStyle = document.body.style
-      bodyStyle.overflow = ''
-    },
+    // showunde(val) {
+    //   this.formOf = false
+    //   let bodyStyle = document.body.style
+    //   bodyStyle.overflow = ''
+    // },
     myProfile() {
       this.opens = !this.opens
     },
@@ -133,8 +147,13 @@ export default {
   .user_login {
     display: flex;
     align-items: center;
-    cursor: pointer;
     position: relative;
+    cursor: pointer;
+    .user_login_ds {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
     .user_img {
       width: 44px;
       height: 44px;
@@ -208,6 +227,9 @@ export default {
         }
       }
     }
+  }
+  .opens_h5 {
+    display: none;
   }
 }
 @media (max-width: (1366px)) {
@@ -315,12 +337,14 @@ export default {
   $pr: math.div(1vw, 3.75);
   .login {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-left: 16 * $pr;
-    min-width: 30 * $pr;
+    justify-content: center;
+    margin-left: 0;
+    width: 100%;
     .button {
-      height: auto;
-      font-family: Rubik;
+      width: 225 * $pr;
+      height: 44 * $pr;
       padding: 8 * $pr 12 * $pr;
       border-radius: 42 * $pr;
       font-size: 14 * $pr;
@@ -329,18 +353,28 @@ export default {
       background: #fff;
     }
     .user_login {
+      width: 100%;
+      height: 47 * $pr;
+      justify-content: center;
       .user_img {
         width: 30 * $pr;
         height: 30 * $pr;
         border-radius: 50%;
       }
       .names {
-        display: none;
+        font-size: 16 * $pr;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22 * $pr;
       }
       .arrow {
-        display: none;
+        position: relative;
+        right: -110 * $pr;
+        width: 12 * $pr;
+        height: 10 * $pr;
       }
       .drop_down {
+        display: none;
         padding: 46 * $pr 0 0;
         backdrop-filter: blur(5 * $pr);
         a {
@@ -358,6 +392,53 @@ export default {
           line-height: 22 * $pr;
           padding: 16 * $pr 24 * $pr 24 * $pr;
         }
+      }
+    }
+    .opens_h5 {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      backdrop-filter: blur(5 * $pr);
+      position: relative;
+      background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.08) 0%,
+          rgba(255, 255, 255, 0.08) 100%
+        ),
+        #000;
+      a {
+        width: 100%;
+        display: block;
+        color: #fff;
+        font-family: 'Rubik';
+        font-size: 16 * $pr;
+        line-height: 22 * $pr;
+        padding: 16 * $pr 24 * $pr;
+        text-align: center;
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: '';
+          left: 0;
+          bottom: 0;
+          height: 1.5 * $pr;
+          width: 100%;
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 50.52%,
+            rgba(255, 255, 255, 0) 100%
+          );
+        }
+      }
+      .log_out {
+        font-family: 'Rubik';
+        font-size: 16 * $pr;
+        line-height: 22 * $pr;
+        padding: 16 * $pr 24 * $pr 24 * $pr;
+        color: #ff4646;
       }
     }
   }

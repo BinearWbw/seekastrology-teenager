@@ -28,8 +28,8 @@ export default {
   methods: {
     onSearch(i) {
       if (i) {
-        window.changePageUrl = `/search/?input=${i}`
-        window.location.href = `/search/?input=${i}`
+        window.changePageUrl = `/search/?query=${i}`
+        window.location.href = `/search/?query=${i}`
       }
     },
     closes() {
@@ -121,6 +121,76 @@ export default {
     padding: 12px 130px;
     &_mian {
       height: 34px;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+  .search {
+    width: 100%;
+    padding: 8 * $pr 50 * $pr 8 * $pr 16 * $pr;
+    display: flex;
+    justify-content: center;
+    &_mian {
+      width: 100%;
+      height: 44 * $pr;
+      border-radius: 42 * $pr;
+      border: 1 * $pr solid rgba(255, 255, 255, 0.24);
+      background: rgba(0, 0, 0, 0.5);
+      position: relative;
+      .close {
+        display: inline-block;
+        position: absolute;
+        right: -30 * $pr;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20 * $pr;
+        height: 20 * $pr;
+        background: url('../../assets/img/header/close.png') no-repeat;
+        background-size: cover;
+        cursor: pointer;
+      }
+      :deep(.ant-input-search) {
+        width: 100%;
+        height: 100%;
+        .ant-input {
+          height: 100%;
+          border-radius: 42 * $pr;
+          background: rgba(0, 0, 0, 0.2);
+          border: none;
+          padding-left: 16 * $pr;
+          color: #fff;
+          font-family: 'Rubik';
+          font-size: 16 * $pr;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 22 * $pr;
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            font-family: 'Rubik';
+            font-size: 16 * $pr;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 22 * $pr;
+          }
+          &:not(:last-child) {
+            padding-right: 100 * $pr;
+          }
+        }
+        .ant-input-suffix {
+          right: 16 * $pr;
+          .anticon svg {
+            width: 24 * $pr;
+            height: 24 * $pr;
+            color: rgba(255, 255, 255, 0.4);
+            flex-shrink: 0;
+          }
+        }
+        .ant-input-clear-icon {
+          margin-right: 16 * $pr;
+        }
+      }
     }
   }
 }

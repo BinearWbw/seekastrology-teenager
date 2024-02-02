@@ -5,32 +5,37 @@
       <div class="test_main_center">
         <div class="test_main_center_left">
           <div class="test_main_center_left_list">
-            <a
-              v-for="item in list"
-              :key="item.id"
-              class="test_main_center_left_list_item"
-              :href="`/test/details/${item.name
-                .trim()
-                .replace(/[^\w\d]/g, '-')
-                .toLowerCase()}-${item.id}/`"
-            >
-              <div class="test_main_center_left_list_item_img">
-                <nuxt-img
-                  :src="item.icon || '/'"
-                  fit="cover"
-                  width="338"
-                  height="338"
-                  :alt="item.name"
-                  loading="lazy"
-                  format="auto"
-                ></nuxt-img>
-              </div>
-              <div class="test_main_center_left_list_item_text">
-                <div class="test_main_center_left_list_item_text_name">
-                  {{ item.name }}
+            <div v-for="(item, index) in list" :key="index">
+              <a
+                class="test_main_center_left_list_item"
+                :href="`/test/details/${item.name
+                  .trim()
+                  .replace(/[^\w\d]/g, '-')
+                  .toLowerCase()}-${item.id}/`"
+              >
+                <div class="test_main_center_left_list_item_img">
+                  <nuxt-img
+                    :src="item.icon || '/'"
+                    fit="cover"
+                    width="338"
+                    height="338"
+                    :alt="item.name"
+                    loading="lazy"
+                    format="auto"
+                  ></nuxt-img>
                 </div>
-              </div>
-            </a>
+                <div class="test_main_center_left_list_item_text">
+                  <div class="test_main_center_left_list_item_text_name">
+                    {{ item.name }}
+                  </div>
+                </div>
+              </a>
+              <google-ad
+                v-if="(index + 1) % 5 === 0"
+                :id="googleAdIds[index % googleAdIds.length]"
+                classNames="google_ad_loading"
+              ></google-ad>
+            </div>
             <google-ad
               classNames="google_ad top"
               v-if="list.length >= 2"
@@ -58,7 +63,7 @@
             </button>
           </div>
         </div>
-        <google-ad classNames="google_ad_h5btm" :id="'3465756968'" />
+        <!-- <google-ad classNames="google_ad_h5btm" :id="'3465756968'" /> -->
         <div class="test_main_center_right" ref="right_google_ad">
           <google-ad
             classNames="google_ad rightAd"
@@ -85,6 +90,14 @@ export default {
       loading: false,
       currentTabIndex: 0,
       tabsStatus: true,
+      googleAdIds: [
+        '5568464365',
+        '4830097762',
+        '7484181264',
+        '9971744541',
+        '4486482830',
+        '3465756968',
+      ],
     }
   },
   async asyncData({ error, $apiList, params, $utils }) {
@@ -94,7 +107,7 @@ export default {
         totalPage = 1,
         search = {
           page: 1,
-          size: 40,
+          size: 20,
         }
 
       //获取测试列表
@@ -131,6 +144,7 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
+    // 滚动懒加载请求数据
     handleScroll() {
       const rightAd = document.querySelector('.rightAd')
       const rightAdBox = this.$refs.right_google_ad
@@ -141,6 +155,13 @@ export default {
         window.innerWidth || document.documentElement.clientWidth
       if (screenWidth <= 750) {
         rightAd.style.display = 'none'
+        const docScroHei = document.documentElement.scrollHeight
+        const inHeight = window.innerHeight
+        let scrolls = docScroHei - inHeight
+        if (scrolls == window.scrollY) {
+          this.getMoreList()
+          return
+        }
       } else {
         rightAd.style.display =
           childRect.top + childRect.height - 48 >=
@@ -312,6 +333,9 @@ $spacing: 16px;
             grid-column-start: span 4;
             grid-row-start: span 2;
           }
+          .google_ad_loading {
+            display: none;
+          }
           .top {
             grid-row-end: 5;
             display: none;
@@ -464,7 +488,7 @@ $spacing: 16px;
   .test {
     &_main {
       width: 100%;
-      padding: 0 16 * $pr;
+      padding: 0 16 * $pr 24 * $pr;
       &_top {
         align-items: center;
         &_tabs {
@@ -517,13 +541,20 @@ $spacing: 16px;
         &_left {
           width: 100%;
           &_list {
-            grid-template-columns: repeat(2, 169 * $pr);
-            grid-gap: 16 * $pr 5 * $pr;
+            grid-template-columns: 1fr;
+            gap: 16 * $pr;
             &_item {
-              width: 169 * $pr;
+              width: 100%;
               &_img {
-                width: 169 * $pr;
-                height: 169 * $pr;
+                width: 100%;
+                height: 171 * $pr;
+                border-radius: 6 * $pr;
+                overflow: hidden;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
               }
               &_text {
                 margin-top: 8 * $pr;
@@ -535,15 +566,24 @@ $spacing: 16px;
               }
             }
             .google_ad {
-              grid-column-end: 3;
-              grid-column-start: span 2;
-              grid-row-start: span 2;
+              grid-area: 2 / 1 / 3 / 6;
+              grid-column-end: inherit;
+              grid-column-start: inherit;
+              grid-row-start: inherit;
               width: 336 * $pr;
               height: 297 * $pr;
               margin: 0 auto;
             }
+
+            .google_ad_loading {
+              display: flex;
+              flex-direction: column;
+              width: 336 * $pr;
+              height: 297 * $pr;
+              margin: 16 * $pr auto 0;
+            }
             .top {
-              grid-row-end: 5;
+              //   grid-row-end: inherit;
               display: flex;
               flex-direction: column;
             }
@@ -559,6 +599,7 @@ $spacing: 16px;
             }
           }
           &_btn {
+            display: none;
             &_moreBtn {
               width: 295 * $pr;
               height: 44 * $pr;
@@ -584,6 +625,7 @@ $spacing: 16px;
       }
     }
     .foot_components {
+      display: none;
       padding: 0 0 32 * $pr;
       .choice {
         margin-bottom: 32 * $pr;

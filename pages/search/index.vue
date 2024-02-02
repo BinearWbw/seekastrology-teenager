@@ -1,10 +1,5 @@
 <template>
   <div class="init_search">
-    <google-ad
-      :id="'1626224357'"
-      :dataFullWidth="'true'"
-      classNames="google_ad_top"
-    />
     <div class="init_search_main">
       <div class="search_title">
         <p class="title">
@@ -13,13 +8,13 @@
         <p class="tips" v-if="nums && count">
           About {{ count }} Results({{ nums }} Seconds)
         </p>
-        <p class="tips" v-else>No Results</p>
+        <p class="tips" v-if="count == 0">No Results</p>
       </div>
 
       <div class="result" v-if="searchData?.length >= 1">
         <a
           class="result_item"
-          :href="item.url"
+          :href="judgmentPath(item)"
           v-for="(item, index) in searchData"
           :key="index"
         >
@@ -56,12 +51,16 @@
             @change="getPagination"
           />
         </div>
-        <google-ad :id="'3000133706'" classNames="google_ad" />
       </div>
-      <div class="recommend" v-else>
-        <google-ad :id="'3000133706'" classNames="google_ad" />
+      <div class="google_search">
+        <div id="afscontainer1" style="height: auto"></div>
+      </div>
+      <div class="recommend" v-if="searchData?.length == 0">
         <el-explore-more />
       </div>
+      <!-- <div class="google_search">
+        <div id="relatedsearches1" style="height: auto"></div>
+      </div> -->
     </div>
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
@@ -77,12 +76,18 @@ export default {
       searchData: [],
       nums: null,
       isLoading: false,
-      count: 0,
+      count: -1,
       current: 1,
+      siteBaseUrl: 'https://www.seekastrology.com',
+      isAdLoaded: false,
     }
   },
   created() {
     this.getSearchData(1)
+  },
+  mounted() {
+    this.getLoadAds()
+    this.getLoadRelatedSearches()
   },
   methods: {
     getPagination(page) {
@@ -93,8 +98,8 @@ export default {
       })
     },
     getSearchData(page) {
-      const name = this.$route.query?.input
-      this.searchName = this.$route.query?.input
+      const name = this.$route.query?.query
+      this.searchName = this.$route.query?.query
       const start = new Date().getTime()
       this.isLoading = true
       this.$apiList.home
@@ -118,6 +123,83 @@ export default {
         (match) => `<span class="crux">${match}</span>`
       )
     },
+
+    // 判断路径
+    judgmentPath(item) {
+      switch (item.type) {
+        case 0:
+          return item.url
+        case 1:
+          return `/resources/details/${item.name
+            .replace(/[^a-zA-Z0-9\\s]/g, '-')
+            .toLowerCase()}-${item.id}/`
+        case 2:
+          return `/test/details/${item.name
+            .replace(/[^a-zA-Z0-9\\s]/g, '-')
+            .toLowerCase()}-${item.id}/`
+        case 3:
+          return `/tarot/details/${item.name
+            .replace(/[^a-zA-Z0-9\\s]/g, '-')
+            .toLowerCase()}-${item.id}/`
+        default:
+          return null
+      }
+    },
+
+    // 获取google搜索广告内容
+    getLoadRelatedSearches() {
+      // 替换代码中的搜索参数值和当前站点地址
+      const pageOptions = {
+        pubId: 'partner-pub-6430486603399192',
+        query: this.$route.query?.query,
+        styleId: '3570937035',
+        adsafe: 'medium',
+        relatedSearchTargeting: 'content',
+        resultsPageBaseUrl: `${this.siteBaseUrl}/search/?afs&partner_param=param`,
+        resultsPageQueryParam: 'query',
+      }
+      const rsblock1 = {
+        container: 'relatedsearches1',
+        relatedSearches: window.innerWidth > 750 ? 10 : 6,
+      }
+      // 引入并执行外部脚本
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.charset = 'utf-8'
+      script.innerHTML = `
+        var pageOptions = ${JSON.stringify(pageOptions)};
+        var rsblock1 = ${JSON.stringify(rsblock1)};
+        _googCsa('relatedsearch', pageOptions, rsblock1);
+      `
+      document.body.appendChild(script)
+    },
+
+    // google搜索页代码
+    getLoadAds() {
+      // 替换代码中的查询参数值
+      const pageOptions = {
+        pubId: 'partner-pub-6430486603399192',
+        query: this.$route.query?.query,
+        styleId: '3570937035',
+        adsafe: 'medium',
+      }
+
+      const adblock1 = {
+        container: 'afscontainer1',
+        number: 2,
+      }
+
+      // 引入并执行外部脚本
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.charset = 'utf-8'
+      script.innerHTML = `
+        var pageOptions = ${JSON.stringify(pageOptions)};
+        var adblock1 = ${JSON.stringify(adblock1)};
+        _googCsa('ads', pageOptions, adblock1);
+      `
+      document.body.appendChild(script)
+    },
   },
 }
 </script>
@@ -125,14 +207,16 @@ export default {
 <style lang="scss" scoped>
 @use 'sass:math';
 .init_search {
-  .google_ad_top {
-    width: 970px;
-    height: 275px;
-    margin: 24px auto 0;
-  }
   &_main {
     width: 1400px;
     margin: 56px auto;
+    .google_search {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.08);
+      margin: 30px 0 56px;
+      border-radius: 16px;
+      padding: 16px;
+    }
     .search_title {
       .title {
         color: #fff;
@@ -278,28 +362,19 @@ export default {
     }
   }
 }
-@media (max-width: 1050px) {
-  .init_search {
-    .google_ad_top {
-      width: 100%;
-      padding: 0 24px;
-    }
-  }
-}
 
 @media (max-width: 750px) {
   $pr: math.div(1vw, 3.75);
   .init_search {
-    .google_ad_top {
-      width: 300 * $pr;
-      height: 67 * $pr;
-      margin: 16 * $pr auto 0;
-      padding: 0;
-    }
     &_main {
       width: 100%;
       padding: 0 16 * $pr;
-      margin: 16 * $pr auto 32 * $pr;
+      margin: 70 * $pr auto 32 * $pr;
+      .google_search {
+        margin: 24 * $pr 0;
+        border-radius: 16 * $pr;
+        padding: 8 * $pr;
+      }
       .search_title {
         .title {
           font-size: 22 * $pr;
