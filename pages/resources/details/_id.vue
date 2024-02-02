@@ -70,6 +70,7 @@
           </div>
         </div>
         <!-- <google-ad classNames="leftAd" :id="'9575035598'" /> -->
+        <google-search-ad querys="zodiac"></google-search-ad>
       </div>
       <div class="details_main_right">
         <google-ad classNames="rightAd" :id="'9971744541'"></google-ad>
@@ -862,7 +863,7 @@ $spacing: 16px;
         .rightAd {
           width: 336 * $pr;
           height: 297 * $pr;
-          margin: 16 * $pr auto 0;
+          margin: 0 auto;
         }
       }
     }

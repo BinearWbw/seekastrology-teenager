@@ -303,6 +303,7 @@ $spacing: 16px;
               img {
                 width: 100%;
                 height: 100%;
+                border-radius: 6px;
                 object-fit: cover;
               }
             }
@@ -548,9 +549,8 @@ $spacing: 16px;
               &_img {
                 width: 100%;
                 height: 171 * $pr;
-                border-radius: 6 * $pr;
-                overflow: hidden;
                 img {
+                  border-radius: 6 * $pr;
                   width: 100%;
                   height: 100%;
                   object-fit: cover;

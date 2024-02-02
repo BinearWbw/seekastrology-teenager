@@ -47,6 +47,7 @@
               </el-tabs>
             </div>
           </div>
+          <google-search-ad querys="horroscope"></google-search-ad>
           <google-ad classNames="google_ad" :id="'7036206358'"></google-ad>
         </div>
       </div>

@@ -40,6 +40,7 @@
                       :src="item.icon || '/'"
                       fit="cover"
                       width="338"
+                      height="200"
                       :alt="item.name"
                       class="resources_main_btm_main_item_img_pic"
                       loading="lazy"
@@ -64,6 +65,7 @@
                       :src="item.icon || '/'"
                       fit="cover"
                       width="338"
+                      height="200"
                       :alt="item.name"
                       class="resources_main_btm_main_item_img_video"
                       loading="lazy"
@@ -444,6 +446,7 @@ $spacing: 16px;
             &_pic {
               width: 100%;
               height: 100%;
+              border-radius: 12px;
               object-fit: cover;
             }
             &_play {
@@ -626,6 +629,8 @@ $spacing: 16px;
             height: 225px;
             position: relative;
             object-fit: cover;
+            border-radius: 12px;
+            overflow: hidden;
             &_pic {
               width: 100%;
               height: 100%;

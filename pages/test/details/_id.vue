@@ -208,6 +208,7 @@
             </div>
           </div>
         </div>
+        <google-search-ad querys="constellationquiz"></google-search-ad>
         <google-ad classNames="google_ad" :id="'5595713395'" />
         <div class="lmore">
           <el-explore-more />
@@ -873,7 +874,6 @@ $spacing: 55px;
       .google_ad {
         width: 100%;
         height: 305px;
-        margin-top: 24px;
       }
       .lmore {
         display: none;
@@ -1034,7 +1034,7 @@ $spacing: 55px;
       &_left {
         width: 100%;
         &_top {
-          padding: 32 * $pr 16 * $pr 48 * $pr;
+          padding: 32 * $pr 16 * $pr 24 * $pr;
           border-radius: 30 * $pr;
           margin-top: 16 * $pr;
           &_menu {
@@ -1244,7 +1244,7 @@ $spacing: 55px;
         .google_ad {
           width: 336 * $pr;
           height: 297 * $pr;
-          margin-top: 16 * $pr;
+          margin-top: 0;
         }
         .lmore {
           display: block;

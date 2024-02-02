@@ -58,9 +58,6 @@
       <div class="recommend" v-if="searchData?.length == 0">
         <el-explore-more />
       </div>
-      <!-- <div class="google_search">
-        <div id="relatedsearches1" style="height: auto"></div>
-      </div> -->
     </div>
     <transition name="fade">
       <el-loading v-if="isLoading"></el-loading>
@@ -78,8 +75,6 @@ export default {
       isLoading: false,
       count: -1,
       current: 1,
-      siteBaseUrl: 'https://www.seekastrology.com',
-      isAdLoaded: false,
     }
   },
   created() {
@@ -87,7 +82,6 @@ export default {
   },
   mounted() {
     this.getLoadAds()
-    this.getLoadRelatedSearches()
   },
   methods: {
     getPagination(page) {
@@ -145,35 +139,6 @@ export default {
           return null
       }
     },
-
-    // 获取google搜索广告内容
-    getLoadRelatedSearches() {
-      // 替换代码中的搜索参数值和当前站点地址
-      const pageOptions = {
-        pubId: 'partner-pub-6430486603399192',
-        query: this.$route.query?.query,
-        styleId: '3570937035',
-        adsafe: 'medium',
-        relatedSearchTargeting: 'content',
-        resultsPageBaseUrl: `${this.siteBaseUrl}/search/?afs&partner_param=param`,
-        resultsPageQueryParam: 'query',
-      }
-      const rsblock1 = {
-        container: 'relatedsearches1',
-        relatedSearches: window.innerWidth > 750 ? 10 : 6,
-      }
-      // 引入并执行外部脚本
-      const script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.charset = 'utf-8'
-      script.innerHTML = `
-        var pageOptions = ${JSON.stringify(pageOptions)};
-        var rsblock1 = ${JSON.stringify(rsblock1)};
-        _googCsa('relatedsearch', pageOptions, rsblock1);
-      `
-      document.body.appendChild(script)
-    },
-
     // google搜索页代码
     getLoadAds() {
       // 替换代码中的查询参数值
