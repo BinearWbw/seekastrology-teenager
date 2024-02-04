@@ -47,8 +47,8 @@
               </el-tabs>
             </div>
           </div>
-          <google-search-ad querys="horroscope"></google-search-ad>
           <google-ad classNames="google_ad" :id="'7036206358'"></google-ad>
+          <google-search-ad querys="horroscope"></google-search-ad>
         </div>
       </div>
       <div class="mexplore">
@@ -365,6 +365,9 @@ export default {
       .datails_list {
         flex: 1;
         padding-left: 54px;
+        :deep(.google_search) {
+          margin-bottom: 0;
+        }
         .list_top {
           display: flex;
           justify-content: space-between;

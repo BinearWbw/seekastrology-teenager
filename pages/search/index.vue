@@ -10,7 +10,9 @@
         </p>
         <p class="tips" v-if="count == 0">No Results</p>
       </div>
-
+      <div class="google_search">
+        <div id="afscontainer1" style="height: auto"></div>
+      </div>
       <div class="result" v-if="searchData?.length >= 1">
         <a
           class="result_item"
@@ -51,9 +53,6 @@
             @change="getPagination"
           />
         </div>
-      </div>
-      <div class="google_search">
-        <div id="afscontainer1" style="height: auto"></div>
       </div>
       <div class="recommend" v-if="searchData?.length == 0">
         <el-explore-more />
@@ -178,7 +177,7 @@ export default {
     .google_search {
       width: 100%;
       background-color: rgba(255, 255, 255, 0.08);
-      margin: 30px 0 56px;
+      margin: 24px 0;
       border-radius: 16px;
       padding: 16px;
     }

@@ -419,6 +419,7 @@ export default {
                   overflow: hidden;
                   -webkit-line-clamp: 1;
                   -webkit-box-orient: vertical;
+                  white-space: nowrap;
                 }
               }
               .testx_s {

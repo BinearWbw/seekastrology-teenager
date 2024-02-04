@@ -68,8 +68,8 @@
             <button @click="numerologySubmit">Calculate</button>
           </div>
         </div>
-        <google-search-ad querys="numerology"></google-search-ad>
         <google-ad :id="'1771284612'" classNames="google_ad_top"></google-ad>
+        <google-search-ad querys="numerology"></google-search-ad>
         <div class="referral">
           <div>
             <p class="calculator_title_mini">
